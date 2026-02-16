@@ -66,3 +66,65 @@ export interface WorldBankDataPoint {
   date: string;
   value: number | null;
 }
+
+// ─── Energy Sankey types ───────────────────────────────────────────────
+
+/** Unit of energy measurement */
+export type EnergyUnit = "KToE" | "PetaJoules";
+
+/** Available fiscal years in the MoSPI Energy dataset (newest first) */
+export const ENERGY_YEARS = [
+  "2023-24",
+  "2022-23",
+  "2021-22",
+  "2020-21",
+  "2019-20",
+  "2018-19",
+  "2017-18",
+  "2016-17",
+  "2015-16",
+  "2014-15",
+  "2013-14",
+  "2012-13",
+] as const;
+
+export type EnergyYear = (typeof ENERGY_YEARS)[number];
+
+/** Raw row returned by MoSPI Energy Balance API */
+export interface EnergyBalanceRow {
+  year: string;
+  commodity: string;
+  commodityCode: number;
+  sector: string;
+  sectorCode: number;
+  subSector?: string;
+  subSectorCode?: number;
+  value: number;
+}
+
+/** A node in the Sankey diagram */
+export interface SankeyNode {
+  id: string; // Unique machine key (e.g., "coal", "electricity_gen")
+  label: string; // Display label (e.g., "Coal", "Electricity Generation")
+  color: string; // RGBA color string
+  column: number; // 0-based column for x positioning (0=source, 1=primary, 2=transform, 3=end-use)
+}
+
+/** A link (flow) in the Sankey diagram */
+export interface SankeyLink {
+  source: number; // Index into SankeyNode[]
+  target: number; // Index into SankeyNode[]
+  value: number; // Energy value in selected unit
+  color: string; // RGBA color string (semi-transparent)
+  label: string; // Hover label (e.g., "Coal → Industry: 200,947 KToE")
+}
+
+/** Complete data for rendering a Sankey diagram */
+export interface SankeyData {
+  nodes: SankeyNode[];
+  links: SankeyLink[];
+  unit: EnergyUnit;
+  year: string;
+  totalSupply: number;
+  totalConsumption: number;
+}
