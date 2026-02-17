@@ -152,10 +152,11 @@ export default function EnergyFlowDashboard() {
 
         {error && !isLoading && (
           <ErrorDisplay
+            title="Energy data unavailable"
             message={
               error instanceof Error
                 ? error.message
-                : "Failed to fetch energy balance data"
+                : `Failed to load energy balance data for ${year} (${unit}).`
             }
             onRetry={() => refetch()}
           />
@@ -186,10 +187,9 @@ export default function EnergyFlowDashboard() {
             Kilotonnes of Oil Equivalent.
           </p>
           <p className="text-sm text-blue-700 mt-2">
-            <strong>Note:</strong> For 2023-24, the diagram uses pre-fetched
-            data for instant loading. Other years fetch live from the MoSPI API
-            and may take a moment to load. If the API is unavailable, only
-            2023-24 data will be accessible.
+            <strong>Note:</strong> All year and unit combinations are
+            pre-fetched at build time for instant loading. Data covers fiscal
+            years 2012-13 through 2023-24 in both KToE and PetaJoules.
           </p>
         </div>
       </div>

@@ -1,0 +1,344 @@
+{
+  "nodes": [
+    {
+      "id": "production",
+      "label": "Production",
+      "color": "rgba(255,153,51,0.8)",
+      "column": 0
+    },
+    {
+      "id": "imports",
+      "label": "Imports",
+      "color": "rgba(0,0,128,0.8)",
+      "column": 0
+    },
+    {
+      "id": "coal",
+      "label": "Coal",
+      "color": "rgba(74,74,74,0.8)",
+      "column": 1
+    },
+    {
+      "id": "crude_oil",
+      "label": "Crude Oil",
+      "color": "rgba(139,69,19,0.8)",
+      "column": 1
+    },
+    {
+      "id": "natural_gas",
+      "label": "Natural Gas",
+      "color": "rgba(135,206,235,0.8)",
+      "column": 1
+    },
+    {
+      "id": "hydro",
+      "label": "Hydro",
+      "color": "rgba(70,130,180,0.8)",
+      "column": 1
+    },
+    {
+      "id": "nuclear",
+      "label": "Nuclear",
+      "color": "rgba(255,99,71,0.8)",
+      "column": 1
+    },
+    {
+      "id": "solar_wind_others",
+      "label": "Solar/Wind/Others",
+      "color": "rgba(255,215,0,0.8)",
+      "column": 1
+    },
+    {
+      "id": "lignite",
+      "label": "Lignite",
+      "color": "rgba(160,82,45,0.8)",
+      "column": 1
+    },
+    {
+      "id": "oil_products",
+      "label": "Oil Products",
+      "color": "rgba(210,105,30,0.8)",
+      "column": 2
+    },
+    {
+      "id": "electricity_gen",
+      "label": "Electricity Generation",
+      "color": "rgba(241,196,15,0.8)",
+      "column": 2
+    },
+    {
+      "id": "electricity",
+      "label": "Electricity",
+      "color": "rgba(241,196,15,0.8)",
+      "column": 2
+    },
+    {
+      "id": "industry",
+      "label": "Industry",
+      "color": "rgba(255,153,51,0.6)",
+      "column": 3
+    },
+    {
+      "id": "transport",
+      "label": "Transport",
+      "color": "rgba(155,89,182,0.6)",
+      "column": 3
+    },
+    {
+      "id": "others",
+      "label": "Others",
+      "color": "rgba(46,204,113,0.6)",
+      "column": 3
+    },
+    {
+      "id": "non_energy_use",
+      "label": "Non-energy Use",
+      "color": "rgba(52,152,219,0.6)",
+      "column": 3
+    }
+  ],
+  "links": [
+    {
+      "source": 0,
+      "target": 2,
+      "value": 297774.74,
+      "color": "rgba(255,153,51,0.3)",
+      "label": "Production → Coal"
+    },
+    {
+      "source": 1,
+      "target": 2,
+      "value": 115541.29,
+      "color": "rgba(0,0,128,0.3)",
+      "label": "Imports → Coal"
+    },
+    {
+      "source": 0,
+      "target": 3,
+      "value": 31164.89,
+      "color": "rgba(255,153,51,0.3)",
+      "label": "Production → Crude Oil"
+    },
+    {
+      "source": 1,
+      "target": 3,
+      "value": 200782.55,
+      "color": "rgba(0,0,128,0.3)",
+      "label": "Imports → Crude Oil"
+    },
+    {
+      "source": 0,
+      "target": 4,
+      "value": 26521.88,
+      "color": "rgba(255,153,51,0.3)",
+      "label": "Production → Natural Gas"
+    },
+    {
+      "source": 1,
+      "target": 4,
+      "value": 30553.74,
+      "color": "rgba(0,0,128,0.3)",
+      "label": "Imports → Natural Gas"
+    },
+    {
+      "source": 0,
+      "target": 5,
+      "value": 12954.92,
+      "color": "rgba(255,153,51,0.3)",
+      "label": "Production → Hydro"
+    },
+    {
+      "source": 0,
+      "target": 6,
+      "value": 11213.64,
+      "color": "rgba(255,153,51,0.3)",
+      "label": "Production → Nuclear"
+    },
+    {
+      "source": 0,
+      "target": 7,
+      "value": 13278.87,
+      "color": "rgba(255,153,51,0.3)",
+      "label": "Production → Solar/Wind/Others"
+    },
+    {
+      "source": 0,
+      "target": 8,
+      "value": 9553.92,
+      "color": "rgba(255,153,51,0.3)",
+      "label": "Production → Lignite"
+    },
+    {
+      "source": 1,
+      "target": 8,
+      "value": 0.82,
+      "color": "rgba(0,0,128,0.3)",
+      "label": "Imports → Lignite"
+    },
+    {
+      "source": 1,
+      "target": 9,
+      "value": 42915.38,
+      "color": "rgba(0,0,128,0.3)",
+      "label": "Imports → Oil Products"
+    },
+    {
+      "source": 1,
+      "target": 11,
+      "value": 821.1,
+      "color": "rgba(0,0,128,0.3)",
+      "label": "Imports → Electricity"
+    },
+    {
+      "source": 2,
+      "target": 12,
+      "value": 152100.29903999998,
+      "color": "rgba(74,74,74,0.3)",
+      "label": "Coal → Industry"
+    },
+    {
+      "source": 4,
+      "target": 12,
+      "value": 1220.6192093200002,
+      "color": "rgba(135,206,235,0.3)",
+      "label": "Natural Gas → Industry"
+    },
+    {
+      "source": 4,
+      "target": 13,
+      "value": 12888.30282782,
+      "color": "rgba(135,206,235,0.3)",
+      "label": "Natural Gas → Transport"
+    },
+    {
+      "source": 4,
+      "target": 14,
+      "value": 969.3152544600001,
+      "color": "rgba(135,206,235,0.3)",
+      "label": "Natural Gas → Others"
+    },
+    {
+      "source": 4,
+      "target": 15,
+      "value": 20822.3276884,
+      "color": "rgba(135,206,235,0.3)",
+      "label": "Natural Gas → Non-energy Use"
+    },
+    {
+      "source": 8,
+      "target": 12,
+      "value": 1547.86788,
+      "color": "rgba(160,82,45,0.3)",
+      "label": "Lignite → Industry"
+    },
+    {
+      "source": 9,
+      "target": 12,
+      "value": 29899.027833960005,
+      "color": "rgba(210,105,30,0.3)",
+      "label": "Oil Products → Industry"
+    },
+    {
+      "source": 9,
+      "target": 13,
+      "value": 127671.0312618,
+      "color": "rgba(210,105,30,0.3)",
+      "label": "Oil Products → Transport"
+    },
+    {
+      "source": 9,
+      "target": 14,
+      "value": 40374.5996298,
+      "color": "rgba(210,105,30,0.3)",
+      "label": "Oil Products → Others"
+    },
+    {
+      "source": 9,
+      "target": 15,
+      "value": 20296.42035444,
+      "color": "rgba(210,105,30,0.3)",
+      "label": "Oil Products → Non-energy Use"
+    },
+    {
+      "source": 11,
+      "target": 12,
+      "value": 43597.343152,
+      "color": "rgba(241,196,15,0.3)",
+      "label": "Electricity → Industry"
+    },
+    {
+      "source": 11,
+      "target": 13,
+      "value": 2190.297144,
+      "color": "rgba(241,196,15,0.3)",
+      "label": "Electricity → Transport"
+    },
+    {
+      "source": 11,
+      "target": 14,
+      "value": 58512.223704,
+      "color": "rgba(241,196,15,0.3)",
+      "label": "Electricity → Others"
+    },
+    {
+      "source": 3,
+      "target": 9,
+      "value": 231947.44,
+      "color": "rgba(139,69,19,0.3)",
+      "label": "Crude Oil → Oil Products"
+    },
+    {
+      "source": 2,
+      "target": 10,
+      "value": 261215.73096,
+      "color": "rgba(74,74,74,0.3)",
+      "label": "Coal → Electricity Generation"
+    },
+    {
+      "source": 8,
+      "target": 10,
+      "value": 8006.87212,
+      "color": "rgba(160,82,45,0.3)",
+      "label": "Lignite → Electricity Generation"
+    },
+    {
+      "source": 4,
+      "target": 10,
+      "value": 21175.05502,
+      "color": "rgba(135,206,235,0.3)",
+      "label": "Natural Gas → Electricity Generation"
+    },
+    {
+      "source": 5,
+      "target": 10,
+      "value": 12954.92,
+      "color": "rgba(70,130,180,0.3)",
+      "label": "Hydro → Electricity Generation"
+    },
+    {
+      "source": 6,
+      "target": 10,
+      "value": 11213.64,
+      "color": "rgba(255,99,71,0.3)",
+      "label": "Nuclear → Electricity Generation"
+    },
+    {
+      "source": 7,
+      "target": 10,
+      "value": 13278.87,
+      "color": "rgba(255,215,0,0.3)",
+      "label": "Solar/Wind/Others → Electricity Generation"
+    },
+    {
+      "source": 10,
+      "target": 11,
+      "value": 104299.864,
+      "color": "rgba(241,196,15,0.3)",
+      "label": "Electricity Generation → Electricity"
+    }
+  ],
+  "unit": "KToE",
+  "year": "2020-21",
+  "totalSupply": 793077.7399999999,
+  "totalConsumption": 512089.67498
+}

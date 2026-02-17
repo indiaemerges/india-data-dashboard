@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "generate:energy": "node scripts/generate-energy-data.mjs",
     "start": "next start",
     "lint": "next lint"
   },
