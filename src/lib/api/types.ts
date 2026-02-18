@@ -128,3 +128,39 @@ export interface SankeyData {
   totalSupply: number;
   totalConsumption: number;
 }
+
+// ─── IIP (Index of Industrial Production) types ────────────────────────
+
+/** Available IIP fiscal years (newest first) */
+export const IIP_YEARS = [
+  "2024-25",
+  "2023-24",
+  "2022-23",
+  "2021-22",
+  "2020-21",
+  "2019-20",
+  "2018-19",
+  "2017-18",
+  "2016-17",
+  "2015-16",
+  "2014-15",
+  "2013-14",
+  "2012-13",
+] as const;
+
+export type IIPYear = (typeof IIP_YEARS)[number];
+
+/** IIP category data point — parallel arrays aligned with `years` */
+export interface IIPCategoryData {
+  index: number[]; // Index values for each year
+  growth: number[]; // Growth rate (%) for each year
+}
+
+/** Complete IIP annual dataset (loaded from static JSON) */
+export interface IIPAnnualData {
+  baseYear: string;
+  lastUpdated: string;
+  years: string[];
+  sectoral: Record<string, IIPCategoryData>;
+  useBased: Record<string, IIPCategoryData>;
+}
