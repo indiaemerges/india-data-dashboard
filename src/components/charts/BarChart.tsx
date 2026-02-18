@@ -13,6 +13,17 @@ interface BarChartProps {
   height?: number;
 }
 
+/**
+ * Detect whether series have different units and need dual y-axes.
+ */
+function getUniqueUnits(series: DataSeries[]): string[] {
+  const seen = new Set<string>();
+  for (const s of series) {
+    seen.add(s.unit);
+  }
+  return [...seen];
+}
+
 export default function BarChart({
   series,
   title,
@@ -24,6 +35,15 @@ export default function BarChart({
   yAxisTitle,
   height = 400,
 }: BarChartProps) {
+  const uniqueUnits = getUniqueUnits(series);
+  const useDualAxis = uniqueUnits.length === 2 && !yAxisTitle && orientation === "v";
+
+  const unitToAxis: Record<string, string> = {};
+  if (useDualAxis) {
+    unitToAxis[uniqueUnits[0]] = "y";
+    unitToAxis[uniqueUnits[1]] = "y2";
+  }
+
   const data: Plotly.Data[] = series.map((s) => {
     const baseTrace = {
       type: "bar" as const,
@@ -33,6 +53,7 @@ export default function BarChart({
         orientation === "v"
           ? `<b>${s.indicator}</b><br>%{x}: %{y:.2f} ${s.unit}<extra></extra>`
           : `<b>${s.indicator}</b><br>%{y}: %{x:.2f} ${s.unit}<extra></extra>`,
+      ...(useDualAxis && unitToAxis[s.unit] === "y2" ? { yaxis: "y2" } : {}),
     };
 
     if (orientation === "h") {
@@ -53,8 +74,26 @@ export default function BarChart({
   const layout: Partial<Plotly.Layout> = {
     barmode: barMode,
     yaxis: {
-      title: yAxisTitle ? { text: yAxisTitle } : (series.length === 1 ? { text: series[0].unit } : undefined),
+      title: yAxisTitle
+        ? { text: yAxisTitle }
+        : useDualAxis
+          ? { text: uniqueUnits[0] }
+          : series.length === 1
+            ? { text: series[0].unit }
+            : undefined,
     },
+    ...(useDualAxis
+      ? {
+          yaxis2: {
+            title: { text: uniqueUnits[1] },
+            overlaying: "y" as const,
+            side: "right" as const,
+            gridcolor: "transparent",
+            showgrid: false,
+          },
+          margin: { r: 60 },
+        }
+      : {}),
   };
 
   return (

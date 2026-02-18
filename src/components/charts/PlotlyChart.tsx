@@ -43,9 +43,20 @@ export default function PlotlyChart({
     ...layout,
     title: layout.title || (title ? { text: title, font: { size: 16 } } : undefined),
     height: layout.height || height,
+    margin: { ...defaultLayout.margin, ...layout.margin },
     xaxis: { ...defaultLayout.xaxis, ...layout.xaxis },
     yaxis: { ...defaultLayout.yaxis, ...layout.yaxis },
     legend: { ...defaultLayout.legend, ...layout.legend },
+    // Support dual y-axis: merge yaxis2 with sensible defaults if provided
+    ...(layout.yaxis2
+      ? {
+          yaxis2: {
+            tickfont: { size: 11 },
+            separatethousands: true,
+            ...layout.yaxis2,
+          },
+        }
+      : {}),
   };
 
   const mergedConfig: Partial<Plotly.Config> = {
