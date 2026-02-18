@@ -23,11 +23,21 @@ const SankeyDiagram = dynamic(
   }
 );
 
+/** Format a number with Indian locale grouping */
+function fmtNum(value: number, decimals = 0): string {
+  return value.toLocaleString("en-IN", { maximumFractionDigits: decimals });
+}
+
 export default function EnergyFlowDashboard() {
   const [year, setYear] = useState<EnergyYear>("2023-24");
   const [unit, setUnit] = useState<EnergyUnit>("KToE");
 
   const { data: sankeyData, isLoading, error, refetch } = useSankeyData(year, unit);
+
+  // Compute derived metrics
+  const consumptionRatio = sankeyData
+    ? ((sankeyData.totalConsumption / sankeyData.totalSupply) * 100).toFixed(1)
+    : null;
 
   return (
     <>
@@ -108,28 +118,39 @@ export default function EnergyFlowDashboard() {
 
         {/* Summary cards */}
         {sankeyData && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <div className="bg-white rounded-lg border border-gray-200 p-4">
               <p className="text-xs text-gray-500 uppercase tracking-wider">
                 Total Primary Supply
               </p>
               <p className="text-2xl font-bold text-gray-900 mt-1">
-                {sankeyData.totalSupply.toLocaleString("en-IN", {
-                  maximumFractionDigits: 0,
-                })}
+                {fmtNum(sankeyData.totalSupply)}
               </p>
-              <p className="text-xs text-gray-400 mt-1">{sankeyData.unit}</p>
+              <p className="text-xs text-gray-400 mt-1">
+                {sankeyData.unit} ({sankeyData.year})
+              </p>
             </div>
             <div className="bg-white rounded-lg border border-gray-200 p-4">
               <p className="text-xs text-gray-500 uppercase tracking-wider">
                 Final Consumption
               </p>
               <p className="text-2xl font-bold text-gray-900 mt-1">
-                {sankeyData.totalConsumption.toLocaleString("en-IN", {
-                  maximumFractionDigits: 0,
-                })}
+                {fmtNum(sankeyData.totalConsumption)}
               </p>
-              <p className="text-xs text-gray-400 mt-1">{sankeyData.unit}</p>
+              <p className="text-xs text-gray-400 mt-1">
+                {sankeyData.unit} ({sankeyData.year})
+              </p>
+            </div>
+            <div className="bg-white rounded-lg border border-gray-200 p-4">
+              <p className="text-xs text-gray-500 uppercase tracking-wider">
+                Consumption / Supply
+              </p>
+              <p className="text-2xl font-bold text-gray-900 mt-1">
+                {consumptionRatio}%
+              </p>
+              <p className="text-xs text-gray-400 mt-1">
+                Final use as % of primary supply
+              </p>
             </div>
             <div className="bg-white rounded-lg border border-gray-200 p-4">
               <p className="text-xs text-gray-500 uppercase tracking-wider">
@@ -147,7 +168,7 @@ export default function EnergyFlowDashboard() {
 
         {/* Main Sankey Diagram */}
         {isLoading && (
-          <LoadingSpinner message={`Fetching energy data for ${year}...`} />
+          <LoadingSpinner message={`Loading energy data for ${year}...`} />
         )}
 
         {error && !isLoading && (
@@ -165,32 +186,47 @@ export default function EnergyFlowDashboard() {
         {sankeyData && !isLoading && (
           <SankeyDiagram
             data={sankeyData}
-            title={`India Energy Balance — ${sankeyData.year}`}
+            title={`India Energy Balance \u2014 ${sankeyData.year}`}
             subtitle={`Energy flows from primary sources to end-use sectors (${sankeyData.unit})`}
             source="MoSPI Energy Statistics, eSankhyiki"
             sourceUrl="https://www.mospi.gov.in/publication/energy-statistics-india"
-            height={700}
+            height={720}
           />
         )}
 
-        {/* Data source info */}
-        <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
-          <h3 className="text-sm font-semibold text-blue-900">
-            About this data
-          </h3>
-          <p className="text-sm text-blue-700 mt-1">
-            Energy balance data is sourced from the Ministry of Statistics and
-            Programme Implementation (MoSPI) via the eSankhyiki API. The diagram
-            shows how primary energy from domestic production and imports flows
-            through transformation (refining, power generation) to final
-            consumption by industry, transport, and other sectors. KToE =
-            Kilotonnes of Oil Equivalent.
-          </p>
-          <p className="text-sm text-blue-700 mt-2">
-            <strong>Note:</strong> All year and unit combinations are
-            pre-fetched at build time for instant loading. Data covers fiscal
-            years 2012-13 through 2023-24 in both KToE and PetaJoules.
-          </p>
+        {/* Reading guide */}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+            <h3 className="text-sm font-semibold text-gray-800">
+              How to read this diagram
+            </h3>
+            <ul className="text-sm text-gray-600 mt-2 space-y-1 list-disc list-inside">
+              <li>
+                <strong>Left:</strong> Energy enters via domestic production and imports
+              </li>
+              <li>
+                <strong>Middle-left:</strong> Primary fuels (coal, oil, gas, renewables)
+              </li>
+              <li>
+                <strong>Middle-right:</strong> Transformation (refining, power generation)
+              </li>
+              <li>
+                <strong>Right:</strong> Final consumption by industry, transport, and others
+              </li>
+              <li>Hover over flows to see values and share of total supply</li>
+            </ul>
+          </div>
+          <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
+            <h3 className="text-sm font-semibold text-blue-900">
+              About this data
+            </h3>
+            <p className="text-sm text-blue-700 mt-1">
+              Energy balance data is sourced from MoSPI via the eSankhyiki API.
+              Supply data is verified from the API for all 12 years. KToE =
+              Kilotonnes of Oil Equivalent; 1 KToE = 0.04187 PetaJoules.
+              Data covers fiscal years 2012-13 through 2023-24.
+            </p>
+          </div>
         </div>
       </div>
     </>
