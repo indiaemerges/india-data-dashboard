@@ -37,13 +37,21 @@ export default function PlotlyChart({
   className = "",
   height = 400,
 }: PlotlyChartProps) {
+  // When an HTML title is rendered above the chart, suppress the Plotly
+  // internal title to avoid duplication and shrink the top margin.
+  const hasHtmlHeader = !!(title || subtitle);
+
   // Merge user layout with defaults
   const mergedLayout: Partial<Plotly.Layout> = {
     ...defaultLayout,
     ...layout,
-    title: layout.title || (title ? { text: title, font: { size: 16 } } : undefined),
+    title: hasHtmlHeader ? undefined : (layout.title || undefined),
     height: layout.height || height,
-    margin: { ...defaultLayout.margin, ...layout.margin },
+    margin: {
+      ...defaultLayout.margin,
+      ...(hasHtmlHeader ? { t: 20 } : {}),
+      ...layout.margin,
+    },
     xaxis: { ...defaultLayout.xaxis, ...layout.xaxis },
     yaxis: { ...defaultLayout.yaxis, ...layout.yaxis },
     legend: { ...defaultLayout.legend, ...layout.legend },
