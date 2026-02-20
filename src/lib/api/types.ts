@@ -164,3 +164,28 @@ export interface IIPAnnualData {
   sectoral: Record<string, IIPCategoryData>;
   useBased: Record<string, IIPCategoryData>;
 }
+
+// ─── PLFS (Periodic Labour Force Survey) types ─────────────────────────
+
+/** Gender breakdown: male, female, person (total) */
+export interface PLFSGenderData {
+  male: number[];
+  female: number[];
+  person: number[];
+}
+
+/** Unemployment rate with additional rural/urban breakdown */
+export interface PLFSUnemploymentData extends PLFSGenderData {
+  rural: number[];
+  urban: number[];
+}
+
+/** Complete PLFS annual dataset (loaded from static JSON) */
+export interface PLFSAnnualData {
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  lfpr: PLFSGenderData;
+  wpr: PLFSGenderData;
+  ur: PLFSUnemploymentData;
+}
