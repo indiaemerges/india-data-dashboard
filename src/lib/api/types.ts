@@ -189,3 +189,18 @@ export interface PLFSAnnualData {
   wpr: PLFSGenderData;
   ur: PLFSUnemploymentData;
 }
+
+// ---------------------------------------------------------------------------
+// RBI Key Rates types
+// ---------------------------------------------------------------------------
+
+/** RBI key policy rates and reserve requirements (annual end-of-year, static JSON) */
+export interface RBIKeyRatesData {
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  repoRate: (number | null)[];
+  reverseRepoSDF: (number | null)[];
+  crr: (number | null)[];
+  slr: (number | null)[];
+}
