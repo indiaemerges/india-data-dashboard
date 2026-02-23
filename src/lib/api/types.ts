@@ -204,3 +204,46 @@ export interface RBIKeyRatesData {
   crr: (number | null)[];
   slr: (number | null)[];
 }
+
+// ---------------------------------------------------------------------------
+// Petroleum / PPAC types
+// ---------------------------------------------------------------------------
+
+/** Supply-side petroleum data (crude oil and refined products, in KToE) */
+export interface PetroleumSupply {
+  /** Domestic crude oil production */
+  crudeOilProduction: number[];
+  /** Crude oil imports */
+  crudeOilImports: number[];
+  /** Total crude available for refining (production + imports) */
+  refineryThroughput: number[];
+  /** Refined product imports */
+  oilProductImports: number[];
+  /** Refined product exports (positive values) */
+  oilProductExports: number[];
+}
+
+/** Consumption breakdown of petroleum products by type (in KToE) */
+export interface PetroleumConsumption {
+  diesel: number[];
+  petrol: number[];
+  lpg: number[];
+  naphtha: number[];
+  petCoke: number[];
+  atf: number[];
+  fuelOil: number[];
+  kerosene: number[];
+  bitumen: number[];
+  lubricants: number[];
+  others: number[];
+}
+
+/** Complete petroleum dataset (loaded from static JSON, sourced from MoSPI Energy) */
+export interface PetroleumData {
+  lastUpdated: string;
+  unit: string;
+  notes: string;
+  years: string[];
+  supply: PetroleumSupply;
+  consumption: PetroleumConsumption;
+}
