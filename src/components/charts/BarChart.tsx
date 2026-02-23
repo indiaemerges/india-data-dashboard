@@ -73,6 +73,9 @@ export default function BarChart({
 
   const layout: Partial<Plotly.Layout> = {
     barmode: barMode,
+    // For horizontal bars the y-axis holds category labels which can be long.
+    // Increase the left margin so labels aren't clipped.
+    ...(orientation === "h" ? { margin: { l: 160, r: 20, t: 20, b: 50 } } : {}),
     yaxis: {
       title: yAxisTitle
         ? { text: yAxisTitle }
