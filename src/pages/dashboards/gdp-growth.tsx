@@ -68,10 +68,10 @@ export default function GDPGrowthDashboard() {
       <div>
         {/* Page header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
             GDP & National Accounts
           </h1>
-          <p className="mt-1 text-gray-600">
+          <p className="mt-1 text-gray-600 dark:text-gray-300">
             India&apos;s Gross Domestic Product, growth rates, and per capita
             figures. Data from World Bank Development Indicators.
           </p>
@@ -80,38 +80,38 @@ export default function GDPGrowthDashboard() {
         {/* Summary cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {latestGrowth && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wider">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 GDP Growth ({latestGrowth.date})
               </p>
-              <p className="text-2xl font-bold text-gray-900 mt-1">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 {latestGrowth.value?.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-400 mt-1">Annual % change</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Annual % change</p>
             </div>
           )}
           {latestGDP && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wider">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 GDP ({latestGDP.date})
               </p>
-              <p className="text-2xl font-bold text-gray-900 mt-1">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 ${((latestGDP.value || 0) / 1e12).toFixed(2)}T
               </p>
-              <p className="text-xs text-gray-400 mt-1">Current USD</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Current USD</p>
             </div>
           )}
           {latestPerCapita && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wider">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 GDP Per Capita ({latestPerCapita.date})
               </p>
-              <p className="text-2xl font-bold text-gray-900 mt-1">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 ${(latestPerCapita.value || 0).toLocaleString("en-US", {
                   maximumFractionDigits: 0,
                 })}
               </p>
-              <p className="text-xs text-gray-400 mt-1">Current USD</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Current USD</p>
             </div>
           )}
         </div>
@@ -167,11 +167,11 @@ export default function GDPGrowthDashboard() {
         </div>
 
         {/* Data source info */}
-        <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
-          <h3 className="text-sm font-semibold text-blue-900">
+        <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
+          <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-200">
             About this data
           </h3>
-          <p className="text-sm text-blue-700 mt-1">
+          <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
             GDP data is sourced from the World Bank Development Indicators API.
             Values represent India&apos;s national accounts aggregates. GDP
             growth rate uses constant local currency. For Indian fiscal year

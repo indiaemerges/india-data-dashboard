@@ -66,10 +66,10 @@ export default function IndustrialDashboard() {
       <div>
         {/* Page header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
             Industrial Production (IIP)
           </h1>
-          <p className="mt-1 text-gray-600">
+          <p className="mt-1 text-gray-600 dark:text-gray-300">
             Index of Industrial Production tracks monthly and annual changes in
             Indian industry across mining, manufacturing, and electricity
             sectors. Base year: {data.baseYear}. Data from MoSPI.
@@ -79,21 +79,21 @@ export default function IndustrialDashboard() {
         {/* Summary cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {generalIndex != null && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wider">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 General IIP Index ({latestYear})
               </p>
-              <p className="text-2xl font-bold text-gray-900 mt-1">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 {generalIndex.toFixed(1)}
               </p>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                 Base: {data.baseYear} = 100
               </p>
             </div>
           )}
           {generalGrowth != null && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wider">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 General Growth ({latestYear})
               </p>
               <p
@@ -104,25 +104,25 @@ export default function IndustrialDashboard() {
                 {generalGrowth >= 0 ? "+" : ""}
                 {generalGrowth.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-400 mt-1">Year-on-year</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Year-on-year</p>
             </div>
           )}
           {mfgIndex != null && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wider">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 Manufacturing Index ({latestYear})
               </p>
-              <p className="text-2xl font-bold text-gray-900 mt-1">
+              <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 {mfgIndex.toFixed(1)}
               </p>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                 Base: {data.baseYear} = 100
               </p>
             </div>
           )}
           {mfgGrowth != null && (
-            <div className="bg-white rounded-lg border border-gray-200 p-4">
-              <p className="text-xs text-gray-500 uppercase tracking-wider">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 Manufacturing Growth ({latestYear})
               </p>
               <p
@@ -133,7 +133,7 @@ export default function IndustrialDashboard() {
                 {mfgGrowth >= 0 ? "+" : ""}
                 {mfgGrowth.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-400 mt-1">Year-on-year</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Year-on-year</p>
             </div>
           )}
         </div>
@@ -194,11 +194,11 @@ export default function IndustrialDashboard() {
         </div>
 
         {/* Data source info */}
-        <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
-          <h3 className="text-sm font-semibold text-blue-900">
+        <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
+          <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-200">
             About this data
           </h3>
-          <p className="text-sm text-blue-700 mt-1">
+          <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
             The Index of Industrial Production (IIP) is compiled and published
             monthly by the Ministry of Statistics and Programme Implementation
             (MoSPI) with base year {data.baseYear}. It measures short-term
@@ -210,13 +210,13 @@ export default function IndustrialDashboard() {
             Infrastructure/Construction Goods, Consumer Durables, and Consumer
             Non-durables.
           </p>
-          <p className="text-sm text-blue-700 mt-2">
+          <p className="text-sm text-blue-700 dark:text-blue-300 mt-2">
             Source:{" "}
             <a
               href={SOURCE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-blue-900"
+              className="underline hover:text-blue-900 dark:hover:text-blue-100"
             >
               {SOURCE_LABEL}
             </a>

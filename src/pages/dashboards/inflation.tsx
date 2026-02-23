@@ -29,19 +29,19 @@ export default function InflationDashboard() {
         <title>Inflation (CPI & WPI) | India Data Dashboard</title>
       </Head>
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
           Inflation (CPI & WPI)
         </h1>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
           Consumer and Wholesale Price Index trends for India.
         </p>
 
         {latestCPI && (
-          <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6 inline-block">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6 inline-block">
+            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               CPI Inflation ({latestCPI.date})
             </p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
               {latestCPI.value?.toFixed(1)}%
             </p>
           </div>
@@ -57,8 +57,8 @@ export default function InflationDashboard() {
           height={450}
         />
 
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
-          <p className="text-sm text-blue-700">
+        <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
+          <p className="text-sm text-blue-700 dark:text-blue-300">
             Detailed CPI breakdown by commodity group (600+ items) and WPI data
             will be integrated from MoSPI CPI and WPI APIs in a future update.
           </p>

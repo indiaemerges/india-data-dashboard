@@ -101,8 +101,8 @@ export default function PetroleumDashboard() {
       <div>
         {/* Page header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Petroleum & Refining</h1>
-          <p className="mt-1 text-gray-600">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Petroleum & Refining</h1>
+          <p className="mt-1 text-gray-600 dark:text-gray-300">
             Crude oil production, imports, refinery throughput, oil product
             trade, and consumption by product type. Data from MoSPI Energy
             Statistics (2012-13 to {latestYear}), in Thousand Tonnes of Oil
@@ -112,8 +112,8 @@ export default function PetroleumDashboard() {
 
         {/* Summary cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               Crude Oil Imports ({latestYear})
             </p>
             <p className="text-2xl font-bold text-red-700 mt-1">
@@ -121,21 +121,21 @@ export default function PetroleumDashboard() {
                 ? `${(latestCrudeImports / 1000).toFixed(0)}mn t`
                 : "—"}
             </p>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
               Thousand Tonnes (÷1000 shown in million)
             </p>
           </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               Import Dependency ({latestYear})
             </p>
             <p className="text-2xl font-bold text-orange-700 mt-1">
               {importDepPct != null ? `${importDepPct.toFixed(1)}%` : "—"}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Share of crude met by imports</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Share of crude met by imports</p>
           </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               Refinery Throughput ({latestYear})
             </p>
             <p className="text-2xl font-bold text-blue-700 mt-1">
@@ -143,10 +143,10 @@ export default function PetroleumDashboard() {
                 ? `${(latestRefinery / 1000).toFixed(0)}mn t`
                 : "—"}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Total crude processed</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Total crude processed</p>
           </div>
-          <div className="bg-white rounded-lg border border-gray-200 p-4">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               Product Exports ({latestYear})
             </p>
             <p className="text-2xl font-bold text-green-700 mt-1">
@@ -154,7 +154,7 @@ export default function PetroleumDashboard() {
                 ? `${(latestExports / 1000).toFixed(0)}mn t`
                 : "—"}
             </p>
-            <p className="text-xs text-gray-400 mt-1">Refined product exports</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Refined product exports</p>
           </div>
         </div>
 
@@ -240,15 +240,15 @@ export default function PetroleumDashboard() {
         </div>
 
         {/* Data source info */}
-        <div className="mt-8 p-4 bg-orange-50 rounded-lg border border-orange-100">
-          <h3 className="text-sm font-semibold text-orange-900">About this data</h3>
-          <p className="text-sm text-orange-700 mt-1">
+        <div className="mt-8 p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-100 dark:border-orange-800">
+          <h3 className="text-sm font-semibold text-orange-900 dark:text-orange-200">About this data</h3>
+          <p className="text-sm text-orange-700 dark:text-orange-300 mt-1">
             Data sourced from{" "}
             <a
               href={SOURCE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-orange-900"
+              className="underline hover:text-orange-900 dark:hover:text-orange-100"
             >
               MoSPI Energy Statistics
             </a>{" "}

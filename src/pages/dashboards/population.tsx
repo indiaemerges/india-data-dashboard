@@ -32,13 +32,13 @@ export default function PopulationDashboard() {
     <>
       <Head><title>Population & Demographics | India Data Dashboard</title></Head>
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Population & Demographics</h1>
-        <p className="text-gray-600 mb-6">India&apos;s population trends, urbanization, and life expectancy.</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Population & Demographics</h1>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">India&apos;s population trends, urbanization, and life expectancy.</p>
 
         {latestPop && (
-          <div className="bg-white rounded-lg border border-gray-200 p-4 mb-6 inline-block">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">Population ({latestPop.date})</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{((latestPop.value || 0) / 1e9).toFixed(2)} Billion</p>
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 mb-6 inline-block">
+            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">Population ({latestPop.date})</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{((latestPop.value || 0) / 1e9).toFixed(2)} Billion</p>
           </div>
         )}
 
