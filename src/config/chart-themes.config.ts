@@ -1,5 +1,5 @@
 // Plotly layout theme shared across all charts
-import { CHART_COLORWAY } from "@/lib/utils/colors";
+import { CHART_COLORWAY, CHART_COLORWAY_DARK } from "@/lib/utils/colors";
 
 export const defaultLayout: Partial<Plotly.Layout> = {
   font: {
@@ -55,9 +55,12 @@ export const defaultConfig: Partial<Plotly.Config> = {
   },
 };
 
-// Dark mode theme override — inherits colorway, legend, margins, hovermode from defaultLayout
+// Dark mode theme override — uses CHART_COLORWAY_DARK so near-black colours
+// (navy, dark green, purple) are replaced with bright equivalents legible on
+// a dark background. All other layout settings are inherited from defaultLayout.
 export const darkLayout: Partial<Plotly.Layout> = {
   ...defaultLayout,
+  colorway: CHART_COLORWAY_DARK,
   font: {
     ...defaultLayout.font,
     color: "#E5E7EB",

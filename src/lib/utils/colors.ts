@@ -8,7 +8,7 @@ export const INDIA_COLORS = {
   white: "#FFFFFF",
 };
 
-// Extended chart color palette for multiple data series
+// Extended chart color palette for multiple data series (light mode)
 export const CHART_COLORWAY = [
   "#FF9933", // Saffron
   "#138808", // India Green
@@ -22,6 +22,26 @@ export const CHART_COLORWAY = [
   "#E67E22", // Carrot
   "#3498DB", // Peter Blue
   "#E91E63", // Pink
+];
+
+// Dark-mode chart colorway — same order, but dark/near-black colours replaced
+// with bright equivalents that are legible on a dark (#1F2937) background:
+//   #000080 Navy    → #22D3EE Cyan      (position 3)
+//   #138808 Green   → #4ADE80 Lime      (position 2, original is too dark)
+//   #9B59B6 Purple  → #C084FC Lavender  (position 7, brightened)
+export const CHART_COLORWAY_DARK = [
+  "#FF9933", // Saffron        (unchanged)
+  "#4ADE80", // Lime Green     (was #138808 — too dark on dark bg)
+  "#22D3EE", // Cyan           (was #000080 — invisible on dark bg)
+  "#60A5FA", // Sky Blue       (was #4A90D9 — slightly brighter)
+  "#F87171", // Soft Red       (was #E74C3C — slightly softened)
+  "#34D399", // Emerald        (unchanged, already bright)
+  "#C084FC", // Lavender       (was #9B59B6 — brightened)
+  "#FBBF24", // Amber          (was #F39C12 — slightly brighter)
+  "#2DD4BF", // Teal           (unchanged)
+  "#FB923C", // Carrot         (was #E67E22 — slightly brighter)
+  "#38BDF8", // Azure          (was #3498DB — brightened)
+  "#F472B6", // Pink           (was #E91E63 — brightened)
 ];
 
 // Sequential palette for maps and heatmaps
