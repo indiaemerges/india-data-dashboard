@@ -1,14 +1,15 @@
 import dynamic from "next/dynamic";
-import { defaultLayout, defaultConfig } from "@/config/chart-themes.config";
+import { useTheme } from "next-themes";
+import { defaultLayout, darkLayout, defaultConfig } from "@/config/chart-themes.config";
 
 // Dynamically import react-plotly.js with SSR disabled (Plotly requires window)
 const Plot = dynamic(() => import("react-plotly.js"), {
   ssr: false,
   loading: () => (
-    <div className="flex items-center justify-center h-80 bg-gray-50 rounded-lg border border-gray-200">
+    <div className="flex items-center justify-center h-80 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
       <div className="text-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-2" />
-        <p className="text-sm text-gray-500">Loading chart...</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">Loading chart...</p>
       </div>
     </div>
   ),
@@ -37,24 +38,27 @@ export default function PlotlyChart({
   className = "",
   height = 400,
 }: PlotlyChartProps) {
+  const { resolvedTheme } = useTheme();
+  const baseLayout = resolvedTheme === "dark" ? darkLayout : defaultLayout;
+
   // When an HTML title is rendered above the chart, suppress the Plotly
   // internal title to avoid duplication and shrink the top margin.
   const hasHtmlHeader = !!(title || subtitle);
 
-  // Merge user layout with defaults
+  // Merge user layout with theme-aware defaults
   const mergedLayout: Partial<Plotly.Layout> = {
-    ...defaultLayout,
+    ...baseLayout,
     ...layout,
     title: hasHtmlHeader ? undefined : (layout.title || undefined),
     height: layout.height || height,
     margin: {
-      ...defaultLayout.margin,
+      ...baseLayout.margin,
       ...(hasHtmlHeader ? { t: 20 } : {}),
       ...layout.margin,
     },
-    xaxis: { ...defaultLayout.xaxis, ...layout.xaxis },
-    yaxis: { ...defaultLayout.yaxis, ...layout.yaxis },
-    legend: { ...defaultLayout.legend, ...layout.legend },
+    xaxis: { ...baseLayout.xaxis, ...layout.xaxis },
+    yaxis: { ...baseLayout.yaxis, ...layout.yaxis },
+    legend: { ...baseLayout.legend, ...layout.legend },
     // Support dual y-axis: merge yaxis2 with sensible defaults if provided
     ...(layout.yaxis2
       ? {
@@ -73,15 +77,15 @@ export default function PlotlyChart({
   };
 
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 p-4 ${className}`}>
+    <div className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 ${className}`}>
       {/* Chart header */}
       {(title || subtitle) && (
         <div className="mb-2">
           {title && (
-            <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>
           )}
           {subtitle && (
-            <p className="text-sm text-gray-500 mt-0.5">{subtitle}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{subtitle}</p>
           )}
         </div>
       )}
@@ -98,7 +102,7 @@ export default function PlotlyChart({
 
       {/* Source attribution */}
       {source && (
-        <div className="mt-2 text-xs text-gray-400">
+        <div className="mt-2 text-xs text-gray-400 dark:text-gray-500">
           Source:{" "}
           {sourceUrl ? (
             <a

@@ -9,6 +9,11 @@
   --foreground: #111827;
 }
 
+.dark {
+  --background: #111827;
+  --foreground: #f9fafb;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -48,4 +53,12 @@ main {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }

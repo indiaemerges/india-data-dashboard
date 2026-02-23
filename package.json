@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.90.21",
     "next": "^15.1.0",
+    "next-themes": "^0.4.6",
     "plotly.js-basic-dist-min": "^3.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

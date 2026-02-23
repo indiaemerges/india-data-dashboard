@@ -55,7 +55,7 @@ export const defaultConfig: Partial<Plotly.Config> = {
   },
 };
 
-// Dark mode theme override
+// Dark mode theme override — inherits colorway, legend, margins, hovermode from defaultLayout
 export const darkLayout: Partial<Plotly.Layout> = {
   ...defaultLayout,
   font: {
@@ -74,5 +74,10 @@ export const darkLayout: Partial<Plotly.Layout> = {
     linecolor: "#4B5563",
     tickfont: { size: 11, color: "#9CA3AF" },
     separatethousands: true,
+  },
+  hoverlabel: {
+    bgcolor: "#374151",
+    font: { color: "#F9FAFB", size: 12 },
+    bordercolor: "#4B5563",
   },
 };

@@ -40,12 +40,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-16 left-0 z-40 h-[calc(100vh-4rem)] w-64 bg-white border-r border-gray-200 overflow-y-auto transition-transform duration-200 ${
+        className={`fixed lg:sticky top-16 left-0 z-40 h-[calc(100vh-4rem)] w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 overflow-y-auto transition-transform duration-200 ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         <div className="p-4">
-          <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+          <h2 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">
             Dashboards
           </h2>
 
@@ -55,7 +55,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
             return (
               <div key={category} className="mb-4">
-                <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1 px-2">
+                <h3 className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1 px-2">
                   {categoryLabels[category] || category}
                 </h3>
                 <ul className="space-y-0.5">
@@ -69,8 +69,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                           href={ds.dashboardPath}
                           className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-sm no-underline transition-colors ${
                             isActive
-                              ? "bg-orange-50 text-orange-700 font-medium"
-                              : "text-gray-700 hover:bg-gray-50"
+                              ? "bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 font-medium"
+                              : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                           }`}
                           onClick={onClose}
                         >
@@ -86,13 +86,13 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           })}
 
           {/* Explorer link */}
-          <div className="mt-6 pt-4 border-t border-gray-200">
+          <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
             <Link
               href="/explore"
               className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-sm no-underline transition-colors ${
                 router.pathname.startsWith("/explore")
-                  ? "bg-orange-50 text-orange-700 font-medium"
-                  : "text-gray-700 hover:bg-gray-50"
+                  ? "bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 font-medium"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
               }`}
               onClick={onClose}
             >

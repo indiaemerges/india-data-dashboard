@@ -12,7 +12,7 @@ export default function Layout({ children, showSidebar = true }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       <Header />
 
       <div className="flex flex-1">
@@ -30,7 +30,7 @@ export default function Layout({ children, showSidebar = true }: LayoutProps) {
             {/* Mobile sidebar toggle */}
             {showSidebar && (
               <button
-                className="lg:hidden mb-4 flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900"
+                className="lg:hidden mb-4 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
                 onClick={() => setSidebarOpen(true)}
               >
                 <svg
