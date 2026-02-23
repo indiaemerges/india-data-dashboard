@@ -14,10 +14,10 @@ export default function DashboardsIndex() {
       </Head>
 
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
           All Dashboards
         </h1>
-        <p className="text-gray-600 mb-6">
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
           Interactive visualizations across {datasets.length} datasets from
           government and international sources.
         </p>
