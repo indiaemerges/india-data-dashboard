@@ -71,8 +71,31 @@ export default function BarChart({
     };
   });
 
+  // Detect quarterly data on the x-axis (vertical bars): labels like "2024-25 Q1"
+  // Enforce chronological order and show only yearly ticks (at Q1 boundaries).
+  const allDates =
+    orientation === "v" && series.length > 0
+      ? series[0].data.map((d) => d.date)
+      : [];
+  const isQuarterly =
+    allDates.length > 0 && /^\d{4}-\d{2} Q\d$/.test(allDates[0]);
+
+  const xaxisQuarterlyOverride: Partial<Plotly.LayoutAxis> = isQuarterly
+    ? {
+        categoryorder: "array" as const,
+        categoryarray: allDates,
+        tickmode: "array" as const,
+        tickvals: allDates.filter((d) => d.endsWith("Q1")),
+        ticktext: allDates
+          .filter((d) => d.endsWith("Q1"))
+          .map((d) => d.replace(" Q1", "")),
+        tickangle: -45,
+      }
+    : {};
+
   const layout: Partial<Plotly.Layout> = {
     barmode: barMode,
+    xaxis: xaxisQuarterlyOverride,
     // For horizontal bars the y-axis holds category labels which can be long.
     // Increase the left margin so labels aren't clipped. b and t are left to
     // PlotlyChart's merge logic so the legend/header logic applies correctly.
