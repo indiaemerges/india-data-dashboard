@@ -253,7 +253,63 @@ export default function GDPGrowthDashboard() {
           </div>
         )}
 
-        {/* ── Section 2: GVA by Sector ────────────────────────────────── */}
+        {/* ── Section 2: World Bank Annual GDP ───────────────────────── */}
+        <div className="mb-2 mt-2">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Annual GDP (Long-run)
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+            World Bank Development Indicators — 35-year historical view
+          </p>
+        </div>
+
+        <div className="space-y-6 mb-8">
+          {gdpGrowth && (
+            <LineChart
+              series={[gdpGrowth]}
+              title="India Annual GDP Growth Rate (%)"
+              subtitle="Year-over-year change in real GDP · World Bank WDI"
+              source="World Bank"
+              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=IN"
+              yAxisTitle="Growth Rate (%)"
+              height={380}
+            />
+          )}
+
+          {gdpUSD && (
+            <BarChart
+              series={[
+                {
+                  ...gdpUSD,
+                  indicator: "GDP (Current USD)",
+                  data: gdpUSD.data.map((d) => ({
+                    ...d,
+                    value: d.value ? d.value / 1e9 : null,
+                  })),
+                },
+              ]}
+              title="India GDP (Current USD, Billions)"
+              subtitle="Nominal GDP at current market prices · World Bank WDI"
+              source="World Bank"
+              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=IN"
+              yAxisTitle="GDP (Billion USD)"
+              height={380}
+            />
+          )}
+
+          {gdpPerCapita && gdpPerCapitaGrowth && (
+            <LineChart
+              series={[gdpPerCapita, gdpPerCapitaGrowth]}
+              title="GDP Per Capita"
+              subtitle="Per capita GDP in current USD and growth rate · World Bank WDI"
+              source="World Bank"
+              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=IN"
+              height={380}
+            />
+          )}
+        </div>
+
+        {/* ── Section 3: GVA by Sector ────────────────────────────────── */}
         <div className="mb-2 mt-2">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             GVA Growth by Sector
@@ -303,62 +359,6 @@ export default function GDPGrowthDashboard() {
             )}
           </div>
         )}
-
-        {/* ── Section 3: World Bank Annual GDP ───────────────────────── */}
-        <div className="mb-2 mt-2">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Annual GDP (Long-run)
-          </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-            World Bank Development Indicators — 35-year historical view
-          </p>
-        </div>
-
-        <div className="space-y-6">
-          {gdpGrowth && (
-            <LineChart
-              series={[gdpGrowth]}
-              title="India Annual GDP Growth Rate (%)"
-              subtitle="Year-over-year change in real GDP · World Bank WDI"
-              source="World Bank"
-              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=IN"
-              yAxisTitle="Growth Rate (%)"
-              height={380}
-            />
-          )}
-
-          {gdpUSD && (
-            <BarChart
-              series={[
-                {
-                  ...gdpUSD,
-                  indicator: "GDP (Current USD)",
-                  data: gdpUSD.data.map((d) => ({
-                    ...d,
-                    value: d.value ? d.value / 1e9 : null,
-                  })),
-                },
-              ]}
-              title="India GDP (Current USD, Billions)"
-              subtitle="Nominal GDP at current market prices · World Bank WDI"
-              source="World Bank"
-              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=IN"
-              yAxisTitle="GDP (Billion USD)"
-              height={380}
-            />
-          )}
-
-          {gdpPerCapita && gdpPerCapitaGrowth && (
-            <LineChart
-              series={[gdpPerCapita, gdpPerCapitaGrowth]}
-              title="GDP Per Capita"
-              subtitle="Per capita GDP in current USD and growth rate · World Bank WDI"
-              source="World Bank"
-              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=IN"
-              height={380}
-            />
-          )}
-        </div>
 
         {/* Data source info */}
         <div className="mt-8 space-y-3">
