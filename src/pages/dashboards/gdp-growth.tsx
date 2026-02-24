@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useWorldBankIndicators } from "@/lib/hooks/useWorldBank";
-import { useNASQuarterlyData, nasQuarterlyToSeries } from "@/lib/hooks/useMospiNAS";
+import { useNASQuarterlyData, nasQuarterlyToSeries, useNASGVASectorData, nasGVAToSeries } from "@/lib/hooks/useMospiNAS";
 import { WORLD_BANK_INDICATORS } from "@/lib/api/worldbank";
 import LineChart from "@/components/charts/LineChart";
 import BarChart from "@/components/charts/BarChart";
@@ -21,8 +21,10 @@ export default function GDPGrowthDashboard() {
   const { data: nasData, isLoading: nasLoading, error: nasError } =
     useNASQuarterlyData();
 
+  const { data: gvaData, isLoading: gvaLoading } = useNASGVASectorData();
+
   // ── Loading / error states ──────────────────────────────────────────
-  if (wbLoading || nasLoading) {
+  if (wbLoading || nasLoading || gvaLoading) {
     return <LoadingSpinner message="Fetching GDP data..." />;
   }
 
@@ -71,6 +73,41 @@ export default function GDPGrowthDashboard() {
     ? [...nasData.quarters]
         .reverse()
         .find((q) => q.realGrowth !== null)
+    : null;
+
+  // ── GVA broad-sector series (3 lines) ──────────────────────────────
+  const gvaBroadSeries = gvaData
+    ? nasGVAToSeries(gvaData, ["agriculture", "industry", "services"])
+    : null;
+
+  // Latest quarter snapshot for all sectors (bar chart)
+  const gvaLatestQuarter = gvaData
+    ? [...gvaData.quarters].reverse().find((q) => q.totalGVA !== null)
+    : null;
+
+  const gvaSnapshotSeries = gvaLatestQuarter && gvaData
+    ? [{
+        source: "mospi" as const,
+        indicator: `GVA Growth by Sector — ${gvaLatestQuarter.label}`,
+        indicatorId: "NAS_GVA_SNAPSHOT",
+        unit: "%",
+        frequency: "quarterly" as const,
+        data: [
+          { date: "Agriculture", value: gvaLatestQuarter.agriculture, label: "Agriculture" },
+          { date: "Mining & Quarrying", value: gvaLatestQuarter.mining, label: "Mining & Quarrying" },
+          { date: "Manufacturing", value: gvaLatestQuarter.manufacturing, label: "Manufacturing" },
+          { date: "Electricity & Utilities", value: gvaLatestQuarter.electricity, label: "Electricity & Utilities" },
+          { date: "Construction", value: gvaLatestQuarter.construction, label: "Construction" },
+          { date: "Trade & Hotels", value: gvaLatestQuarter.tradeHotelsTransport, label: "Trade & Hotels" },
+          { date: "Finance & Real Estate", value: gvaLatestQuarter.financialRealEstate, label: "Finance & Real Estate" },
+          { date: "Public Administration", value: gvaLatestQuarter.publicAdmin, label: "Public Administration" },
+        ].filter((d) => d.value !== null),
+        metadata: {
+          lastUpdated: gvaData.lastUpdated,
+          sourceUrl: gvaData.sourceUrl,
+          notes: gvaData.notes,
+        },
+      }]
     : null;
 
   return (
@@ -216,8 +253,59 @@ export default function GDPGrowthDashboard() {
           </div>
         )}
 
-        {/* ── Section 2: World Bank Annual GDP ───────────────────────── */}
-        <div className="mb-2 mt-4">
+        {/* ── Section 2: GVA by Sector ────────────────────────────────── */}
+        <div className="mb-2 mt-2">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            GVA Growth by Sector
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+            MoSPI NAS — real growth (constant 2011-12 prices), year-on-year
+          </p>
+        </div>
+
+        {!gvaData ? (
+          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
+            <p className="text-sm text-amber-800 dark:text-amber-300">
+              GVA sector data could not be loaded. Run{" "}
+              <code className="font-mono bg-amber-100 dark:bg-amber-900/40 px-1 rounded">
+                npm run generate:gva
+              </code>{" "}
+              to generate the static data file.
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-6 mb-8">
+            {/* Chart 1: 3-line broad sectors over time */}
+            {gvaBroadSeries && (
+              <LineChart
+                series={gvaBroadSeries}
+                title="GVA Growth — Agriculture, Industry & Services (%)"
+                subtitle="Year-on-year real growth, constant 2011-12 prices · MoSPI NAS"
+                source="MoSPI NAS"
+                sourceUrl="https://www.mospi.gov.in/"
+                yAxisTitle="Growth Rate (%)"
+                height={420}
+              />
+            )}
+
+            {/* Chart 2: Latest quarter snapshot — all 8 sectors */}
+            {gvaSnapshotSeries && gvaLatestQuarter && (
+              <BarChart
+                series={gvaSnapshotSeries}
+                title={`GVA Growth by Sector — ${gvaLatestQuarter.label}`}
+                subtitle="Real year-on-year growth rate across all sectors · MoSPI NAS"
+                source="MoSPI NAS"
+                sourceUrl="https://www.mospi.gov.in/"
+                yAxisTitle="Growth Rate (%)"
+                height={360}
+                orientation="h"
+              />
+            )}
+          </div>
+        )}
+
+        {/* ── Section 3: World Bank Annual GDP ───────────────────────── */}
+        <div className="mb-2 mt-2">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Annual GDP (Long-run)
           </h2>

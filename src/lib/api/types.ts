@@ -220,6 +220,38 @@ export interface NASQuarterDataPoint {
   realGDP: number | null;        // GDP at constant 2011-12 prices (₹ Crore)
 }
 
+/** A single quarter's GVA sector data from MoSPI NAS */
+export interface NASGVAQuarterDataPoint {
+  year: string;
+  quarter: string;
+  label: string;
+  // Broad sector aggregates (simple average of sub-sectors)
+  agriculture: number | null;
+  industry: number | null;
+  services: number | null;
+  // Sub-sectors
+  mining: number | null;
+  manufacturing: number | null;
+  electricity: number | null;
+  construction: number | null;
+  tradeHotelsTransport: number | null;
+  financialRealEstate: number | null;
+  publicAdmin: number | null;
+  totalGVA: number | null;
+}
+
+/** Complete NAS quarterly GVA by sector dataset (loaded from static JSON) */
+export interface NASGVASectorData {
+  lastUpdated: string;
+  source: string;
+  sourceUrl: string;
+  baseYear: string;
+  unit: string;
+  notes: string;
+  sectorLabels: Record<string, string>;
+  quarters: NASGVAQuarterDataPoint[];
+}
+
 /** Complete NAS quarterly dataset (loaded from static JSON) */
 export interface NASQuarterlyData {
   lastUpdated: string;
