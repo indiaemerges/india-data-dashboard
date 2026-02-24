@@ -8,21 +8,12 @@
   "quarters": [
     {
       "year": "2011-12",
-      "quarter": "Q4",
-      "label": "2011-12 Q4",
+      "quarter": "Q1",
+      "label": "2011-12 Q1",
       "realGrowth": null,
       "nominalGrowth": null,
-      "nominalGDP": 2418511,
-      "realGDP": 2365461
-    },
-    {
-      "year": "2011-12",
-      "quarter": "Q3",
-      "label": "2011-12 Q3",
-      "realGrowth": null,
-      "nominalGrowth": null,
-      "nominalGDP": 2244852,
-      "realGDP": 2225135
+      "nominalGDP": 2043496,
+      "realGDP": 2102863
     },
     {
       "year": "2011-12",
@@ -35,30 +26,30 @@
     },
     {
       "year": "2011-12",
-      "quarter": "Q1",
-      "label": "2011-12 Q1",
+      "quarter": "Q3",
+      "label": "2011-12 Q3",
       "realGrowth": null,
       "nominalGrowth": null,
-      "nominalGDP": 2043496,
-      "realGDP": 2102863
+      "nominalGDP": 2244852,
+      "realGDP": 2225135
     },
     {
-      "year": "2012-13",
+      "year": "2011-12",
       "quarter": "Q4",
-      "label": "2012-13 Q4",
-      "realGrowth": 4.296010406,
-      "nominalGrowth": 12.692428128,
-      "nominalGDP": 2725479,
-      "realGDP": 2467082
+      "label": "2011-12 Q4",
+      "realGrowth": null,
+      "nominalGrowth": null,
+      "nominalGDP": 2418511,
+      "realGDP": 2365461
     },
     {
       "year": "2012-13",
-      "quarter": "Q3",
-      "label": "2012-13 Q3",
-      "realGrowth": 5.376391669,
-      "nominalGrowth": 13.520961134,
-      "nominalGDP": 2548378,
-      "realGDP": 2344767
+      "quarter": "Q1",
+      "label": "2012-13 Q1",
+      "realGrowth": 4.867679535,
+      "nominalGrowth": 13.198301502,
+      "nominalGDP": 2313203,
+      "realGDP": 2205223
     },
     {
       "year": "2012-13",
@@ -71,30 +62,30 @@
     },
     {
       "year": "2012-13",
-      "quarter": "Q1",
-      "label": "2012-13 Q1",
-      "realGrowth": 4.867679535,
-      "nominalGrowth": 13.198301502,
-      "nominalGDP": 2313203,
-      "realGDP": 2205223
-    },
-    {
-      "year": "2013-14",
-      "quarter": "Q4",
-      "label": "2013-14 Q4",
-      "realGrowth": 5.342899071,
-      "nominalGrowth": 12.305918972,
-      "nominalGDP": 3060874,
-      "realGDP": 2598898
-    },
-    {
-      "year": "2013-14",
       "quarter": "Q3",
-      "label": "2013-14 Q3",
-      "realGrowth": 6.534982613,
-      "nominalGrowth": 14.624684528,
-      "nominalGDP": 2921070,
-      "realGDP": 2497997
+      "label": "2012-13 Q3",
+      "realGrowth": 5.376391669,
+      "nominalGrowth": 13.520961134,
+      "nominalGDP": 2548378,
+      "realGDP": 2344767
+    },
+    {
+      "year": "2012-13",
+      "quarter": "Q4",
+      "label": "2012-13 Q4",
+      "realGrowth": 4.296010406,
+      "nominalGrowth": 12.692428128,
+      "nominalGDP": 2725479,
+      "realGDP": 2467082
+    },
+    {
+      "year": "2013-14",
+      "quarter": "Q1",
+      "label": "2013-14 Q1",
+      "realGrowth": 6.447098628,
+      "nominalGrowth": 10.901392663,
+      "nominalGDP": 2565374,
+      "realGDP": 2347396
     },
     {
       "year": "2013-14",
@@ -107,30 +98,30 @@
     },
     {
       "year": "2013-14",
-      "quarter": "Q1",
-      "label": "2013-14 Q1",
-      "realGrowth": 6.447098628,
-      "nominalGrowth": 10.901392663,
-      "nominalGDP": 2565374,
-      "realGDP": 2347396
-    },
-    {
-      "year": "2014-15",
-      "quarter": "Q4",
-      "label": "2014-15 Q4",
-      "realGrowth": 7.112162334,
-      "nominalGrowth": 8.291509385,
-      "nominalGDP": 3314667,
-      "realGDP": 2783733
-    },
-    {
-      "year": "2014-15",
       "quarter": "Q3",
-      "label": "2014-15 Q3",
-      "realGrowth": 5.922736184,
-      "nominalGrowth": 9.032546817,
-      "nominalGDP": 3184917,
-      "realGDP": 2645947
+      "label": "2013-14 Q3",
+      "realGrowth": 6.534982613,
+      "nominalGrowth": 14.624684528,
+      "nominalGDP": 2921070,
+      "realGDP": 2497997
+    },
+    {
+      "year": "2013-14",
+      "quarter": "Q4",
+      "label": "2013-14 Q4",
+      "realGrowth": 5.342899071,
+      "nominalGrowth": 12.305918972,
+      "nominalGDP": 3060874,
+      "realGDP": 2598898
+    },
+    {
+      "year": "2014-15",
+      "quarter": "Q1",
+      "label": "2014-15 Q1",
+      "realGrowth": 8.023963019,
+      "nominalGrowth": 13.604983839,
+      "nominalGDP": 2914393,
+      "realGDP": 2535751
     },
     {
       "year": "2014-15",
@@ -143,30 +134,30 @@
     },
     {
       "year": "2014-15",
-      "quarter": "Q1",
-      "label": "2014-15 Q1",
-      "realGrowth": 8.023963019,
-      "nominalGrowth": 13.604983839,
-      "nominalGDP": 2914393,
-      "realGDP": 2535751
-    },
-    {
-      "year": "2015-16",
-      "quarter": "Q4",
-      "label": "2015-16 Q4",
-      "realGrowth": 9.088682634,
-      "nominalGrowth": 11.498797397,
-      "nominalGDP": 3695814,
-      "realGDP": 3036738
-    },
-    {
-      "year": "2015-16",
       "quarter": "Q3",
-      "label": "2015-16 Q3",
-      "realGrowth": 7.197432472,
-      "nominalGrowth": 9.159277908,
-      "nominalGDP": 3476632,
-      "realGDP": 2836387
+      "label": "2014-15 Q3",
+      "realGrowth": 5.922736184,
+      "nominalGrowth": 9.032546817,
+      "nominalGDP": 3184917,
+      "realGDP": 2645947
+    },
+    {
+      "year": "2014-15",
+      "quarter": "Q4",
+      "label": "2014-15 Q4",
+      "realGrowth": 7.112162334,
+      "nominalGrowth": 8.291509385,
+      "nominalGDP": 3314667,
+      "realGDP": 2783733
+    },
+    {
+      "year": "2015-16",
+      "quarter": "Q1",
+      "label": "2015-16 Q1",
+      "realGrowth": 7.592544704,
+      "nominalGrowth": 11.293950826,
+      "nominalGDP": 3243543,
+      "realGDP": 2728279
     },
     {
       "year": "2015-16",
@@ -179,30 +170,30 @@
     },
     {
       "year": "2015-16",
-      "quarter": "Q1",
-      "label": "2015-16 Q1",
-      "realGrowth": 7.592544704,
-      "nominalGrowth": 11.293950826,
-      "nominalGDP": 3243543,
-      "realGDP": 2728279
-    },
-    {
-      "year": "2016-17",
-      "quarter": "Q4",
-      "label": "2016-17 Q4",
-      "realGrowth": 6.289654045,
-      "nominalGrowth": 11.55276247,
-      "nominalGDP": 4122771,
-      "realGDP": 3227728
-    },
-    {
-      "year": "2016-17",
       "quarter": "Q3",
-      "label": "2016-17 Q3",
-      "realGrowth": 8.576357397,
-      "nominalGrowth": 11.459444424,
-      "nominalGDP": 3875007,
-      "realGDP": 3079622
+      "label": "2015-16 Q3",
+      "realGrowth": 7.197432472,
+      "nominalGrowth": 9.159277908,
+      "nominalGDP": 3476632,
+      "realGDP": 2836387
+    },
+    {
+      "year": "2015-16",
+      "quarter": "Q4",
+      "label": "2015-16 Q4",
+      "realGrowth": 9.088682634,
+      "nominalGrowth": 11.498797397,
+      "nominalGDP": 3695814,
+      "realGDP": 3036738
+    },
+    {
+      "year": "2016-17",
+      "quarter": "Q1",
+      "label": "2016-17 Q1",
+      "realGrowth": 8.679542613,
+      "nominalGrowth": 12.215736681,
+      "nominalGDP": 3639775,
+      "realGDP": 2965088
     },
     {
       "year": "2016-17",
@@ -215,30 +206,30 @@
     },
     {
       "year": "2016-17",
-      "quarter": "Q1",
-      "label": "2016-17 Q1",
-      "realGrowth": 8.679542613,
-      "nominalGrowth": 12.215736681,
-      "nominalGDP": 3639775,
-      "realGDP": 2965088
-    },
-    {
-      "year": "2017-18",
-      "quarter": "Q4",
-      "label": "2017-18 Q4",
-      "realGrowth": 8.932909215,
-      "nominalGrowth": 11.204004837,
-      "nominalGDP": 4584686,
-      "realGDP": 3516058
-    },
-    {
-      "year": "2017-18",
       "quarter": "Q3",
-      "label": "2017-18 Q3",
-      "realGrowth": 6.668677787,
-      "nominalGrowth": 11.978941443,
-      "nominalGDP": 4339194,
-      "realGDP": 3284992
+      "label": "2016-17 Q3",
+      "realGrowth": 8.576357397,
+      "nominalGrowth": 11.459444424,
+      "nominalGDP": 3875007,
+      "realGDP": 3079622
+    },
+    {
+      "year": "2016-17",
+      "quarter": "Q4",
+      "label": "2016-17 Q4",
+      "realGrowth": 6.289654045,
+      "nominalGrowth": 11.55276247,
+      "nominalGDP": 4122771,
+      "realGDP": 3227728
+    },
+    {
+      "year": "2017-18",
+      "quarter": "Q1",
+      "label": "2017-18 Q1",
+      "realGrowth": 6.112753448,
+      "nominalGrowth": 10.141876867,
+      "nominalGDP": 4008916,
+      "realGDP": 3146336
     },
     {
       "year": "2017-18",
@@ -251,30 +242,30 @@
     },
     {
       "year": "2017-18",
-      "quarter": "Q1",
-      "label": "2017-18 Q1",
-      "realGrowth": 6.112753448,
-      "nominalGrowth": 10.141876867,
-      "nominalGDP": 4008916,
-      "realGDP": 3146336
-    },
-    {
-      "year": "2018-19",
-      "quarter": "Q4",
-      "label": "2018-19 Q4",
-      "realGrowth": 5.720942784,
-      "nominalGrowth": 4.724379927,
-      "nominalGDP": 4801284,
-      "realGDP": 3717210
-    },
-    {
-      "year": "2018-19",
       "quarter": "Q3",
-      "label": "2018-19 Q3",
-      "realGrowth": 6.233478045,
-      "nominalGrowth": 12.301936084,
-      "nominalGDP": 4872998,
-      "realGDP": 3489761
+      "label": "2017-18 Q3",
+      "realGrowth": 6.668677787,
+      "nominalGrowth": 11.978941443,
+      "nominalGDP": 4339194,
+      "realGDP": 3284992
+    },
+    {
+      "year": "2017-18",
+      "quarter": "Q4",
+      "label": "2017-18 Q4",
+      "realGrowth": 8.932909215,
+      "nominalGrowth": 11.204004837,
+      "nominalGDP": 4584686,
+      "realGDP": 3516058
+    },
+    {
+      "year": "2018-19",
+      "quarter": "Q1",
+      "label": "2018-19 Q1",
+      "realGrowth": 7.499660631,
+      "nominalGrowth": 13.980167124,
+      "nominalGDP": 4569369,
+      "realGDP": 3382301
     },
     {
       "year": "2018-19",
@@ -287,30 +278,30 @@
     },
     {
       "year": "2018-19",
-      "quarter": "Q1",
-      "label": "2018-19 Q1",
-      "realGrowth": 7.499660631,
-      "nominalGrowth": 13.980167124,
-      "nominalGDP": 4569369,
-      "realGDP": 3382301
-    },
-    {
-      "year": "2019-20",
-      "quarter": "Q4",
-      "label": "2019-20 Q4",
-      "realGrowth": 2.944913061,
-      "nominalGrowth": 7.236581545,
-      "nominalGDP": 5148733,
-      "realGDP": 3826679
-    },
-    {
-      "year": "2019-20",
       "quarter": "Q3",
-      "label": "2019-20 Q3",
-      "realGrowth": 3.255643068,
-      "nominalGrowth": 5.383673244,
-      "nominalGDP": 5135345,
-      "realGDP": 3603375
+      "label": "2018-19 Q3",
+      "realGrowth": 6.233478045,
+      "nominalGrowth": 12.301936084,
+      "nominalGDP": 4872998,
+      "realGDP": 3489761
+    },
+    {
+      "year": "2018-19",
+      "quarter": "Q4",
+      "label": "2018-19 Q4",
+      "realGrowth": 5.720942784,
+      "nominalGrowth": 4.724379927,
+      "nominalGDP": 4801284,
+      "realGDP": 3717210
+    },
+    {
+      "year": "2019-20",
+      "quarter": "Q1",
+      "label": "2019-20 Q1",
+      "realGrowth": 5.095368273,
+      "nominalGrowth": 8.360218506,
+      "nominalGDP": 4951378,
+      "realGDP": 3554642
     },
     {
       "year": "2019-20",
@@ -323,30 +314,30 @@
     },
     {
       "year": "2019-20",
-      "quarter": "Q1",
-      "label": "2019-20 Q1",
-      "realGrowth": 5.095368273,
-      "nominalGrowth": 8.360218506,
-      "nominalGDP": 4951378,
-      "realGDP": 3554642
-    },
-    {
-      "year": "2020-21",
-      "quarter": "Q4",
-      "label": "2020-21 Q4",
-      "realGrowth": 3.289792797,
-      "nominalGrowth": 11.827530694,
-      "nominalGDP": 5757701,
-      "realGDP": 3952568
-    },
-    {
-      "year": "2020-21",
       "quarter": "Q3",
-      "label": "2020-21 Q3",
-      "realGrowth": 1.775082226,
-      "nominalGrowth": 6.597935468,
-      "nominalGDP": 5474171,
-      "realGDP": 3667338
+      "label": "2019-20 Q3",
+      "realGrowth": 3.255643068,
+      "nominalGrowth": 5.383673244,
+      "nominalGDP": 5135345,
+      "realGDP": 3603375
+    },
+    {
+      "year": "2019-20",
+      "quarter": "Q4",
+      "label": "2019-20 Q4",
+      "realGrowth": 2.944913061,
+      "nominalGrowth": 7.236581545,
+      "nominalGDP": 5148733,
+      "realGDP": 3826679
+    },
+    {
+      "year": "2020-21",
+      "quarter": "Q1",
+      "label": "2020-21 Q1",
+      "realGrowth": -23.134128851,
+      "nominalGrowth": -21.356391965,
+      "nominalGDP": 3893943,
+      "realGDP": 2732306
     },
     {
       "year": "2020-21",
@@ -359,30 +350,30 @@
     },
     {
       "year": "2020-21",
-      "quarter": "Q1",
-      "label": "2020-21 Q1",
-      "realGrowth": -23.134128851,
-      "nominalGrowth": -21.356391965,
-      "nominalGDP": 3893943,
-      "realGDP": 2732306
-    },
-    {
-      "year": "2021-22",
-      "quarter": "Q4",
-      "label": "2021-22 Q4",
-      "realGrowth": 4.452845566,
-      "nominalGrowth": 13.302010949,
-      "nominalGDP": 6523591,
-      "realGDP": 4128570
-    },
-    {
-      "year": "2021-22",
       "quarter": "Q3",
-      "label": "2021-22 Q3",
-      "realGrowth": 5.529074978,
-      "nominalGrowth": 14.507251402,
-      "nominalGDP": 6268323,
-      "realGDP": 3870108
+      "label": "2020-21 Q3",
+      "realGrowth": 1.775082226,
+      "nominalGrowth": 6.597935468,
+      "nominalGDP": 5474171,
+      "realGDP": 3667338
+    },
+    {
+      "year": "2020-21",
+      "quarter": "Q4",
+      "label": "2020-21 Q4",
+      "realGrowth": 3.289792797,
+      "nominalGrowth": 11.827530694,
+      "nominalGDP": 5757701,
+      "realGDP": 3952568
+    },
+    {
+      "year": "2021-22",
+      "quarter": "Q1",
+      "label": "2021-22 Q1",
+      "realGrowth": 22.633772591,
+      "nominalGrowth": 32.980134027,
+      "nominalGDP": 5178170,
+      "realGDP": 3350730
     },
     {
       "year": "2021-22",
@@ -395,30 +386,30 @@
     },
     {
       "year": "2021-22",
-      "quarter": "Q1",
-      "label": "2021-22 Q1",
-      "realGrowth": 22.633772591,
-      "nominalGrowth": 32.980134027,
-      "nominalGDP": 5178170,
-      "realGDP": 3350730
-    },
-    {
-      "year": "2022-23",
-      "quarter": "Q4",
-      "label": "2022-23 Q4",
-      "realGrowth": 6.89695397,
-      "nominalGrowth": 8.913636071,
-      "nominalGDP": 7105080,
-      "realGDP": 4413316
-    },
-    {
-      "year": "2022-23",
       "quarter": "Q3",
-      "label": "2022-23 Q3",
-      "realGrowth": 4.844051198,
-      "nominalGrowth": 8.920763095,
-      "nominalGDP": 6827505,
-      "realGDP": 4057578
+      "label": "2021-22 Q3",
+      "realGrowth": 5.529074978,
+      "nominalGrowth": 14.507251402,
+      "nominalGDP": 6268323,
+      "realGDP": 3870108
+    },
+    {
+      "year": "2021-22",
+      "quarter": "Q4",
+      "label": "2021-22 Q4",
+      "realGrowth": 4.452845566,
+      "nominalGrowth": 13.302010949,
+      "nominalGDP": 6523591,
+      "realGDP": 4128570
+    },
+    {
+      "year": "2022-23",
+      "quarter": "Q1",
+      "label": "2022-23 Q1",
+      "realGrowth": 13.49075958,
+      "nominalGrowth": 25.524316556,
+      "nominalGDP": 6499863,
+      "realGDP": 3802769
     },
     {
       "year": "2022-23",
@@ -431,30 +422,30 @@
     },
     {
       "year": "2022-23",
-      "quarter": "Q1",
-      "label": "2022-23 Q1",
-      "realGrowth": 13.49075958,
-      "nominalGrowth": 25.524316556,
-      "nominalGDP": 6499863,
-      "realGDP": 3802769
-    },
-    {
-      "year": "2023-24",
-      "quarter": "Q4",
-      "label": "2023-24 Q4",
-      "realGrowth": 8.354640581,
-      "nominalGrowth": 12.046110758,
-      "nominalGDP": 7960966,
-      "realGDP": 4782032
-    },
-    {
-      "year": "2023-24",
       "quarter": "Q3",
-      "label": "2023-24 Q3",
-      "realGrowth": 9.514554744,
-      "nominalGrowth": 12.92067726,
-      "nominalGDP": 7709665,
-      "realGDP": 4443638
+      "label": "2022-23 Q3",
+      "realGrowth": 4.844051198,
+      "nominalGrowth": 8.920763095,
+      "nominalGDP": 6827505,
+      "realGDP": 4057578
+    },
+    {
+      "year": "2022-23",
+      "quarter": "Q4",
+      "label": "2022-23 Q4",
+      "realGrowth": 6.89695397,
+      "nominalGrowth": 8.913636071,
+      "nominalGDP": 7105080,
+      "realGDP": 4413316
+    },
+    {
+      "year": "2023-24",
+      "quarter": "Q1",
+      "label": "2023-24 Q1",
+      "realGrowth": 9.659944251,
+      "nominalGrowth": 10.950464661,
+      "nominalGDP": 7211628,
+      "realGDP": 4170114
     },
     {
       "year": "2023-24",
@@ -467,30 +458,30 @@
     },
     {
       "year": "2023-24",
-      "quarter": "Q1",
-      "label": "2023-24 Q1",
-      "realGrowth": 9.659944251,
-      "nominalGrowth": 10.950464661,
-      "nominalGDP": 7211628,
-      "realGDP": 4170114
-    },
-    {
-      "year": "2024-25",
-      "quarter": "Q4",
-      "label": "2024-25 Q4",
-      "realGrowth": 7.384530362,
-      "nominalGrowth": 10.759604865,
-      "nominalGDP": 8817534,
-      "realGDP": 5135163
-    },
-    {
-      "year": "2024-25",
       "quarter": "Q3",
-      "label": "2024-25 Q3",
-      "realGrowth": 6.366485562,
-      "nominalGrowth": 10.281984002,
-      "nominalGDP": 8502372,
-      "realGDP": 4726542
+      "label": "2023-24 Q3",
+      "realGrowth": 9.514554744,
+      "nominalGrowth": 12.92067726,
+      "nominalGDP": 7709665,
+      "realGDP": 4443638
+    },
+    {
+      "year": "2023-24",
+      "quarter": "Q4",
+      "label": "2023-24 Q4",
+      "realGrowth": 8.354640581,
+      "nominalGrowth": 12.046110758,
+      "nominalGDP": 7960966,
+      "realGDP": 4782032
+    },
+    {
+      "year": "2024-25",
+      "quarter": "Q1",
+      "label": "2024-25 Q1",
+      "realGrowth": 6.511799767,
+      "nominalGrowth": 9.654775534,
+      "nominalGDP": 7907894,
+      "realGDP": 4441664
     },
     {
       "year": "2024-25",
@@ -503,21 +494,21 @@
     },
     {
       "year": "2024-25",
-      "quarter": "Q1",
-      "label": "2024-25 Q1",
-      "realGrowth": 6.511799767,
-      "nominalGrowth": 9.654775534,
-      "nominalGDP": 7907894,
-      "realGDP": 4441664
+      "quarter": "Q3",
+      "label": "2024-25 Q3",
+      "realGrowth": 6.366485562,
+      "nominalGrowth": 10.281984002,
+      "nominalGDP": 8502372,
+      "realGDP": 4726542
     },
     {
-      "year": "2025-26",
-      "quarter": "Q2",
-      "label": "2025-26 Q2",
-      "realGrowth": 8.228474104,
-      "nominalGrowth": 8.733345698,
-      "nominalGDP": 8525070,
-      "realGDP": 4863340
+      "year": "2024-25",
+      "quarter": "Q4",
+      "label": "2024-25 Q4",
+      "realGrowth": 7.384530362,
+      "nominalGrowth": 10.759604865,
+      "nominalGDP": 8817534,
+      "realGDP": 5135163
     },
     {
       "year": "2025-26",
@@ -527,6 +518,15 @@
       "nominalGrowth": 8.819924796,
       "nominalGDP": 8605365,
       "realGDP": 4788623
+    },
+    {
+      "year": "2025-26",
+      "quarter": "Q2",
+      "label": "2025-26 Q2",
+      "realGrowth": 8.228474104,
+      "nominalGrowth": 8.733345698,
+      "nominalGDP": 8525070,
+      "realGDP": 4863340
     }
   ]
 }

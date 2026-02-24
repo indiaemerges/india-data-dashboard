@@ -36,7 +36,8 @@ export default function BarChart({
   height = 400,
 }: BarChartProps) {
   const uniqueUnits = getUniqueUnits(series);
-  const useDualAxis = uniqueUnits.length === 2 && !yAxisTitle && orientation === "v";
+  const useDualAxis =
+    uniqueUnits.length === 2 && !yAxisTitle && orientation === "v";
 
   const unitToAxis: Record<string, string> = {};
   if (useDualAxis) {
@@ -44,15 +45,32 @@ export default function BarChart({
     unitToAxis[uniqueUnits[1]] = "y2";
   }
 
+  // ── Quarterly detection (vertical bars only) ───────────────────────────
+  // Use numeric indices as x-values so Plotly's axis stays linear and we
+  // control ordering / tick positions explicitly.
+  const allDates =
+    orientation === "v" && series.length > 0
+      ? series[0].data.map((d) => d.date)
+      : [];
+  const isQuarterly =
+    allDates.length > 0 && /^\d{4}-\d{2} Q\d$/.test(allDates[0]);
+
+  const dateToIndex = new Map<string, number>(allDates.map((d, i) => [d, i]));
+
+  const q1Entries = allDates
+    .map((d, i) => ({ d, i }))
+    .filter(({ d }) => d.endsWith("Q1"));
+
+  // ── Build Plotly traces ────────────────────────────────────────────────
   const data: Plotly.Data[] = series.map((s) => {
+    const baseHoverV = `<b>${s.indicator}</b><br>%{x}: %{y:.2f} ${s.unit}<extra></extra>`;
+    const baseHoverH = `<b>${s.indicator}</b><br>%{y}: %{x:.2f} ${s.unit}<extra></extra>`;
+
     const baseTrace = {
       type: "bar" as const,
       name: s.indicator,
       orientation,
-      hovertemplate:
-        orientation === "v"
-          ? `<b>${s.indicator}</b><br>%{x}: %{y:.2f} ${s.unit}<extra></extra>`
-          : `<b>${s.indicator}</b><br>%{y}: %{x:.2f} ${s.unit}<extra></extra>`,
+      hovertemplate: orientation === "v" ? baseHoverV : baseHoverH,
       ...(useDualAxis && unitToAxis[s.unit] === "y2" ? { yaxis: "y2" } : {}),
     };
 
@@ -64,31 +82,27 @@ export default function BarChart({
       };
     }
 
+    // Vertical bars — use numeric index for quarterly data
     return {
       ...baseTrace,
-      x: s.data.map((d) => d.date),
+      x: isQuarterly
+        ? s.data.map((d) => dateToIndex.get(d.date) ?? 0)
+        : s.data.map((d) => d.date),
       y: s.data.map((d) => d.value),
+      // customdata carries the original label for the hover tooltip
+      customdata: s.data.map((d) => d.date),
+      hovertemplate: isQuarterly
+        ? `<b>${s.indicator}</b><br>%{customdata}: %{y:.2f} ${s.unit}<extra></extra>`
+        : baseHoverV,
     };
   });
 
-  // Detect quarterly data on the x-axis (vertical bars): labels like "2024-25 Q1"
-  // Enforce chronological order and show only yearly ticks (at Q1 boundaries).
-  const allDates =
-    orientation === "v" && series.length > 0
-      ? series[0].data.map((d) => d.date)
-      : [];
-  const isQuarterly =
-    allDates.length > 0 && /^\d{4}-\d{2} Q\d$/.test(allDates[0]);
-
+  // ── Build layout ───────────────────────────────────────────────────────
   const xaxisQuarterlyOverride: Partial<Plotly.LayoutAxis> = isQuarterly
     ? {
-        categoryorder: "array" as const,
-        categoryarray: allDates,
         tickmode: "array" as const,
-        tickvals: allDates.filter((d) => d.endsWith("Q1")),
-        ticktext: allDates
-          .filter((d) => d.endsWith("Q1"))
-          .map((d) => d.replace(" Q1", "")),
+        tickvals: q1Entries.map(({ i }) => i),
+        ticktext: q1Entries.map(({ d }) => d.replace(" Q1", "")),
         tickangle: -45,
       }
     : {};

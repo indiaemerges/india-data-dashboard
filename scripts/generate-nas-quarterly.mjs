@@ -207,8 +207,13 @@ function buildOutput() {
 
   // Merge growth rates with levels, filter out base year nulls for growth
   const quarters = [];
-  // Reverse the growth array so earliest (2011-12) is first
-  const ordered = [...GDP_GROWTH_RATE].reverse();
+  // Sort chronologically: oldest year first, and within each year Q1→Q4
+  const QUARTER_NUM = { Q1: 1, Q2: 2, Q3: 3, Q4: 4 };
+  const ordered = [...GDP_GROWTH_RATE].sort((a, b) => {
+    if (a.year < b.year) return -1;
+    if (a.year > b.year) return 1;
+    return QUARTER_NUM[a.quarter] - QUARTER_NUM[b.quarter];
+  });
 
   for (const g of ordered) {
     const key = `${g.year}|${g.quarter}`;
