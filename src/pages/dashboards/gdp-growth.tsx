@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useWorldBankIndicators } from "@/lib/hooks/useWorldBank";
+import { useNASQuarterlyData, nasQuarterlyToSeries } from "@/lib/hooks/useMospiNAS";
 import { WORLD_BANK_INDICATORS } from "@/lib/api/worldbank";
 import LineChart from "@/components/charts/LineChart";
 import BarChart from "@/components/charts/BarChart";
@@ -14,46 +15,63 @@ const GDP_INDICATORS = [
 ];
 
 export default function GDPGrowthDashboard() {
-  const { data: series, isLoading, error, refetch } = useWorldBankIndicators(
-    GDP_INDICATORS,
-    { years: 35 }
-  );
+  const { data: wbSeries, isLoading: wbLoading, error: wbError, refetch: wbRefetch } =
+    useWorldBankIndicators(GDP_INDICATORS, { years: 35 });
 
-  if (isLoading) {
-    return <LoadingSpinner message="Fetching GDP data from World Bank..." />;
+  const { data: nasData, isLoading: nasLoading, error: nasError } =
+    useNASQuarterlyData();
+
+  // ── Loading / error states ──────────────────────────────────────────
+  if (wbLoading || nasLoading) {
+    return <LoadingSpinner message="Fetching GDP data..." />;
   }
 
-  if (error || !series || series.length === 0) {
+  if (wbError || !wbSeries || wbSeries.length === 0) {
     return (
       <ErrorDisplay
         message={
-          error instanceof Error
-            ? error.message
+          wbError instanceof Error
+            ? wbError.message
             : "Failed to fetch GDP data from World Bank API"
         }
-        onRetry={() => refetch()}
+        onRetry={() => wbRefetch()}
       />
     );
   }
 
-  // Find specific series
-  const gdpGrowth = series.find(
+  // ── World Bank annual series ────────────────────────────────────────
+  const gdpGrowth = wbSeries.find(
     (s) => s.indicatorId === WORLD_BANK_INDICATORS.GDP_GROWTH
   );
-  const gdpUSD = series.find(
+  const gdpUSD = wbSeries.find(
     (s) => s.indicatorId === WORLD_BANK_INDICATORS.GDP_CURRENT_USD
   );
-  const gdpPerCapita = series.find(
+  const gdpPerCapita = wbSeries.find(
     (s) => s.indicatorId === WORLD_BANK_INDICATORS.GDP_PER_CAPITA
   );
-  const gdpPerCapitaGrowth = series.find(
+  const gdpPerCapitaGrowth = wbSeries.find(
     (s) => s.indicatorId === WORLD_BANK_INDICATORS.GDP_PER_CAPITA_GROWTH
   );
 
-  // Get latest values for summary cards
+  // ── MoSPI NAS quarterly series ──────────────────────────────────────
+  const nasGrowthSeries = nasData
+    ? nasQuarterlyToSeries(nasData, "realGrowth")
+    : null;
+  const nasNominalGDPSeries = nasData
+    ? nasQuarterlyToSeries(nasData, "nominalGDP")
+    : null;
+
+  // Latest values for summary cards
   const latestGrowth = gdpGrowth?.data[gdpGrowth.data.length - 1];
   const latestGDP = gdpUSD?.data[gdpUSD.data.length - 1];
   const latestPerCapita = gdpPerCapita?.data[gdpPerCapita.data.length - 1];
+
+  // Latest quarterly (MoSPI) — most recent non-null entry
+  const latestQuarter = nasData
+    ? [...nasData.quarters]
+        .reverse()
+        .find((q) => q.realGrowth !== null)
+    : null;
 
   return (
     <>
@@ -61,7 +79,7 @@ export default function GDPGrowthDashboard() {
         <title>GDP & Growth | India Data Dashboard</title>
         <meta
           name="description"
-          content="India's GDP growth rate, GDP in current USD, and per capita GDP from World Bank data."
+          content="India's GDP growth rate, quarterly GDP from MoSPI NAS, and per capita GDP from World Bank."
         />
       </Head>
 
@@ -72,13 +90,36 @@ export default function GDPGrowthDashboard() {
             GDP & National Accounts
           </h1>
           <p className="mt-1 text-gray-600 dark:text-gray-300">
-            India&apos;s Gross Domestic Product, growth rates, and per capita
-            figures. Data from World Bank Development Indicators.
+            India&apos;s Gross Domestic Product — quarterly data from MoSPI
+            National Accounts Statistics and long-run annual data from World
+            Bank.
           </p>
         </div>
 
         {/* Summary cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
+          {/* Latest quarterly growth — MoSPI (most current) */}
+          {latestQuarter && (
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                Real GDP Growth ({latestQuarter.label})
+              </p>
+              <p
+                className={`text-2xl font-bold mt-1 ${
+                  (latestQuarter.realGrowth ?? 0) >= 0
+                    ? "text-green-700 dark:text-green-400"
+                    : "text-red-700 dark:text-red-400"
+                }`}
+              >
+                {latestQuarter.realGrowth?.toFixed(1)}%
+              </p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                YoY, constant prices · MoSPI
+              </p>
+            </div>
+          )}
+
+          {/* Annual growth — World Bank */}
           {latestGrowth && (
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -87,9 +128,13 @@ export default function GDPGrowthDashboard() {
               <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 {latestGrowth.value?.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Annual % change</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                Annual % · World Bank
+              </p>
             </div>
           )}
+
+          {/* GDP in USD — World Bank */}
           {latestGDP && (
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -98,9 +143,13 @@ export default function GDPGrowthDashboard() {
               <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 ${((latestGDP.value || 0) / 1e12).toFixed(2)}T
               </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Current USD</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                Current USD · World Bank
+              </p>
             </div>
           )}
+
+          {/* GDP per capita — World Bank */}
           {latestPerCapita && (
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
@@ -111,27 +160,85 @@ export default function GDPGrowthDashboard() {
                   maximumFractionDigits: 0,
                 })}
               </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Current USD</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                Current USD · World Bank
+              </p>
             </div>
           )}
         </div>
 
-        {/* Charts */}
-        <div className="space-y-6">
-          {/* GDP Growth Rate */}
-          {gdpGrowth && (
+        {/* ── Section 1: MoSPI Quarterly GDP ─────────────────────────── */}
+        <div className="mb-2">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Quarterly GDP Growth Rate
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+            MoSPI NAS — real (constant 2011-12 prices), year-on-year.{" "}
+            <span className="font-medium text-orange-600 dark:text-orange-400">
+              Most current: {latestQuarter?.label ?? "—"}
+            </span>
+          </p>
+        </div>
+
+        {nasError || !nasGrowthSeries ? (
+          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6">
+            <p className="text-sm text-amber-800 dark:text-amber-300">
+              Quarterly GDP data could not be loaded. Run{" "}
+              <code className="font-mono bg-amber-100 dark:bg-amber-900/40 px-1 rounded">
+                npm run generate:nas
+              </code>{" "}
+              to generate the static data file.
+            </p>
+          </div>
+        ) : (
+          <div className="space-y-6 mb-8">
             <LineChart
-              series={[gdpGrowth]}
-              title="India GDP Growth Rate (Annual %)"
-              subtitle="Year-over-year change in real GDP"
-              source="World Bank"
-              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=IN"
+              series={[nasGrowthSeries]}
+              title="India Quarterly Real GDP Growth Rate (%)"
+              subtitle="Year-on-year change, constant 2011-12 prices · MoSPI NAS"
+              source="MoSPI NAS"
+              sourceUrl="https://www.mospi.gov.in/"
               yAxisTitle="Growth Rate (%)"
               height={420}
             />
+
+            {nasNominalGDPSeries && (
+              <BarChart
+                series={[nasNominalGDPSeries]}
+                title="India Quarterly Nominal GDP (₹ Lakh Crore)"
+                subtitle="GDP at current prices · MoSPI NAS"
+                source="MoSPI NAS"
+                sourceUrl="https://www.mospi.gov.in/"
+                yAxisTitle="GDP (₹ Lakh Crore)"
+                height={380}
+              />
+            )}
+          </div>
+        )}
+
+        {/* ── Section 2: World Bank Annual GDP ───────────────────────── */}
+        <div className="mb-2 mt-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Annual GDP (Long-run)
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+            World Bank Development Indicators — 35-year historical view
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          {gdpGrowth && (
+            <LineChart
+              series={[gdpGrowth]}
+              title="India Annual GDP Growth Rate (%)"
+              subtitle="Year-over-year change in real GDP · World Bank WDI"
+              source="World Bank"
+              sourceUrl="https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=IN"
+              yAxisTitle="Growth Rate (%)"
+              height={380}
+            />
           )}
 
-          {/* GDP in USD */}
           {gdpUSD && (
             <BarChart
               series={[
@@ -140,44 +247,57 @@ export default function GDPGrowthDashboard() {
                   indicator: "GDP (Current USD)",
                   data: gdpUSD.data.map((d) => ({
                     ...d,
-                    value: d.value ? d.value / 1e9 : null, // Convert to billions
+                    value: d.value ? d.value / 1e9 : null,
                   })),
                 },
               ]}
               title="India GDP (Current USD, Billions)"
-              subtitle="Nominal GDP at current market prices"
+              subtitle="Nominal GDP at current market prices · World Bank WDI"
               source="World Bank"
               sourceUrl="https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?locations=IN"
               yAxisTitle="GDP (Billion USD)"
-              height={420}
+              height={380}
             />
           )}
 
-          {/* GDP Per Capita */}
           {gdpPerCapita && gdpPerCapitaGrowth && (
             <LineChart
               series={[gdpPerCapita, gdpPerCapitaGrowth]}
               title="GDP Per Capita"
-              subtitle="Per capita GDP in current USD and growth rate"
+              subtitle="Per capita GDP in current USD and growth rate · World Bank WDI"
               source="World Bank"
               sourceUrl="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=IN"
-              height={420}
+              height={380}
             />
           )}
         </div>
 
         {/* Data source info */}
-        <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
-          <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-200">
-            About this data
-          </h3>
-          <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
-            GDP data is sourced from the World Bank Development Indicators API.
-            Values represent India&apos;s national accounts aggregates. GDP
-            growth rate uses constant local currency. For Indian fiscal year
-            breakdowns and GVA by sector, see the MoSPI NAS integration
-            (coming soon).
-          </p>
+        <div className="mt-8 space-y-3">
+          <div className="p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-100 dark:border-orange-800">
+            <h3 className="text-sm font-semibold text-orange-900 dark:text-orange-200">
+              MoSPI NAS — Quarterly GDP
+            </h3>
+            <p className="text-sm text-orange-700 dark:text-orange-300 mt-1">
+              India&apos;s National Statistical Office publishes quarterly GDP
+              estimates within ~60 days of each quarter end (Q1=Apr–Jun,
+              Q2=Jul–Sep, Q3=Oct–Dec, Q4=Jan–Mar). Growth rates are
+              year-on-year comparisons at constant 2011-12 prices. Data
+              available from 2011-12 Q1 through the most recently released
+              quarter.
+            </p>
+          </div>
+
+          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">
+            <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-200">
+              World Bank WDI — Annual GDP
+            </h3>
+            <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
+              World Bank Development Indicators provide a long-run annual view
+              in USD, useful for international comparisons. Data typically lags
+              by 1–2 years behind MoSPI&apos;s own releases.
+            </p>
+          </div>
         </div>
       </div>
     </>

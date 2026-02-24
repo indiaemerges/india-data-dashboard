@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "generate:energy": "node scripts/generate-energy-data.mjs",
+    "generate:nas": "node scripts/generate-nas-quarterly.mjs",
     "start": "next start",
     "lint": "next lint"
   },

@@ -206,6 +206,32 @@ export interface RBIKeyRatesData {
 }
 
 // ---------------------------------------------------------------------------
+// NAS (National Accounts Statistics) — Quarterly GDP types
+// ---------------------------------------------------------------------------
+
+/** A single quarter's GDP data from MoSPI NAS */
+export interface NASQuarterDataPoint {
+  year: string;       // Fiscal year, e.g. "2024-25"
+  quarter: string;    // "Q1" | "Q2" | "Q3" | "Q4"
+  label: string;      // Human-readable, e.g. "2024-25 Q1"
+  realGrowth: number | null;     // YoY real GDP growth rate (%)
+  nominalGrowth: number | null;  // YoY nominal GDP growth rate (%)
+  nominalGDP: number | null;     // GDP at current prices (₹ Crore)
+  realGDP: number | null;        // GDP at constant 2011-12 prices (₹ Crore)
+}
+
+/** Complete NAS quarterly dataset (loaded from static JSON) */
+export interface NASQuarterlyData {
+  lastUpdated: string;
+  source: string;
+  sourceUrl: string;
+  baseYear: string;
+  unit: string;
+  notes: string;
+  quarters: NASQuarterDataPoint[];
+}
+
+// ---------------------------------------------------------------------------
 // Petroleum / PPAC types
 // ---------------------------------------------------------------------------
 
