@@ -10,7 +10,9 @@ export const defaultLayout: Partial<Plotly.Layout> = {
   colorway: CHART_COLORWAY,
   paper_bgcolor: "transparent",
   plot_bgcolor: "transparent",
-  margin: { l: 60, r: 20, t: 50, b: 50 },
+  // b: 80 gives enough room for x-axis tick labels + the horizontal legend
+  // below them without overlap on both desktop and mobile viewports.
+  margin: { l: 60, r: 20, t: 50, b: 80 },
   xaxis: {
     gridcolor: "#E5E7EB",
     linecolor: "#D1D5DB",
@@ -24,11 +26,15 @@ export const defaultLayout: Partial<Plotly.Layout> = {
   },
   legend: {
     orientation: "h",
-    yanchor: "bottom",
-    y: -0.2,
+    yanchor: "top",
+    // y: -0.15 places the legend just below the x-axis in the b:80 margin zone,
+    // clear of tick labels on all screen sizes.
+    y: -0.15,
     xanchor: "center",
     x: 0.5,
     font: { size: 11 },
+    // Wrap long legend items rather than overflowing off-screen on mobile
+    tracegroupgap: 4,
   },
   hoverlabel: {
     bgcolor: "#1F2937",

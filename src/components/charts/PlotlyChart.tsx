@@ -45,15 +45,24 @@ export default function PlotlyChart({
   // internal title to avoid duplication and shrink the top margin.
   const hasHtmlHeader = !!(title || subtitle);
 
+  // Single-series charts don't need a legend — hide it to reclaim the
+  // bottom margin space that would otherwise be reserved for it.
+  const hideLegend = data.length <= 1;
+
   // Merge user layout with theme-aware defaults
   const mergedLayout: Partial<Plotly.Layout> = {
     ...baseLayout,
     ...layout,
     title: hasHtmlHeader ? undefined : (layout.title || undefined),
     height: layout.height || height,
+    showlegend: hideLegend ? false : (layout.showlegend ?? true),
     margin: {
       ...baseLayout.margin,
+      // Shrink top when the HTML header replaces the Plotly title
       ...(hasHtmlHeader ? { t: 20 } : {}),
+      // Shrink bottom when there's no legend (saves ~35px on single-series charts)
+      ...(hideLegend ? { b: 50 } : {}),
+      // Per-chart overrides applied last (e.g. l:160 for horizontal bars)
       ...layout.margin,
     },
     xaxis: { ...baseLayout.xaxis, ...layout.xaxis },
