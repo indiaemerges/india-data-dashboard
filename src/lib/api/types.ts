@@ -305,3 +305,66 @@ export interface PetroleumData {
   supply: PetroleumSupply;
   consumption: PetroleumConsumption;
 }
+
+// ---------------------------------------------------------------------------
+// WPI (Wholesale Price Index) — Monthly types
+// ---------------------------------------------------------------------------
+
+/** A single month's WPI YoY % change data */
+export interface WPIMonthDataPoint {
+  year: number;
+  month: string;
+  label: string;                  // e.g. "Apr 2013"
+  headline: number | null;        // Overall WPI
+  primaryArticles: number | null; // Primary Articles
+  fuelPower: number | null;       // Fuel & Power
+  manufactured: number | null;    // Manufactured Products
+  foodIndex: number | null;       // Food Index (WPI)
+}
+
+/** Complete WPI monthly dataset (loaded from static JSON) */
+export interface WPIMonthlyData {
+  lastUpdated: string;
+  baseYear: string;   // "2011-12"
+  source: string;
+  sourceUrl: string;
+  notes: string;
+  monthly: WPIMonthDataPoint[];
+}
+
+// ---------------------------------------------------------------------------
+// CPI (Consumer Price Index) — Monthly types
+// ---------------------------------------------------------------------------
+
+/** A single month's CPI YoY % change data, All India Combined */
+export interface CPIMonthDataPoint {
+  year: number;
+  month: string;
+  label: string;                    // e.g. "Mar 2014"
+  // Major groups
+  general: number | null;           // Overall CPI (headline)
+  foodBeverages: number | null;     // Food & Beverages
+  fuelLight: number | null;         // Fuel & Light
+  housing: number | null;           // Housing
+  clothingFootwear: number | null;  // Clothing & Footwear
+  miscellaneous: number | null;     // Miscellaneous
+  // Food sub-groups
+  cereals: number | null;
+  pulses: number | null;
+  oilsFats: number | null;
+  milkProducts: number | null;
+  meatFish: number | null;
+  vegetables: number | null;
+  fruits: number | null;
+  spices: number | null;
+}
+
+/** Complete CPI monthly dataset (loaded from static JSON) */
+export interface CPIMonthlyData {
+  lastUpdated: string;
+  baseYear: string;   // "2012"
+  source: string;
+  sourceUrl: string;
+  notes: string;
+  months: CPIMonthDataPoint[];
+}

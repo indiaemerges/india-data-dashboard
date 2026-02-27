@@ -8,6 +8,8 @@
     "generate:energy": "node scripts/generate-energy-data.mjs",
     "generate:nas": "node scripts/generate-nas-quarterly.mjs",
     "generate:gva": "node scripts/generate-nas-gva.mjs",
+    "generate:wpi": "node scripts/generate-wpi.mjs",
+    "generate:cpi": "node scripts/generate-cpi.mjs",
     "start": "next start",
     "lint": "next lint"
   },

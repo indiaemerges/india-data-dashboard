@@ -1,0 +1,1549 @@
+{
+  "lastUpdated": "2026-02-26",
+  "baseYear": "2011-12",
+  "source": "MoSPI WPI",
+  "sourceUrl": "https://mospi.gov.in/web/mospi/reports-publications/-/reports/view/templateOne/16904?q=16904",
+  "notes": "Wholesale Price Index, base year 2011-12=100. All values are YoY % change. Manufactured Products coverage is partial (2024-25 onwards).",
+  "monthly": [
+    {
+      "year": 2013,
+      "month": "April",
+      "label": "Apr 2013",
+      "headline": 3.7249,
+      "primaryArticles": null,
+      "fuelPower": 1.5992,
+      "manufactured": null,
+      "foodIndex": 6.8933
+    },
+    {
+      "year": 2013,
+      "month": "May",
+      "label": "May 2013",
+      "headline": 3.1339,
+      "primaryArticles": null,
+      "fuelPower": -1.4058,
+      "manufactured": null,
+      "foodIndex": 8.4507
+    },
+    {
+      "year": 2013,
+      "month": "June",
+      "label": "Jun 2013",
+      "headline": 4.5584,
+      "primaryArticles": null,
+      "fuelPower": 2.2749,
+      "manufactured": null,
+      "foodIndex": 9.3173
+    },
+    {
+      "year": 2013,
+      "month": "July",
+      "label": "Jul 2013",
+      "headline": 4.7081,
+      "primaryArticles": null,
+      "fuelPower": 8.2126,
+      "manufactured": null,
+      "foodIndex": 8.4239
+    },
+    {
+      "year": 2013,
+      "month": "August",
+      "label": "Aug 2013",
+      "headline": 5.6127,
+      "primaryArticles": null,
+      "fuelPower": 8.9695,
+      "manufactured": null,
+      "foodIndex": 10.6211
+    },
+    {
+      "year": 2013,
+      "month": "September",
+      "label": "Sep 2013",
+      "headline": 6.2268,
+      "primaryArticles": 12.5,
+      "fuelPower": 10.2683,
+      "manufactured": null,
+      "foodIndex": 10.772
+    },
+    {
+      "year": 2013,
+      "month": "October",
+      "label": "Oct 2013",
+      "headline": 6.7039,
+      "primaryArticles": 15.6757,
+      "fuelPower": 8.8372,
+      "manufactured": null,
+      "foodIndex": 14.1176
+    },
+    {
+      "year": 2013,
+      "month": "November",
+      "label": "Nov 2013",
+      "headline": 6.5238,
+      "primaryArticles": 14.4385,
+      "fuelPower": 8.9035,
+      "manufactured": null,
+      "foodIndex": 14.1441
+    },
+    {
+      "year": 2013,
+      "month": "December",
+      "label": "Dec 2013",
+      "headline": 5.8824,
+      "primaryArticles": 10.1877,
+      "fuelPower": 10.4575,
+      "manufactured": null,
+      "foodIndex": 10.6364
+    },
+    {
+      "year": 2014,
+      "month": "January",
+      "label": "Jan 2014",
+      "headline": 5.1852,
+      "primaryArticles": null,
+      "fuelPower": 10.101,
+      "manufactured": null,
+      "foodIndex": 7.2646
+    },
+    {
+      "year": 2014,
+      "month": "February",
+      "label": "Feb 2014",
+      "headline": 4.797,
+      "primaryArticles": null,
+      "fuelPower": 8.2878,
+      "manufactured": null,
+      "foodIndex": 6.6964
+    },
+    {
+      "year": 2014,
+      "month": "March",
+      "label": "Mar 2014",
+      "headline": 5.2486,
+      "primaryArticles": null,
+      "fuelPower": 8.6521,
+      "manufactured": null,
+      "foodIndex": 7.7818
+    },
+    {
+      "year": 2014,
+      "month": "April",
+      "label": "Apr 2014",
+      "headline": 5.0645,
+      "primaryArticles": null,
+      "fuelPower": 7.8704,
+      "manufactured": null,
+      "foodIndex": 7.1555
+    },
+    {
+      "year": 2014,
+      "month": "May",
+      "label": "May 2014",
+      "headline": 5.709,
+      "primaryArticles": null,
+      "fuelPower": 10.4563,
+      "manufactured": null,
+      "foodIndex": 6.6667
+    },
+    {
+      "year": 2014,
+      "month": "June",
+      "label": "Jun 2014",
+      "headline": 4.6322,
+      "primaryArticles": null,
+      "fuelPower": 6.6728,
+      "manufactured": null,
+      "foodIndex": 5.654
+    },
+    {
+      "year": 2014,
+      "month": "July",
+      "label": "Jul 2014",
+      "headline": 4.946,
+      "primaryArticles": null,
+      "fuelPower": 4.5536,
+      "manufactured": null,
+      "foodIndex": 8.1036
+    },
+    {
+      "year": 2014,
+      "month": "August",
+      "label": "Aug 2014",
+      "headline": 3.8087,
+      "primaryArticles": null,
+      "fuelPower": 2.1016,
+      "manufactured": null,
+      "foodIndex": 6.5094
+    },
+    {
+      "year": 2014,
+      "month": "September",
+      "label": "Sep 2014",
+      "headline": 1.8373,
+      "primaryArticles": 2.6984,
+      "fuelPower": -3.6074,
+      "manufactured": null,
+      "foodIndex": 4.5381
+    },
+    {
+      "year": 2014,
+      "month": "October",
+      "label": "Oct 2014",
+      "headline": 0.8726,
+      "primaryArticles": -0.8567,
+      "fuelPower": -3.7607,
+      "manufactured": null,
+      "foodIndex": 1.4274
+    },
+    {
+      "year": 2014,
+      "month": "November",
+      "label": "Nov 2014",
+      "headline": -0.175,
+      "primaryArticles": -1.4798,
+      "fuelPower": -8.2616,
+      "manufactured": null,
+      "foodIndex": 0.4736
+    },
+    {
+      "year": 2014,
+      "month": "December",
+      "label": "Dec 2014",
+      "headline": -1.1464,
+      "primaryArticles": -0.1622,
+      "fuelPower": -14.3702,
+      "manufactured": null,
+      "foodIndex": 2.4651
+    },
+    {
+      "year": 2015,
+      "month": "January",
+      "label": "Jan 2015",
+      "headline": -2.4648,
+      "primaryArticles": null,
+      "fuelPower": -21.1843,
+      "manufactured": null,
+      "foodIndex": 3.9298
+    },
+    {
+      "year": 2015,
+      "month": "February",
+      "label": "Feb 2015",
+      "headline": -3.5211,
+      "primaryArticles": null,
+      "fuelPower": -25.5677,
+      "manufactured": null,
+      "foodIndex": 3.2636
+    },
+    {
+      "year": 2015,
+      "month": "March",
+      "label": "Mar 2015",
+      "headline": -3.8495,
+      "primaryArticles": null,
+      "fuelPower": -22.8835,
+      "manufactured": null,
+      "foodIndex": 1.9087
+    },
+    {
+      "year": 2015,
+      "month": "April",
+      "label": "Apr 2015",
+      "headline": -3.4181,
+      "primaryArticles": null,
+      "fuelPower": -21.6309,
+      "manufactured": null,
+      "foodIndex": 2.3083
+    },
+    {
+      "year": 2015,
+      "month": "May",
+      "label": "May 2015",
+      "headline": -2.9617,
+      "primaryArticles": null,
+      "fuelPower": -17.8141,
+      "manufactured": null,
+      "foodIndex": 1.2987
+    },
+    {
+      "year": 2015,
+      "month": "June",
+      "label": "Jun 2015",
+      "headline": -2.9514,
+      "primaryArticles": null,
+      "fuelPower": -16.2467,
+      "manufactured": null,
+      "foodIndex": 0.639
+    },
+    {
+      "year": 2015,
+      "month": "July",
+      "label": "Jul 2015",
+      "headline": -4.7986,
+      "primaryArticles": null,
+      "fuelPower": -19.8975,
+      "manufactured": null,
+      "foodIndex": -2.5502
+    },
+    {
+      "year": 2015,
+      "month": "August",
+      "label": "Aug 2015",
+      "headline": -6.1433,
+      "primaryArticles": null,
+      "fuelPower": -24.8714,
+      "manufactured": null,
+      "foodIndex": -2.521
+    },
+    {
+      "year": 2015,
+      "month": "September",
+      "label": "Sep 2015",
+      "headline": -5.5842,
+      "primaryArticles": -2.7048,
+      "fuelPower": -25.4134,
+      "manufactured": null,
+      "foodIndex": -0.8527
+    },
+    {
+      "year": 2015,
+      "month": "October",
+      "label": "Oct 2015",
+      "headline": -4.7578,
+      "primaryArticles": -0.707,
+      "fuelPower": -23.9787,
+      "manufactured": null,
+      "foodIndex": 1.0946
+    },
+    {
+      "year": 2015,
+      "month": "November",
+      "label": "Nov 2015",
+      "headline": -3.681,
+      "primaryArticles": 0.4743,
+      "fuelPower": -19.7936,
+      "manufactured": null,
+      "foodIndex": 1.8068
+    },
+    {
+      "year": 2015,
+      "month": "December",
+      "label": "Dec 2015",
+      "headline": -2.4086,
+      "primaryArticles": 2.9245,
+      "fuelPower": -16.2883,
+      "manufactured": null,
+      "foodIndex": 3.6087
+    },
+    {
+      "year": 2016,
+      "month": "January",
+      "label": "Jan 2016",
+      "headline": -2.5271,
+      "primaryArticles": null,
+      "fuelPower": -15.5556,
+      "manufactured": null,
+      "foodIndex": 3.2985
+    },
+    {
+      "year": 2016,
+      "month": "February",
+      "label": "Feb 2016",
+      "headline": -2.281,
+      "primaryArticles": null,
+      "fuelPower": -14.6893,
+      "manufactured": null,
+      "foodIndex": 2.7553
+    },
+    {
+      "year": 2016,
+      "month": "March",
+      "label": "Mar 2016",
+      "headline": -2.0018,
+      "primaryArticles": null,
+      "fuelPower": -16.8478,
+      "manufactured": null,
+      "foodIndex": 3.6645
+    },
+    {
+      "year": 2016,
+      "month": "April",
+      "label": "Apr 2016",
+      "headline": -1.0889,
+      "primaryArticles": null,
+      "fuelPower": -14.2388,
+      "manufactured": null,
+      "foodIndex": 5.6406
+    },
+    {
+      "year": 2016,
+      "month": "May",
+      "label": "May 2016",
+      "headline": -0.8977,
+      "primaryArticles": null,
+      "fuelPower": -14.8691,
+      "manufactured": null,
+      "foodIndex": 7.0513
+    },
+    {
+      "year": 2016,
+      "month": "June",
+      "label": "Jun 2016",
+      "headline": -0.0894,
+      "primaryArticles": null,
+      "fuelPower": -11.6183,
+      "manufactured": null,
+      "foodIndex": 8.0159
+    },
+    {
+      "year": 2016,
+      "month": "July",
+      "label": "Jul 2016",
+      "headline": 0.6301,
+      "primaryArticles": null,
+      "fuelPower": -9.7015,
+      "manufactured": null,
+      "foodIndex": 8.6439
+    },
+    {
+      "year": 2016,
+      "month": "August",
+      "label": "Aug 2016",
+      "headline": 1.0909,
+      "primaryArticles": null,
+      "fuelPower": -7.4201,
+      "manufactured": null,
+      "foodIndex": 6.5831
+    },
+    {
+      "year": 2016,
+      "month": "September",
+      "label": "Sep 2016",
+      "headline": 1.3649,
+      "primaryArticles": null,
+      "fuelPower": -2.9172,
+      "manufactured": null,
+      "foodIndex": 6.2549
+    },
+    {
+      "year": 2016,
+      "month": "October",
+      "label": "Oct 2016",
+      "headline": 1.2716,
+      "primaryArticles": 2.1361,
+      "fuelPower": -1.1682,
+      "manufactured": null,
+      "foodIndex": 5.3364
+    },
+    {
+      "year": 2016,
+      "month": "November",
+      "label": "Nov 2016",
+      "headline": 1.8198,
+      "primaryArticles": 1.3375,
+      "fuelPower": 2.1053,
+      "manufactured": null,
+      "foodIndex": 5.3241
+    },
+    {
+      "year": 2016,
+      "month": "December",
+      "label": "Dec 2016",
+      "headline": 2.1024,
+      "primaryArticles": 0.0789,
+      "fuelPower": 4.2453,
+      "manufactured": null,
+      "foodIndex": 3.6378
+    },
+    {
+      "year": 2017,
+      "month": "January",
+      "label": "Jan 2017",
+      "headline": 4.2593,
+      "primaryArticles": null,
+      "fuelPower": 16.6667,
+      "manufactured": null,
+      "foodIndex": 3.8162
+    },
+    {
+      "year": 2017,
+      "month": "February",
+      "label": "Feb 2017",
+      "headline": 5.5089,
+      "primaryArticles": null,
+      "fuelPower": 25.1656,
+      "manufactured": null,
+      "foodIndex": 5.205
+    },
+    {
+      "year": 2017,
+      "month": "March",
+      "label": "Mar 2017",
+      "headline": 5.1068,
+      "primaryArticles": null,
+      "fuelPower": 22.3529,
+      "manufactured": null,
+      "foodIndex": 5.0275
+    },
+    {
+      "year": 2017,
+      "month": "April",
+      "label": "Apr 2017",
+      "headline": 3.8532,
+      "primaryArticles": null,
+      "fuelPower": 17.1137,
+      "manufactured": null,
+      "foodIndex": 2.4409
+    },
+    {
+      "year": 2017,
+      "month": "May",
+      "label": "May 2017",
+      "headline": 2.2645,
+      "primaryArticles": null,
+      "fuelPower": 11.8081,
+      "manufactured": null,
+      "foodIndex": 0.1497
+    },
+    {
+      "year": 2017,
+      "month": "June",
+      "label": "Jun 2017",
+      "headline": 0.8953,
+      "primaryArticles": null,
+      "fuelPower": 5.1643,
+      "manufactured": null,
+      "foodIndex": -1.0287
+    },
+    {
+      "year": 2017,
+      "month": "July",
+      "label": "Jul 2017",
+      "headline": 1.8784,
+      "primaryArticles": null,
+      "fuelPower": 4.3684,
+      "manufactured": null,
+      "foodIndex": 2.1898
+    },
+    {
+      "year": 2017,
+      "month": "August",
+      "label": "Aug 2017",
+      "headline": 3.2374,
+      "primaryArticles": null,
+      "fuelPower": 9.8644,
+      "manufactured": null,
+      "foodIndex": 4.4853
+    },
+    {
+      "year": 2017,
+      "month": "September",
+      "label": "Sep 2017",
+      "headline": 3.1418,
+      "primaryArticles": null,
+      "fuelPower": 10.4567,
+      "manufactured": null,
+      "foodIndex": 2.0603
+    },
+    {
+      "year": 2017,
+      "month": "October",
+      "label": "Oct 2017",
+      "headline": 3.6771,
+      "primaryArticles": 3.718,
+      "fuelPower": 10.8747,
+      "manufactured": null,
+      "foodIndex": 3.2305
+    },
+    {
+      "year": 2017,
+      "month": "November",
+      "label": "Nov 2017",
+      "headline": 4.0214,
+      "primaryArticles": 5.5901,
+      "fuelPower": 8.362,
+      "manufactured": null,
+      "foodIndex": 4.3956
+    },
+    {
+      "year": 2017,
+      "month": "December",
+      "label": "Dec 2017",
+      "headline": 3.581,
+      "primaryArticles": 3.8644,
+      "fuelPower": 8.0317,
+      "manufactured": null,
+      "foodIndex": 2.9126
+    },
+    {
+      "year": 2018,
+      "month": "January",
+      "label": "Jan 2018",
+      "headline": 3.0195,
+      "primaryArticles": null,
+      "fuelPower": 4.7261,
+      "manufactured": null,
+      "foodIndex": 1.7254
+    },
+    {
+      "year": 2018,
+      "month": "February",
+      "label": "Feb 2018",
+      "headline": 2.7434,
+      "primaryArticles": null,
+      "fuelPower": 4.5503,
+      "manufactured": null,
+      "foodIndex": 0.2249
+    },
+    {
+      "year": 2018,
+      "month": "March",
+      "label": "Mar 2018",
+      "headline": 2.7385,
+      "primaryArticles": null,
+      "fuelPower": 4.7009,
+      "manufactured": null,
+      "foodIndex": 0
+    },
+    {
+      "year": 2018,
+      "month": "April",
+      "label": "Apr 2018",
+      "headline": 3.6219,
+      "primaryArticles": null,
+      "fuelPower": 7.9607,
+      "manufactured": null,
+      "foodIndex": 0.8191
+    },
+    {
+      "year": 2018,
+      "month": "May",
+      "label": "May 2018",
+      "headline": 4.783,
+      "primaryArticles": null,
+      "fuelPower": 12.6513,
+      "manufactured": null,
+      "foodIndex": 1.1958
+    },
+    {
+      "year": 2018,
+      "month": "June",
+      "label": "Jun 2018",
+      "headline": 5.6788,
+      "primaryArticles": null,
+      "fuelPower": 16.5179,
+      "manufactured": null,
+      "foodIndex": 1.559
+    },
+    {
+      "year": 2018,
+      "month": "July",
+      "label": "Jul 2018",
+      "headline": 5.2678,
+      "primaryArticles": null,
+      "fuelPower": 18.0995,
+      "manufactured": null,
+      "foodIndex": -0.7857
+    },
+    {
+      "year": 2018,
+      "month": "August",
+      "label": "Aug 2018",
+      "headline": 4.6167,
+      "primaryArticles": null,
+      "fuelPower": 17.7329,
+      "manufactured": null,
+      "foodIndex": -2.1112
+    },
+    {
+      "year": 2018,
+      "month": "September",
+      "label": "Sep 2018",
+      "headline": 5.2219,
+      "primaryArticles": 3.0418,
+      "fuelPower": 17.3014,
+      "manufactured": null,
+      "foodIndex": 0.1442
+    },
+    {
+      "year": 2018,
+      "month": "October",
+      "label": "Oct 2018",
+      "headline": 5.5363,
+      "primaryArticles": 2.4645,
+      "fuelPower": 18.6567,
+      "manufactured": null,
+      "foodIndex": -0.4979
+    },
+    {
+      "year": 2018,
+      "month": "November",
+      "label": "Nov 2018",
+      "headline": 4.4674,
+      "primaryArticles": 0.5882,
+      "fuelPower": 15.5391,
+      "manufactured": null,
+      "foodIndex": -1.9649
+    },
+    {
+      "year": 2018,
+      "month": "December",
+      "label": "Dec 2018",
+      "headline": 3.4572,
+      "primaryArticles": 1.3667,
+      "fuelPower": 7.644,
+      "manufactured": null,
+      "foodIndex": -0.1451
+    },
+    {
+      "year": 2019,
+      "month": "January",
+      "label": "Jan 2019",
+      "headline": 2.7586,
+      "primaryArticles": null,
+      "fuelPower": 1.8462,
+      "manufactured": null,
+      "foodIndex": 1.9912
+    },
+    {
+      "year": 2019,
+      "month": "February",
+      "label": "Feb 2019",
+      "headline": 2.9285,
+      "primaryArticles": null,
+      "fuelPower": 1.7206,
+      "manufactured": null,
+      "foodIndex": 3.2909
+    },
+    {
+      "year": 2019,
+      "month": "March",
+      "label": "Mar 2019",
+      "headline": 3.0954,
+      "primaryArticles": null,
+      "fuelPower": 4.5918,
+      "manufactured": null,
+      "foodIndex": 3.5901
+    },
+    {
+      "year": 2019,
+      "month": "April",
+      "label": "Apr 2019",
+      "headline": 3.2396,
+      "primaryArticles": null,
+      "fuelPower": 3.8384,
+      "manufactured": null,
+      "foodIndex": 4.5052
+    },
+    {
+      "year": 2019,
+      "month": "May",
+      "label": "May 2019",
+      "headline": 2.7895,
+      "primaryArticles": null,
+      "fuelPower": 1.9531,
+      "manufactured": null,
+      "foodIndex": 5.4653
+    },
+    {
+      "year": 2019,
+      "month": "June",
+      "label": "Jun 2019",
+      "headline": 2.0151,
+      "primaryArticles": null,
+      "fuelPower": -2.1073,
+      "manufactured": null,
+      "foodIndex": 5.4094
+    },
+    {
+      "year": 2019,
+      "month": "July",
+      "label": "Jul 2019",
+      "headline": 1.1676,
+      "primaryArticles": null,
+      "fuelPower": -3.6398,
+      "manufactured": null,
+      "foodIndex": 4.8956
+    },
+    {
+      "year": 2019,
+      "month": "August",
+      "label": "Aug 2019",
+      "headline": 1.1657,
+      "primaryArticles": null,
+      "fuelPower": -3.5272,
+      "manufactured": null,
+      "foodIndex": 5.895
+    },
+    {
+      "year": 2019,
+      "month": "September",
+      "label": "Sep 2019",
+      "headline": 0.3309,
+      "primaryArticles": null,
+      "fuelPower": -6.679,
+      "manufactured": null,
+      "foodIndex": 6.1195
+    },
+    {
+      "year": 2019,
+      "month": "October",
+      "label": "Oct 2019",
+      "headline": 0,
+      "primaryArticles": 6.0496,
+      "fuelPower": -8.0863,
+      "manufactured": null,
+      "foodIndex": 7.6483
+    },
+    {
+      "year": 2019,
+      "month": "November",
+      "label": "Nov 2019",
+      "headline": 0.5757,
+      "primaryArticles": 7.6023,
+      "fuelPower": -7.3193,
+      "manufactured": null,
+      "foodIndex": 9.0909
+    },
+    {
+      "year": 2019,
+      "month": "December",
+      "label": "Dec 2019",
+      "headline": 2.7569,
+      "primaryArticles": 11.5356,
+      "fuelPower": 0.3891,
+      "manufactured": null,
+      "foodIndex": 11.1919
+    },
+    {
+      "year": 2020,
+      "month": "January",
+      "label": "Jan 2020",
+      "headline": 3.5235,
+      "primaryArticles": null,
+      "fuelPower": 5.4381,
+      "manufactured": null,
+      "foodIndex": 10.0506
+    },
+    {
+      "year": 2020,
+      "month": "February",
+      "label": "Feb 2020",
+      "headline": 2.2594,
+      "primaryArticles": null,
+      "fuelPower": 3.0846,
+      "manufactured": null,
+      "foodIndex": 7.2411
+    },
+    {
+      "year": 2020,
+      "month": "March",
+      "label": "Mar 2020",
+      "headline": 0.417,
+      "primaryArticles": null,
+      "fuelPower": -2.9268,
+      "manufactured": null,
+      "foodIndex": 5.1986
+    },
+    {
+      "year": 2020,
+      "month": "April",
+      "label": "Apr 2020",
+      "headline": -1.569,
+      "primaryArticles": null,
+      "fuelPower": -12.6459,
+      "manufactured": null,
+      "foodIndex": 4.3816
+    },
+    {
+      "year": 2020,
+      "month": "May",
+      "label": "May 2020",
+      "headline": -3.3717,
+      "primaryArticles": null,
+      "fuelPower": -23.0843,
+      "manufactured": null,
+      "foodIndex": 2.7311
+    },
+    {
+      "year": 2020,
+      "month": "June",
+      "label": "Jun 2020",
+      "headline": -1.8107,
+      "primaryArticles": null,
+      "fuelPower": -16.2427,
+      "manufactured": null,
+      "foodIndex": 3.1207
+    },
+    {
+      "year": 2020,
+      "month": "July",
+      "label": "Jul 2020",
+      "headline": -0.2473,
+      "primaryArticles": null,
+      "fuelPower": -9.841,
+      "manufactured": null,
+      "foodIndex": 4.6671
+    },
+    {
+      "year": 2020,
+      "month": "August",
+      "label": "Aug 2020",
+      "headline": 0.4115,
+      "primaryArticles": null,
+      "fuelPower": -9.0909,
+      "manufactured": null,
+      "foodIndex": 4.7522
+    },
+    {
+      "year": 2020,
+      "month": "September",
+      "label": "Sep 2020",
+      "headline": 1.319,
+      "primaryArticles": null,
+      "fuelPower": -8.6481,
+      "manufactured": null,
+      "foodIndex": 7.1913
+    },
+    {
+      "year": 2020,
+      "month": "October",
+      "label": "Oct 2020",
+      "headline": 1.3115,
+      "primaryArticles": 4.3299,
+      "fuelPower": -11.1437,
+      "manufactured": null,
+      "foodIndex": 6.1753
+    },
+    {
+      "year": 2020,
+      "month": "November",
+      "label": "Nov 2020",
+      "headline": 2.2895,
+      "primaryArticles": 3.8043,
+      "fuelPower": -7.0089,
+      "manufactured": null,
+      "foodIndex": 4.79
+    },
+    {
+      "year": 2020,
+      "month": "December",
+      "label": "Dec 2020",
+      "headline": 1.9512,
+      "primaryArticles": -0.6044,
+      "fuelPower": -6.1047,
+      "manufactured": null,
+      "foodIndex": 1.1111
+    },
+    {
+      "year": 2021,
+      "month": "January",
+      "label": "Jan 2021",
+      "headline": 2.5122,
+      "primaryArticles": null,
+      "fuelPower": -3.8204,
+      "manufactured": null,
+      "foodIndex": -0.2628
+    },
+    {
+      "year": 2021,
+      "month": "February",
+      "label": "Feb 2021",
+      "headline": 4.8282,
+      "primaryArticles": null,
+      "fuelPower": 2.027,
+      "manufactured": null,
+      "foodIndex": 3.5787
+    },
+    {
+      "year": 2021,
+      "month": "March",
+      "label": "Mar 2021",
+      "headline": 7.8904,
+      "primaryArticles": null,
+      "fuelPower": 9.7487,
+      "manufactured": null,
+      "foodIndex": 5.628
+    },
+    {
+      "year": 2021,
+      "month": "April",
+      "label": "Apr 2021",
+      "headline": 10.7383,
+      "primaryArticles": null,
+      "fuelPower": 21.2695,
+      "manufactured": null,
+      "foodIndex": 7.5152
+    },
+    {
+      "year": 2021,
+      "month": "May",
+      "label": "May 2021",
+      "headline": 13.1064,
+      "primaryArticles": null,
+      "fuelPower": 36.7372,
+      "manufactured": null,
+      "foodIndex": 8.2481
+    },
+    {
+      "year": 2021,
+      "month": "June",
+      "label": "Jun 2021",
+      "headline": 12.0704,
+      "primaryArticles": null,
+      "fuelPower": 29.3224,
+      "manufactured": null,
+      "foodIndex": 6.7249
+    },
+    {
+      "year": 2021,
+      "month": "July",
+      "label": "Jul 2021",
+      "headline": 11.5702,
+      "primaryArticles": null,
+      "fuelPower": 27.0121,
+      "manufactured": null,
+      "foodIndex": 4.5246
+    },
+    {
+      "year": 2021,
+      "month": "August",
+      "label": "Aug 2021",
+      "headline": 11.6393,
+      "primaryArticles": null,
+      "fuelPower": 28.1522,
+      "manufactured": null,
+      "foodIndex": 3.7589
+    },
+    {
+      "year": 2021,
+      "month": "September",
+      "label": "Sep 2021",
+      "headline": 11.7982,
+      "primaryArticles": 5.9812,
+      "fuelPower": 29.4886,
+      "manufactured": null,
+      "foodIndex": 2.5949
+    },
+    {
+      "year": 2021,
+      "month": "October",
+      "label": "Oct 2021",
+      "headline": 13.835,
+      "primaryArticles": 7.3781,
+      "fuelPower": 38.6139,
+      "manufactured": null,
+      "foodIndex": 4.2527
+    },
+    {
+      "year": 2021,
+      "month": "November",
+      "label": "Nov 2021",
+      "headline": 14.8681,
+      "primaryArticles": 10.2094,
+      "fuelPower": 44.3737,
+      "manufactured": null,
+      "foodIndex": 6.8253
+    },
+    {
+      "year": 2021,
+      "month": "December",
+      "label": "Dec 2021",
+      "headline": 14.2743,
+      "primaryArticles": 13.7838,
+      "fuelPower": 38.0805,
+      "manufactured": null,
+      "foodIndex": 9.373
+    },
+    {
+      "year": 2022,
+      "month": "January",
+      "label": "Jan 2022",
+      "headline": 13.6759,
+      "primaryArticles": null,
+      "fuelPower": 34.3595,
+      "manufactured": null,
+      "foodIndex": 9.552
+    },
+    {
+      "year": 2022,
+      "month": "February",
+      "label": "Feb 2022",
+      "headline": 13.427,
+      "primaryArticles": null,
+      "fuelPower": 30.842,
+      "manufactured": null,
+      "foodIndex": 8.6701
+    },
+    {
+      "year": 2022,
+      "month": "March",
+      "label": "Mar 2022",
+      "headline": 14.6266,
+      "primaryArticles": null,
+      "fuelPower": 31.7766,
+      "manufactured": null,
+      "foodIndex": 9.2917
+    },
+    {
+      "year": 2022,
+      "month": "April",
+      "label": "Apr 2022",
+      "headline": 15.3788,
+      "primaryArticles": null,
+      "fuelPower": 38.843,
+      "manufactured": null,
+      "foodIndex": 9.131
+    },
+    {
+      "year": 2022,
+      "month": "May",
+      "label": "May 2022",
+      "headline": 16.629,
+      "primaryArticles": null,
+      "fuelPower": 48.9982,
+      "manufactured": null,
+      "foodIndex": 10.5793
+    },
+    {
+      "year": 2022,
+      "month": "June",
+      "label": "Jun 2022",
+      "headline": 16.2304,
+      "primaryArticles": null,
+      "fuelPower": 50.9485,
+      "manufactured": null,
+      "foodIndex": 11.7832
+    },
+    {
+      "year": 2022,
+      "month": "July",
+      "label": "Jul 2022",
+      "headline": 14.0741,
+      "primaryArticles": null,
+      "fuelPower": 44.6181,
+      "manufactured": null,
+      "foodIndex": 9.2848
+    },
+    {
+      "year": 2022,
+      "month": "August",
+      "label": "Aug 2022",
+      "headline": 12.4816,
+      "primaryArticles": null,
+      "fuelPower": 35.0297,
+      "manufactured": null,
+      "foodIndex": 10.0562
+    },
+    {
+      "year": 2022,
+      "month": "September",
+      "label": "Sep 2022",
+      "headline": 10.5531,
+      "primaryArticles": 11.5409,
+      "fuelPower": 33.1092,
+      "manufactured": null,
+      "foodIndex": 8.0197
+    },
+    {
+      "year": 2022,
+      "month": "October",
+      "label": "Oct 2022",
+      "headline": 8.6709,
+      "primaryArticles": 11.1656,
+      "fuelPower": 25.3968,
+      "manufactured": null,
+      "foodIndex": 6.5987
+    },
+    {
+      "year": 2022,
+      "month": "November",
+      "label": "Nov 2022",
+      "headline": 6.1239,
+      "primaryArticles": 5.9382,
+      "fuelPower": 19.7059,
+      "manufactured": null,
+      "foodIndex": 2.5205
+    },
+    {
+      "year": 2022,
+      "month": "December",
+      "label": "Dec 2022",
+      "headline": 5.0244,
+      "primaryArticles": 2.6722,
+      "fuelPower": 18.0867,
+      "manufactured": null,
+      "foodIndex": 0.8865
+    },
+    {
+      "year": 2023,
+      "month": "January",
+      "label": "Jan 2023",
+      "headline": 4.7983,
+      "primaryArticles": null,
+      "fuelPower": 15.0037,
+      "manufactured": null,
+      "foodIndex": 3.1269
+    },
+    {
+      "year": 2023,
+      "month": "February",
+      "label": "Feb 2023",
+      "headline": 3.8541,
+      "primaryArticles": null,
+      "fuelPower": 13.9552,
+      "manufactured": null,
+      "foodIndex": 2.7594
+    },
+    {
+      "year": 2023,
+      "month": "March",
+      "label": "Mar 2023",
+      "headline": 1.4103,
+      "primaryArticles": null,
+      "fuelPower": 8.6866,
+      "manufactured": null,
+      "foodIndex": 2.3187
+    },
+    {
+      "year": 2023,
+      "month": "April",
+      "label": "Apr 2023",
+      "headline": -0.7879,
+      "primaryArticles": null,
+      "fuelPower": 0.9921,
+      "manufactured": null,
+      "foodIndex": 0.4039
+    },
+    {
+      "year": 2023,
+      "month": "May",
+      "label": "May 2023",
+      "headline": -3.6129,
+      "primaryArticles": null,
+      "fuelPower": -9.1687,
+      "manufactured": null,
+      "foodIndex": -1.5376
+    },
+    {
+      "year": 2023,
+      "month": "June",
+      "label": "Jun 2023",
+      "headline": -4.1828,
+      "primaryArticles": null,
+      "fuelPower": -12.5075,
+      "manufactured": null,
+      "foodIndex": -1.2965
+    },
+    {
+      "year": 2023,
+      "month": "July",
+      "label": "Jul 2023",
+      "headline": -1.2338,
+      "primaryArticles": null,
+      "fuelPower": -12.7251,
+      "manufactured": null,
+      "foodIndex": 8.3238
+    },
+    {
+      "year": 2023,
+      "month": "August",
+      "label": "Aug 2023",
+      "headline": -0.4569,
+      "primaryArticles": null,
+      "fuelPower": -6.3442,
+      "manufactured": null,
+      "foodIndex": 6.1862
+    },
+    {
+      "year": 2023,
+      "month": "September",
+      "label": "Sep 2023",
+      "headline": -0.0658,
+      "primaryArticles": 4.3775,
+      "fuelPower": -3.346,
+      "manufactured": null,
+      "foodIndex": 1.8846
+    },
+    {
+      "year": 2023,
+      "month": "October",
+      "label": "Oct 2023",
+      "headline": -0.2616,
+      "primaryArticles": 2.2627,
+      "fuelPower": -1.5823,
+      "manufactured": null,
+      "foodIndex": 1.4631
+    },
+    {
+      "year": 2023,
+      "month": "November",
+      "label": "Nov 2023",
+      "headline": 0.3934,
+      "primaryArticles": 5.157,
+      "fuelPower": -4.0541,
+      "manufactured": null,
+      "foodIndex": 5.1458
+    },
+    {
+      "year": 2023,
+      "month": "December",
+      "label": "Dec 2023",
+      "headline": 0.8638,
+      "primaryArticles": 5.7259,
+      "fuelPower": -1.3924,
+      "manufactured": null,
+      "foodIndex": 5.3896
+    },
+    {
+      "year": 2024,
+      "month": "January",
+      "label": "Jan 2024",
+      "headline": 0.3318,
+      "primaryArticles": 4.0734,
+      "fuelPower": -0.4499,
+      "manufactured": null,
+      "foodIndex": 3.8484
+    },
+    {
+      "year": 2024,
+      "month": "February",
+      "label": "Feb 2024",
+      "headline": 0.1988,
+      "primaryArticles": 4.5507,
+      "fuelPower": -1.7132,
+      "manufactured": null,
+      "foodIndex": 4.1448
+    },
+    {
+      "year": 2024,
+      "month": "March",
+      "label": "Mar 2024",
+      "headline": 0.2649,
+      "primaryArticles": 4.5662,
+      "fuelPower": -2.7494,
+      "manufactured": null,
+      "foodIndex": 4.8228
+    },
+    {
+      "year": 2024,
+      "month": "April",
+      "label": "Apr 2024",
+      "headline": 1.1913,
+      "primaryArticles": 5.2306,
+      "fuelPower": -0.8513,
+      "manufactured": null,
+      "foodIndex": 6.092
+    },
+    {
+      "year": 2024,
+      "month": "May",
+      "label": "May 2024",
+      "headline": 2.7443,
+      "primaryArticles": 7.4243,
+      "fuelPower": 1.0094,
+      "manufactured": null,
+      "foodIndex": 7.7501
+    },
+    {
+      "year": 2024,
+      "month": "June",
+      "label": "Jun 2024",
+      "headline": 3.4251,
+      "primaryArticles": 9.1993,
+      "fuelPower": 0.4788,
+      "manufactured": null,
+      "foodIndex": 8.9092
+    },
+    {
+      "year": 2024,
+      "month": "July",
+      "label": "Jul 2024",
+      "headline": 2.1039,
+      "primaryArticles": 3.1821,
+      "fuelPower": 1.9257,
+      "manufactured": null,
+      "foodIndex": 3.6036
+    },
+    {
+      "year": 2024,
+      "month": "August",
+      "label": "Aug 2024",
+      "headline": 1.2459,
+      "primaryArticles": 2.5223,
+      "fuelPower": -0.5366,
+      "manufactured": null,
+      "foodIndex": 3.2068
+    },
+    {
+      "year": 2024,
+      "month": "September",
+      "label": "Sep 2024",
+      "headline": 1.9104,
+      "primaryArticles": 6.4815,
+      "fuelPower": -3.8537,
+      "manufactured": null,
+      "foodIndex": 9.8094
+    },
+    {
+      "year": 2024,
+      "month": "October",
+      "label": "Oct 2024",
+      "headline": 2.7541,
+      "primaryArticles": 8.2569,
+      "fuelPower": -4.3087,
+      "manufactured": null,
+      "foodIndex": 12.1464
+    },
+    {
+      "year": 2024,
+      "month": "November",
+      "label": "Nov 2024",
+      "headline": 2.1555,
+      "primaryArticles": 5.4904,
+      "fuelPower": -4.0333,
+      "manufactured": null,
+      "foodIndex": 8.8635
+    },
+    {
+      "year": 2024,
+      "month": "December",
+      "label": "Dec 2024",
+      "headline": 2.5692,
+      "primaryArticles": 6.0175,
+      "fuelPower": -2.5674,
+      "manufactured": null,
+      "foodIndex": 8.9494
+    },
+    {
+      "year": 2025,
+      "month": "January",
+      "label": "Jan 2025",
+      "headline": 2.5132,
+      "primaryArticles": 4.5755,
+      "fuelPower": -1.8722,
+      "manufactured": null,
+      "foodIndex": 7.5239
+    },
+    {
+      "year": 2025,
+      "month": "February",
+      "label": "Feb 2025",
+      "headline": 2.4471,
+      "primaryArticles": 2.9201,
+      "fuelPower": -0.9684,
+      "manufactured": null,
+      "foodIndex": 6.1659
+    },
+    {
+      "year": 2025,
+      "month": "March",
+      "label": "Mar 2025",
+      "headline": 2.2457,
+      "primaryArticles": 1.2555,
+      "fuelPower": 0,
+      "manufactured": null,
+      "foodIndex": 4.9335
+    },
+    {
+      "year": 2025,
+      "month": "April",
+      "label": "Apr 2025",
+      "headline": 0.8502,
+      "primaryArticles": -0.9086,
+      "fuelPower": -3.7649,
+      "manufactured": null,
+      "foodIndex": 3.3044
+    },
+    {
+      "year": 2025,
+      "month": "May",
+      "label": "May 2025",
+      "headline": 0.1303,
+      "primaryArticles": -1.7544,
+      "fuelPower": -4.7968,
+      "manufactured": null,
+      "foodIndex": 1.9324
+    },
+    {
+      "year": 2025,
+      "month": "June",
+      "label": "Jun 2025",
+      "headline": -0.1948,
+      "primaryArticles": -3.2241,
+      "fuelPower": -3.1314,
+      "manufactured": null,
+      "foodIndex": -0.2622
+    },
+    {
+      "year": 2025,
+      "month": "July",
+      "label": "Jul 2025",
+      "headline": -0.5795,
+      "primaryArticles": -4.7017,
+      "fuelPower": -3.0364,
+      "manufactured": null,
+      "foodIndex": -2.0972
+    },
+    {
+      "year": 2025,
+      "month": "August",
+      "label": "Aug 2025",
+      "headline": 0.5181,
+      "primaryArticles": -2.1015,
+      "fuelPower": -3.2367,
+      "manufactured": 2.6185,
+      "foodIndex": 0.2071
+    },
+    {
+      "year": 2025,
+      "month": "September",
+      "label": "Sep 2025",
+      "headline": 0.1939,
+      "primaryArticles": -3.1202,
+      "fuelPower": -2.5815,
+      "manufactured": 2.3256,
+      "foodIndex": -1.9398
+    },
+    {
+      "year": 2025,
+      "month": "October",
+      "label": "Oct 2025",
+      "headline": -1.0211,
+      "primaryArticles": -5.9322,
+      "fuelPower": -2.4194,
+      "manufactured": 1.6795,
+      "foodIndex": -5.0445
+    },
+    {
+      "year": 2025,
+      "month": "November",
+      "label": "Nov 2025",
+      "headline": -0.1279,
+      "primaryArticles": -2.5265,
+      "fuelPower": -2.3349,
+      "manufactured": 1.4675,
+      "foodIndex": -2.4975
+    },
+    {
+      "year": 2025,
+      "month": "December",
+      "label": "Dec 2025",
+      "headline": 0.8349,
+      "primaryArticles": 0.2064,
+      "fuelPower": -2.3057,
+      "manufactured": 1.8182,
+      "foodIndex": 0
+    },
+    {
+      "year": 2026,
+      "month": "January",
+      "label": "Jan 2026",
+      "headline": 1.8065,
+      "primaryArticles": 2.214,
+      "fuelPower": -4.0132,
+      "manufactured": null,
+      "foodIndex": 1.4099
+    }
+  ]
+}
