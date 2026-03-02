@@ -5,7 +5,6 @@ import {
   rbiPolicyRatesToSeries,
   rbiForexToSeries,
 } from "@/lib/hooks/useRBIMonetary";
-import { useWorldBankIndicator } from "@/lib/hooks/useWorldBank";
 import LineChart from "@/components/charts/LineChart";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
@@ -13,8 +12,6 @@ import type { DataSeries } from "@/lib/api/types";
 
 const RBI_SOURCE = "RBI, Database on Indian Economy";
 const RBI_URL = "https://data.rbi.org.in/DBIE/";
-const WB_SOURCE = "World Bank, World Development Indicators";
-const WB_URL = "https://data.worldbank.org/indicator/";
 
 export default function RBIMonetaryDashboard() {
   const {
@@ -28,10 +25,6 @@ export default function RBIMonetaryDashboard() {
     data: forexData,
     isLoading: forexLoading,
   } = useRBIForexReserves();
-
-  // World Bank indicators for money supply & credit
-  const { data: m3Series } = useWorldBankIndicator("FM.LBL.BMNY.ZG", { years: 30 });
-  const { data: creditSeries } = useWorldBankIndicator("FS.AST.PRVT.GD.ZS", { years: 30 });
 
   if (ratesLoading || forexLoading) {
     return <LoadingSpinner message="Loading RBI monetary data..." />;
@@ -73,21 +66,13 @@ export default function RBIMonetaryDashboard() {
   // Latest forex value
   const latestForex = forexData?.monthly.at(-1);
 
-  // Override indicator labels for clarity
-  const m3LabelledSeries: DataSeries | undefined = m3Series
-    ? { ...m3Series, indicator: "Broad Money (M3) Growth", unit: "%" }
-    : undefined;
-  const creditLabelledSeries: DataSeries | undefined = creditSeries
-    ? { ...creditSeries, indicator: "Credit to Private Sector", unit: "% of GDP" }
-    : undefined;
-
   return (
     <>
       <Head>
         <title>RBI Monetary Policy | India Data Dashboard</title>
         <meta
           name="description"
-          content="India's monetary policy indicators — RBI repo rate, CRR, SLR, forex reserves, and money supply data."
+          content="India's monetary policy indicators — RBI repo rate, CRR, SLR, and forex reserves."
         />
       </Head>
 
@@ -96,9 +81,9 @@ export default function RBIMonetaryDashboard() {
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">RBI Monetary Policy</h1>
           <p className="mt-1 text-gray-600 dark:text-gray-300">
-            Key policy rates, reserve requirements, foreign exchange reserves, and monetary
-            aggregates. Policy rates shown at actual decision dates (MPC era exact, pre-2016
-            approximate). Monthly forex data from RBI; macro indicators from World Bank.
+            Key policy rates, reserve requirements, and foreign exchange reserves. Policy rates
+            shown at actual decision dates (MPC era exact, pre-2016 approximate). Monthly forex
+            data from RBI.
           </p>
         </div>
 
@@ -191,26 +176,6 @@ export default function RBIMonetaryDashboard() {
               height={400}
             />
           )}
-
-          {/* M3 growth + credit to private sector (dual axis) */}
-          {m3LabelledSeries && creditLabelledSeries && (
-            <div>
-              <LineChart
-                series={[m3LabelledSeries, creditLabelledSeries]}
-                title="Money Supply & Bank Credit"
-                subtitle="Broad money (M3) annual growth % and domestic credit to private sector (% of GDP)"
-                source={WB_SOURCE}
-                sourceUrl={`${WB_URL}FM.LBL.BMNY.ZG`}
-                height={400}
-              />
-              <p className="mt-1 text-xs text-gray-400 dark:text-gray-500 text-right">
-                Note: World Bank annual data typically lags 2–3 years. More recent M3 data
-                is available from{" "}
-                <a href="https://data.rbi.org.in/DBIE/" target="_blank" rel="noopener noreferrer"
-                   className="underline">RBI DBIE</a>.
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Data source info */}
@@ -231,16 +196,6 @@ export default function RBIMonetaryDashboard() {
               RBI Database on Indian Economy
             </a>
             ; pre-2016 months are linearly interpolated between known year-end anchor points.
-            Broad money and credit data are from the{" "}
-            <a
-              href="https://data.worldbank.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-blue-900 dark:hover:text-blue-100"
-            >
-              World Bank
-            </a>
-            .
           </p>
         </div>
       </div>
