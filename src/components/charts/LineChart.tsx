@@ -10,6 +10,8 @@ interface LineChartProps {
   showMarkers?: boolean;
   yAxisTitle?: string;
   height?: number;
+  /** Plotly line shape. Use "hv" for step charts (policy rates). Default: "linear" */
+  lineShape?: "linear" | "spline" | "hv" | "vh" | "hvh" | "vhv";
 }
 
 /**
@@ -33,6 +35,7 @@ export default function LineChart({
   showMarkers = true,
   yAxisTitle,
   height = 400,
+  lineShape = "linear",
 }: LineChartProps) {
   const uniqueUnits = getUniqueUnits(series);
   const useDualAxis = uniqueUnits.length === 2 && !yAxisTitle;
@@ -91,8 +94,8 @@ export default function LineChart({
     y: s.data.map((d) => d.value),
     // Store original label for hover tooltip
     customdata: s.data.map((d) => d.date),
-    marker: { size: 5 },
-    line: { width: 2 },
+    marker: { size: lineShape === "hv" ? 4 : 5 },
+    line: { width: 2, shape: lineShape },
     hovertemplate: isQuarterly
       ? `<b>${s.indicator}</b><br>%{customdata}: %{y:.2f} ${s.unit}<extra></extra>`
       : `<b>${s.indicator}</b><br>%{x}: %{y:.2f} ${s.unit}<extra></extra>`,
