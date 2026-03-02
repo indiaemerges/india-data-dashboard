@@ -58,10 +58,12 @@ export default function RBIMonetaryDashboard() {
     (s) => s.indicatorId === "RBI_CRR" || s.indicatorId === "RBI_SLR"
   );
 
-  // Latest policy rate values (last event in each series)
-  const latestRepo = ratesData.repoRate.at(-1);
-  const latestCRR = ratesData.crr.at(-1);
-  const latestSLR = ratesData.slr.at(-1);
+  // Latest policy rate values — skip the trailing sentinel (2026-03-01) to show
+  // the actual last decision date, not the extend-to-today placeholder.
+  const isSentinel = (d: { date: string }) => d.date === "2026-03-01";
+  const latestRepo = ratesData.repoRate.findLast((d) => !isSentinel(d));
+  const latestCRR  = ratesData.crr.findLast((d) => !isSentinel(d));
+  const latestSLR  = ratesData.slr.findLast((d) => !isSentinel(d));
 
   // Forex series from static monthly data
   const forexSeries: DataSeries | undefined = forexData
@@ -192,14 +194,22 @@ export default function RBIMonetaryDashboard() {
 
           {/* M3 growth + credit to private sector (dual axis) */}
           {m3LabelledSeries && creditLabelledSeries && (
-            <LineChart
-              series={[m3LabelledSeries, creditLabelledSeries]}
-              title="Money Supply & Bank Credit"
-              subtitle="Broad money (M3) annual growth % and domestic credit to private sector (% of GDP)"
-              source={WB_SOURCE}
-              sourceUrl={`${WB_URL}FM.LBL.BMNY.ZG`}
-              height={400}
-            />
+            <div>
+              <LineChart
+                series={[m3LabelledSeries, creditLabelledSeries]}
+                title="Money Supply & Bank Credit"
+                subtitle="Broad money (M3) annual growth % and domestic credit to private sector (% of GDP)"
+                source={WB_SOURCE}
+                sourceUrl={`${WB_URL}FM.LBL.BMNY.ZG`}
+                height={400}
+              />
+              <p className="mt-1 text-xs text-gray-400 dark:text-gray-500 text-right">
+                Note: World Bank annual data typically lags 2–3 years. More recent M3 data
+                is available from{" "}
+                <a href="https://data.rbi.org.in/DBIE/" target="_blank" rel="noopener noreferrer"
+                   className="underline">RBI DBIE</a>.
+              </p>
+            </div>
           )}
         </div>
 

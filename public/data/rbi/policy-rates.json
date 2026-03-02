@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-04",
+  "lastUpdated": "2026-03",
   "notes": "Event-level policy rate changes. Pre-Oct 2016: approximate dates (annual and key intra-year inflection points). MPC era (Oct 4, 2016 onwards): exact MPC decision dates. SDF replaced Reverse Repo as LAF floor from April 8, 2022. Source: RBI DBIE / MPC policy statements.",
   "repoRate": [
     {
@@ -209,6 +209,18 @@
     {
       "date": "2025-04-09",
       "value": 6
+    },
+    {
+      "date": "2025-06-06",
+      "value": 5.5
+    },
+    {
+      "date": "2025-12-05",
+      "value": 5.25
+    },
+    {
+      "date": "2026-03-01",
+      "value": 5.25
     }
   ],
   "reverseRepoSDF": [
@@ -419,6 +431,18 @@
     {
       "date": "2025-04-09",
       "value": 5.75
+    },
+    {
+      "date": "2025-06-06",
+      "value": 5.25
+    },
+    {
+      "date": "2025-12-05",
+      "value": 5
+    },
+    {
+      "date": "2026-03-01",
+      "value": 5
     }
   ],
   "crr": [
@@ -513,6 +537,26 @@
     {
       "date": "2024-12-06",
       "value": 4
+    },
+    {
+      "date": "2025-09-06",
+      "value": 3.75
+    },
+    {
+      "date": "2025-10-04",
+      "value": 3.5
+    },
+    {
+      "date": "2025-11-01",
+      "value": 3.25
+    },
+    {
+      "date": "2025-11-29",
+      "value": 3
+    },
+    {
+      "date": "2026-03-01",
+      "value": 3
     }
   ],
   "slr": [
@@ -574,6 +618,10 @@
     },
     {
       "date": "2020-04-01",
+      "value": 18
+    },
+    {
+      "date": "2026-03-01",
       "value": 18
     }
   ]

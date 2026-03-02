@@ -87,6 +87,10 @@ const repoRateEvents = [
   // Held at 6.50% from Apr 2023 through Dec 2024
   { date: "2025-02-07", value: 6.25 },
   { date: "2025-04-09", value: 6.00 },
+  { date: "2025-06-06", value: 5.50 },  // surprise 50 bps cut
+  { date: "2025-12-05", value: 5.25 },  // 25 bps cut; Feb 6 2026 unchanged
+  // Sentinel: extend step chart to current date (no further change)
+  { date: "2026-03-01", value: 5.25 },
 ];
 
 /** Reverse Repo / SDF — lower bound of LAF corridor */
@@ -151,6 +155,10 @@ const reverseRepoSDFEvents = [
   // SDF held at 6.25% while repo held at 6.50% (Apr 2023 – Dec 2024)
   { date: "2025-02-07", value: 6.00 }, // repo 6.25, SDF 6.00
   { date: "2025-04-09", value: 5.75 }, // repo 6.00, SDF 5.75
+  { date: "2025-06-06", value: 5.25 }, // repo 5.50, SDF 5.25
+  { date: "2025-12-05", value: 5.00 }, // repo 5.25, SDF 5.00
+  // Sentinel: extend step chart to current date
+  { date: "2026-03-01", value: 5.00 },
 ];
 
 /** Cash Reserve Ratio (CRR) — change events */
@@ -188,6 +196,13 @@ const crrEvents = [
   { date: "2022-05-07", value: 4.50 },
   // Easing
   { date: "2024-12-06", value: 4.00 },
+  // Jun 6, 2025: 100 bps cut announced, phased in 4 x 25 bps tranches
+  { date: "2025-09-06", value: 3.75 },  // tranche 1 effective
+  { date: "2025-10-04", value: 3.50 },  // tranche 2 effective
+  { date: "2025-11-01", value: 3.25 },  // tranche 3 effective
+  { date: "2025-11-29", value: 3.00 },  // tranche 4 effective (final)
+  // Sentinel: extend step chart to current date
+  { date: "2026-03-01", value: 3.00 },
 ];
 
 /** Statutory Liquidity Ratio (SLR) — change events */
@@ -212,6 +227,8 @@ const slrEvents = [
   { date: "2018-10-05", value: 19.00 },
   { date: "2019-04-01", value: 18.75 },
   { date: "2020-04-01", value: 18.00 }, // SLR reduced; held at 18% since
+  // Sentinel: extend step chart to current date (confirmed unchanged through Feb 2026)
+  { date: "2026-03-01", value: 18.00 },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -250,9 +267,21 @@ const forexAnchors = [
   { date: "2022-10", value: 524.5 }, // INR-defence trough
   { date: "2022-12", value: 562.7 },
   { date: "2023-12", value: 623.0 },
-  { date: "2024-09", value: 689.2 }, // new record
-  { date: "2024-12", value: 625.0 },
-  { date: "2025-01", value: 630.0 },
+  { date: "2024-09", value: 689.2 }, // record at the time
+  { date: "2024-12", value: 625.0 }, // fell on RBI FX intervention
+  // 2025 — directly sourced from RBI weekly supplement (end-month readings)
+  { date: "2025-02", value: 638.3 },
+  { date: "2025-03", value: 668.3 }, // sharp recovery; RBI $10 bn FX swap
+  { date: "2025-04", value: 677.0 },
+  { date: "2025-05", value: 691.5 },
+  { date: "2025-06", value: 698.9 }, // all-time high at the time
+  { date: "2025-07", value: 698.2 },
+  { date: "2025-08", value: 690.0 },
+  { date: "2025-09", value: 693.0 },
+  { date: "2025-10", value: 689.7 },
+  { date: "2025-11", value: 690.0 },
+  { date: "2025-12", value: 688.0 },
+  { date: "2026-01", value: 723.8 }, // new all-time high (Jan 30, 2026)
 ];
 
 // ── Interpolation helper ──────────────────────────────────────────────────────
@@ -295,7 +324,7 @@ function interpolateMonthly(anchors) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const policyRates = {
-  lastUpdated: "2025-04",
+  lastUpdated: "2026-03",
   notes:
     "Event-level policy rate changes. " +
     "Pre-Oct 2016: approximate dates (annual and key intra-year inflection points). " +
@@ -309,7 +338,7 @@ const policyRates = {
 };
 
 const forexReserves = {
-  lastUpdated: "2025-01",
+  lastUpdated: "2026-01",
   unit: "USD billion",
   notes:
     "Total foreign exchange reserves including gold, SDRs, and reserve tranche position. " +

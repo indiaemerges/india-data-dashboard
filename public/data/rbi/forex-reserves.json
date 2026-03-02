@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-01",
+  "lastUpdated": "2026-01",
   "unit": "USD billion",
   "notes": "Total foreign exchange reserves including gold, SDRs, and reserve tranche position. Values are monthly; pre-2016 months are linearly interpolated between known anchor points. Source: RBI Weekly Statistical Supplement / World Bank.",
   "monthly": [
@@ -1205,7 +1205,55 @@
     },
     {
       "date": "2025-01",
-      "value": 630
+      "value": 631.7
+    },
+    {
+      "date": "2025-02",
+      "value": 638.3
+    },
+    {
+      "date": "2025-03",
+      "value": 668.3
+    },
+    {
+      "date": "2025-04",
+      "value": 677
+    },
+    {
+      "date": "2025-05",
+      "value": 691.5
+    },
+    {
+      "date": "2025-06",
+      "value": 698.9
+    },
+    {
+      "date": "2025-07",
+      "value": 698.2
+    },
+    {
+      "date": "2025-08",
+      "value": 690
+    },
+    {
+      "date": "2025-09",
+      "value": 693
+    },
+    {
+      "date": "2025-10",
+      "value": 689.7
+    },
+    {
+      "date": "2025-11",
+      "value": 690
+    },
+    {
+      "date": "2025-12",
+      "value": 688
+    },
+    {
+      "date": "2026-01",
+      "value": 723.8
     }
   ]
 }
