@@ -2,14 +2,88 @@ import Head from "next/head";
 import { useCPIMonthlyData, cpiToSeries } from "@/lib/hooks/useMospiCPI";
 import { useWPIMonthlyData, wpiToSeries } from "@/lib/hooks/useMospiWPI";
 import LineChart from "@/components/charts/LineChart";
+import HeatmapChart from "@/components/charts/HeatmapChart";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
+import type { CPIMonthDataPoint } from "@/lib/api/types";
 
 const MOSPI_CPI_SOURCE = "MoSPI CPI, All India Combined";
 const MOSPI_CPI_URL = "https://mospi.gov.in/web/mospi/inflation";
 const MOSPI_WPI_SOURCE = "MoSPI WPI (base year 2011-12)";
 const MOSPI_WPI_URL =
   "https://mospi.gov.in/web/mospi/reports-publications/-/reports/view/templateOne/16904?q=16904";
+
+// ── Heatmap helpers ───────────────────────────────────────────────────────────
+
+const MONTH_ORDER = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+const MONTH_SHORT: Record<string, string> = {
+  January: "Jan", February: "Feb", March: "Mar", April: "Apr",
+  May: "May", June: "Jun", July: "Jul", August: "Aug",
+  September: "Sep", October: "Oct", November: "Nov", December: "Dec",
+};
+
+type CPINumericField = Exclude<
+  keyof CPIMonthDataPoint,
+  "year" | "month" | "label"
+>;
+
+/**
+ * Build a seasonal matrix for a single CPI field.
+ * Rows = years (newest first so latest year appears at top of heatmap).
+ * Cols = Jan … Dec.
+ * Cells with no data are null.
+ */
+function buildSeasonalMatrix(
+  months: CPIMonthDataPoint[],
+  field: CPINumericField
+): { z: (number | null)[][]; x: string[]; y: string[] } {
+  const years = [...new Set(months.map((m) => m.year))].sort((a, b) => b - a); // newest first → top row
+  const z = years.map((year) =>
+    MONTH_ORDER.map((shortMon) => {
+      const found = months.find(
+        (m) => m.year === year && MONTH_SHORT[m.month] === shortMon
+      );
+      const val = found?.[field];
+      return typeof val === "number" ? val : null;
+    })
+  );
+  return { z, x: MONTH_ORDER, y: years.map(String) };
+}
+
+/**
+ * Build a category-vs-year matrix.
+ * Rows = category labels (newest-first on screen, so reversed display).
+ * Cols = years (ascending, oldest → newest).
+ * Cell value = mean of all monthly readings for that category in that year
+ *              (null if no data available).
+ */
+function buildCategoryYearMatrix(
+  months: CPIMonthDataPoint[],
+  fields: { key: CPINumericField; label: string }[]
+): { z: (number | null)[][]; x: string[]; y: string[] } {
+  const years = [...new Set(months.map((m) => m.year))].sort(); // ascending
+  const z = fields.map(({ key }) =>
+    years.map((year) => {
+      const readings = months
+        .filter((m) => m.year === year)
+        .map((m) => m[key])
+        .filter((v): v is number => typeof v === "number");
+      if (readings.length === 0) return null;
+      return Math.round((readings.reduce((s, v) => s + v, 0) / readings.length) * 100) / 100;
+    })
+  );
+  return {
+    z,
+    x: years.map(String),
+    y: fields.map((f) => f.label),
+  };
+}
+
+// ── Colour helpers ────────────────────────────────────────────────────────────
 
 /** Returns a Tailwind colour class based on the inflation reading */
 function inflationColor(value: number | null): string {
@@ -19,6 +93,21 @@ function inflationColor(value: number | null): string {
   if (value >= 0) return "text-green-700 dark:text-green-400";
   return "text-blue-600 dark:text-blue-400"; // deflation
 }
+
+// CPI colour scale: centred at 4% (RBI target midpoint).
+// Blue = deflation, pale yellow ≈ 4%, deep red = very high inflation.
+// zmin=-12, zmid=4, zmax=20 → symmetric ±16 around 4%.
+const CPI_COLORSCALE: [number, string][] = [
+  [0,    "#1e40af"],  // deep blue   (deflation / strongly negative)
+  [0.25, "#60a5fa"],  // light blue  (~-8%)
+  [0.45, "#d1fae5"],  // pale green  (~2%)
+  [0.5,  "#fef9c3"],  // pale yellow (4% — RBI target midpoint)
+  [0.6,  "#fed7aa"],  // peach       (~7%)
+  [0.75, "#f97316"],  // orange      (~12%)
+  [1,    "#991b1b"],  // deep red    (>16%)
+];
+
+// ── Dashboard ─────────────────────────────────────────────────────────────────
 
 export default function InflationDashboard() {
   const {
@@ -53,14 +142,12 @@ export default function InflationDashboard() {
 
   // ── Latest-reading helpers ──────────────────────────────────────────────
 
-  /** Latest non-null value for a CPI field */
   function latestCPI(field: "general" | "foodBeverages" | "fuelLight" | "vegetables") {
     if (!cpiData) return { value: null as number | null, label: "" };
     const found = [...cpiData.months].reverse().find((m) => m[field] !== null);
     return { value: found?.[field] ?? null, label: found?.label ?? "" };
   }
 
-  /** Latest non-null value for a WPI field */
   function latestWPI(field: "headline" | "foodIndex" | "fuelPower") {
     if (!wpiData) return { value: null as number | null, label: "" };
     const found = [...wpiData.monthly].reverse().find((m) => m[field] !== null);
@@ -72,14 +159,10 @@ export default function InflationDashboard() {
   const latestVegCPI = latestCPI("vegetables");
   const latestHeadlineWPI = latestWPI("headline");
 
-  // ── Chart series ────────────────────────────────────────────────────────
+  // ── Line chart series ───────────────────────────────────────────────────
 
-  // Chart 1: CPI Headline — full history from 2014
-  const cpiHeadlineSeries = cpiData
-    ? cpiToSeries(cpiData, ["general"])
-    : [];
+  const cpiHeadlineSeries = cpiData ? cpiToSeries(cpiData, ["general"]) : [];
 
-  // Chart 2: CPI major components — last 5 years
   const cpiComponentSeries = cpiData
     ? cpiToSeries(
         cpiData,
@@ -88,7 +171,6 @@ export default function InflationDashboard() {
       )
     : [];
 
-  // Chart 3: CPI food sub-groups — last 4 years
   const cpiFoodSeries = cpiData
     ? cpiToSeries(
         cpiData,
@@ -97,10 +179,32 @@ export default function InflationDashboard() {
       )
     : [];
 
-  // Chart 4: WPI components — full history
   const wpiSeries = wpiData
     ? wpiToSeries(wpiData, ["headline", "primaryArticles", "fuelPower", "foodIndex"])
     : [];
+
+  // ── Heatmap matrices ────────────────────────────────────────────────────
+
+  // Heatmap 1: General CPI seasonal calendar (year × month)
+  const generalHeatmap = cpiData
+    ? buildSeasonalMatrix(cpiData.months, "general")
+    : null;
+
+  // Heatmap 2: Food sub-groups annual average (category × year)
+  const foodFields: { key: CPINumericField; label: string }[] = [
+    { key: "vegetables",    label: "Vegetables" },
+    { key: "fruits",        label: "Fruits" },
+    { key: "oilsFats",      label: "Oils & Fats" },
+    { key: "pulses",        label: "Pulses" },
+    { key: "meatFish",      label: "Meat & Fish" },
+    { key: "cereals",       label: "Cereals" },
+    { key: "spices",        label: "Spices" },
+    { key: "milkProducts",  label: "Milk Products" },
+  ];
+
+  const foodHeatmap = cpiData
+    ? buildCategoryYearMatrix(cpiData.months, foodFields)
+    : null;
 
   return (
     <>
@@ -126,7 +230,6 @@ export default function InflationDashboard() {
 
         {/* Summary cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {/* CPI Headline */}
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
             <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               CPI Headline{latestHeadlineCPI.label ? ` (${latestHeadlineCPI.label})` : ""}
@@ -141,7 +244,6 @@ export default function InflationDashboard() {
             </p>
           </div>
 
-          {/* CPI Food & Beverages */}
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
             <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               CPI Food{latestFoodCPI.label ? ` (${latestFoodCPI.label})` : ""}
@@ -156,7 +258,6 @@ export default function InflationDashboard() {
             </p>
           </div>
 
-          {/* CPI Vegetables */}
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
             <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               Vegetables{latestVegCPI.label ? ` (${latestVegCPI.label})` : ""}
@@ -171,7 +272,6 @@ export default function InflationDashboard() {
             </p>
           </div>
 
-          {/* WPI Headline */}
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
             <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
               WPI Headline{latestHeadlineWPI.label ? ` (${latestHeadlineWPI.label})` : ""}
@@ -190,55 +290,100 @@ export default function InflationDashboard() {
         {/* Charts */}
         <div className="space-y-6">
 
-          {/* Chart 1: CPI Headline trend */}
+          {/* 1 — CPI Headline trend */}
           {cpiHeadlineSeries.length > 0 && (
             <LineChart
               series={cpiHeadlineSeries}
+              showMarkers={false}
               title="CPI Headline Inflation (Monthly)"
               subtitle="All India Combined — Year-on-Year % change, base year 2012=100"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
               yAxisTitle="YoY % Change"
-              height={420}
+              height={380}
             />
           )}
 
-          {/* Chart 2: CPI components */}
+          {/* 2 — Seasonal calendar heatmap (General CPI, year × month) */}
+          {generalHeatmap && (
+            <HeatmapChart
+              z={generalHeatmap.z}
+              x={generalHeatmap.x}
+              y={generalHeatmap.y}
+              colorscale={CPI_COLORSCALE}
+              zmid={4}
+              zmin={-12}
+              zmax={20}
+              valueUnit="%"
+              valuePrecision={1}
+              title="CPI Inflation Calendar (Seasonal Heatmap)"
+              subtitle="Each cell = YoY % for that month. Newest year at top. Colour: blue = deflation, pale = near 4% target, red = high inflation"
+              source={MOSPI_CPI_SOURCE}
+              sourceUrl={MOSPI_CPI_URL}
+              height={380}
+            />
+          )}
+
+          {/* 3 — CPI major components (since 2020) */}
           {cpiComponentSeries.length > 0 && (
             <LineChart
               series={cpiComponentSeries}
+              showMarkers={false}
               title="CPI by Major Component (2020 onwards)"
               subtitle="Food & Beverages, Fuel & Light, Housing, Clothing, Miscellaneous — YoY %"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
               yAxisTitle="YoY % Change"
-              height={450}
+              height={420}
             />
           )}
 
-          {/* Chart 3: CPI food sub-groups */}
+          {/* 4 — CPI food sub-groups (since 2021) */}
           {cpiFoodSeries.length > 0 && (
             <LineChart
               series={cpiFoodSeries}
+              showMarkers={false}
               title="CPI Food Sub-Groups (2021 onwards)"
               subtitle="Vegetables, Fruits, Cereals, Pulses, Oils, Milk, Meat, Spices — YoY %"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
               yAxisTitle="YoY % Change"
-              height={450}
+              height={420}
             />
           )}
 
-          {/* Chart 4: WPI components */}
+          {/* 5 — Food sub-group annual heatmap (category × year) */}
+          {foodHeatmap && (
+            <HeatmapChart
+              z={foodHeatmap.z}
+              x={foodHeatmap.x}
+              y={foodHeatmap.y}
+              colorscale={CPI_COLORSCALE}
+              zmid={4}
+              zmin={-20}
+              zmax={28}
+              valueUnit="%"
+              valuePrecision={1}
+              showAnnotations={true}
+              title="Food Sub-groups — Annual Average Inflation"
+              subtitle="Each cell = annual average YoY % for that food category. Highlights persistent inflators vs. seasonal deflators"
+              source={MOSPI_CPI_SOURCE}
+              sourceUrl={MOSPI_CPI_URL}
+              height={320}
+            />
+          )}
+
+          {/* 6 — WPI components */}
           {wpiSeries.length > 0 && (
             <LineChart
               series={wpiSeries}
+              showMarkers={false}
               title="WPI by Component (Monthly)"
               subtitle="Headline WPI, Primary Articles, Fuel & Power, Food Index — YoY % change"
               source={MOSPI_WPI_SOURCE}
               sourceUrl={MOSPI_WPI_URL}
               yAxisTitle="YoY % Change"
-              height={420}
+              height={380}
             />
           )}
         </div>
@@ -260,7 +405,8 @@ export default function InflationDashboard() {
               MoSPI CPI portal
             </a>
             . Inflation figures are YoY % change pre-computed by MoSPI. Coverage: February 2014 –
-            December 2025.{" "}
+            December 2025. The seasonal heatmap centres colour at 4% (the midpoint of RBI&apos;s 2–6%
+            tolerance band).{" "}
             <strong>WPI</strong> data (base year 2011-12=100) covers Headline, Primary Articles,
             Fuel &amp; Power, and Food Index from the{" "}
             <a
