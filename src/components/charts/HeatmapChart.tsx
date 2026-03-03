@@ -13,6 +13,35 @@ const DEFAULT_COLORSCALE: [number, string][] = [
   [1,    "#991b1b"],  // deep red  (very high inflation)
 ];
 
+/**
+ * Build a diverging colorscale where `divideAt` maps to white/neutral,
+ * deep blue anchors the minimum, and deep red anchors the maximum.
+ *
+ * @param zmin  - effective lower bound of the data range
+ * @param zmax  - effective upper bound of the data range
+ * @param divideAt - value that should appear white/neutral (typically 0)
+ */
+function buildDivergingColorscale(
+  zmin: number,
+  zmax: number,
+  divideAt: number
+): [number, string][] {
+  const range = zmax - zmin;
+  if (range <= 0) return DEFAULT_COLORSCALE;
+
+  // Position of the neutral point in [0, 1] colorscale space
+  const pos = Math.max(0.02, Math.min(0.98, (divideAt - zmin) / range));
+
+  return [
+    [0,                           "#1e40af"],  // deep blue    (zmin)
+    [pos * 0.5,                   "#93c5fd"],  // light blue
+    [pos,                         "#f8fafc"],  // white/neutral (divideAt = 0%)
+    [pos + (1 - pos) * 0.35,     "#fde68a"],  // pale yellow  (~RBI target zone)
+    [pos + (1 - pos) * 0.65,     "#f97316"],  // orange       (elevated)
+    [1,                           "#b2182b"],  // deep red     (zmax)
+  ];
+}
+
 interface HeatmapChartProps {
   /** 2-D value array: z[rowIndex][colIndex] — null renders as blank cell */
   z: (number | null)[][];
@@ -23,11 +52,25 @@ interface HeatmapChartProps {
   /**
    * Plotly ColorScale — a named string ("RdYlGn") or custom
    * [[position 0–1, cssColor], ...] array.
+   * Ignored when `divideAt` is provided (colorscale is computed automatically).
    */
   colorscale?: Plotly.ColorScale;
   /**
+   * When set, the colorscale is computed so that `divideAt` maps to
+   * white/neutral, deep blue anchors zmin, and deep red anchors zmax.
+   * Overrides `zmid` and the caller-supplied `colorscale`.
+   *
+   * Typical usage: `divideAt={0}` places white at 0% inflation,
+   * with blue for deflation and red for inflation regardless of
+   * whether the data range is symmetric.
+   *
+   * If `zmin` is not provided it is auto-computed from the data.
+   */
+  divideAt?: number;
+  /**
    * The value that maps to the centre of the color scale.
-   * For CPI, use 4 (RBI's inflation target). For growth-rate data, use 0.
+   * For CPI, use 4 (RBI&apos;s inflation target). For growth-rate data, use 0.
+   * Ignored when `divideAt` is provided.
    */
   zmid?: number;
   /** Clamp the colour range minimum. Leave undefined to auto-range. */
@@ -61,6 +104,7 @@ export default function HeatmapChart({
   x,
   y,
   colorscale = DEFAULT_COLORSCALE,
+  divideAt,
   zmid,
   zmin,
   zmax,
@@ -75,16 +119,39 @@ export default function HeatmapChart({
 }: HeatmapChartProps) {
   const fmt = (v: number) => v.toFixed(valuePrecision) + valueUnit;
 
+  // ── Resolve colorscale and bounds when divideAt is used ──────────────────
+  let resolvedColorscale: Plotly.ColorScale = colorscale;
+  let resolvedZmid: number | undefined = zmid;
+  let resolvedZmin: number | undefined = zmin;
+  let resolvedZmax: number | undefined = zmax;
+
+  if (divideAt !== undefined) {
+    // Compute effective data bounds
+    const allValues = z
+      .flat()
+      .filter((v): v is number => v !== null && isFinite(v));
+    const dataMin = allValues.length > 0 ? Math.min(...allValues) : -12.5;
+    const dataMax = allValues.length > 0 ? Math.max(...allValues) : 12.5;
+
+    const ezmin = zmin !== undefined ? zmin : dataMin;
+    const ezmax = zmax !== undefined ? zmax : dataMax;
+
+    resolvedZmin = ezmin;
+    resolvedZmax = ezmax;
+    resolvedZmid = undefined;  // let the custom colorscale handle centering
+    resolvedColorscale = buildDivergingColorscale(ezmin, ezmax, divideAt);
+  }
+
   // ── Plotly heatmap trace ──────────────────────────────────────────────────
   const trace: Plotly.Data = {
     type: "heatmap",
     x,
     y,
     z,
-    colorscale,
-    ...(zmid !== undefined ? { zmid } : {}),
-    ...(zmin !== undefined ? { zmin } : {}),
-    ...(zmax !== undefined ? { zmax } : {}),
+    colorscale: resolvedColorscale,
+    ...(resolvedZmid !== undefined ? { zmid: resolvedZmid } : {}),
+    ...(resolvedZmin !== undefined ? { zmin: resolvedZmin } : {}),
+    ...(resolvedZmax !== undefined ? { zmax: resolvedZmax } : {}),
     colorbar: {
       title: { text: valueUnit, side: "right" as const },
       ticksuffix: valueUnit,
