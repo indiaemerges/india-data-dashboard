@@ -1,9 +1,32 @@
 import Head from "next/head";
-import { useIIPAnnualData, iipToSeries } from "@/lib/hooks/useMospiIIP";
+import {
+  useIIPAnnualData,
+  useIIPMonthlyData,
+  iipToSeries,
+  iipMonthlyToSeries,
+  type IIPMonthField,
+} from "@/lib/hooks/useMospiIIP";
 import LineChart from "@/components/charts/LineChart";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
+import type { DataSeries } from "@/lib/api/types";
 
+// ── Category lists ───────────────────────────────────────────────────────────
+
+const MONTHLY_SECTORAL: IIPMonthField[] = [
+  "general",
+  "mining",
+  "manufacturing",
+  "electricity",
+];
+const MONTHLY_USE_BASED: IIPMonthField[] = [
+  "primaryGoods",
+  "capitalGoods",
+  "intermediateGoods",
+  "infraGoods",
+  "consumerDurables",
+  "consumerNonDurables",
+];
 const SECTORAL_CATEGORIES = ["General", "Mining", "Manufacturing", "Electricity"];
 const USE_BASED_CATEGORIES = [
   "Primary Goods",
@@ -18,40 +41,102 @@ const SOURCE_LABEL = "MoSPI, Index of Industrial Production";
 const SOURCE_URL =
   "https://www.mospi.gov.in/publication/index-industrial-production";
 
-export default function IndustrialDashboard() {
-  const { data, isLoading, error, refetch } = useIIPAnnualData();
+// ── Moving-average helper ────────────────────────────────────────────────────
 
-  if (isLoading) {
+/**
+ * Return a new DataSeries whose values are the N-month trailing moving average
+ * of the supplied series. Points with fewer than N predecessors are null.
+ */
+function computeMA(series: DataSeries, window: number): DataSeries {
+  return {
+    ...series,
+    indicator: `${series.indicator} (${window}-mo MA)`,
+    indicatorId: `${series.indicatorId}_MA${window}`,
+    data: series.data.map((pt, i) => {
+      if (i < window - 1) return { date: pt.date, value: null };
+      const slice = series.data.slice(i - window + 1, i + 1);
+      const vals = slice.map((p) => p.value).filter((v) => v !== null) as number[];
+      if (vals.length < window) return { date: pt.date, value: null };
+      return {
+        date: pt.date,
+        value: Math.round((vals.reduce((s, v) => s + v, 0) / window) * 10) / 10,
+      };
+    }),
+  };
+}
+
+// ── Dashboard ────────────────────────────────────────────────────────────────
+
+export default function IndustrialDashboard() {
+  const {
+    data: annualData,
+    isLoading: annualLoading,
+    error: annualError,
+    refetch: refetchAnnual,
+  } = useIIPAnnualData();
+
+  const {
+    data: monthlyData,
+    isLoading: monthlyLoading,
+  } = useIIPMonthlyData();
+
+  if (annualLoading || monthlyLoading) {
     return <LoadingSpinner message="Loading IIP data..." />;
   }
-
-  if (error || !data) {
+  if (annualError || !annualData) {
     return (
       <ErrorDisplay
         message={
-          error instanceof Error
-            ? error.message
+          annualError instanceof Error
+            ? annualError.message
             : "Failed to load Index of Industrial Production data"
         }
-        onRetry={() => refetch()}
+        onRetry={() => refetchAnnual()}
       />
     );
   }
 
-  // Latest year is the last element in the years array (oldest-to-newest order)
-  const latestYear = data.years[data.years.length - 1];
-  const latestIdx = data.years.length - 1;
+  // ── Summary cards from latest monthly data ──────────────────────────────
 
-  const generalIndex = data.sectoral["General"]?.index[latestIdx];
-  const generalGrowth = data.sectoral["General"]?.growth[latestIdx];
-  const mfgIndex = data.sectoral["Manufacturing"]?.index[latestIdx];
-  const mfgGrowth = data.sectoral["Manufacturing"]?.growth[latestIdx];
+  const latestMonth = monthlyData?.monthly.at(-1);
+  const prevMonth   = monthlyData?.monthly.at(-2); // for month-over-month context
 
-  // Build chart series
-  const sectoralIndexSeries = iipToSeries(data, "sectoral", SECTORAL_CATEGORIES, "index");
-  const sectoralGrowthSeries = iipToSeries(data, "sectoral", SECTORAL_CATEGORIES, "growth");
-  const useBasedIndexSeries = iipToSeries(data, "useBased", USE_BASED_CATEGORIES, "index");
-  const useBasedGrowthSeries = iipToSeries(data, "useBased", USE_BASED_CATEGORIES, "growth");
+  // Fallback to annual when monthly not available
+  const latestAnnualYear = annualData.years[annualData.years.length - 1];
+  const latestAnnualIdx  = annualData.years.length - 1;
+  const annualGeneralIndex  = annualData.sectoral["General"]?.index[latestAnnualIdx];
+  const annualGeneralGrowth = annualData.sectoral["General"]?.growth[latestAnnualIdx];
+  const annualMfgIndex      = annualData.sectoral["Manufacturing"]?.index[latestAnnualIdx];
+  const annualMfgGrowth     = annualData.sectoral["Manufacturing"]?.growth[latestAnnualIdx];
+
+  const generalIndex  = latestMonth?.general.index   ?? annualGeneralIndex;
+  const generalGrowth = latestMonth?.general.growth   ?? annualGeneralGrowth;
+  const mfgIndex      = latestMonth?.manufacturing.index  ?? annualMfgIndex;
+  const mfgGrowth     = latestMonth?.manufacturing.growth ?? annualMfgGrowth;
+  const cardPeriod    = latestMonth?.label ?? latestAnnualYear;
+
+  // ── Monthly series ──────────────────────────────────────────────────────
+
+  const monthlyGeneralSeries = monthlyData
+    ? iipMonthlyToSeries(monthlyData, ["general"], "index")[0]
+    : null;
+
+  const generalWithMA = monthlyGeneralSeries
+    ? [monthlyGeneralSeries, computeMA(monthlyGeneralSeries, 12)]
+    : [];
+
+  const monthlySectoralGrowth = monthlyData
+    ? iipMonthlyToSeries(monthlyData, MONTHLY_SECTORAL, "growth")
+    : [];
+
+  const monthlyUseBasedGrowth = monthlyData
+    ? iipMonthlyToSeries(monthlyData, MONTHLY_USE_BASED, "growth")
+    : [];
+
+  // ── Annual series (kept as reference) ──────────────────────────────────
+
+  const sectoralIndexSeries  = iipToSeries(annualData, "sectoral", SECTORAL_CATEGORIES, "index");
+  const useBasedGrowthSeries = iipToSeries(annualData, "useBased", USE_BASED_CATEGORIES, "growth");
 
   return (
     <>
@@ -59,7 +144,7 @@ export default function IndustrialDashboard() {
         <title>Industrial Production (IIP) | India Data Dashboard</title>
         <meta
           name="description"
-          content="India's Index of Industrial Production — sectoral and use-based classification trends from MoSPI."
+          content="India's Index of Industrial Production — monthly and annual trends from MoSPI."
         />
       </Head>
 
@@ -70,9 +155,8 @@ export default function IndustrialDashboard() {
             Industrial Production (IIP)
           </h1>
           <p className="mt-1 text-gray-600 dark:text-gray-300">
-            Index of Industrial Production tracks monthly and annual changes in
-            Indian industry across mining, manufacturing, and electricity
-            sectors. Base year: {data.baseYear}. Data from MoSPI.
+            Monthly Index of Industrial Production (IIP, base {annualData.baseYear}) across mining,
+            manufacturing, and electricity sectors. Data from MoSPI.
           </p>
         </div>
 
@@ -81,20 +165,20 @@ export default function IndustrialDashboard() {
           {generalIndex != null && (
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                General IIP Index ({latestYear})
+                General IIP
               </p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 {generalIndex.toFixed(1)}
               </p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                Base: {data.baseYear} = 100
+                {cardPeriod} · Base {annualData.baseYear}=100
               </p>
             </div>
           )}
           {generalGrowth != null && (
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                General Growth ({latestYear})
+                General Growth
               </p>
               <p
                 className={`text-2xl font-bold mt-1 ${
@@ -104,26 +188,28 @@ export default function IndustrialDashboard() {
                 {generalGrowth >= 0 ? "+" : ""}
                 {generalGrowth.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Year-on-year</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                {cardPeriod} · Year-on-year
+              </p>
             </div>
           )}
           {mfgIndex != null && (
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                Manufacturing Index ({latestYear})
+                Manufacturing IIP
               </p>
               <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                 {mfgIndex.toFixed(1)}
               </p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                Base: {data.baseYear} = 100
+                {cardPeriod} · Base {annualData.baseYear}=100
               </p>
             </div>
           )}
           {mfgGrowth != null && (
             <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                Manufacturing Growth ({latestYear})
+                Manufacturing Growth
               </p>
               <p
                 className={`text-2xl font-bold mt-1 ${
@@ -133,64 +219,91 @@ export default function IndustrialDashboard() {
                 {mfgGrowth >= 0 ? "+" : ""}
                 {mfgGrowth.toFixed(1)}%
               </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Year-on-year</p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                {cardPeriod} · Year-on-year
+              </p>
             </div>
           )}
         </div>
 
-        {/* Charts */}
+        {/* ── Monthly charts (primary) ─────────────────────────────────── */}
         <div className="space-y-6">
-          {/* Sectoral Index */}
-          {sectoralIndexSeries.length > 0 && (
+
+          {/* General IIP trend + 12-month moving average */}
+          {generalWithMA.length > 0 && (
             <LineChart
-              series={sectoralIndexSeries}
-              title="IIP Index — Sectoral"
-              subtitle="General, Mining, Manufacturing, and Electricity index values over time"
+              series={generalWithMA}
+              showMarkers={false}
+              title="General IIP — Monthly Trend"
+              subtitle="Monthly index level with 12-month moving average (smooths seasonal noise)"
               source={SOURCE_LABEL}
               sourceUrl={SOURCE_URL}
-              yAxisTitle="Index"
+              yAxisTitle="Index (2011-12=100)"
               height={420}
             />
           )}
 
-          {/* Sectoral Growth */}
-          {sectoralGrowthSeries.length > 0 && (
+          {/* Monthly sectoral growth rates */}
+          {monthlySectoralGrowth.length > 0 && (
             <LineChart
-              series={sectoralGrowthSeries}
-              title="IIP Growth Rate — Sectoral"
-              subtitle="Year-on-year growth rates for General, Mining, Manufacturing, and Electricity"
+              series={monthlySectoralGrowth}
+              showMarkers={false}
+              title="IIP Growth Rate — Sectoral (Monthly)"
+              subtitle="Year-on-year growth for General, Mining, Manufacturing, and Electricity — COVID-19 shock and recovery clearly visible"
               source={SOURCE_LABEL}
               sourceUrl={SOURCE_URL}
-              yAxisTitle="Growth Rate (%)"
+              yAxisTitle="YoY Growth (%)"
               height={420}
             />
           )}
 
-          {/* Use-based Index */}
-          {useBasedIndexSeries.length > 0 && (
+          {/* Monthly use-based growth rates */}
+          {monthlyUseBasedGrowth.length > 0 && (
             <LineChart
-              series={useBasedIndexSeries}
-              title="IIP Index — Use-based Classification"
-              subtitle="Primary Goods, Capital Goods, Intermediate Goods, Infrastructure/Construction, Consumer Durables & Non-durables"
+              series={monthlyUseBasedGrowth}
+              showMarkers={false}
+              title="IIP Growth Rate — Use-based Classification (Monthly)"
+              subtitle="Capital Goods leads the investment cycle; Consumer Durables tracks household demand"
               source={SOURCE_LABEL}
               sourceUrl={SOURCE_URL}
-              yAxisTitle="Index"
+              yAxisTitle="YoY Growth (%)"
               height={420}
             />
           )}
 
-          {/* Use-based Growth */}
-          {useBasedGrowthSeries.length > 0 && (
-            <LineChart
-              series={useBasedGrowthSeries}
-              title="IIP Growth Rate — Use-based Classification"
-              subtitle="Year-on-year growth rates by use-based category"
-              source={SOURCE_LABEL}
-              sourceUrl={SOURCE_URL}
-              yAxisTitle="Growth Rate (%)"
-              height={420}
-            />
-          )}
+          {/* ── Annual reference charts ──────────────────────────────── */}
+          <div className="pt-2">
+            <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">
+              Annual Reference
+            </h2>
+            <div className="space-y-6">
+              {/* Annual sectoral index — long-run structural trend */}
+              {sectoralIndexSeries.length > 0 && (
+                <LineChart
+                  series={sectoralIndexSeries}
+                  title="IIP Index — Sectoral (Annual Average)"
+                  subtitle="Annual average index levels showing long-run structural growth in each sector"
+                  source={SOURCE_LABEL}
+                  sourceUrl={SOURCE_URL}
+                  yAxisTitle="Index (2011-12=100)"
+                  height={380}
+                />
+              )}
+
+              {/* Annual use-based growth rates */}
+              {useBasedGrowthSeries.length > 0 && (
+                <LineChart
+                  series={useBasedGrowthSeries}
+                  title="IIP Growth Rate — Use-based (Annual Average)"
+                  subtitle="Annual average growth rates by use-based category"
+                  source={SOURCE_LABEL}
+                  sourceUrl={SOURCE_URL}
+                  yAxisTitle="Growth Rate (%)"
+                  height={380}
+                />
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Data source info */}
@@ -199,16 +312,13 @@ export default function IndustrialDashboard() {
             About this data
           </h3>
           <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
-            The Index of Industrial Production (IIP) is compiled and published
-            monthly by the Ministry of Statistics and Programme Implementation
-            (MoSPI) with base year {data.baseYear}. It measures short-term
-            changes in the volume of production of a basket of industrial
-            products during a given period with respect to a chosen base period.
-            The index covers mining, manufacturing (22 industry groups per
-            NIC-2008), and electricity sectors. Use-based classification groups
+            The Index of Industrial Production (IIP) is compiled and published monthly by MoSPI with
+            base year {annualData.baseYear}. Monthly data covers April 2012 onwards (calendar year
+            months). IIP is typically released with a ~6-week lag, so the latest month shown reflects
+            production from approximately 6 weeks prior. The 12-month moving average smooths
+            seasonal fluctuations to reveal the underlying trend. Use-based classification groups
             items into Primary Goods, Capital Goods, Intermediate Goods,
-            Infrastructure/Construction Goods, Consumer Durables, and Consumer
-            Non-durables.
+            Infrastructure/Construction Goods, Consumer Durables, and Consumer Non-durables.
           </p>
           <p className="text-sm text-blue-700 dark:text-blue-300 mt-2">
             Source:{" "}

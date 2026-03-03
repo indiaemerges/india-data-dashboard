@@ -1,0 +1,7599 @@
+{
+  "baseYear": "2011-12",
+  "lastUpdated": "2025-12",
+  "source": "MoSPI, Index of Industrial Production",
+  "sourceUrl": "https://mospi.gov.in/iip",
+  "notes": "Monthly IIP index (base 2011-12=100) and YoY growth rate (%). Calendar year months. Excludes manufacturing sub-industry rows. IIP is typically released with a 6-week lag.",
+  "monthly": [
+    {
+      "year": 2012,
+      "month": "April",
+      "label": "Apr 2012",
+      "date": "2012-04",
+      "general": {
+        "index": 99.3,
+        "growth": -0.7
+      },
+      "mining": {
+        "index": 99.1,
+        "growth": -0.9
+      },
+      "manufacturing": {
+        "index": 99,
+        "growth": -1
+      },
+      "electricity": {
+        "index": 103,
+        "growth": 3
+      },
+      "primaryGoods": {
+        "index": 98.2,
+        "growth": -1.8
+      },
+      "capitalGoods": {
+        "index": 89.5,
+        "growth": -10.5
+      },
+      "intermediateGoods": {
+        "index": 103.6,
+        "growth": 3.6
+      },
+      "infraGoods": {
+        "index": 103.1,
+        "growth": 3.1
+      },
+      "consumerDurables": {
+        "index": 102,
+        "growth": 2
+      },
+      "consumerNonDurables": {
+        "index": 97,
+        "growth": -3
+      }
+    },
+    {
+      "year": 2012,
+      "month": "May",
+      "label": "May 2012",
+      "date": "2012-05",
+      "general": {
+        "index": 105,
+        "growth": 5
+      },
+      "mining": {
+        "index": 102.9,
+        "growth": 2.9
+      },
+      "manufacturing": {
+        "index": 105,
+        "growth": 5
+      },
+      "electricity": {
+        "index": 108.7,
+        "growth": 8.7
+      },
+      "primaryGoods": {
+        "index": 104,
+        "growth": 4
+      },
+      "capitalGoods": {
+        "index": 98.7,
+        "growth": -1.3
+      },
+      "intermediateGoods": {
+        "index": 105.6,
+        "growth": 5.6
+      },
+      "infraGoods": {
+        "index": 117.4,
+        "growth": 17.4
+      },
+      "consumerDurables": {
+        "index": 105.1,
+        "growth": 5.1
+      },
+      "consumerNonDurables": {
+        "index": 99.8,
+        "growth": -0.2
+      }
+    },
+    {
+      "year": 2012,
+      "month": "June",
+      "label": "Jun 2012",
+      "date": "2012-06",
+      "general": {
+        "index": 102.3,
+        "growth": 2.3
+      },
+      "mining": {
+        "index": 93.3,
+        "growth": -6.7
+      },
+      "manufacturing": {
+        "index": 103.7,
+        "growth": 3.7
+      },
+      "electricity": {
+        "index": 105.1,
+        "growth": 5.1
+      },
+      "primaryGoods": {
+        "index": 99.7,
+        "growth": -0.3
+      },
+      "capitalGoods": {
+        "index": 101.9,
+        "growth": 1.9
+      },
+      "intermediateGoods": {
+        "index": 103.5,
+        "growth": 3.5
+      },
+      "infraGoods": {
+        "index": 102.2,
+        "growth": 2.2
+      },
+      "consumerDurables": {
+        "index": 104.9,
+        "growth": 4.9
+      },
+      "consumerNonDurables": {
+        "index": 104.9,
+        "growth": 4.9
+      }
+    },
+    {
+      "year": 2012,
+      "month": "July",
+      "label": "Jul 2012",
+      "date": "2012-07",
+      "general": {
+        "index": 101.5,
+        "growth": 1.5
+      },
+      "mining": {
+        "index": 89.8,
+        "growth": -10.2
+      },
+      "manufacturing": {
+        "index": 103.3,
+        "growth": 3.3
+      },
+      "electricity": {
+        "index": 104.6,
+        "growth": 4.6
+      },
+      "primaryGoods": {
+        "index": 98.9,
+        "growth": -1.1
+      },
+      "capitalGoods": {
+        "index": 97,
+        "growth": -3
+      },
+      "intermediateGoods": {
+        "index": 102.7,
+        "growth": 2.7
+      },
+      "infraGoods": {
+        "index": 106,
+        "growth": 6
+      },
+      "consumerDurables": {
+        "index": 102.2,
+        "growth": 2.2
+      },
+      "consumerNonDurables": {
+        "index": 103.7,
+        "growth": 3.7
+      }
+    },
+    {
+      "year": 2012,
+      "month": "August",
+      "label": "Aug 2012",
+      "date": "2012-08",
+      "general": {
+        "index": 99.9,
+        "growth": -0.1
+      },
+      "mining": {
+        "index": 85.6,
+        "growth": -14.4
+      },
+      "manufacturing": {
+        "index": 102.3,
+        "growth": 2.3
+      },
+      "electricity": {
+        "index": 101.9,
+        "growth": 1.9
+      },
+      "primaryGoods": {
+        "index": 96.5,
+        "growth": -3.5
+      },
+      "capitalGoods": {
+        "index": 101.9,
+        "growth": 1.9
+      },
+      "intermediateGoods": {
+        "index": 103,
+        "growth": 3
+      },
+      "infraGoods": {
+        "index": 97.2,
+        "growth": -2.8
+      },
+      "consumerDurables": {
+        "index": 101.1,
+        "growth": 1.1
+      },
+      "consumerNonDurables": {
+        "index": 103.8,
+        "growth": 3.8
+      }
+    },
+    {
+      "year": 2012,
+      "month": "September",
+      "label": "Sep 2012",
+      "date": "2012-09",
+      "general": {
+        "index": 99,
+        "growth": -1
+      },
+      "mining": {
+        "index": 82.5,
+        "growth": -17.5
+      },
+      "manufacturing": {
+        "index": 101.9,
+        "growth": 1.9
+      },
+      "electricity": {
+        "index": 100.3,
+        "growth": 0.3
+      },
+      "primaryGoods": {
+        "index": 92.4,
+        "growth": -7.6
+      },
+      "capitalGoods": {
+        "index": 102.8,
+        "growth": 2.8
+      },
+      "intermediateGoods": {
+        "index": 104.6,
+        "growth": 4.6
+      },
+      "infraGoods": {
+        "index": 98.8,
+        "growth": -1.2
+      },
+      "consumerDurables": {
+        "index": 107.2,
+        "growth": 7.2
+      },
+      "consumerNonDurables": {
+        "index": 98.2,
+        "growth": -1.8
+      }
+    },
+    {
+      "year": 2012,
+      "month": "October",
+      "label": "Oct 2012",
+      "date": "2012-10",
+      "general": {
+        "index": 103.7,
+        "growth": 3.7
+      },
+      "mining": {
+        "index": 91.5,
+        "growth": -8.5
+      },
+      "manufacturing": {
+        "index": 105.6,
+        "growth": 5.6
+      },
+      "electricity": {
+        "index": 107.5,
+        "growth": 7.5
+      },
+      "primaryGoods": {
+        "index": 102.5,
+        "growth": 2.5
+      },
+      "capitalGoods": {
+        "index": 95.5,
+        "growth": -4.5
+      },
+      "intermediateGoods": {
+        "index": 104.7,
+        "growth": 4.7
+      },
+      "infraGoods": {
+        "index": 101,
+        "growth": 1
+      },
+      "consumerDurables": {
+        "index": 115.1,
+        "growth": 15.1
+      },
+      "consumerNonDurables": {
+        "index": 102.4,
+        "growth": 2.4
+      }
+    },
+    {
+      "year": 2012,
+      "month": "November",
+      "label": "Nov 2012",
+      "date": "2012-11",
+      "general": {
+        "index": 98.3,
+        "growth": -1.7
+      },
+      "mining": {
+        "index": 89.9,
+        "growth": -10.1
+      },
+      "manufacturing": {
+        "index": 99.7,
+        "growth": -0.3
+      },
+      "electricity": {
+        "index": 99.8,
+        "growth": -0.2
+      },
+      "primaryGoods": {
+        "index": 98.3,
+        "growth": -1.7
+      },
+      "capitalGoods": {
+        "index": 90.9,
+        "growth": -9.1
+      },
+      "intermediateGoods": {
+        "index": 100.1,
+        "growth": 0.1
+      },
+      "infraGoods": {
+        "index": 99.4,
+        "growth": -0.6
+      },
+      "consumerDurables": {
+        "index": 94.2,
+        "growth": -5.8
+      },
+      "consumerNonDurables": {
+        "index": 102.6,
+        "growth": 2.6
+      }
+    },
+    {
+      "year": 2012,
+      "month": "December",
+      "label": "Dec 2012",
+      "date": "2012-12",
+      "general": {
+        "index": 107.1,
+        "growth": 7.1
+      },
+      "mining": {
+        "index": 98.9,
+        "growth": -1.1
+      },
+      "manufacturing": {
+        "index": 108.8,
+        "growth": 8.8
+      },
+      "electricity": {
+        "index": 105.5,
+        "growth": 5.5
+      },
+      "primaryGoods": {
+        "index": 104.6,
+        "growth": 4.6
+      },
+      "capitalGoods": {
+        "index": 101.5,
+        "growth": 1.5
+      },
+      "intermediateGoods": {
+        "index": 108.1,
+        "growth": 8.1
+      },
+      "infraGoods": {
+        "index": 107.6,
+        "growth": 7.6
+      },
+      "consumerDurables": {
+        "index": 103.6,
+        "growth": 3.6
+      },
+      "consumerNonDurables": {
+        "index": 117.5,
+        "growth": 17.5
+      }
+    },
+    {
+      "year": 2013,
+      "month": "January",
+      "label": "Jan 2013",
+      "date": "2013-01",
+      "general": {
+        "index": 107.2,
+        "growth": 7.2
+      },
+      "mining": {
+        "index": 101.4,
+        "growth": 1.4
+      },
+      "manufacturing": {
+        "index": 108.2,
+        "growth": 8.2
+      },
+      "electricity": {
+        "index": 107.6,
+        "growth": 7.6
+      },
+      "primaryGoods": {
+        "index": 105.9,
+        "growth": 5.9
+      },
+      "capitalGoods": {
+        "index": 93.8,
+        "growth": -6.2
+      },
+      "intermediateGoods": {
+        "index": 107.7,
+        "growth": 7.7
+      },
+      "infraGoods": {
+        "index": 110,
+        "growth": 10
+      },
+      "consumerDurables": {
+        "index": 108.2,
+        "growth": 8.2
+      },
+      "consumerNonDurables": {
+        "index": 113.2,
+        "growth": 13.2
+      }
+    },
+    {
+      "year": 2013,
+      "month": "February",
+      "label": "Feb 2013",
+      "date": "2013-02",
+      "general": {
+        "index": 101.4,
+        "growth": 1.4
+      },
+      "mining": {
+        "index": 92.7,
+        "growth": -7.3
+      },
+      "manufacturing": {
+        "index": 103.7,
+        "growth": 3.7
+      },
+      "electricity": {
+        "index": 94.1,
+        "growth": -5.9
+      },
+      "primaryGoods": {
+        "index": 95.4,
+        "growth": -4.6
+      },
+      "capitalGoods": {
+        "index": 100.2,
+        "growth": 0.2
+      },
+      "intermediateGoods": {
+        "index": 103.1,
+        "growth": 3.1
+      },
+      "infraGoods": {
+        "index": 104.1,
+        "growth": 4.1
+      },
+      "consumerDurables": {
+        "index": 103.3,
+        "growth": 3.3
+      },
+      "consumerNonDurables": {
+        "index": 109.7,
+        "growth": 9.7
+      }
+    },
+    {
+      "year": 2013,
+      "month": "March",
+      "label": "Mar 2013",
+      "date": "2013-03",
+      "general": {
+        "index": 115.2,
+        "growth": 15.2
+      },
+      "mining": {
+        "index": 109.2,
+        "growth": 9.2
+      },
+      "manufacturing": {
+        "index": 116.8,
+        "growth": 16.8
+      },
+      "electricity": {
+        "index": 109.9,
+        "growth": 9.9
+      },
+      "primaryGoods": {
+        "index": 109.7,
+        "growth": 9.7
+      },
+      "capitalGoods": {
+        "index": 130.1,
+        "growth": 30.1
+      },
+      "intermediateGoods": {
+        "index": 114.8,
+        "growth": 14.8
+      },
+      "infraGoods": {
+        "index": 117.8,
+        "growth": 17.8
+      },
+      "consumerDurables": {
+        "index": 111.9,
+        "growth": 11.9
+      },
+      "consumerNonDurables": {
+        "index": 120.3,
+        "growth": 20.3
+      }
+    },
+    {
+      "year": 2013,
+      "month": "April",
+      "label": "Apr 2013",
+      "date": "2013-04",
+      "general": {
+        "index": 102.6,
+        "growth": 3.3
+      },
+      "mining": {
+        "index": 91.4,
+        "growth": -7.8
+      },
+      "manufacturing": {
+        "index": 104.2,
+        "growth": 5.3
+      },
+      "electricity": {
+        "index": 106.6,
+        "growth": 3.5
+      },
+      "primaryGoods": {
+        "index": 98,
+        "growth": -0.2
+      },
+      "capitalGoods": {
+        "index": 89.8,
+        "growth": 0.3
+      },
+      "intermediateGoods": {
+        "index": 104.2,
+        "growth": 0.6
+      },
+      "infraGoods": {
+        "index": 114.3,
+        "growth": 10.9
+      },
+      "consumerDurables": {
+        "index": 106.1,
+        "growth": 4
+      },
+      "consumerNonDurables": {
+        "index": 105.1,
+        "growth": 8.4
+      }
+    },
+    {
+      "year": 2013,
+      "month": "May",
+      "label": "May 2013",
+      "date": "2013-05",
+      "general": {
+        "index": 106,
+        "growth": 1
+      },
+      "mining": {
+        "index": 93.6,
+        "growth": -9
+      },
+      "manufacturing": {
+        "index": 107.3,
+        "growth": 2.2
+      },
+      "electricity": {
+        "index": 115.4,
+        "growth": 6.2
+      },
+      "primaryGoods": {
+        "index": 103.7,
+        "growth": -0.3
+      },
+      "capitalGoods": {
+        "index": 99.6,
+        "growth": 0.9
+      },
+      "intermediateGoods": {
+        "index": 106.2,
+        "growth": 0.6
+      },
+      "infraGoods": {
+        "index": 116,
+        "growth": -1.2
+      },
+      "consumerDurables": {
+        "index": 102.9,
+        "growth": -2.1
+      },
+      "consumerNonDurables": {
+        "index": 108.8,
+        "growth": 9
+      }
+    },
+    {
+      "year": 2013,
+      "month": "June",
+      "label": "Jun 2013",
+      "date": "2013-06",
+      "general": {
+        "index": 101.3,
+        "growth": -1
+      },
+      "mining": {
+        "index": 87.6,
+        "growth": -6.1
+      },
+      "manufacturing": {
+        "index": 103.4,
+        "growth": -0.3
+      },
+      "electricity": {
+        "index": 105.1,
+        "growth": 0
+      },
+      "primaryGoods": {
+        "index": 97.2,
+        "growth": -2.5
+      },
+      "capitalGoods": {
+        "index": 91.9,
+        "growth": -9.8
+      },
+      "intermediateGoods": {
+        "index": 105.2,
+        "growth": 1.6
+      },
+      "infraGoods": {
+        "index": 104,
+        "growth": 1.8
+      },
+      "consumerDurables": {
+        "index": 104.6,
+        "growth": -0.3
+      },
+      "consumerNonDurables": {
+        "index": 105.8,
+        "growth": 0.9
+      }
+    },
+    {
+      "year": 2013,
+      "month": "July",
+      "label": "Jul 2013",
+      "date": "2013-07",
+      "general": {
+        "index": 104.7,
+        "growth": 3.2
+      },
+      "mining": {
+        "index": 86.8,
+        "growth": -3.3
+      },
+      "manufacturing": {
+        "index": 107.5,
+        "growth": 4.1
+      },
+      "electricity": {
+        "index": 110.1,
+        "growth": 5.3
+      },
+      "primaryGoods": {
+        "index": 100.3,
+        "growth": 1.4
+      },
+      "capitalGoods": {
+        "index": 93,
+        "growth": -4.1
+      },
+      "intermediateGoods": {
+        "index": 111,
+        "growth": 8.1
+      },
+      "infraGoods": {
+        "index": 110,
+        "growth": 3.8
+      },
+      "consumerDurables": {
+        "index": 107,
+        "growth": 4.7
+      },
+      "consumerNonDurables": {
+        "index": 107.9,
+        "growth": 4.1
+      }
+    },
+    {
+      "year": 2013,
+      "month": "August",
+      "label": "Aug 2013",
+      "date": "2013-08",
+      "general": {
+        "index": 104.3,
+        "growth": 4.4
+      },
+      "mining": {
+        "index": 84.6,
+        "growth": -1.2
+      },
+      "manufacturing": {
+        "index": 107.5,
+        "growth": 5.1
+      },
+      "electricity": {
+        "index": 109.2,
+        "growth": 7.2
+      },
+      "primaryGoods": {
+        "index": 100.2,
+        "growth": 3.8
+      },
+      "capitalGoods": {
+        "index": 94.9,
+        "growth": -6.9
+      },
+      "intermediateGoods": {
+        "index": 111.4,
+        "growth": 8.2
+      },
+      "infraGoods": {
+        "index": 108.5,
+        "growth": 11.6
+      },
+      "consumerDurables": {
+        "index": 105.1,
+        "growth": 4
+      },
+      "consumerNonDurables": {
+        "index": 106.9,
+        "growth": 3
+      }
+    },
+    {
+      "year": 2013,
+      "month": "September",
+      "label": "Sep 2013",
+      "date": "2013-09",
+      "general": {
+        "index": 105.7,
+        "growth": 6.8
+      },
+      "mining": {
+        "index": 86.6,
+        "growth": 5
+      },
+      "manufacturing": {
+        "index": 108.5,
+        "growth": 6.5
+      },
+      "electricity": {
+        "index": 113.1,
+        "growth": 12.8
+      },
+      "primaryGoods": {
+        "index": 100,
+        "growth": 8.2
+      },
+      "capitalGoods": {
+        "index": 96.7,
+        "growth": -5.9
+      },
+      "intermediateGoods": {
+        "index": 110.9,
+        "growth": 6
+      },
+      "infraGoods": {
+        "index": 108.1,
+        "growth": 9.4
+      },
+      "consumerDurables": {
+        "index": 116.5,
+        "growth": 8.7
+      },
+      "consumerNonDurables": {
+        "index": 106.2,
+        "growth": 8.1
+      }
+    },
+    {
+      "year": 2013,
+      "month": "October",
+      "label": "Oct 2013",
+      "date": "2013-10",
+      "general": {
+        "index": 105.7,
+        "growth": 1.9
+      },
+      "mining": {
+        "index": 88.6,
+        "growth": -3.2
+      },
+      "manufacturing": {
+        "index": 108.6,
+        "growth": 2.8
+      },
+      "electricity": {
+        "index": 108.9,
+        "growth": 1.3
+      },
+      "primaryGoods": {
+        "index": 100.1,
+        "growth": -2.3
+      },
+      "capitalGoods": {
+        "index": 94.1,
+        "growth": -1.5
+      },
+      "intermediateGoods": {
+        "index": 108.2,
+        "growth": 3.3
+      },
+      "infraGoods": {
+        "index": 105.4,
+        "growth": 4.4
+      },
+      "consumerDurables": {
+        "index": 124.5,
+        "growth": 8.2
+      },
+      "consumerNonDurables": {
+        "index": 106.4,
+        "growth": 3.9
+      }
+    },
+    {
+      "year": 2013,
+      "month": "November",
+      "label": "Nov 2013",
+      "date": "2013-11",
+      "general": {
+        "index": 101.9,
+        "growth": 3.7
+      },
+      "mining": {
+        "index": 93.3,
+        "growth": 3.8
+      },
+      "manufacturing": {
+        "index": 103.1,
+        "growth": 3.4
+      },
+      "electricity": {
+        "index": 106.1,
+        "growth": 6.3
+      },
+      "primaryGoods": {
+        "index": 99.8,
+        "growth": 1.5
+      },
+      "capitalGoods": {
+        "index": 92.6,
+        "growth": 1.9
+      },
+      "intermediateGoods": {
+        "index": 105,
+        "growth": 4.9
+      },
+      "infraGoods": {
+        "index": 104.8,
+        "growth": 5.4
+      },
+      "consumerDurables": {
+        "index": 105.9,
+        "growth": 12.4
+      },
+      "consumerNonDurables": {
+        "index": 102.4,
+        "growth": -0.2
+      }
+    },
+    {
+      "year": 2013,
+      "month": "December",
+      "label": "Dec 2013",
+      "date": "2013-12",
+      "general": {
+        "index": 110.9,
+        "growth": 3.5
+      },
+      "mining": {
+        "index": 104.2,
+        "growth": 5.4
+      },
+      "manufacturing": {
+        "index": 111.8,
+        "growth": 2.8
+      },
+      "electricity": {
+        "index": 113.6,
+        "growth": 7.7
+      },
+      "primaryGoods": {
+        "index": 109.3,
+        "growth": 4.5
+      },
+      "capitalGoods": {
+        "index": 97,
+        "growth": -4.4
+      },
+      "intermediateGoods": {
+        "index": 113.4,
+        "growth": 4.9
+      },
+      "infraGoods": {
+        "index": 111.2,
+        "growth": 3.3
+      },
+      "consumerDurables": {
+        "index": 109.8,
+        "growth": 6
+      },
+      "consumerNonDurables": {
+        "index": 119.5,
+        "growth": 1.7
+      }
+    },
+    {
+      "year": 2014,
+      "month": "January",
+      "label": "Jan 2014",
+      "date": "2014-01",
+      "general": {
+        "index": 112.3,
+        "growth": 4.8
+      },
+      "mining": {
+        "index": 106.2,
+        "growth": 4.7
+      },
+      "manufacturing": {
+        "index": 113.2,
+        "growth": 4.6
+      },
+      "electricity": {
+        "index": 114.6,
+        "growth": 6.5
+      },
+      "primaryGoods": {
+        "index": 109.7,
+        "growth": 3.6
+      },
+      "capitalGoods": {
+        "index": 93.2,
+        "growth": -0.6
+      },
+      "intermediateGoods": {
+        "index": 113.1,
+        "growth": 5
+      },
+      "infraGoods": {
+        "index": 120.5,
+        "growth": 9.5
+      },
+      "consumerDurables": {
+        "index": 115.9,
+        "growth": 7.1
+      },
+      "consumerNonDurables": {
+        "index": 118,
+        "growth": 4.2
+      }
+    },
+    {
+      "year": 2014,
+      "month": "February",
+      "label": "Feb 2014",
+      "date": "2014-02",
+      "general": {
+        "index": 106.7,
+        "growth": 5.2
+      },
+      "mining": {
+        "index": 97.8,
+        "growth": 5.5
+      },
+      "manufacturing": {
+        "index": 108.5,
+        "growth": 4.6
+      },
+      "electricity": {
+        "index": 104.9,
+        "growth": 11.5
+      },
+      "primaryGoods": {
+        "index": 101.3,
+        "growth": 6.2
+      },
+      "capitalGoods": {
+        "index": 98.7,
+        "growth": -1.5
+      },
+      "intermediateGoods": {
+        "index": 108.5,
+        "growth": 5.2
+      },
+      "infraGoods": {
+        "index": 114.2,
+        "growth": 9.7
+      },
+      "consumerDurables": {
+        "index": 110.8,
+        "growth": 7.3
+      },
+      "consumerNonDurables": {
+        "index": 111.2,
+        "growth": 1.4
+      }
+    },
+    {
+      "year": 2014,
+      "month": "March",
+      "label": "Mar 2014",
+      "date": "2014-03",
+      "general": {
+        "index": 118.5,
+        "growth": 2.9
+      },
+      "mining": {
+        "index": 114,
+        "growth": 4.4
+      },
+      "manufacturing": {
+        "index": 119.6,
+        "growth": 2.4
+      },
+      "electricity": {
+        "index": 115.8,
+        "growth": 5.4
+      },
+      "primaryGoods": {
+        "index": 114.4,
+        "growth": 4.3
+      },
+      "capitalGoods": {
+        "index": 117.8,
+        "growth": -9.5
+      },
+      "intermediateGoods": {
+        "index": 121.8,
+        "growth": 6.1
+      },
+      "infraGoods": {
+        "index": 119.8,
+        "growth": 1.7
+      },
+      "consumerDurables": {
+        "index": 120.7,
+        "growth": 7.9
+      },
+      "consumerNonDurables": {
+        "index": 121.5,
+        "growth": 1
+      }
+    },
+    {
+      "year": 2014,
+      "month": "April",
+      "label": "Apr 2014",
+      "date": "2014-04",
+      "general": {
+        "index": 106.6,
+        "growth": 3.9
+      },
+      "mining": {
+        "index": 93.6,
+        "growth": 2.4
+      },
+      "manufacturing": {
+        "index": 107.2,
+        "growth": 2.9
+      },
+      "electricity": {
+        "index": 124.3,
+        "growth": 16.6
+      },
+      "primaryGoods": {
+        "index": 103.5,
+        "growth": 5.6
+      },
+      "capitalGoods": {
+        "index": 82.4,
+        "growth": -8.2
+      },
+      "intermediateGoods": {
+        "index": 117.1,
+        "growth": 12.4
+      },
+      "infraGoods": {
+        "index": 114,
+        "growth": -0.3
+      },
+      "consumerDurables": {
+        "index": 108.4,
+        "growth": 2.2
+      },
+      "consumerNonDurables": {
+        "index": 107.2,
+        "growth": 2
+      }
+    },
+    {
+      "year": 2014,
+      "month": "May",
+      "label": "May 2014",
+      "date": "2014-05",
+      "general": {
+        "index": 111,
+        "growth": 4.7
+      },
+      "mining": {
+        "index": 94.4,
+        "growth": 0.9
+      },
+      "manufacturing": {
+        "index": 112.2,
+        "growth": 4.6
+      },
+      "electricity": {
+        "index": 128.6,
+        "growth": 11.4
+      },
+      "primaryGoods": {
+        "index": 107.3,
+        "growth": 3.5
+      },
+      "capitalGoods": {
+        "index": 92.8,
+        "growth": -6.8
+      },
+      "intermediateGoods": {
+        "index": 116.8,
+        "growth": 10
+      },
+      "infraGoods": {
+        "index": 121.8,
+        "growth": 5
+      },
+      "consumerDurables": {
+        "index": 114.4,
+        "growth": 11.2
+      },
+      "consumerNonDurables": {
+        "index": 110.8,
+        "growth": 1.8
+      }
+    },
+    {
+      "year": 2014,
+      "month": "June",
+      "label": "Jun 2014",
+      "date": "2014-06",
+      "general": {
+        "index": 109.7,
+        "growth": 8.3
+      },
+      "mining": {
+        "index": 91,
+        "growth": 3.9
+      },
+      "manufacturing": {
+        "index": 111,
+        "growth": 7.4
+      },
+      "electricity": {
+        "index": 130.6,
+        "growth": 24.3
+      },
+      "primaryGoods": {
+        "index": 105.6,
+        "growth": 8.6
+      },
+      "capitalGoods": {
+        "index": 100.8,
+        "growth": 9.7
+      },
+      "intermediateGoods": {
+        "index": 116.8,
+        "growth": 11
+      },
+      "infraGoods": {
+        "index": 117.9,
+        "growth": 13.4
+      },
+      "consumerDurables": {
+        "index": 108.3,
+        "growth": 3.5
+      },
+      "consumerNonDurables": {
+        "index": 109.9,
+        "growth": 3.9
+      }
+    },
+    {
+      "year": 2014,
+      "month": "July",
+      "label": "Jul 2014",
+      "date": "2014-07",
+      "general": {
+        "index": 110.4,
+        "growth": 5.4
+      },
+      "mining": {
+        "index": 84.6,
+        "growth": -2.5
+      },
+      "manufacturing": {
+        "index": 112.8,
+        "growth": 4.9
+      },
+      "electricity": {
+        "index": 134.1,
+        "growth": 21.8
+      },
+      "primaryGoods": {
+        "index": 103.1,
+        "growth": 2.8
+      },
+      "capitalGoods": {
+        "index": 94.4,
+        "growth": 1.5
+      },
+      "intermediateGoods": {
+        "index": 118.2,
+        "growth": 6.5
+      },
+      "infraGoods": {
+        "index": 119.1,
+        "growth": 8.3
+      },
+      "consumerDurables": {
+        "index": 115.3,
+        "growth": 7.8
+      },
+      "consumerNonDurables": {
+        "index": 115.3,
+        "growth": 6.9
+      }
+    },
+    {
+      "year": 2014,
+      "month": "August",
+      "label": "Aug 2014",
+      "date": "2014-08",
+      "general": {
+        "index": 108,
+        "growth": 3.5
+      },
+      "mining": {
+        "index": 83.5,
+        "growth": -1.3
+      },
+      "manufacturing": {
+        "index": 109.9,
+        "growth": 2.2
+      },
+      "electricity": {
+        "index": 133.1,
+        "growth": 21.9
+      },
+      "primaryGoods": {
+        "index": 103.5,
+        "growth": 3.3
+      },
+      "capitalGoods": {
+        "index": 91.7,
+        "growth": -3.4
+      },
+      "intermediateGoods": {
+        "index": 117.6,
+        "growth": 5.6
+      },
+      "infraGoods": {
+        "index": 112.2,
+        "growth": 3.4
+      },
+      "consumerDurables": {
+        "index": 112.4,
+        "growth": 6.9
+      },
+      "consumerNonDurables": {
+        "index": 108.6,
+        "growth": 1.6
+      }
+    },
+    {
+      "year": 2014,
+      "month": "September",
+      "label": "Sep 2014",
+      "date": "2014-09",
+      "general": {
+        "index": 110.2,
+        "growth": 4.3
+      },
+      "mining": {
+        "index": 82.8,
+        "growth": -4.4
+      },
+      "manufacturing": {
+        "index": 113.7,
+        "growth": 4.8
+      },
+      "electricity": {
+        "index": 125.4,
+        "growth": 10.9
+      },
+      "primaryGoods": {
+        "index": 101.7,
+        "growth": 1.7
+      },
+      "capitalGoods": {
+        "index": 104.5,
+        "growth": 8.1
+      },
+      "intermediateGoods": {
+        "index": 117.5,
+        "growth": 6
+      },
+      "infraGoods": {
+        "index": 112.9,
+        "growth": 4.4
+      },
+      "consumerDurables": {
+        "index": 126.4,
+        "growth": 8.5
+      },
+      "consumerNonDurables": {
+        "index": 108.2,
+        "growth": 1.9
+      }
+    },
+    {
+      "year": 2014,
+      "month": "October",
+      "label": "Oct 2014",
+      "date": "2014-10",
+      "general": {
+        "index": 106,
+        "growth": 0.3
+      },
+      "mining": {
+        "index": 89.1,
+        "growth": 0.6
+      },
+      "manufacturing": {
+        "index": 106.6,
+        "growth": -1.8
+      },
+      "electricity": {
+        "index": 130.1,
+        "growth": 19.5
+      },
+      "primaryGoods": {
+        "index": 107,
+        "growth": 6.9
+      },
+      "capitalGoods": {
+        "index": 82.2,
+        "growth": -12.6
+      },
+      "intermediateGoods": {
+        "index": 111.2,
+        "growth": 2.8
+      },
+      "infraGoods": {
+        "index": 115,
+        "growth": 9.1
+      },
+      "consumerDurables": {
+        "index": 109.4,
+        "growth": -12.1
+      },
+      "consumerNonDurables": {
+        "index": 100.3,
+        "growth": -5.7
+      }
+    },
+    {
+      "year": 2014,
+      "month": "November",
+      "label": "Nov 2014",
+      "date": "2014-11",
+      "general": {
+        "index": 109.4,
+        "growth": 7.4
+      },
+      "mining": {
+        "index": 92.9,
+        "growth": -0.4
+      },
+      "manufacturing": {
+        "index": 111.2,
+        "growth": 7.9
+      },
+      "electricity": {
+        "index": 121.9,
+        "growth": 14.9
+      },
+      "primaryGoods": {
+        "index": 106.8,
+        "growth": 7
+      },
+      "capitalGoods": {
+        "index": 88.1,
+        "growth": -4.9
+      },
+      "intermediateGoods": {
+        "index": 114.4,
+        "growth": 9
+      },
+      "infraGoods": {
+        "index": 115.5,
+        "growth": 10.2
+      },
+      "consumerDurables": {
+        "index": 116,
+        "growth": 9.5
+      },
+      "consumerNonDurables": {
+        "index": 110.8,
+        "growth": 8.2
+      }
+    },
+    {
+      "year": 2014,
+      "month": "December",
+      "label": "Dec 2014",
+      "date": "2014-12",
+      "general": {
+        "index": 115.3,
+        "growth": 4
+      },
+      "mining": {
+        "index": 98.9,
+        "growth": -5.1
+      },
+      "manufacturing": {
+        "index": 117.3,
+        "growth": 4.9
+      },
+      "electricity": {
+        "index": 125.2,
+        "growth": 10.2
+      },
+      "primaryGoods": {
+        "index": 111.8,
+        "growth": 2.3
+      },
+      "capitalGoods": {
+        "index": 99,
+        "growth": 2.1
+      },
+      "intermediateGoods": {
+        "index": 117.2,
+        "growth": 3.4
+      },
+      "infraGoods": {
+        "index": 119.3,
+        "growth": 7.3
+      },
+      "consumerDurables": {
+        "index": 116.9,
+        "growth": 6.5
+      },
+      "consumerNonDurables": {
+        "index": 124.9,
+        "growth": 4.5
+      }
+    },
+    {
+      "year": 2015,
+      "month": "January",
+      "label": "Jan 2015",
+      "date": "2015-01",
+      "general": {
+        "index": 114.3,
+        "growth": 1.8
+      },
+      "mining": {
+        "index": 103,
+        "growth": -3
+      },
+      "manufacturing": {
+        "index": 115.4,
+        "growth": 1.9
+      },
+      "electricity": {
+        "index": 124.4,
+        "growth": 8.6
+      },
+      "primaryGoods": {
+        "index": 112.4,
+        "growth": 2.5
+      },
+      "capitalGoods": {
+        "index": 88.3,
+        "growth": -5.3
+      },
+      "intermediateGoods": {
+        "index": 117.1,
+        "growth": 3.5
+      },
+      "infraGoods": {
+        "index": 122.7,
+        "growth": 1.8
+      },
+      "consumerDurables": {
+        "index": 115.5,
+        "growth": -0.3
+      },
+      "consumerNonDurables": {
+        "index": 122.1,
+        "growth": 3.5
+      }
+    },
+    {
+      "year": 2015,
+      "month": "February",
+      "label": "Feb 2015",
+      "date": "2015-02",
+      "general": {
+        "index": 109.9,
+        "growth": 3
+      },
+      "mining": {
+        "index": 94.9,
+        "growth": -3
+      },
+      "manufacturing": {
+        "index": 111.9,
+        "growth": 3.1
+      },
+      "electricity": {
+        "index": 117.4,
+        "growth": 11.9
+      },
+      "primaryGoods": {
+        "index": 103.4,
+        "growth": 2.1
+      },
+      "capitalGoods": {
+        "index": 100.1,
+        "growth": 1.4
+      },
+      "intermediateGoods": {
+        "index": 112.1,
+        "growth": 3.3
+      },
+      "infraGoods": {
+        "index": 112.5,
+        "growth": -1.5
+      },
+      "consumerDurables": {
+        "index": 113.4,
+        "growth": 2.3
+      },
+      "consumerNonDurables": {
+        "index": 121.9,
+        "growth": 9.6
+      }
+    },
+    {
+      "year": 2015,
+      "month": "March",
+      "label": "Mar 2015",
+      "date": "2015-03",
+      "general": {
+        "index": 121.3,
+        "growth": 2.4
+      },
+      "mining": {
+        "index": 110.8,
+        "growth": -2.8
+      },
+      "manufacturing": {
+        "index": 122.9,
+        "growth": 2.8
+      },
+      "electricity": {
+        "index": 124.5,
+        "growth": 7.5
+      },
+      "primaryGoods": {
+        "index": 114.1,
+        "growth": -0.3
+      },
+      "capitalGoods": {
+        "index": 121.9,
+        "growth": 3.5
+      },
+      "intermediateGoods": {
+        "index": 123.5,
+        "growth": 1.4
+      },
+      "infraGoods": {
+        "index": 120.5,
+        "growth": 0.6
+      },
+      "consumerDurables": {
+        "index": 126.2,
+        "growth": 4.6
+      },
+      "consumerNonDurables": {
+        "index": 130.7,
+        "growth": 7.6
+      }
+    },
+    {
+      "year": 2015,
+      "month": "April",
+      "label": "Apr 2015",
+      "date": "2015-04",
+      "general": {
+        "index": 107.3,
+        "growth": 0.7
+      },
+      "mining": {
+        "index": 89.9,
+        "growth": -4
+      },
+      "manufacturing": {
+        "index": 108.7,
+        "growth": 1.4
+      },
+      "electricity": {
+        "index": 124.9,
+        "growth": 0.5
+      },
+      "primaryGoods": {
+        "index": 100.4,
+        "growth": -3
+      },
+      "capitalGoods": {
+        "index": 85.5,
+        "growth": 3.8
+      },
+      "intermediateGoods": {
+        "index": 115.7,
+        "growth": -1.2
+      },
+      "infraGoods": {
+        "index": 118.6,
+        "growth": 4
+      },
+      "consumerDurables": {
+        "index": 110.3,
+        "growth": 1.8
+      },
+      "consumerNonDurables": {
+        "index": 113.3,
+        "growth": 5.7
+      }
+    },
+    {
+      "year": 2015,
+      "month": "May",
+      "label": "May 2015",
+      "date": "2015-05",
+      "general": {
+        "index": 113,
+        "growth": 1.8
+      },
+      "mining": {
+        "index": 95.9,
+        "growth": 1.6
+      },
+      "manufacturing": {
+        "index": 113.6,
+        "growth": 1.2
+      },
+      "electricity": {
+        "index": 137.6,
+        "growth": 7
+      },
+      "primaryGoods": {
+        "index": 112.4,
+        "growth": 4.8
+      },
+      "capitalGoods": {
+        "index": 88.3,
+        "growth": -4.8
+      },
+      "intermediateGoods": {
+        "index": 117.4,
+        "growth": 0.5
+      },
+      "infraGoods": {
+        "index": 121.9,
+        "growth": 0.1
+      },
+      "consumerDurables": {
+        "index": 113.1,
+        "growth": -1.1
+      },
+      "consumerNonDurables": {
+        "index": 115.4,
+        "growth": 4.2
+      }
+    },
+    {
+      "year": 2015,
+      "month": "June",
+      "label": "Jun 2015",
+      "date": "2015-06",
+      "general": {
+        "index": 110.8,
+        "growth": 1
+      },
+      "mining": {
+        "index": 89.3,
+        "growth": -1.9
+      },
+      "manufacturing": {
+        "index": 112.7,
+        "growth": 1.5
+      },
+      "electricity": {
+        "index": 131.4,
+        "growth": 0.6
+      },
+      "primaryGoods": {
+        "index": 107.9,
+        "growth": 2.2
+      },
+      "capitalGoods": {
+        "index": 92.6,
+        "growth": -8.1
+      },
+      "intermediateGoods": {
+        "index": 114.6,
+        "growth": -1.9
+      },
+      "infraGoods": {
+        "index": 120.9,
+        "growth": 2.5
+      },
+      "consumerDurables": {
+        "index": 116.6,
+        "growth": 7.7
+      },
+      "consumerNonDurables": {
+        "index": 109.8,
+        "growth": -0.1
+      }
+    },
+    {
+      "year": 2015,
+      "month": "July",
+      "label": "Jul 2015",
+      "date": "2015-07",
+      "general": {
+        "index": 111.8,
+        "growth": 1.3
+      },
+      "mining": {
+        "index": 87.6,
+        "growth": 3.5
+      },
+      "manufacturing": {
+        "index": 113.4,
+        "growth": 0.5
+      },
+      "electricity": {
+        "index": 139.6,
+        "growth": 4.1
+      },
+      "primaryGoods": {
+        "index": 108.6,
+        "growth": 5.3
+      },
+      "capitalGoods": {
+        "index": 89.7,
+        "growth": -5
+      },
+      "intermediateGoods": {
+        "index": 120.2,
+        "growth": 1.7
+      },
+      "infraGoods": {
+        "index": 120.6,
+        "growth": 1.3
+      },
+      "consumerDurables": {
+        "index": 119.7,
+        "growth": 3.8
+      },
+      "consumerNonDurables": {
+        "index": 107.7,
+        "growth": -6.6
+      }
+    },
+    {
+      "year": 2015,
+      "month": "August",
+      "label": "Aug 2015",
+      "date": "2015-08",
+      "general": {
+        "index": 112,
+        "growth": 3.7
+      },
+      "mining": {
+        "index": 88.5,
+        "growth": 6
+      },
+      "manufacturing": {
+        "index": 113.4,
+        "growth": 3.2
+      },
+      "electricity": {
+        "index": 140.5,
+        "growth": 5.6
+      },
+      "primaryGoods": {
+        "index": 111.1,
+        "growth": 7.3
+      },
+      "capitalGoods": {
+        "index": 94.3,
+        "growth": 2.8
+      },
+      "intermediateGoods": {
+        "index": 118.2,
+        "growth": 0.5
+      },
+      "infraGoods": {
+        "index": 117.3,
+        "growth": 4.5
+      },
+      "consumerDurables": {
+        "index": 114.4,
+        "growth": 1.8
+      },
+      "consumerNonDurables": {
+        "index": 110.2,
+        "growth": 1.5
+      }
+    },
+    {
+      "year": 2015,
+      "month": "September",
+      "label": "Sep 2015",
+      "date": "2015-09",
+      "general": {
+        "index": 112.6,
+        "growth": 2.2
+      },
+      "mining": {
+        "index": 88.8,
+        "growth": 7.2
+      },
+      "manufacturing": {
+        "index": 114.4,
+        "growth": 0.6
+      },
+      "electricity": {
+        "index": 138.5,
+        "growth": 10.4
+      },
+      "primaryGoods": {
+        "index": 107.4,
+        "growth": 5.6
+      },
+      "capitalGoods": {
+        "index": 107,
+        "growth": 2.4
+      },
+      "intermediateGoods": {
+        "index": 119,
+        "growth": 1.3
+      },
+      "infraGoods": {
+        "index": 114.7,
+        "growth": 1.6
+      },
+      "consumerDurables": {
+        "index": 122.8,
+        "growth": -2.8
+      },
+      "consumerNonDurables": {
+        "index": 109.9,
+        "growth": 1.6
+      }
+    },
+    {
+      "year": 2015,
+      "month": "October",
+      "label": "Oct 2015",
+      "date": "2015-10",
+      "general": {
+        "index": 115.5,
+        "growth": 9
+      },
+      "mining": {
+        "index": 100,
+        "growth": 12.2
+      },
+      "manufacturing": {
+        "index": 115.7,
+        "growth": 8.5
+      },
+      "electricity": {
+        "index": 140.9,
+        "growth": 8.3
+      },
+      "primaryGoods": {
+        "index": 113.3,
+        "growth": 5.9
+      },
+      "capitalGoods": {
+        "index": 98.9,
+        "growth": 20.3
+      },
+      "intermediateGoods": {
+        "index": 116.8,
+        "growth": 5
+      },
+      "infraGoods": {
+        "index": 116.2,
+        "growth": 1
+      },
+      "consumerDurables": {
+        "index": 128.8,
+        "growth": 17.7
+      },
+      "consumerNonDurables": {
+        "index": 115.6,
+        "growth": 15.3
+      }
+    },
+    {
+      "year": 2015,
+      "month": "November",
+      "label": "Nov 2015",
+      "date": "2015-11",
+      "general": {
+        "index": 110.3,
+        "growth": 0.8
+      },
+      "mining": {
+        "index": 98.2,
+        "growth": 5.7
+      },
+      "manufacturing": {
+        "index": 111.2,
+        "growth": 0
+      },
+      "electricity": {
+        "index": 123.2,
+        "growth": 1.1
+      },
+      "primaryGoods": {
+        "index": 110.9,
+        "growth": 3.8
+      },
+      "capitalGoods": {
+        "index": 93.7,
+        "growth": 6.4
+      },
+      "intermediateGoods": {
+        "index": 111.4,
+        "growth": -2.6
+      },
+      "infraGoods": {
+        "index": 109.4,
+        "growth": -5.3
+      },
+      "consumerDurables": {
+        "index": 110.8,
+        "growth": -4.5
+      },
+      "consumerNonDurables": {
+        "index": 116.7,
+        "growth": 5.3
+      }
+    },
+    {
+      "year": 2015,
+      "month": "December",
+      "label": "Dec 2015",
+      "date": "2015-12",
+      "general": {
+        "index": 118.9,
+        "growth": 3.1
+      },
+      "mining": {
+        "index": 103,
+        "growth": 4.1
+      },
+      "manufacturing": {
+        "index": 120.7,
+        "growth": 2.9
+      },
+      "electricity": {
+        "index": 129.5,
+        "growth": 3.4
+      },
+      "primaryGoods": {
+        "index": 114.8,
+        "growth": 2.7
+      },
+      "capitalGoods": {
+        "index": 103.7,
+        "growth": 4.7
+      },
+      "intermediateGoods": {
+        "index": 119.4,
+        "growth": 1.9
+      },
+      "infraGoods": {
+        "index": 119.2,
+        "growth": -0.1
+      },
+      "consumerDurables": {
+        "index": 123,
+        "growth": 5.2
+      },
+      "consumerNonDurables": {
+        "index": 131.6,
+        "growth": 5.4
+      }
+    },
+    {
+      "year": 2016,
+      "month": "January",
+      "label": "Jan 2016",
+      "date": "2016-01",
+      "general": {
+        "index": 118.9,
+        "growth": 4
+      },
+      "mining": {
+        "index": 105.3,
+        "growth": 2.2
+      },
+      "manufacturing": {
+        "index": 120.1,
+        "growth": 4.1
+      },
+      "electricity": {
+        "index": 132.1,
+        "growth": 6.2
+      },
+      "primaryGoods": {
+        "index": 117.5,
+        "growth": 4.5
+      },
+      "capitalGoods": {
+        "index": 99.4,
+        "growth": 12.6
+      },
+      "intermediateGoods": {
+        "index": 120,
+        "growth": 2.5
+      },
+      "infraGoods": {
+        "index": 125.4,
+        "growth": 2.2
+      },
+      "consumerDurables": {
+        "index": 119.1,
+        "growth": 3.1
+      },
+      "consumerNonDurables": {
+        "index": 126.4,
+        "growth": 3.5
+      }
+    },
+    {
+      "year": 2016,
+      "month": "February",
+      "label": "Feb 2016",
+      "date": "2016-02",
+      "general": {
+        "index": 117.8,
+        "growth": 7.2
+      },
+      "mining": {
+        "index": 105.6,
+        "growth": 11.3
+      },
+      "manufacturing": {
+        "index": 118.9,
+        "growth": 6.3
+      },
+      "electricity": {
+        "index": 128.6,
+        "growth": 9.5
+      },
+      "primaryGoods": {
+        "index": 114.3,
+        "growth": 10.5
+      },
+      "capitalGoods": {
+        "index": 104.4,
+        "growth": 4.3
+      },
+      "intermediateGoods": {
+        "index": 118,
+        "growth": 5.3
+      },
+      "infraGoods": {
+        "index": 125,
+        "growth": 11.1
+      },
+      "consumerDurables": {
+        "index": 121,
+        "growth": 6.7
+      },
+      "consumerNonDurables": {
+        "index": 123.6,
+        "growth": 1.4
+      }
+    },
+    {
+      "year": 2016,
+      "month": "March",
+      "label": "Mar 2016",
+      "date": "2016-03",
+      "general": {
+        "index": 127.6,
+        "growth": 5.2
+      },
+      "mining": {
+        "index": 116,
+        "growth": 4.7
+      },
+      "manufacturing": {
+        "index": 128.5,
+        "growth": 4.6
+      },
+      "electricity": {
+        "index": 139.3,
+        "growth": 11.9
+      },
+      "primaryGoods": {
+        "index": 125.2,
+        "growth": 9.7
+      },
+      "capitalGoods": {
+        "index": 123.1,
+        "growth": 1
+      },
+      "intermediateGoods": {
+        "index": 130.1,
+        "growth": 5.3
+      },
+      "infraGoods": {
+        "index": 134.1,
+        "growth": 11.3
+      },
+      "consumerDurables": {
+        "index": 129,
+        "growth": 2.2
+      },
+      "consumerNonDurables": {
+        "index": 125.9,
+        "growth": -3.7
+      }
+    },
+    {
+      "year": 2016,
+      "month": "April",
+      "label": "Apr 2016",
+      "date": "2016-04",
+      "general": {
+        "index": 113.7,
+        "growth": 6
+      },
+      "mining": {
+        "index": 95.9,
+        "growth": 6.7
+      },
+      "manufacturing": {
+        "index": 114,
+        "growth": 4.9
+      },
+      "electricity": {
+        "index": 142.9,
+        "growth": 14.4
+      },
+      "primaryGoods": {
+        "index": 113.1,
+        "growth": 12.6
+      },
+      "capitalGoods": {
+        "index": 93.4,
+        "growth": 9.2
+      },
+      "intermediateGoods": {
+        "index": 115.4,
+        "growth": -0.3
+      },
+      "infraGoods": {
+        "index": 119.6,
+        "growth": 0.8
+      },
+      "consumerDurables": {
+        "index": 120.6,
+        "growth": 9.3
+      },
+      "consumerNonDurables": {
+        "index": 113.5,
+        "growth": 0.2
+      }
+    },
+    {
+      "year": 2016,
+      "month": "May",
+      "label": "May 2016",
+      "date": "2016-05",
+      "general": {
+        "index": 121.3,
+        "growth": 7.3
+      },
+      "mining": {
+        "index": 101.4,
+        "growth": 5.7
+      },
+      "manufacturing": {
+        "index": 122.4,
+        "growth": 7.7
+      },
+      "electricity": {
+        "index": 146,
+        "growth": 6.1
+      },
+      "primaryGoods": {
+        "index": 117.6,
+        "growth": 4.6
+      },
+      "capitalGoods": {
+        "index": 101.3,
+        "growth": 14.7
+      },
+      "intermediateGoods": {
+        "index": 122.5,
+        "growth": 4.3
+      },
+      "infraGoods": {
+        "index": 130.9,
+        "growth": 7.4
+      },
+      "consumerDurables": {
+        "index": 124.3,
+        "growth": 9.9
+      },
+      "consumerNonDurables": {
+        "index": 128.4,
+        "growth": 11.3
+      }
+    },
+    {
+      "year": 2016,
+      "month": "June",
+      "label": "Jun 2016",
+      "date": "2016-06",
+      "general": {
+        "index": 119.7,
+        "growth": 8
+      },
+      "mining": {
+        "index": 98.4,
+        "growth": 10.2
+      },
+      "manufacturing": {
+        "index": 121.1,
+        "growth": 7.5
+      },
+      "electricity": {
+        "index": 144.3,
+        "growth": 9.8
+      },
+      "primaryGoods": {
+        "index": 116.7,
+        "growth": 8.2
+      },
+      "capitalGoods": {
+        "index": 106.3,
+        "growth": 14.8
+      },
+      "intermediateGoods": {
+        "index": 121.5,
+        "growth": 6
+      },
+      "infraGoods": {
+        "index": 128.9,
+        "growth": 6.6
+      },
+      "consumerDurables": {
+        "index": 121.9,
+        "growth": 4.5
+      },
+      "consumerNonDurables": {
+        "index": 122.3,
+        "growth": 11.4
+      }
+    },
+    {
+      "year": 2016,
+      "month": "July",
+      "label": "Jul 2016",
+      "date": "2016-07",
+      "general": {
+        "index": 116.8,
+        "growth": 4.5
+      },
+      "mining": {
+        "index": 88.4,
+        "growth": 0.9
+      },
+      "manufacturing": {
+        "index": 119.4,
+        "growth": 5.3
+      },
+      "electricity": {
+        "index": 142.5,
+        "growth": 2.1
+      },
+      "primaryGoods": {
+        "index": 113.2,
+        "growth": 4.2
+      },
+      "capitalGoods": {
+        "index": 97.6,
+        "growth": 8.8
+      },
+      "intermediateGoods": {
+        "index": 123.2,
+        "growth": 2.5
+      },
+      "infraGoods": {
+        "index": 119.5,
+        "growth": -0.9
+      },
+      "consumerDurables": {
+        "index": 119.9,
+        "growth": 0.2
+      },
+      "consumerNonDurables": {
+        "index": 123.3,
+        "growth": 14.5
+      }
+    },
+    {
+      "year": 2016,
+      "month": "August",
+      "label": "Aug 2016",
+      "date": "2016-08",
+      "general": {
+        "index": 116.5,
+        "growth": 4
+      },
+      "mining": {
+        "index": 84.7,
+        "growth": -4.3
+      },
+      "manufacturing": {
+        "index": 119.6,
+        "growth": 5.5
+      },
+      "electricity": {
+        "index": 143.5,
+        "growth": 2.1
+      },
+      "primaryGoods": {
+        "index": 110,
+        "growth": -1
+      },
+      "capitalGoods": {
+        "index": 94.8,
+        "growth": 0.5
+      },
+      "intermediateGoods": {
+        "index": 123.6,
+        "growth": 4.6
+      },
+      "infraGoods": {
+        "index": 124.9,
+        "growth": 6.5
+      },
+      "consumerDurables": {
+        "index": 122.8,
+        "growth": 7.3
+      },
+      "consumerNonDurables": {
+        "index": 122.6,
+        "growth": 11.3
+      }
+    },
+    {
+      "year": 2016,
+      "month": "September",
+      "label": "Sep 2016",
+      "date": "2016-09",
+      "general": {
+        "index": 118.2,
+        "growth": 5
+      },
+      "mining": {
+        "index": 87.7,
+        "growth": -1.2
+      },
+      "manufacturing": {
+        "index": 121,
+        "growth": 5.8
+      },
+      "electricity": {
+        "index": 145.6,
+        "growth": 5.1
+      },
+      "primaryGoods": {
+        "index": 109.8,
+        "growth": 2.2
+      },
+      "capitalGoods": {
+        "index": 99,
+        "growth": -7.5
+      },
+      "intermediateGoods": {
+        "index": 121.2,
+        "growth": 1.8
+      },
+      "infraGoods": {
+        "index": 124.7,
+        "growth": 8.7
+      },
+      "consumerDurables": {
+        "index": 135.4,
+        "growth": 10.3
+      },
+      "consumerNonDurables": {
+        "index": 123.9,
+        "growth": 12.7
+      }
+    },
+    {
+      "year": 2016,
+      "month": "October",
+      "label": "Oct 2016",
+      "date": "2016-10",
+      "general": {
+        "index": 120.3,
+        "growth": 4.2
+      },
+      "mining": {
+        "index": 101,
+        "growth": 1
+      },
+      "manufacturing": {
+        "index": 121.3,
+        "growth": 4.8
+      },
+      "electricity": {
+        "index": 145.1,
+        "growth": 3
+      },
+      "primaryGoods": {
+        "index": 119.2,
+        "growth": 5.2
+      },
+      "capitalGoods": {
+        "index": 94.3,
+        "growth": -4.7
+      },
+      "intermediateGoods": {
+        "index": 122.3,
+        "growth": 4.7
+      },
+      "infraGoods": {
+        "index": 124.8,
+        "growth": 7.4
+      },
+      "consumerDurables": {
+        "index": 130.7,
+        "growth": 1.5
+      },
+      "consumerNonDurables": {
+        "index": 122.1,
+        "growth": 5.6
+      }
+    },
+    {
+      "year": 2016,
+      "month": "November",
+      "label": "Nov 2016",
+      "date": "2016-11",
+      "general": {
+        "index": 115.9,
+        "growth": 5.1
+      },
+      "mining": {
+        "index": 106.2,
+        "growth": 8.1
+      },
+      "manufacturing": {
+        "index": 115.7,
+        "growth": 4
+      },
+      "electricity": {
+        "index": 134.9,
+        "growth": 9.5
+      },
+      "primaryGoods": {
+        "index": 117,
+        "growth": 5.5
+      },
+      "capitalGoods": {
+        "index": 98.7,
+        "growth": 5.3
+      },
+      "intermediateGoods": {
+        "index": 117.7,
+        "growth": 5.7
+      },
+      "infraGoods": {
+        "index": 113.7,
+        "growth": 3.9
+      },
+      "consumerDurables": {
+        "index": 118.3,
+        "growth": 6.8
+      },
+      "consumerNonDurables": {
+        "index": 120.5,
+        "growth": 3.3
+      }
+    },
+    {
+      "year": 2016,
+      "month": "December",
+      "label": "Dec 2016",
+      "date": "2016-12",
+      "general": {
+        "index": 121.7,
+        "growth": 2.4
+      },
+      "mining": {
+        "index": 114.1,
+        "growth": 10.8
+      },
+      "manufacturing": {
+        "index": 121.4,
+        "growth": 0.6
+      },
+      "electricity": {
+        "index": 137.8,
+        "growth": 6.4
+      },
+      "primaryGoods": {
+        "index": 123.3,
+        "growth": 7.4
+      },
+      "capitalGoods": {
+        "index": 97.3,
+        "growth": -6.2
+      },
+      "intermediateGoods": {
+        "index": 121.9,
+        "growth": 2.1
+      },
+      "infraGoods": {
+        "index": 125.8,
+        "growth": 5.5
+      },
+      "consumerDurables": {
+        "index": 116.8,
+        "growth": -5
+      },
+      "consumerNonDurables": {
+        "index": 131.3,
+        "growth": -0.2
+      }
+    },
+    {
+      "year": 2017,
+      "month": "January",
+      "label": "Jan 2017",
+      "date": "2017-01",
+      "general": {
+        "index": 123.1,
+        "growth": 3.5
+      },
+      "mining": {
+        "index": 114.4,
+        "growth": 8.6
+      },
+      "manufacturing": {
+        "index": 123.1,
+        "growth": 2.5
+      },
+      "electricity": {
+        "index": 138.9,
+        "growth": 5.1
+      },
+      "primaryGoods": {
+        "index": 122,
+        "growth": 3.8
+      },
+      "capitalGoods": {
+        "index": 98.8,
+        "growth": -0.6
+      },
+      "intermediateGoods": {
+        "index": 123.9,
+        "growth": 3.3
+      },
+      "infraGoods": {
+        "index": 128.7,
+        "growth": 2.6
+      },
+      "consumerDurables": {
+        "index": 116.7,
+        "growth": -2
+      },
+      "consumerNonDurables": {
+        "index": 138.5,
+        "growth": 9.6
+      }
+    },
+    {
+      "year": 2017,
+      "month": "February",
+      "label": "Feb 2017",
+      "date": "2017-02",
+      "general": {
+        "index": 119.2,
+        "growth": 1.2
+      },
+      "mining": {
+        "index": 110.5,
+        "growth": 4.6
+      },
+      "manufacturing": {
+        "index": 119.7,
+        "growth": 0.7
+      },
+      "electricity": {
+        "index": 130.2,
+        "growth": 1.2
+      },
+      "primaryGoods": {
+        "index": 115.2,
+        "growth": 0.8
+      },
+      "capitalGoods": {
+        "index": 101.9,
+        "growth": -2.4
+      },
+      "intermediateGoods": {
+        "index": 120.7,
+        "growth": 2.3
+      },
+      "infraGoods": {
+        "index": 122.6,
+        "growth": -1.9
+      },
+      "consumerDurables": {
+        "index": 115.4,
+        "growth": -4.6
+      },
+      "consumerNonDurables": {
+        "index": 136.5,
+        "growth": 10.4
+      }
+    },
+    {
+      "year": 2017,
+      "month": "March",
+      "label": "Mar 2017",
+      "date": "2017-03",
+      "general": {
+        "index": 133.2,
+        "growth": 4.4
+      },
+      "mining": {
+        "index": 127.7,
+        "growth": 10.1
+      },
+      "manufacturing": {
+        "index": 132.7,
+        "growth": 3.3
+      },
+      "electricity": {
+        "index": 147.9,
+        "growth": 6.2
+      },
+      "primaryGoods": {
+        "index": 132.5,
+        "growth": 5.8
+      },
+      "capitalGoods": {
+        "index": 134.7,
+        "growth": 9.4
+      },
+      "intermediateGoods": {
+        "index": 134.1,
+        "growth": 3.1
+      },
+      "infraGoods": {
+        "index": 135.6,
+        "growth": 1.1
+      },
+      "consumerDurables": {
+        "index": 128.2,
+        "growth": -0.6
+      },
+      "consumerNonDurables": {
+        "index": 135.4,
+        "growth": 7.5
+      }
+    },
+    {
+      "year": 2017,
+      "month": "April",
+      "label": "Apr 2017",
+      "date": "2017-04",
+      "general": {
+        "index": 117.3,
+        "growth": 3.2
+      },
+      "mining": {
+        "index": 98.8,
+        "growth": 3
+      },
+      "manufacturing": {
+        "index": 117.3,
+        "growth": 2.9
+      },
+      "electricity": {
+        "index": 150.6,
+        "growth": 5.4
+      },
+      "primaryGoods": {
+        "index": 116.5,
+        "growth": 3
+      },
+      "capitalGoods": {
+        "index": 88.9,
+        "growth": -4.8
+      },
+      "intermediateGoods": {
+        "index": 119.6,
+        "growth": 3.6
+      },
+      "infraGoods": {
+        "index": 125.2,
+        "growth": 4.7
+      },
+      "consumerDurables": {
+        "index": 119.7,
+        "growth": -0.7
+      },
+      "consumerNonDurables": {
+        "index": 123.5,
+        "growth": 8.8
+      }
+    },
+    {
+      "year": 2017,
+      "month": "May",
+      "label": "May 2017",
+      "date": "2017-05",
+      "general": {
+        "index": 124.8,
+        "growth": 2.9
+      },
+      "mining": {
+        "index": 101.7,
+        "growth": 0.3
+      },
+      "manufacturing": {
+        "index": 125.6,
+        "growth": 2.6
+      },
+      "electricity": {
+        "index": 158.1,
+        "growth": 8.3
+      },
+      "primaryGoods": {
+        "index": 122,
+        "growth": 3.7
+      },
+      "capitalGoods": {
+        "index": 99.7,
+        "growth": -1.6
+      },
+      "intermediateGoods": {
+        "index": 123.3,
+        "growth": 0.7
+      },
+      "infraGoods": {
+        "index": 130.8,
+        "growth": -0.1
+      },
+      "consumerDurables": {
+        "index": 125.1,
+        "growth": 0.6
+      },
+      "consumerNonDurables": {
+        "index": 140.9,
+        "growth": 9.7
+      }
+    },
+    {
+      "year": 2017,
+      "month": "June",
+      "label": "Jun 2017",
+      "date": "2017-06",
+      "general": {
+        "index": 119.3,
+        "growth": -0.3
+      },
+      "mining": {
+        "index": 98.5,
+        "growth": 0.1
+      },
+      "manufacturing": {
+        "index": 120.3,
+        "growth": -0.7
+      },
+      "electricity": {
+        "index": 147.4,
+        "growth": 2.1
+      },
+      "primaryGoods": {
+        "index": 116.4,
+        "growth": -0.3
+      },
+      "capitalGoods": {
+        "index": 99.8,
+        "growth": -6.1
+      },
+      "intermediateGoods": {
+        "index": 120,
+        "growth": -1.2
+      },
+      "infraGoods": {
+        "index": 130.2,
+        "growth": 1
+      },
+      "consumerDurables": {
+        "index": 117.6,
+        "growth": -3.5
+      },
+      "consumerNonDurables": {
+        "index": 128.2,
+        "growth": 4.8
+      }
+    },
+    {
+      "year": 2017,
+      "month": "July",
+      "label": "Jul 2017",
+      "date": "2017-07",
+      "general": {
+        "index": 118,
+        "growth": 1
+      },
+      "mining": {
+        "index": 92.4,
+        "growth": 4.5
+      },
+      "manufacturing": {
+        "index": 119.3,
+        "growth": -0.1
+      },
+      "electricity": {
+        "index": 151.9,
+        "growth": 6.6
+      },
+      "primaryGoods": {
+        "index": 115.7,
+        "growth": 2.2
+      },
+      "capitalGoods": {
+        "index": 96.5,
+        "growth": -1.1
+      },
+      "intermediateGoods": {
+        "index": 119.8,
+        "growth": -2.8
+      },
+      "infraGoods": {
+        "index": 124.6,
+        "growth": 4.3
+      },
+      "consumerDurables": {
+        "index": 117,
+        "growth": -2.4
+      },
+      "consumerNonDurables": {
+        "index": 128.3,
+        "growth": 4.1
+      }
+    },
+    {
+      "year": 2017,
+      "month": "August",
+      "label": "Aug 2017",
+      "date": "2017-08",
+      "general": {
+        "index": 122.1,
+        "growth": 4.8
+      },
+      "mining": {
+        "index": 92.6,
+        "growth": 9.3
+      },
+      "manufacturing": {
+        "index": 124.1,
+        "growth": 3.8
+      },
+      "electricity": {
+        "index": 155.4,
+        "growth": 8.3
+      },
+      "primaryGoods": {
+        "index": 117.8,
+        "growth": 7.1
+      },
+      "capitalGoods": {
+        "index": 101.7,
+        "growth": 7.3
+      },
+      "intermediateGoods": {
+        "index": 123,
+        "growth": -0.5
+      },
+      "infraGoods": {
+        "index": 128.3,
+        "growth": 2.7
+      },
+      "consumerDurables": {
+        "index": 128.1,
+        "growth": 4.3
+      },
+      "consumerNonDurables": {
+        "index": 131.4,
+        "growth": 7.2
+      }
+    },
+    {
+      "year": 2017,
+      "month": "September",
+      "label": "Sep 2017",
+      "date": "2017-09",
+      "general": {
+        "index": 123.1,
+        "growth": 4.1
+      },
+      "mining": {
+        "index": 94.4,
+        "growth": 7.6
+      },
+      "manufacturing": {
+        "index": 125.6,
+        "growth": 3.8
+      },
+      "electricity": {
+        "index": 150.5,
+        "growth": 3.4
+      },
+      "primaryGoods": {
+        "index": 117,
+        "growth": 6.6
+      },
+      "capitalGoods": {
+        "index": 107.6,
+        "growth": 8.7
+      },
+      "intermediateGoods": {
+        "index": 123.8,
+        "growth": 2.1
+      },
+      "infraGoods": {
+        "index": 125.3,
+        "growth": 0.5
+      },
+      "consumerDurables": {
+        "index": 129.9,
+        "growth": -4.1
+      },
+      "consumerNonDurables": {
+        "index": 136.9,
+        "growth": 10.5
+      }
+    },
+    {
+      "year": 2017,
+      "month": "October",
+      "label": "Oct 2017",
+      "date": "2017-10",
+      "general": {
+        "index": 122.5,
+        "growth": 1.8
+      },
+      "mining": {
+        "index": 100.8,
+        "growth": -0.2
+      },
+      "manufacturing": {
+        "index": 123.7,
+        "growth": 2
+      },
+      "electricity": {
+        "index": 149.8,
+        "growth": 3.2
+      },
+      "primaryGoods": {
+        "index": 122.1,
+        "growth": 2.4
+      },
+      "capitalGoods": {
+        "index": 97.6,
+        "growth": 3.5
+      },
+      "intermediateGoods": {
+        "index": 122.6,
+        "growth": 0.2
+      },
+      "infraGoods": {
+        "index": 132,
+        "growth": 5.8
+      },
+      "consumerDurables": {
+        "index": 119,
+        "growth": -9
+      },
+      "consumerNonDurables": {
+        "index": 132.1,
+        "growth": 8.2
+      }
+    },
+    {
+      "year": 2017,
+      "month": "November",
+      "label": "Nov 2017",
+      "date": "2017-11",
+      "general": {
+        "index": 125.8,
+        "growth": 8.5
+      },
+      "mining": {
+        "index": 107.7,
+        "growth": 1.4
+      },
+      "manufacturing": {
+        "index": 127.7,
+        "growth": 10.4
+      },
+      "electricity": {
+        "index": 140.1,
+        "growth": 3.9
+      },
+      "primaryGoods": {
+        "index": 120.9,
+        "growth": 3.3
+      },
+      "capitalGoods": {
+        "index": 104.3,
+        "growth": 5.7
+      },
+      "intermediateGoods": {
+        "index": 125.4,
+        "growth": 6.5
+      },
+      "infraGoods": {
+        "index": 129.3,
+        "growth": 13.7
+      },
+      "consumerDurables": {
+        "index": 122,
+        "growth": 3.1
+      },
+      "consumerNonDurables": {
+        "index": 149.1,
+        "growth": 23.7
+      }
+    },
+    {
+      "year": 2017,
+      "month": "December",
+      "label": "Dec 2017",
+      "date": "2017-12",
+      "general": {
+        "index": 130.6,
+        "growth": 7.3
+      },
+      "mining": {
+        "index": 115.5,
+        "growth": 1.2
+      },
+      "manufacturing": {
+        "index": 132,
+        "growth": 8.7
+      },
+      "electricity": {
+        "index": 143.9,
+        "growth": 4.4
+      },
+      "primaryGoods": {
+        "index": 128,
+        "growth": 3.8
+      },
+      "capitalGoods": {
+        "index": 110.1,
+        "growth": 13.2
+      },
+      "intermediateGoods": {
+        "index": 131,
+        "growth": 7.5
+      },
+      "infraGoods": {
+        "index": 134,
+        "growth": 6.5
+      },
+      "consumerDurables": {
+        "index": 119.3,
+        "growth": 2.1
+      },
+      "consumerNonDurables": {
+        "index": 153.4,
+        "growth": 16.8
+      }
+    },
+    {
+      "year": 2018,
+      "month": "January",
+      "label": "Jan 2018",
+      "date": "2018-01",
+      "general": {
+        "index": 132.3,
+        "growth": 7.5
+      },
+      "mining": {
+        "index": 114.7,
+        "growth": 0.3
+      },
+      "manufacturing": {
+        "index": 133.8,
+        "growth": 8.7
+      },
+      "electricity": {
+        "index": 149.5,
+        "growth": 7.6
+      },
+      "primaryGoods": {
+        "index": 129.2,
+        "growth": 5.9
+      },
+      "capitalGoods": {
+        "index": 111.1,
+        "growth": 12.4
+      },
+      "intermediateGoods": {
+        "index": 130.6,
+        "growth": 5.4
+      },
+      "infraGoods": {
+        "index": 138.3,
+        "growth": 7.5
+      },
+      "consumerDurables": {
+        "index": 125.6,
+        "growth": 7.6
+      },
+      "consumerNonDurables": {
+        "index": 153.3,
+        "growth": 10.7
+      }
+    },
+    {
+      "year": 2018,
+      "month": "February",
+      "label": "Feb 2018",
+      "date": "2018-02",
+      "general": {
+        "index": 127.4,
+        "growth": 6.9
+      },
+      "mining": {
+        "index": 110.1,
+        "growth": -0.4
+      },
+      "manufacturing": {
+        "index": 129.7,
+        "growth": 8.4
+      },
+      "electricity": {
+        "index": 136.1,
+        "growth": 4.5
+      },
+      "primaryGoods": {
+        "index": 119.5,
+        "growth": 3.7
+      },
+      "capitalGoods": {
+        "index": 118.8,
+        "growth": 16.6
+      },
+      "intermediateGoods": {
+        "index": 124.8,
+        "growth": 3.4
+      },
+      "infraGoods": {
+        "index": 138.5,
+        "growth": 13
+      },
+      "consumerDurables": {
+        "index": 124,
+        "growth": 7.5
+      },
+      "consumerNonDurables": {
+        "index": 146.6,
+        "growth": 7.4
+      }
+    },
+    {
+      "year": 2018,
+      "month": "March",
+      "label": "Mar 2018",
+      "date": "2018-03",
+      "general": {
+        "index": 140.3,
+        "growth": 5.3
+      },
+      "mining": {
+        "index": 131.6,
+        "growth": 3.1
+      },
+      "manufacturing": {
+        "index": 140.2,
+        "growth": 5.7
+      },
+      "electricity": {
+        "index": 156.7,
+        "growth": 5.9
+      },
+      "primaryGoods": {
+        "index": 136.5,
+        "growth": 3
+      },
+      "capitalGoods": {
+        "index": 130.5,
+        "growth": -3.1
+      },
+      "intermediateGoods": {
+        "index": 137.4,
+        "growth": 2.5
+      },
+      "infraGoods": {
+        "index": 147.9,
+        "growth": 9.1
+      },
+      "consumerDurables": {
+        "index": 136.1,
+        "growth": 6.2
+      },
+      "consumerNonDurables": {
+        "index": 154.5,
+        "growth": 14.1
+      }
+    },
+    {
+      "year": 2018,
+      "month": "April",
+      "label": "Apr 2018",
+      "date": "2018-04",
+      "general": {
+        "index": 122.6,
+        "growth": 4.5
+      },
+      "mining": {
+        "index": 102.6,
+        "growth": 3.8
+      },
+      "manufacturing": {
+        "index": 123.1,
+        "growth": 4.9
+      },
+      "electricity": {
+        "index": 153.7,
+        "growth": 2.1
+      },
+      "primaryGoods": {
+        "index": 119.7,
+        "growth": 2.7
+      },
+      "capitalGoods": {
+        "index": 97.6,
+        "growth": 9.8
+      },
+      "intermediateGoods": {
+        "index": 120.1,
+        "growth": 0.4
+      },
+      "infraGoods": {
+        "index": 135.9,
+        "growth": 8.5
+      },
+      "consumerDurables": {
+        "index": 124.4,
+        "growth": 3.9
+      },
+      "consumerNonDurables": {
+        "index": 132.8,
+        "growth": 7.5
+      }
+    },
+    {
+      "year": 2018,
+      "month": "May",
+      "label": "May 2018",
+      "date": "2018-05",
+      "general": {
+        "index": 129.6,
+        "growth": 3.8
+      },
+      "mining": {
+        "index": 107.6,
+        "growth": 5.8
+      },
+      "manufacturing": {
+        "index": 130.1,
+        "growth": 3.6
+      },
+      "electricity": {
+        "index": 164.7,
+        "growth": 4.2
+      },
+      "primaryGoods": {
+        "index": 129,
+        "growth": 5.7
+      },
+      "capitalGoods": {
+        "index": 106.1,
+        "growth": 6.4
+      },
+      "intermediateGoods": {
+        "index": 123.4,
+        "growth": 0.1
+      },
+      "infraGoods": {
+        "index": 140.8,
+        "growth": 7.6
+      },
+      "consumerDurables": {
+        "index": 133.5,
+        "growth": 6.7
+      },
+      "consumerNonDurables": {
+        "index": 138.6,
+        "growth": -1.6
+      }
+    },
+    {
+      "year": 2018,
+      "month": "June",
+      "label": "Jun 2018",
+      "date": "2018-06",
+      "general": {
+        "index": 127.7,
+        "growth": 7
+      },
+      "mining": {
+        "index": 104.9,
+        "growth": 6.5
+      },
+      "manufacturing": {
+        "index": 128.6,
+        "growth": 6.9
+      },
+      "electricity": {
+        "index": 159.9,
+        "growth": 8.5
+      },
+      "primaryGoods": {
+        "index": 127.1,
+        "growth": 9.2
+      },
+      "capitalGoods": {
+        "index": 109.5,
+        "growth": 9.7
+      },
+      "intermediateGoods": {
+        "index": 121.8,
+        "growth": 1.5
+      },
+      "infraGoods": {
+        "index": 142.4,
+        "growth": 9.4
+      },
+      "consumerDurables": {
+        "index": 133.6,
+        "growth": 13.6
+      },
+      "consumerNonDurables": {
+        "index": 128.5,
+        "growth": 0.2
+      }
+    },
+    {
+      "year": 2018,
+      "month": "July",
+      "label": "Jul 2018",
+      "date": "2018-07",
+      "general": {
+        "index": 125.7,
+        "growth": 6.5
+      },
+      "mining": {
+        "index": 95.5,
+        "growth": 3.4
+      },
+      "manufacturing": {
+        "index": 127.6,
+        "growth": 7
+      },
+      "electricity": {
+        "index": 162,
+        "growth": 6.6
+      },
+      "primaryGoods": {
+        "index": 123.6,
+        "growth": 6.8
+      },
+      "capitalGoods": {
+        "index": 98.7,
+        "growth": 2.3
+      },
+      "intermediateGoods": {
+        "index": 121.4,
+        "growth": 1.3
+      },
+      "infraGoods": {
+        "index": 136.1,
+        "growth": 9.2
+      },
+      "consumerDurables": {
+        "index": 133.5,
+        "growth": 14.1
+      },
+      "consumerNonDurables": {
+        "index": 135.1,
+        "growth": 5.3
+      }
+    },
+    {
+      "year": 2018,
+      "month": "August",
+      "label": "Aug 2018",
+      "date": "2018-08",
+      "general": {
+        "index": 128,
+        "growth": 4.8
+      },
+      "mining": {
+        "index": 92,
+        "growth": -0.6
+      },
+      "manufacturing": {
+        "index": 130.6,
+        "growth": 5.2
+      },
+      "electricity": {
+        "index": 167.2,
+        "growth": 7.6
+      },
+      "primaryGoods": {
+        "index": 120.7,
+        "growth": 2.5
+      },
+      "capitalGoods": {
+        "index": 112.2,
+        "growth": 10.3
+      },
+      "intermediateGoods": {
+        "index": 126.6,
+        "growth": 2.9
+      },
+      "infraGoods": {
+        "index": 138.6,
+        "growth": 8
+      },
+      "consumerDurables": {
+        "index": 135.1,
+        "growth": 5.5
+      },
+      "consumerNonDurables": {
+        "index": 140,
+        "growth": 6.5
+      }
+    },
+    {
+      "year": 2018,
+      "month": "September",
+      "label": "Sep 2018",
+      "date": "2018-09",
+      "general": {
+        "index": 128.8,
+        "growth": 4.6
+      },
+      "mining": {
+        "index": 94.5,
+        "growth": 0.1
+      },
+      "manufacturing": {
+        "index": 131.6,
+        "growth": 4.8
+      },
+      "electricity": {
+        "index": 162.9,
+        "growth": 8.2
+      },
+      "primaryGoods": {
+        "index": 120,
+        "growth": 2.6
+      },
+      "capitalGoods": {
+        "index": 115,
+        "growth": 6.9
+      },
+      "intermediateGoods": {
+        "index": 125.6,
+        "growth": 1.5
+      },
+      "infraGoods": {
+        "index": 137.2,
+        "growth": 9.5
+      },
+      "consumerDurables": {
+        "index": 136.9,
+        "growth": 5.4
+      },
+      "consumerNonDurables": {
+        "index": 145.6,
+        "growth": 6.4
+      }
+    },
+    {
+      "year": 2018,
+      "month": "October",
+      "label": "Oct 2018",
+      "date": "2018-10",
+      "general": {
+        "index": 132.8,
+        "growth": 8.4
+      },
+      "mining": {
+        "index": 108.2,
+        "growth": 7.3
+      },
+      "manufacturing": {
+        "index": 133.9,
+        "growth": 8.2
+      },
+      "electricity": {
+        "index": 166,
+        "growth": 10.8
+      },
+      "primaryGoods": {
+        "index": 129.5,
+        "growth": 6.1
+      },
+      "capitalGoods": {
+        "index": 114.1,
+        "growth": 16.9
+      },
+      "intermediateGoods": {
+        "index": 125.5,
+        "growth": 2.4
+      },
+      "infraGoods": {
+        "index": 143.9,
+        "growth": 9
+      },
+      "consumerDurables": {
+        "index": 139.7,
+        "growth": 17.4
+      },
+      "consumerNonDurables": {
+        "index": 143.4,
+        "growth": 8.6
+      }
+    },
+    {
+      "year": 2018,
+      "month": "November",
+      "label": "Nov 2018",
+      "date": "2018-11",
+      "general": {
+        "index": 126.1,
+        "growth": 0.2
+      },
+      "mining": {
+        "index": 110.6,
+        "growth": 2.7
+      },
+      "manufacturing": {
+        "index": 126.8,
+        "growth": -0.7
+      },
+      "electricity": {
+        "index": 147.3,
+        "growth": 5.1
+      },
+      "primaryGoods": {
+        "index": 124.8,
+        "growth": 3.2
+      },
+      "capitalGoods": {
+        "index": 100,
+        "growth": -4.1
+      },
+      "intermediateGoods": {
+        "index": 120.2,
+        "growth": -4.1
+      },
+      "infraGoods": {
+        "index": 135.5,
+        "growth": 4.8
+      },
+      "consumerDurables": {
+        "index": 118.3,
+        "growth": -3
+      },
+      "consumerNonDurables": {
+        "index": 148.6,
+        "growth": -0.3
+      }
+    },
+    {
+      "year": 2018,
+      "month": "December",
+      "label": "Dec 2018",
+      "date": "2018-12",
+      "general": {
+        "index": 133.9,
+        "growth": 2.5
+      },
+      "mining": {
+        "index": 114.4,
+        "growth": -1
+      },
+      "manufacturing": {
+        "index": 135.8,
+        "growth": 2.9
+      },
+      "electricity": {
+        "index": 150.4,
+        "growth": 4.5
+      },
+      "primaryGoods": {
+        "index": 126.6,
+        "growth": -1.1
+      },
+      "capitalGoods": {
+        "index": 114.7,
+        "growth": 4.2
+      },
+      "intermediateGoods": {
+        "index": 129.9,
+        "growth": -0.8
+      },
+      "infraGoods": {
+        "index": 146.1,
+        "growth": 9
+      },
+      "consumerDurables": {
+        "index": 124.2,
+        "growth": 4.1
+      },
+      "consumerNonDurables": {
+        "index": 163.4,
+        "growth": 6.5
+      }
+    },
+    {
+      "year": 2019,
+      "month": "January",
+      "label": "Jan 2019",
+      "date": "2019-01",
+      "general": {
+        "index": 134.4,
+        "growth": 1.6
+      },
+      "mining": {
+        "index": 119.1,
+        "growth": 3.8
+      },
+      "manufacturing": {
+        "index": 135.5,
+        "growth": 1.3
+      },
+      "electricity": {
+        "index": 150.9,
+        "growth": 0.9
+      },
+      "primaryGoods": {
+        "index": 131,
+        "growth": 1.4
+      },
+      "capitalGoods": {
+        "index": 107.1,
+        "growth": -3.6
+      },
+      "intermediateGoods": {
+        "index": 127,
+        "growth": -2.8
+      },
+      "infraGoods": {
+        "index": 147.2,
+        "growth": 6.4
+      },
+      "consumerDurables": {
+        "index": 128.7,
+        "growth": 2.5
+      },
+      "consumerNonDurables": {
+        "index": 159.2,
+        "growth": 3.8
+      }
+    },
+    {
+      "year": 2019,
+      "month": "February",
+      "label": "Feb 2019",
+      "date": "2019-02",
+      "general": {
+        "index": 127.6,
+        "growth": 0.2
+      },
+      "mining": {
+        "index": 112.5,
+        "growth": 2.2
+      },
+      "manufacturing": {
+        "index": 129.3,
+        "growth": -0.3
+      },
+      "electricity": {
+        "index": 137.9,
+        "growth": 1.3
+      },
+      "primaryGoods": {
+        "index": 121.1,
+        "growth": 1.3
+      },
+      "capitalGoods": {
+        "index": 107.7,
+        "growth": -9.3
+      },
+      "intermediateGoods": {
+        "index": 118.5,
+        "growth": -5
+      },
+      "infraGoods": {
+        "index": 141.1,
+        "growth": 1.9
+      },
+      "consumerDurables": {
+        "index": 125.1,
+        "growth": 0.9
+      },
+      "consumerNonDurables": {
+        "index": 153.9,
+        "growth": 5
+      }
+    },
+    {
+      "year": 2019,
+      "month": "March",
+      "label": "Mar 2019",
+      "date": "2019-03",
+      "general": {
+        "index": 144.1,
+        "growth": 2.7
+      },
+      "mining": {
+        "index": 132.7,
+        "growth": 0.8
+      },
+      "manufacturing": {
+        "index": 144.6,
+        "growth": 3.1
+      },
+      "electricity": {
+        "index": 160.1,
+        "growth": 2.2
+      },
+      "primaryGoods": {
+        "index": 140,
+        "growth": 2.6
+      },
+      "capitalGoods": {
+        "index": 118.6,
+        "growth": -9.1
+      },
+      "intermediateGoods": {
+        "index": 154.4,
+        "growth": 12.4
+      },
+      "infraGoods": {
+        "index": 155.4,
+        "growth": 5.1
+      },
+      "consumerDurables": {
+        "index": 131.7,
+        "growth": -3.2
+      },
+      "consumerNonDurables": {
+        "index": 156.6,
+        "growth": 1.4
+      }
+    },
+    {
+      "year": 2019,
+      "month": "April",
+      "label": "Apr 2019",
+      "date": "2019-04",
+      "general": {
+        "index": 126.5,
+        "growth": 3.2
+      },
+      "mining": {
+        "index": 107.8,
+        "growth": 5.1
+      },
+      "manufacturing": {
+        "index": 126.2,
+        "growth": 2.5
+      },
+      "electricity": {
+        "index": 162.9,
+        "growth": 6
+      },
+      "primaryGoods": {
+        "index": 125.8,
+        "growth": 5.1
+      },
+      "capitalGoods": {
+        "index": 96.2,
+        "growth": -1.4
+      },
+      "intermediateGoods": {
+        "index": 123.7,
+        "growth": 3
+      },
+      "infraGoods": {
+        "index": 135,
+        "growth": -0.7
+      },
+      "consumerDurables": {
+        "index": 127.1,
+        "growth": 2.2
+      },
+      "consumerNonDurables": {
+        "index": 140,
+        "growth": 5.4
+      }
+    },
+    {
+      "year": 2019,
+      "month": "May",
+      "label": "May 2019",
+      "date": "2019-05",
+      "general": {
+        "index": 135.4,
+        "growth": 4.5
+      },
+      "mining": {
+        "index": 110.1,
+        "growth": 2.3
+      },
+      "manufacturing": {
+        "index": 135.8,
+        "growth": 4.4
+      },
+      "electricity": {
+        "index": 176.9,
+        "growth": 7.4
+      },
+      "primaryGoods": {
+        "index": 131.9,
+        "growth": 2.2
+      },
+      "capitalGoods": {
+        "index": 103.9,
+        "growth": -2.1
+      },
+      "intermediateGoods": {
+        "index": 138.8,
+        "growth": 12.5
+      },
+      "infraGoods": {
+        "index": 145,
+        "growth": 3
+      },
+      "consumerDurables": {
+        "index": 133.8,
+        "growth": 0.2
+      },
+      "consumerNonDurables": {
+        "index": 149.8,
+        "growth": 8.1
+      }
+    },
+    {
+      "year": 2019,
+      "month": "June",
+      "label": "Jun 2019",
+      "date": "2019-06",
+      "general": {
+        "index": 129.3,
+        "growth": 1.3
+      },
+      "mining": {
+        "index": 106.5,
+        "growth": 1.5
+      },
+      "manufacturing": {
+        "index": 129,
+        "growth": 0.3
+      },
+      "electricity": {
+        "index": 173.6,
+        "growth": 8.6
+      },
+      "primaryGoods": {
+        "index": 127.8,
+        "growth": 0.6
+      },
+      "capitalGoods": {
+        "index": 101.9,
+        "growth": -6.9
+      },
+      "intermediateGoods": {
+        "index": 136.5,
+        "growth": 12.1
+      },
+      "infraGoods": {
+        "index": 140.6,
+        "growth": -1.3
+      },
+      "consumerDurables": {
+        "index": 120,
+        "growth": -10.2
+      },
+      "consumerNonDurables": {
+        "index": 138,
+        "growth": 7.4
+      }
+    },
+    {
+      "year": 2019,
+      "month": "July",
+      "label": "Jul 2019",
+      "date": "2019-07",
+      "general": {
+        "index": 131.8,
+        "growth": 4.9
+      },
+      "mining": {
+        "index": 100.2,
+        "growth": 4.9
+      },
+      "manufacturing": {
+        "index": 133.7,
+        "growth": 4.8
+      },
+      "electricity": {
+        "index": 170.5,
+        "growth": 5.2
+      },
+      "primaryGoods": {
+        "index": 128.1,
+        "growth": 3.6
+      },
+      "capitalGoods": {
+        "index": 91.8,
+        "growth": -7
+      },
+      "intermediateGoods": {
+        "index": 140.4,
+        "growth": 15.7
+      },
+      "infraGoods": {
+        "index": 140.1,
+        "growth": 2.9
+      },
+      "consumerDurables": {
+        "index": 130.3,
+        "growth": -2.4
+      },
+      "consumerNonDurables": {
+        "index": 146.6,
+        "growth": 8.5
+      }
+    },
+    {
+      "year": 2019,
+      "month": "August",
+      "label": "Aug 2019",
+      "date": "2019-08",
+      "general": {
+        "index": 126.2,
+        "growth": -1.4
+      },
+      "mining": {
+        "index": 92,
+        "growth": 0
+      },
+      "manufacturing": {
+        "index": 128.4,
+        "growth": -1.7
+      },
+      "electricity": {
+        "index": 165.7,
+        "growth": -0.9
+      },
+      "primaryGoods": {
+        "index": 121.9,
+        "growth": 1
+      },
+      "capitalGoods": {
+        "index": 88.7,
+        "growth": -20.9
+      },
+      "intermediateGoods": {
+        "index": 135.9,
+        "growth": 7.3
+      },
+      "infraGoods": {
+        "index": 130.7,
+        "growth": -5.7
+      },
+      "consumerDurables": {
+        "index": 122,
+        "growth": -9.7
+      },
+      "consumerNonDurables": {
+        "index": 144.4,
+        "growth": 3.1
+      }
+    },
+    {
+      "year": 2019,
+      "month": "September",
+      "label": "Sep 2019",
+      "date": "2019-09",
+      "general": {
+        "index": 122.9,
+        "growth": -4.6
+      },
+      "mining": {
+        "index": 86.4,
+        "growth": -8.6
+      },
+      "manufacturing": {
+        "index": 126,
+        "growth": -4.3
+      },
+      "electricity": {
+        "index": 158.7,
+        "growth": -2.6
+      },
+      "primaryGoods": {
+        "index": 113.8,
+        "growth": -5.2
+      },
+      "capitalGoods": {
+        "index": 91.4,
+        "growth": -20.5
+      },
+      "intermediateGoods": {
+        "index": 134.1,
+        "growth": 6.8
+      },
+      "infraGoods": {
+        "index": 127.6,
+        "growth": -7
+      },
+      "consumerDurables": {
+        "index": 122.5,
+        "growth": -10.5
+      },
+      "consumerNonDurables": {
+        "index": 144,
+        "growth": -1.1
+      }
+    },
+    {
+      "year": 2019,
+      "month": "October",
+      "label": "Oct 2019",
+      "date": "2019-10",
+      "general": {
+        "index": 124,
+        "growth": -6.6
+      },
+      "mining": {
+        "index": 99.5,
+        "growth": -8
+      },
+      "manufacturing": {
+        "index": 126.3,
+        "growth": -5.7
+      },
+      "electricity": {
+        "index": 145.8,
+        "growth": -12.2
+      },
+      "primaryGoods": {
+        "index": 121.7,
+        "growth": -6
+      },
+      "capitalGoods": {
+        "index": 88.5,
+        "growth": -22.4
+      },
+      "intermediateGoods": {
+        "index": 136.4,
+        "growth": 8.7
+      },
+      "infraGoods": {
+        "index": 129.9,
+        "growth": -9.7
+      },
+      "consumerDurables": {
+        "index": 113.3,
+        "growth": -18.9
+      },
+      "consumerNonDurables": {
+        "index": 138.6,
+        "growth": -3.3
+      }
+    },
+    {
+      "year": 2019,
+      "month": "November",
+      "label": "Nov 2019",
+      "date": "2019-11",
+      "general": {
+        "index": 128.8,
+        "growth": 2.1
+      },
+      "mining": {
+        "index": 112.7,
+        "growth": 1.9
+      },
+      "manufacturing": {
+        "index": 130.6,
+        "growth": 3
+      },
+      "electricity": {
+        "index": 139.9,
+        "growth": -5
+      },
+      "primaryGoods": {
+        "index": 124.5,
+        "growth": -0.2
+      },
+      "capitalGoods": {
+        "index": 91.1,
+        "growth": -8.9
+      },
+      "intermediateGoods": {
+        "index": 140.9,
+        "growth": 17.2
+      },
+      "infraGoods": {
+        "index": 134.5,
+        "growth": -0.7
+      },
+      "consumerDurables": {
+        "index": 116.7,
+        "growth": -1.4
+      },
+      "consumerNonDurables": {
+        "index": 150.2,
+        "growth": 1.1
+      }
+    },
+    {
+      "year": 2019,
+      "month": "December",
+      "label": "Dec 2019",
+      "date": "2019-12",
+      "general": {
+        "index": 134.5,
+        "growth": 0.4
+      },
+      "mining": {
+        "index": 120.9,
+        "growth": 5.7
+      },
+      "manufacturing": {
+        "index": 135.4,
+        "growth": -0.3
+      },
+      "electricity": {
+        "index": 150.3,
+        "growth": -0.1
+      },
+      "primaryGoods": {
+        "index": 129.6,
+        "growth": 2.4
+      },
+      "capitalGoods": {
+        "index": 93.7,
+        "growth": -18.3
+      },
+      "intermediateGoods": {
+        "index": 146.9,
+        "growth": 13.1
+      },
+      "infraGoods": {
+        "index": 146.4,
+        "growth": 0.2
+      },
+      "consumerDurables": {
+        "index": 117.3,
+        "growth": -5.6
+      },
+      "consumerNonDurables": {
+        "index": 158.1,
+        "growth": -3.2
+      }
+    },
+    {
+      "year": 2020,
+      "month": "January",
+      "label": "Jan 2020",
+      "date": "2020-01",
+      "general": {
+        "index": 137.4,
+        "growth": 2.2
+      },
+      "mining": {
+        "index": 124.3,
+        "growth": 4.4
+      },
+      "manufacturing": {
+        "index": 137.9,
+        "growth": 1.8
+      },
+      "electricity": {
+        "index": 155.6,
+        "growth": 3.1
+      },
+      "primaryGoods": {
+        "index": 133.4,
+        "growth": 1.8
+      },
+      "capitalGoods": {
+        "index": 102.4,
+        "growth": -4.4
+      },
+      "intermediateGoods": {
+        "index": 146.8,
+        "growth": 15.6
+      },
+      "infraGoods": {
+        "index": 146.7,
+        "growth": -0.3
+      },
+      "consumerDurables": {
+        "index": 124,
+        "growth": -3.7
+      },
+      "consumerNonDurables": {
+        "index": 158.3,
+        "growth": -0.6
+      }
+    },
+    {
+      "year": 2020,
+      "month": "February",
+      "label": "Feb 2020",
+      "date": "2020-02",
+      "general": {
+        "index": 134.2,
+        "growth": 5.2
+      },
+      "mining": {
+        "index": 123.3,
+        "growth": 9.6
+      },
+      "manufacturing": {
+        "index": 134.2,
+        "growth": 3.8
+      },
+      "electricity": {
+        "index": 153.7,
+        "growth": 11.5
+      },
+      "primaryGoods": {
+        "index": 131,
+        "growth": 8.2
+      },
+      "capitalGoods": {
+        "index": 97.4,
+        "growth": -9.6
+      },
+      "intermediateGoods": {
+        "index": 145.8,
+        "growth": 23
+      },
+      "infraGoods": {
+        "index": 145,
+        "growth": 2.8
+      },
+      "consumerDurables": {
+        "index": 117.3,
+        "growth": -6.2
+      },
+      "consumerNonDurables": {
+        "index": 153.4,
+        "growth": -0.3
+      }
+    },
+    {
+      "year": 2020,
+      "month": "March",
+      "label": "Mar 2020",
+      "date": "2020-03",
+      "general": {
+        "index": 117.2,
+        "growth": -18.7
+      },
+      "mining": {
+        "index": 131,
+        "growth": -1.3
+      },
+      "manufacturing": {
+        "index": 111.6,
+        "growth": -22.8
+      },
+      "electricity": {
+        "index": 146.9,
+        "growth": -8.2
+      },
+      "primaryGoods": {
+        "index": 134.4,
+        "growth": -4
+      },
+      "capitalGoods": {
+        "index": 72.6,
+        "growth": -38.8
+      },
+      "intermediateGoods": {
+        "index": 125.7,
+        "growth": -18.6
+      },
+      "infraGoods": {
+        "index": 117.6,
+        "growth": -24.3
+      },
+      "consumerDurables": {
+        "index": 83.2,
+        "growth": -36.8
+      },
+      "consumerNonDurables": {
+        "index": 121.7,
+        "growth": -22.3
+      }
+    },
+    {
+      "year": 2020,
+      "month": "April",
+      "label": "Apr 2020",
+      "date": "2020-04",
+      "general": {
+        "index": 54,
+        "growth": -57.3
+      },
+      "mining": {
+        "index": 78.8,
+        "growth": -26.9
+      },
+      "manufacturing": {
+        "index": 42.1,
+        "growth": -66.6
+      },
+      "electricity": {
+        "index": 125.6,
+        "growth": -22.9
+      },
+      "primaryGoods": {
+        "index": 92.4,
+        "growth": -26.6
+      },
+      "capitalGoods": {
+        "index": 7,
+        "growth": -92.7
+      },
+      "intermediateGoods": {
+        "index": 44.6,
+        "growth": -63.9
+      },
+      "infraGoods": {
+        "index": 20.3,
+        "growth": -85
+      },
+      "consumerDurables": {
+        "index": 5.5,
+        "growth": -95.7
+      },
+      "consumerNonDurables": {
+        "index": 72.7,
+        "growth": -48.1
+      }
+    },
+    {
+      "year": 2020,
+      "month": "May",
+      "label": "May 2020",
+      "date": "2020-05",
+      "general": {
+        "index": 90.2,
+        "growth": -33.4
+      },
+      "mining": {
+        "index": 87.6,
+        "growth": -20.4
+      },
+      "manufacturing": {
+        "index": 84.4,
+        "growth": -37.8
+      },
+      "electricity": {
+        "index": 150.6,
+        "growth": -14.9
+      },
+      "primaryGoods": {
+        "index": 106,
+        "growth": -19.6
+      },
+      "capitalGoods": {
+        "index": 35.4,
+        "growth": -65.9
+      },
+      "intermediateGoods": {
+        "index": 83.7,
+        "growth": -39.7
+      },
+      "infraGoods": {
+        "index": 88.4,
+        "growth": -39
+      },
+      "consumerDurables": {
+        "index": 39.7,
+        "growth": -70.3
+      },
+      "consumerNonDurables": {
+        "index": 135.3,
+        "growth": -9.7
+      }
+    },
+    {
+      "year": 2020,
+      "month": "June",
+      "label": "Jun 2020",
+      "date": "2020-06",
+      "general": {
+        "index": 107.9,
+        "growth": -16.6
+      },
+      "mining": {
+        "index": 85.7,
+        "growth": -19.5
+      },
+      "manufacturing": {
+        "index": 107.1,
+        "growth": -17
+      },
+      "electricity": {
+        "index": 156.2,
+        "growth": -10
+      },
+      "primaryGoods": {
+        "index": 109.3,
+        "growth": -14.5
+      },
+      "capitalGoods": {
+        "index": 63.8,
+        "growth": -37.4
+      },
+      "intermediateGoods": {
+        "index": 108.2,
+        "growth": -20.7
+      },
+      "infraGoods": {
+        "index": 114.9,
+        "growth": -18.3
+      },
+      "consumerDurables": {
+        "index": 78.2,
+        "growth": -34.8
+      },
+      "consumerNonDurables": {
+        "index": 147.5,
+        "growth": 6.9
+      }
+    },
+    {
+      "year": 2020,
+      "month": "July",
+      "label": "Jul 2020",
+      "date": "2020-07",
+      "general": {
+        "index": 117.9,
+        "growth": -10.5
+      },
+      "mining": {
+        "index": 87.5,
+        "growth": -12.7
+      },
+      "manufacturing": {
+        "index": 118.5,
+        "growth": -11.4
+      },
+      "electricity": {
+        "index": 166.3,
+        "growth": -2.5
+      },
+      "primaryGoods": {
+        "index": 114.3,
+        "growth": -10.8
+      },
+      "capitalGoods": {
+        "index": 70.9,
+        "growth": -22.8
+      },
+      "intermediateGoods": {
+        "index": 125.4,
+        "growth": -10.7
+      },
+      "infraGoods": {
+        "index": 128.6,
+        "growth": -8.2
+      },
+      "consumerDurables": {
+        "index": 99.4,
+        "growth": -23.7
+      },
+      "consumerNonDurables": {
+        "index": 149.3,
+        "growth": 1.8
+      }
+    },
+    {
+      "year": 2020,
+      "month": "August",
+      "label": "Aug 2020",
+      "date": "2020-08",
+      "general": {
+        "index": 117.2,
+        "growth": -7.1
+      },
+      "mining": {
+        "index": 84,
+        "growth": -8.7
+      },
+      "manufacturing": {
+        "index": 118.7,
+        "growth": -7.6
+      },
+      "electricity": {
+        "index": 162.7,
+        "growth": -1.8
+      },
+      "primaryGoods": {
+        "index": 108.8,
+        "growth": -10.7
+      },
+      "capitalGoods": {
+        "index": 75.9,
+        "growth": -14.4
+      },
+      "intermediateGoods": {
+        "index": 129.4,
+        "growth": -4.8
+      },
+      "infraGoods": {
+        "index": 130.7,
+        "growth": 0
+      },
+      "consumerDurables": {
+        "index": 109.5,
+        "growth": -10.2
+      },
+      "consumerNonDurables": {
+        "index": 140,
+        "growth": -3
+      }
+    },
+    {
+      "year": 2020,
+      "month": "September",
+      "label": "Sep 2020",
+      "date": "2020-09",
+      "general": {
+        "index": 124.1,
+        "growth": 1
+      },
+      "mining": {
+        "index": 87.6,
+        "growth": 1.4
+      },
+      "manufacturing": {
+        "index": 126.5,
+        "growth": 0.4
+      },
+      "electricity": {
+        "index": 166.4,
+        "growth": 4.9
+      },
+      "primaryGoods": {
+        "index": 112.1,
+        "growth": -1.5
+      },
+      "capitalGoods": {
+        "index": 90.3,
+        "growth": -1.2
+      },
+      "intermediateGoods": {
+        "index": 133.6,
+        "growth": -0.4
+      },
+      "infraGoods": {
+        "index": 132.7,
+        "growth": 4
+      },
+      "consumerDurables": {
+        "index": 129,
+        "growth": 5.3
+      },
+      "consumerNonDurables": {
+        "index": 147.4,
+        "growth": 2.4
+      }
+    },
+    {
+      "year": 2020,
+      "month": "October",
+      "label": "Oct 2020",
+      "date": "2020-10",
+      "general": {
+        "index": 129.6,
+        "growth": 4.5
+      },
+      "mining": {
+        "index": 98.5,
+        "growth": -1
+      },
+      "manufacturing": {
+        "index": 132,
+        "growth": 4.5
+      },
+      "electricity": {
+        "index": 162.2,
+        "growth": 11.2
+      },
+      "primaryGoods": {
+        "index": 117.9,
+        "growth": -3.1
+      },
+      "capitalGoods": {
+        "index": 91.3,
+        "growth": 3.2
+      },
+      "intermediateGoods": {
+        "index": 140.7,
+        "growth": 3.2
+      },
+      "infraGoods": {
+        "index": 144.1,
+        "growth": 10.9
+      },
+      "consumerDurables": {
+        "index": 133.8,
+        "growth": 18.1
+      },
+      "consumerNonDurables": {
+        "index": 148.7,
+        "growth": 7.3
+      }
+    },
+    {
+      "year": 2020,
+      "month": "November",
+      "label": "Nov 2020",
+      "date": "2020-11",
+      "general": {
+        "index": 126.7,
+        "growth": -1.6
+      },
+      "mining": {
+        "index": 106.6,
+        "growth": -5.4
+      },
+      "manufacturing": {
+        "index": 128.5,
+        "growth": -1.6
+      },
+      "electricity": {
+        "index": 144.8,
+        "growth": 3.5
+      },
+      "primaryGoods": {
+        "index": 122.2,
+        "growth": -1.8
+      },
+      "capitalGoods": {
+        "index": 84.3,
+        "growth": -7.5
+      },
+      "intermediateGoods": {
+        "index": 138.4,
+        "growth": -1.8
+      },
+      "infraGoods": {
+        "index": 137.3,
+        "growth": 2.1
+      },
+      "consumerDurables": {
+        "index": 113,
+        "growth": -3.2
+      },
+      "consumerNonDurables": {
+        "index": 149.1,
+        "growth": -0.7
+      }
+    },
+    {
+      "year": 2020,
+      "month": "December",
+      "label": "Dec 2020",
+      "date": "2020-12",
+      "general": {
+        "index": 137.4,
+        "growth": 2.2
+      },
+      "mining": {
+        "index": 117.3,
+        "growth": -3
+      },
+      "manufacturing": {
+        "index": 139,
+        "growth": 2.7
+      },
+      "electricity": {
+        "index": 158,
+        "growth": 5.1
+      },
+      "primaryGoods": {
+        "index": 130.1,
+        "growth": 0.4
+      },
+      "capitalGoods": {
+        "index": 95.8,
+        "growth": 2.2
+      },
+      "intermediateGoods": {
+        "index": 150.3,
+        "growth": 2.3
+      },
+      "infraGoods": {
+        "index": 151,
+        "growth": 3.1
+      },
+      "consumerDurables": {
+        "index": 124.9,
+        "growth": 6.5
+      },
+      "consumerNonDurables": {
+        "index": 161.1,
+        "growth": 1.9
+      }
+    },
+    {
+      "year": 2021,
+      "month": "January",
+      "label": "Jan 2021",
+      "date": "2021-01",
+      "general": {
+        "index": 136.6,
+        "growth": -0.6
+      },
+      "mining": {
+        "index": 121.3,
+        "growth": -2.4
+      },
+      "manufacturing": {
+        "index": 136.6,
+        "growth": -0.9
+      },
+      "electricity": {
+        "index": 164.2,
+        "growth": 5.5
+      },
+      "primaryGoods": {
+        "index": 134.4,
+        "growth": 0.7
+      },
+      "capitalGoods": {
+        "index": 93.2,
+        "growth": -9
+      },
+      "intermediateGoods": {
+        "index": 149.7,
+        "growth": 2
+      },
+      "infraGoods": {
+        "index": 150.1,
+        "growth": 2.3
+      },
+      "consumerDurables": {
+        "index": 123.9,
+        "growth": -0.1
+      },
+      "consumerNonDurables": {
+        "index": 149.8,
+        "growth": -5.4
+      }
+    },
+    {
+      "year": 2021,
+      "month": "February",
+      "label": "Feb 2021",
+      "date": "2021-02",
+      "general": {
+        "index": 129.9,
+        "growth": -3.2
+      },
+      "mining": {
+        "index": 117.9,
+        "growth": -4.4
+      },
+      "manufacturing": {
+        "index": 129.7,
+        "growth": -3.4
+      },
+      "electricity": {
+        "index": 153.9,
+        "growth": 0.1
+      },
+      "primaryGoods": {
+        "index": 125,
+        "growth": -4.6
+      },
+      "capitalGoods": {
+        "index": 93.3,
+        "growth": -4.2
+      },
+      "intermediateGoods": {
+        "index": 138,
+        "growth": -5.3
+      },
+      "infraGoods": {
+        "index": 139.9,
+        "growth": -3.5
+      },
+      "consumerDurables": {
+        "index": 125,
+        "growth": 6.6
+      },
+      "consumerNonDurables": {
+        "index": 147.6,
+        "growth": -3.8
+      }
+    },
+    {
+      "year": 2021,
+      "month": "March",
+      "label": "Mar 2021",
+      "date": "2021-03",
+      "general": {
+        "index": 145.6,
+        "growth": 24.2
+      },
+      "mining": {
+        "index": 139,
+        "growth": 6.1
+      },
+      "manufacturing": {
+        "index": 143.3,
+        "growth": 28.4
+      },
+      "electricity": {
+        "index": 180,
+        "growth": 22.5
+      },
+      "primaryGoods": {
+        "index": 145,
+        "growth": 7.9
+      },
+      "capitalGoods": {
+        "index": 109.2,
+        "growth": 50.4
+      },
+      "intermediateGoods": {
+        "index": 153.9,
+        "growth": 22.4
+      },
+      "infraGoods": {
+        "index": 158.9,
+        "growth": 35.1
+      },
+      "consumerDurables": {
+        "index": 133,
+        "growth": 59.9
+      },
+      "consumerNonDurables": {
+        "index": 157.2,
+        "growth": 29.2
+      }
+    },
+    {
+      "year": 2021,
+      "month": "April",
+      "label": "Apr 2021",
+      "date": "2021-04",
+      "general": {
+        "index": 126.1,
+        "growth": null
+      },
+      "mining": {
+        "index": 107.6,
+        "growth": null
+      },
+      "manufacturing": {
+        "index": 124.6,
+        "growth": null
+      },
+      "electricity": {
+        "index": 174,
+        "growth": null
+      },
+      "primaryGoods": {
+        "index": 126.5,
+        "growth": null
+      },
+      "capitalGoods": {
+        "index": 79,
+        "growth": null
+      },
+      "intermediateGoods": {
+        "index": 139.6,
+        "growth": null
+      },
+      "infraGoods": {
+        "index": 144,
+        "growth": null
+      },
+      "consumerDurables": {
+        "index": 103.3,
+        "growth": null
+      },
+      "consumerNonDurables": {
+        "index": 140,
+        "growth": null
+      }
+    },
+    {
+      "year": 2021,
+      "month": "May",
+      "label": "May 2021",
+      "date": "2021-05",
+      "general": {
+        "index": 115.1,
+        "growth": 27.6
+      },
+      "mining": {
+        "index": 108.3,
+        "growth": 23.6
+      },
+      "manufacturing": {
+        "index": 111.5,
+        "growth": 32.1
+      },
+      "electricity": {
+        "index": 161.9,
+        "growth": 7.5
+      },
+      "primaryGoods": {
+        "index": 122.8,
+        "growth": 15.8
+      },
+      "capitalGoods": {
+        "index": 61.9,
+        "growth": 74.9
+      },
+      "intermediateGoods": {
+        "index": 129.1,
+        "growth": 54.2
+      },
+      "infraGoods": {
+        "index": 129.5,
+        "growth": 46.5
+      },
+      "consumerDurables": {
+        "index": 71.6,
+        "growth": 80.4
+      },
+      "consumerNonDurables": {
+        "index": 135.6,
+        "growth": 0.2
+      }
+    },
+    {
+      "year": 2021,
+      "month": "June",
+      "label": "Jun 2021",
+      "date": "2021-06",
+      "general": {
+        "index": 122.8,
+        "growth": 13.8
+      },
+      "mining": {
+        "index": 105.5,
+        "growth": 23.1
+      },
+      "manufacturing": {
+        "index": 121.2,
+        "growth": 13.2
+      },
+      "electricity": {
+        "index": 169.1,
+        "growth": 8.3
+      },
+      "primaryGoods": {
+        "index": 122.4,
+        "growth": 12
+      },
+      "capitalGoods": {
+        "index": 81.2,
+        "growth": 27.3
+      },
+      "intermediateGoods": {
+        "index": 132.7,
+        "growth": 22.6
+      },
+      "infraGoods": {
+        "index": 137.9,
+        "growth": 20
+      },
+      "consumerDurables": {
+        "index": 100.1,
+        "growth": 28
+      },
+      "consumerNonDurables": {
+        "index": 141.8,
+        "growth": -3.9
+      }
+    },
+    {
+      "year": 2021,
+      "month": "July",
+      "label": "Jul 2021",
+      "date": "2021-07",
+      "general": {
+        "index": 131.5,
+        "growth": 11.5
+      },
+      "mining": {
+        "index": 104.6,
+        "growth": 19.5
+      },
+      "manufacturing": {
+        "index": 131,
+        "growth": 10.5
+      },
+      "electricity": {
+        "index": 184.7,
+        "growth": 11.1
+      },
+      "primaryGoods": {
+        "index": 128.5,
+        "growth": 12.4
+      },
+      "capitalGoods": {
+        "index": 92.4,
+        "growth": 30.3
+      },
+      "intermediateGoods": {
+        "index": 143.7,
+        "growth": 14.6
+      },
+      "infraGoods": {
+        "index": 144.4,
+        "growth": 12.3
+      },
+      "consumerDurables": {
+        "index": 118.7,
+        "growth": 19.4
+      },
+      "consumerNonDurables": {
+        "index": 145.9,
+        "growth": -2.3
+      }
+    },
+    {
+      "year": 2021,
+      "month": "August",
+      "label": "Aug 2021",
+      "date": "2021-08",
+      "general": {
+        "index": 132.4,
+        "growth": 13
+      },
+      "mining": {
+        "index": 103.6,
+        "growth": 23.3
+      },
+      "manufacturing": {
+        "index": 131.9,
+        "growth": 11.1
+      },
+      "electricity": {
+        "index": 188.7,
+        "growth": 16
+      },
+      "primaryGoods": {
+        "index": 127.2,
+        "growth": 16.9
+      },
+      "capitalGoods": {
+        "index": 91.1,
+        "growth": 20
+      },
+      "intermediateGoods": {
+        "index": 144.7,
+        "growth": 11.8
+      },
+      "infraGoods": {
+        "index": 148.3,
+        "growth": 13.5
+      },
+      "consumerDurables": {
+        "index": 121.6,
+        "growth": 11.1
+      },
+      "consumerNonDurables": {
+        "index": 148.3,
+        "growth": 5.9
+      }
+    },
+    {
+      "year": 2021,
+      "month": "September",
+      "label": "Sep 2021",
+      "date": "2021-09",
+      "general": {
+        "index": 129.5,
+        "growth": 4.4
+      },
+      "mining": {
+        "index": 95.1,
+        "growth": 8.6
+      },
+      "manufacturing": {
+        "index": 131.9,
+        "growth": 4.3
+      },
+      "electricity": {
+        "index": 167.9,
+        "growth": 0.9
+      },
+      "primaryGoods": {
+        "index": 117.3,
+        "growth": 4.6
+      },
+      "capitalGoods": {
+        "index": 93.3,
+        "growth": 3.3
+      },
+      "intermediateGoods": {
+        "index": 142.9,
+        "growth": 7
+      },
+      "infraGoods": {
+        "index": 145,
+        "growth": 9.3
+      },
+      "consumerDurables": {
+        "index": 131,
+        "growth": 1.6
+      },
+      "consumerNonDurables": {
+        "index": 147.3,
+        "growth": -0.1
+      }
+    },
+    {
+      "year": 2021,
+      "month": "October",
+      "label": "Oct 2021",
+      "date": "2021-10",
+      "general": {
+        "index": 135,
+        "growth": 4.2
+      },
+      "mining": {
+        "index": 109.8,
+        "growth": 11.5
+      },
+      "manufacturing": {
+        "index": 136.4,
+        "growth": 3.3
+      },
+      "electricity": {
+        "index": 167.3,
+        "growth": 3.1
+      },
+      "primaryGoods": {
+        "index": 128.5,
+        "growth": 9
+      },
+      "capitalGoods": {
+        "index": 89.8,
+        "growth": -1.6
+      },
+      "intermediateGoods": {
+        "index": 147.2,
+        "growth": 4.6
+      },
+      "infraGoods": {
+        "index": 153.6,
+        "growth": 6.6
+      },
+      "consumerDurables": {
+        "index": 129.5,
+        "growth": -3.2
+      },
+      "consumerNonDurables": {
+        "index": 149.7,
+        "growth": 0.7
+      }
+    },
+    {
+      "year": 2021,
+      "month": "November",
+      "label": "Nov 2021",
+      "date": "2021-11",
+      "general": {
+        "index": 128,
+        "growth": 1
+      },
+      "mining": {
+        "index": 111.8,
+        "growth": 4.9
+      },
+      "manufacturing": {
+        "index": 128.9,
+        "growth": 0.3
+      },
+      "electricity": {
+        "index": 147.9,
+        "growth": 2.1
+      },
+      "primaryGoods": {
+        "index": 126.5,
+        "growth": 3.5
+      },
+      "capitalGoods": {
+        "index": 82.1,
+        "growth": -2.6
+      },
+      "intermediateGoods": {
+        "index": 141.3,
+        "growth": 2.1
+      },
+      "infraGoods": {
+        "index": 141.5,
+        "growth": 3.1
+      },
+      "consumerDurables": {
+        "index": 106.6,
+        "growth": -5.7
+      },
+      "consumerNonDurables": {
+        "index": 147.9,
+        "growth": -0.8
+      }
+    },
+    {
+      "year": 2021,
+      "month": "December",
+      "label": "Dec 2021",
+      "date": "2021-12",
+      "general": {
+        "index": 138.8,
+        "growth": 1
+      },
+      "mining": {
+        "index": 120.4,
+        "growth": 2.6
+      },
+      "manufacturing": {
+        "index": 139.8,
+        "growth": 0.6
+      },
+      "electricity": {
+        "index": 162.5,
+        "growth": 2.8
+      },
+      "primaryGoods": {
+        "index": 133.7,
+        "growth": 2.8
+      },
+      "capitalGoods": {
+        "index": 92.9,
+        "growth": -3
+      },
+      "intermediateGoods": {
+        "index": 151.8,
+        "growth": 1
+      },
+      "infraGoods": {
+        "index": 154,
+        "growth": 2
+      },
+      "consumerDurables": {
+        "index": 122.5,
+        "growth": -1.9
+      },
+      "consumerNonDurables": {
+        "index": 161.6,
+        "growth": 0.3
+      }
+    },
+    {
+      "year": 2022,
+      "month": "January",
+      "label": "Jan 2022",
+      "date": "2022-01",
+      "general": {
+        "index": 139.3,
+        "growth": 2
+      },
+      "mining": {
+        "index": 124.9,
+        "growth": 3
+      },
+      "manufacturing": {
+        "index": 139.2,
+        "growth": 1.9
+      },
+      "electricity": {
+        "index": 165.6,
+        "growth": 0.9
+      },
+      "primaryGoods": {
+        "index": 136.5,
+        "growth": 1.6
+      },
+      "capitalGoods": {
+        "index": 94.9,
+        "growth": 1.8
+      },
+      "intermediateGoods": {
+        "index": 153.5,
+        "growth": 2.5
+      },
+      "infraGoods": {
+        "index": 158.9,
+        "growth": 5.9
+      },
+      "consumerDurables": {
+        "index": 118.5,
+        "growth": -4.4
+      },
+      "consumerNonDurables": {
+        "index": 154.4,
+        "growth": 3.1
+      }
+    },
+    {
+      "year": 2022,
+      "month": "February",
+      "label": "Feb 2022",
+      "date": "2022-02",
+      "general": {
+        "index": 131.4,
+        "growth": 1.2
+      },
+      "mining": {
+        "index": 123.3,
+        "growth": 4.6
+      },
+      "manufacturing": {
+        "index": 129.9,
+        "growth": 0.2
+      },
+      "electricity": {
+        "index": 160.8,
+        "growth": 4.5
+      },
+      "primaryGoods": {
+        "index": 130.8,
+        "growth": 4.6
+      },
+      "capitalGoods": {
+        "index": 94.5,
+        "growth": 1.3
+      },
+      "intermediateGoods": {
+        "index": 143.7,
+        "growth": 4.1
+      },
+      "infraGoods": {
+        "index": 152,
+        "growth": 8.6
+      },
+      "consumerDurables": {
+        "index": 112.9,
+        "growth": -9.7
+      },
+      "consumerNonDurables": {
+        "index": 137.6,
+        "growth": -6.8
+      }
+    },
+    {
+      "year": 2022,
+      "month": "March",
+      "label": "Mar 2022",
+      "date": "2022-03",
+      "general": {
+        "index": 148.8,
+        "growth": 2.2
+      },
+      "mining": {
+        "index": 144.4,
+        "growth": 3.9
+      },
+      "manufacturing": {
+        "index": 145.3,
+        "growth": 1.4
+      },
+      "electricity": {
+        "index": 191,
+        "growth": 6.1
+      },
+      "primaryGoods": {
+        "index": 153.2,
+        "growth": 5.7
+      },
+      "capitalGoods": {
+        "index": 111.8,
+        "growth": 2.4
+      },
+      "intermediateGoods": {
+        "index": 156.6,
+        "growth": 1.8
+      },
+      "infraGoods": {
+        "index": 169.5,
+        "growth": 6.7
+      },
+      "consumerDurables": {
+        "index": 128.9,
+        "growth": -3.1
+      },
+      "consumerNonDurables": {
+        "index": 150.3,
+        "growth": -4.4
+      }
+    },
+    {
+      "year": 2022,
+      "month": "April",
+      "label": "Apr 2022",
+      "date": "2022-04",
+      "general": {
+        "index": 134.5,
+        "growth": 6.7
+      },
+      "mining": {
+        "index": 116.6,
+        "growth": 8.4
+      },
+      "manufacturing": {
+        "index": 131.6,
+        "growth": 5.6
+      },
+      "electricity": {
+        "index": 194.5,
+        "growth": 11.8
+      },
+      "primaryGoods": {
+        "index": 139.5,
+        "growth": 10.3
+      },
+      "capitalGoods": {
+        "index": 88.5,
+        "growth": 12
+      },
+      "intermediateGoods": {
+        "index": 149.5,
+        "growth": 7.1
+      },
+      "infraGoods": {
+        "index": 149.7,
+        "growth": 4
+      },
+      "consumerDurables": {
+        "index": 110.7,
+        "growth": 7.2
+      },
+      "consumerNonDurables": {
+        "index": 138.9,
+        "growth": -0.8
+      }
+    },
+    {
+      "year": 2022,
+      "month": "May",
+      "label": "May 2022",
+      "date": "2022-05",
+      "general": {
+        "index": 137.8,
+        "growth": 19.7
+      },
+      "mining": {
+        "index": 120.4,
+        "growth": 11.2
+      },
+      "manufacturing": {
+        "index": 134.6,
+        "growth": 20.7
+      },
+      "electricity": {
+        "index": 199.9,
+        "growth": 23.5
+      },
+      "primaryGoods": {
+        "index": 144.7,
+        "growth": 17.8
+      },
+      "capitalGoods": {
+        "index": 94.9,
+        "growth": 53.3
+      },
+      "intermediateGoods": {
+        "index": 151.7,
+        "growth": 17.5
+      },
+      "infraGoods": {
+        "index": 153.3,
+        "growth": 18.4
+      },
+      "consumerDurables": {
+        "index": 113.9,
+        "growth": 59.1
+      },
+      "consumerNonDurables": {
+        "index": 137.5,
+        "growth": 1.4
+      }
+    },
+    {
+      "year": 2022,
+      "month": "June",
+      "label": "Jun 2022",
+      "date": "2022-06",
+      "general": {
+        "index": 138.3,
+        "growth": 12.6
+      },
+      "mining": {
+        "index": 113.7,
+        "growth": 7.8
+      },
+      "manufacturing": {
+        "index": 136.8,
+        "growth": 12.9
+      },
+      "electricity": {
+        "index": 196.9,
+        "growth": 16.4
+      },
+      "primaryGoods": {
+        "index": 139.3,
+        "growth": 13.8
+      },
+      "capitalGoods": {
+        "index": 104.4,
+        "growth": 28.6
+      },
+      "intermediateGoods": {
+        "index": 146.6,
+        "growth": 10.5
+      },
+      "infraGoods": {
+        "index": 150.8,
+        "growth": 9.4
+      },
+      "consumerDurables": {
+        "index": 125.3,
+        "growth": 25.2
+      },
+      "consumerNonDurables": {
+        "index": 145.9,
+        "growth": 2.9
+      }
+    },
+    {
+      "year": 2022,
+      "month": "July",
+      "label": "Jul 2022",
+      "date": "2022-07",
+      "general": {
+        "index": 134.4,
+        "growth": 2.2
+      },
+      "mining": {
+        "index": 101.1,
+        "growth": -3.3
+      },
+      "manufacturing": {
+        "index": 135,
+        "growth": 3.1
+      },
+      "electricity": {
+        "index": 188.9,
+        "growth": 2.3
+      },
+      "primaryGoods": {
+        "index": 131.7,
+        "growth": 2.5
+      },
+      "capitalGoods": {
+        "index": 97.1,
+        "growth": 5.1
+      },
+      "intermediateGoods": {
+        "index": 149,
+        "growth": 3.7
+      },
+      "infraGoods": {
+        "index": 151.3,
+        "growth": 4.8
+      },
+      "consumerDurables": {
+        "index": 121.4,
+        "growth": 2.3
+      },
+      "consumerNonDurables": {
+        "index": 141.7,
+        "growth": -2.9
+      }
+    },
+    {
+      "year": 2022,
+      "month": "August",
+      "label": "Aug 2022",
+      "date": "2022-08",
+      "general": {
+        "index": 131.5,
+        "growth": -0.7
+      },
+      "mining": {
+        "index": 99.6,
+        "growth": -3.9
+      },
+      "manufacturing": {
+        "index": 131.3,
+        "growth": -0.5
+      },
+      "electricity": {
+        "index": 191.3,
+        "growth": 1.4
+      },
+      "primaryGoods": {
+        "index": 129.4,
+        "growth": 1.7
+      },
+      "capitalGoods": {
+        "index": 95,
+        "growth": 4.3
+      },
+      "intermediateGoods": {
+        "index": 146.6,
+        "growth": 1.3
+      },
+      "infraGoods": {
+        "index": 152.8,
+        "growth": 3
+      },
+      "consumerDurables": {
+        "index": 116.2,
+        "growth": -4.4
+      },
+      "consumerNonDurables": {
+        "index": 134.9,
+        "growth": -9
+      }
+    },
+    {
+      "year": 2022,
+      "month": "September",
+      "label": "Sep 2022",
+      "date": "2022-09",
+      "general": {
+        "index": 133.8,
+        "growth": 3.3
+      },
+      "mining": {
+        "index": 100,
+        "growth": 5.2
+      },
+      "manufacturing": {
+        "index": 134.6,
+        "growth": 2
+      },
+      "electricity": {
+        "index": 187.4,
+        "growth": 11.6
+      },
+      "primaryGoods": {
+        "index": 128.5,
+        "growth": 9.5
+      },
+      "capitalGoods": {
+        "index": 103.9,
+        "growth": 11.4
+      },
+      "intermediateGoods": {
+        "index": 145.3,
+        "growth": 1.7
+      },
+      "infraGoods": {
+        "index": 156.9,
+        "growth": 8.2
+      },
+      "consumerDurables": {
+        "index": 123.8,
+        "growth": -5.5
+      },
+      "consumerNonDurables": {
+        "index": 138.9,
+        "growth": -5.7
+      }
+    },
+    {
+      "year": 2022,
+      "month": "October",
+      "label": "Oct 2022",
+      "date": "2022-10",
+      "general": {
+        "index": 129.5,
+        "growth": -4.1
+      },
+      "mining": {
+        "index": 112.6,
+        "growth": 2.6
+      },
+      "manufacturing": {
+        "index": 128.5,
+        "growth": -5.8
+      },
+      "electricity": {
+        "index": 169.3,
+        "growth": 1.2
+      },
+      "primaryGoods": {
+        "index": 131.2,
+        "growth": 2.1
+      },
+      "capitalGoods": {
+        "index": 87.2,
+        "growth": -2.9
+      },
+      "intermediateGoods": {
+        "index": 143.8,
+        "growth": -2.3
+      },
+      "infraGoods": {
+        "index": 156.2,
+        "growth": 1.7
+      },
+      "consumerDurables": {
+        "index": 106.1,
+        "growth": -18.1
+      },
+      "consumerNonDurables": {
+        "index": 130.3,
+        "growth": -13
+      }
+    },
+    {
+      "year": 2022,
+      "month": "November",
+      "label": "Nov 2022",
+      "date": "2022-11",
+      "general": {
+        "index": 137.7,
+        "growth": 7.6
+      },
+      "mining": {
+        "index": 122.7,
+        "growth": 9.7
+      },
+      "manufacturing": {
+        "index": 137.5,
+        "growth": 6.7
+      },
+      "electricity": {
+        "index": 166.7,
+        "growth": 12.7
+      },
+      "primaryGoods": {
+        "index": 132.6,
+        "growth": 4.8
+      },
+      "capitalGoods": {
+        "index": 99.1,
+        "growth": 20.7
+      },
+      "intermediateGoods": {
+        "index": 146.3,
+        "growth": 3.5
+      },
+      "infraGoods": {
+        "index": 161.7,
+        "growth": 14.3
+      },
+      "consumerDurables": {
+        "index": 111.9,
+        "growth": 5
+      },
+      "consumerNonDurables": {
+        "index": 162.7,
+        "growth": 10
+      }
+    },
+    {
+      "year": 2022,
+      "month": "December",
+      "label": "Dec 2022",
+      "date": "2022-12",
+      "general": {
+        "index": 145.9,
+        "growth": 5.1
+      },
+      "mining": {
+        "index": 132.6,
+        "growth": 10.1
+      },
+      "manufacturing": {
+        "index": 144.9,
+        "growth": 3.6
+      },
+      "electricity": {
+        "index": 179.4,
+        "growth": 10.4
+      },
+      "primaryGoods": {
+        "index": 145,
+        "growth": 8.5
+      },
+      "capitalGoods": {
+        "index": 100.1,
+        "growth": 7.8
+      },
+      "intermediateGoods": {
+        "index": 154.1,
+        "growth": 1.5
+      },
+      "infraGoods": {
+        "index": 170.9,
+        "growth": 11
+      },
+      "consumerDurables": {
+        "index": 108.8,
+        "growth": -11.2
+      },
+      "consumerNonDurables": {
+        "index": 174.4,
+        "growth": 7.9
+      }
+    },
+    {
+      "year": 2023,
+      "month": "January",
+      "label": "Jan 2023",
+      "date": "2023-01",
+      "general": {
+        "index": 147.4,
+        "growth": 5.8
+      },
+      "mining": {
+        "index": 136.1,
+        "growth": 9
+      },
+      "manufacturing": {
+        "index": 145.5,
+        "growth": 4.5
+      },
+      "electricity": {
+        "index": 186.6,
+        "growth": 12.7
+      },
+      "primaryGoods": {
+        "index": 149.9,
+        "growth": 9.8
+      },
+      "capitalGoods": {
+        "index": 104.9,
+        "growth": 10.5
+      },
+      "intermediateGoods": {
+        "index": 155.6,
+        "growth": 1.4
+      },
+      "infraGoods": {
+        "index": 176.9,
+        "growth": 11.3
+      },
+      "consumerDurables": {
+        "index": 108.8,
+        "growth": -8.2
+      },
+      "consumerNonDurables": {
+        "index": 164.4,
+        "growth": 6.5
+      }
+    },
+    {
+      "year": 2023,
+      "month": "February",
+      "label": "Feb 2023",
+      "date": "2023-02",
+      "general": {
+        "index": 139.3,
+        "growth": 6
+      },
+      "mining": {
+        "index": 129.2,
+        "growth": 4.8
+      },
+      "manufacturing": {
+        "index": 137.6,
+        "growth": 5.9
+      },
+      "electricity": {
+        "index": 174,
+        "growth": 8.2
+      },
+      "primaryGoods": {
+        "index": 139.9,
+        "growth": 7
+      },
+      "capitalGoods": {
+        "index": 104.9,
+        "growth": 11
+      },
+      "intermediateGoods": {
+        "index": 145.1,
+        "growth": 1
+      },
+      "infraGoods": {
+        "index": 165.7,
+        "growth": 9
+      },
+      "consumerDurables": {
+        "index": 108.3,
+        "growth": -4.1
+      },
+      "consumerNonDurables": {
+        "index": 154.8,
+        "growth": 12.5
+      }
+    },
+    {
+      "year": 2023,
+      "month": "March",
+      "label": "Mar 2023",
+      "date": "2023-03",
+      "general": {
+        "index": 151.7,
+        "growth": 1.9
+      },
+      "mining": {
+        "index": 154.2,
+        "growth": 6.8
+      },
+      "manufacturing": {
+        "index": 147.5,
+        "growth": 1.5
+      },
+      "electricity": {
+        "index": 188,
+        "growth": -1.6
+      },
+      "primaryGoods": {
+        "index": 158.3,
+        "growth": 3.3
+      },
+      "capitalGoods": {
+        "index": 123,
+        "growth": 10
+      },
+      "intermediateGoods": {
+        "index": 159.4,
+        "growth": 1.8
+      },
+      "infraGoods": {
+        "index": 181.7,
+        "growth": 7.2
+      },
+      "consumerDurables": {
+        "index": 118.6,
+        "growth": -8
+      },
+      "consumerNonDurables": {
+        "index": 147.5,
+        "growth": -1.9
+      }
+    },
+    {
+      "year": 2023,
+      "month": "April",
+      "label": "Apr 2023",
+      "date": "2023-04",
+      "general": {
+        "index": 140.7,
+        "growth": 4.6
+      },
+      "mining": {
+        "index": 122.6,
+        "growth": 5.1
+      },
+      "manufacturing": {
+        "index": 138.8,
+        "growth": 5.5
+      },
+      "electricity": {
+        "index": 192.3,
+        "growth": -1.1
+      },
+      "primaryGoods": {
+        "index": 142.2,
+        "growth": 1.9
+      },
+      "capitalGoods": {
+        "index": 92.4,
+        "growth": 4.4
+      },
+      "intermediateGoods": {
+        "index": 152,
+        "growth": 1.7
+      },
+      "infraGoods": {
+        "index": 169.8,
+        "growth": 13.4
+      },
+      "consumerDurables": {
+        "index": 108.1,
+        "growth": -2.3
+      },
+      "consumerNonDurables": {
+        "index": 154.7,
+        "growth": 11.4
+      }
+    },
+    {
+      "year": 2023,
+      "month": "May",
+      "label": "May 2023",
+      "date": "2023-05",
+      "general": {
+        "index": 145.6,
+        "growth": 5.7
+      },
+      "mining": {
+        "index": 128.1,
+        "growth": 6.4
+      },
+      "manufacturing": {
+        "index": 143.1,
+        "growth": 6.3
+      },
+      "electricity": {
+        "index": 201.6,
+        "growth": 0.9
+      },
+      "primaryGoods": {
+        "index": 149.9,
+        "growth": 3.6
+      },
+      "capitalGoods": {
+        "index": 102.6,
+        "growth": 8.1
+      },
+      "intermediateGoods": {
+        "index": 156.9,
+        "growth": 3.4
+      },
+      "infraGoods": {
+        "index": 173.2,
+        "growth": 13
+      },
+      "consumerDurables": {
+        "index": 115.6,
+        "growth": 1.5
+      },
+      "consumerNonDurables": {
+        "index": 149.8,
+        "growth": 8.9
+      }
+    },
+    {
+      "year": 2023,
+      "month": "June",
+      "label": "Jun 2023",
+      "date": "2023-06",
+      "general": {
+        "index": 143.9,
+        "growth": 4
+      },
+      "mining": {
+        "index": 122.3,
+        "growth": 7.6
+      },
+      "manufacturing": {
+        "index": 141.6,
+        "growth": 3.5
+      },
+      "electricity": {
+        "index": 205.2,
+        "growth": 4.2
+      },
+      "primaryGoods": {
+        "index": 146.7,
+        "growth": 5.3
+      },
+      "capitalGoods": {
+        "index": 107.4,
+        "growth": 2.9
+      },
+      "intermediateGoods": {
+        "index": 154.2,
+        "growth": 5.2
+      },
+      "infraGoods": {
+        "index": 170.9,
+        "growth": 13.3
+      },
+      "consumerDurables": {
+        "index": 116.8,
+        "growth": -6.8
+      },
+      "consumerNonDurables": {
+        "index": 146.7,
+        "growth": 0.5
+      }
+    },
+    {
+      "year": 2023,
+      "month": "July",
+      "label": "Jul 2023",
+      "date": "2023-07",
+      "general": {
+        "index": 142.7,
+        "growth": 6.2
+      },
+      "mining": {
+        "index": 111.9,
+        "growth": 10.7
+      },
+      "manufacturing": {
+        "index": 142.1,
+        "growth": 5.3
+      },
+      "electricity": {
+        "index": 204,
+        "growth": 8
+      },
+      "primaryGoods": {
+        "index": 141.8,
+        "growth": 7.7
+      },
+      "capitalGoods": {
+        "index": 102.1,
+        "growth": 5.1
+      },
+      "intermediateGoods": {
+        "index": 153.8,
+        "growth": 3.2
+      },
+      "infraGoods": {
+        "index": 170.3,
+        "growth": 12.6
+      },
+      "consumerDurables": {
+        "index": 117,
+        "growth": -3.6
+      },
+      "consumerNonDurables": {
+        "index": 153.5,
+        "growth": 8.3
+      }
+    },
+    {
+      "year": 2023,
+      "month": "August",
+      "label": "Aug 2023",
+      "date": "2023-08",
+      "general": {
+        "index": 145.8,
+        "growth": 10.9
+      },
+      "mining": {
+        "index": 111.9,
+        "growth": 12.3
+      },
+      "manufacturing": {
+        "index": 144.4,
+        "growth": 10
+      },
+      "electricity": {
+        "index": 220.5,
+        "growth": 15.3
+      },
+      "primaryGoods": {
+        "index": 145.4,
+        "growth": 12.4
+      },
+      "capitalGoods": {
+        "index": 107.4,
+        "growth": 13.1
+      },
+      "intermediateGoods": {
+        "index": 157.4,
+        "growth": 7.4
+      },
+      "infraGoods": {
+        "index": 176.8,
+        "growth": 15.7
+      },
+      "consumerDurables": {
+        "index": 123.2,
+        "growth": 6
+      },
+      "consumerNonDurables": {
+        "index": 148.3,
+        "growth": 9.9
+      }
+    },
+    {
+      "year": 2023,
+      "month": "September",
+      "label": "Sep 2023",
+      "date": "2023-09",
+      "general": {
+        "index": 142.3,
+        "growth": 6.4
+      },
+      "mining": {
+        "index": 111.5,
+        "growth": 11.5
+      },
+      "manufacturing": {
+        "index": 141.5,
+        "growth": 5.1
+      },
+      "electricity": {
+        "index": 205.9,
+        "growth": 9.9
+      },
+      "primaryGoods": {
+        "index": 138.8,
+        "growth": 8
+      },
+      "capitalGoods": {
+        "index": 112.6,
+        "growth": 8.4
+      },
+      "intermediateGoods": {
+        "index": 154.2,
+        "growth": 6.1
+      },
+      "infraGoods": {
+        "index": 172.8,
+        "growth": 10.1
+      },
+      "consumerDurables": {
+        "index": 125,
+        "growth": 1
+      },
+      "consumerNonDurables": {
+        "index": 142.6,
+        "growth": 2.7
+      }
+    },
+    {
+      "year": 2023,
+      "month": "October",
+      "label": "Oct 2023",
+      "date": "2023-10",
+      "general": {
+        "index": 144.9,
+        "growth": 11.9
+      },
+      "mining": {
+        "index": 127.4,
+        "growth": 13.1
+      },
+      "manufacturing": {
+        "index": 142.1,
+        "growth": 10.6
+      },
+      "electricity": {
+        "index": 203.8,
+        "growth": 20.4
+      },
+      "primaryGoods": {
+        "index": 146.1,
+        "growth": 11.4
+      },
+      "capitalGoods": {
+        "index": 106.1,
+        "growth": 21.7
+      },
+      "intermediateGoods": {
+        "index": 157.5,
+        "growth": 9.5
+      },
+      "infraGoods": {
+        "index": 175.9,
+        "growth": 12.6
+      },
+      "consumerDurables": {
+        "index": 123,
+        "growth": 15.9
+      },
+      "consumerNonDurables": {
+        "index": 142.4,
+        "growth": 9.3
+      }
+    },
+    {
+      "year": 2023,
+      "month": "November",
+      "label": "Nov 2023",
+      "date": "2023-11",
+      "general": {
+        "index": 141.1,
+        "growth": 2.5
+      },
+      "mining": {
+        "index": 131.3,
+        "growth": 7
+      },
+      "manufacturing": {
+        "index": 139.3,
+        "growth": 1.3
+      },
+      "electricity": {
+        "index": 176.3,
+        "growth": 5.8
+      },
+      "primaryGoods": {
+        "index": 143.8,
+        "growth": 8.4
+      },
+      "capitalGoods": {
+        "index": 98,
+        "growth": -1.1
+      },
+      "intermediateGoods": {
+        "index": 151.3,
+        "growth": 3.4
+      },
+      "infraGoods": {
+        "index": 164.2,
+        "growth": 1.5
+      },
+      "consumerDurables": {
+        "index": 106.5,
+        "growth": -4.8
+      },
+      "consumerNonDurables": {
+        "index": 157.2,
+        "growth": -3.4
+      }
+    },
+    {
+      "year": 2023,
+      "month": "December",
+      "label": "Dec 2023",
+      "date": "2023-12",
+      "general": {
+        "index": 152.3,
+        "growth": 4.4
+      },
+      "mining": {
+        "index": 139.5,
+        "growth": 5.2
+      },
+      "manufacturing": {
+        "index": 151.6,
+        "growth": 4.6
+      },
+      "electricity": {
+        "index": 181.6,
+        "growth": 1.2
+      },
+      "primaryGoods": {
+        "index": 151.9,
+        "growth": 4.8
+      },
+      "capitalGoods": {
+        "index": 103.8,
+        "growth": 3.7
+      },
+      "intermediateGoods": {
+        "index": 159.8,
+        "growth": 3.7
+      },
+      "infraGoods": {
+        "index": 180.3,
+        "growth": 5.5
+      },
+      "consumerDurables": {
+        "index": 114.5,
+        "growth": 5.2
+      },
+      "consumerNonDurables": {
+        "index": 179.7,
+        "growth": 3
+      }
+    },
+    {
+      "year": 2024,
+      "month": "January",
+      "label": "Jan 2024",
+      "date": "2024-01",
+      "general": {
+        "index": 153.6,
+        "growth": 4.2
+      },
+      "mining": {
+        "index": 144.3,
+        "growth": 6
+      },
+      "manufacturing": {
+        "index": 150.8,
+        "growth": 3.6
+      },
+      "electricity": {
+        "index": 197.1,
+        "growth": 5.6
+      },
+      "primaryGoods": {
+        "index": 154.3,
+        "growth": 2.9
+      },
+      "capitalGoods": {
+        "index": 108.3,
+        "growth": 3.2
+      },
+      "intermediateGoods": {
+        "index": 163.8,
+        "growth": 5.3
+      },
+      "infraGoods": {
+        "index": 186.6,
+        "growth": 5.5
+      },
+      "consumerDurables": {
+        "index": 121.4,
+        "growth": 11.6
+      },
+      "consumerNonDurables": {
+        "index": 164.9,
+        "growth": 0.3
+      }
+    },
+    {
+      "year": 2024,
+      "month": "February",
+      "label": "Feb 2024",
+      "date": "2024-02",
+      "general": {
+        "index": 147.1,
+        "growth": 5.6
+      },
+      "mining": {
+        "index": 139.7,
+        "growth": 8.1
+      },
+      "manufacturing": {
+        "index": 144.4,
+        "growth": 4.9
+      },
+      "electricity": {
+        "index": 187.2,
+        "growth": 7.6
+      },
+      "primaryGoods": {
+        "index": 148.2,
+        "growth": 5.9
+      },
+      "capitalGoods": {
+        "index": 106.7,
+        "growth": 1.7
+      },
+      "intermediateGoods": {
+        "index": 157.6,
+        "growth": 8.6
+      },
+      "infraGoods": {
+        "index": 179.5,
+        "growth": 8.3
+      },
+      "consumerDurables": {
+        "index": 121.9,
+        "growth": 12.6
+      },
+      "consumerNonDurables": {
+        "index": 149.9,
+        "growth": -3.2
+      }
+    },
+    {
+      "year": 2024,
+      "month": "March",
+      "label": "Mar 2024",
+      "date": "2024-03",
+      "general": {
+        "index": 160,
+        "growth": 5.5
+      },
+      "mining": {
+        "index": 156.2,
+        "growth": 1.3
+      },
+      "manufacturing": {
+        "index": 156.2,
+        "growth": 5.9
+      },
+      "electricity": {
+        "index": 204.2,
+        "growth": 8.6
+      },
+      "primaryGoods": {
+        "index": 163.1,
+        "growth": 3
+      },
+      "capitalGoods": {
+        "index": 131.6,
+        "growth": 7
+      },
+      "intermediateGoods": {
+        "index": 169.2,
+        "growth": 6.1
+      },
+      "infraGoods": {
+        "index": 195.2,
+        "growth": 7.4
+      },
+      "consumerDurables": {
+        "index": 129.9,
+        "growth": 9.5
+      },
+      "consumerNonDurables": {
+        "index": 155.2,
+        "growth": 5.2
+      }
+    },
+    {
+      "year": 2024,
+      "month": "April",
+      "label": "Apr 2024",
+      "date": "2024-04",
+      "general": {
+        "index": 148,
+        "growth": 5.2
+      },
+      "mining": {
+        "index": 130.9,
+        "growth": 6.8
+      },
+      "manufacturing": {
+        "index": 144.6,
+        "growth": 4.2
+      },
+      "electricity": {
+        "index": 212,
+        "growth": 10.2
+      },
+      "primaryGoods": {
+        "index": 152.2,
+        "growth": 7
+      },
+      "capitalGoods": {
+        "index": 95,
+        "growth": 2.8
+      },
+      "intermediateGoods": {
+        "index": 157.8,
+        "growth": 3.8
+      },
+      "infraGoods": {
+        "index": 184.2,
+        "growth": 8.5
+      },
+      "consumerDurables": {
+        "index": 119.5,
+        "growth": 10.5
+      },
+      "consumerNonDurables": {
+        "index": 150.9,
+        "growth": -2.5
+      }
+    },
+    {
+      "year": 2024,
+      "month": "May",
+      "label": "May 2024",
+      "date": "2024-05",
+      "general": {
+        "index": 154.7,
+        "growth": 6.3
+      },
+      "mining": {
+        "index": 136.5,
+        "growth": 6.6
+      },
+      "manufacturing": {
+        "index": 150.4,
+        "growth": 5.1
+      },
+      "electricity": {
+        "index": 229.3,
+        "growth": 13.7
+      },
+      "primaryGoods": {
+        "index": 160.9,
+        "growth": 7.3
+      },
+      "capitalGoods": {
+        "index": 105.3,
+        "growth": 2.6
+      },
+      "intermediateGoods": {
+        "index": 162.4,
+        "growth": 3.5
+      },
+      "infraGoods": {
+        "index": 186.3,
+        "growth": 7.6
+      },
+      "consumerDurables": {
+        "index": 130.2,
+        "growth": 12.6
+      },
+      "consumerNonDurables": {
+        "index": 154,
+        "growth": 2.8
+      }
+    },
+    {
+      "year": 2024,
+      "month": "June",
+      "label": "Jun 2024",
+      "date": "2024-06",
+      "general": {
+        "index": 151,
+        "growth": 4.9
+      },
+      "mining": {
+        "index": 134.9,
+        "growth": 10.3
+      },
+      "manufacturing": {
+        "index": 146.6,
+        "growth": 3.5
+      },
+      "electricity": {
+        "index": 222.8,
+        "growth": 8.6
+      },
+      "primaryGoods": {
+        "index": 156,
+        "growth": 6.3
+      },
+      "capitalGoods": {
+        "index": 111.3,
+        "growth": 3.6
+      },
+      "intermediateGoods": {
+        "index": 159.1,
+        "growth": 3.2
+      },
+      "infraGoods": {
+        "index": 184.9,
+        "growth": 8.2
+      },
+      "consumerDurables": {
+        "index": 127.1,
+        "growth": 8.8
+      },
+      "consumerNonDurables": {
+        "index": 145.2,
+        "growth": -1
+      }
+    },
+    {
+      "year": 2024,
+      "month": "July",
+      "label": "Jul 2024",
+      "date": "2024-07",
+      "general": {
+        "index": 149.8,
+        "growth": 5
+      },
+      "mining": {
+        "index": 116.1,
+        "growth": 3.8
+      },
+      "manufacturing": {
+        "index": 148.8,
+        "growth": 4.7
+      },
+      "electricity": {
+        "index": 220.2,
+        "growth": 7.9
+      },
+      "primaryGoods": {
+        "index": 150.1,
+        "growth": 5.9
+      },
+      "capitalGoods": {
+        "index": 114,
+        "growth": 11.7
+      },
+      "intermediateGoods": {
+        "index": 164.6,
+        "growth": 7
+      },
+      "infraGoods": {
+        "index": 179.7,
+        "growth": 5.5
+      },
+      "consumerDurables": {
+        "index": 126.6,
+        "growth": 8.2
+      },
+      "consumerNonDurables": {
+        "index": 147.1,
+        "growth": -4.2
+      }
+    },
+    {
+      "year": 2024,
+      "month": "August",
+      "label": "Aug 2024",
+      "date": "2024-08",
+      "general": {
+        "index": 145.8,
+        "growth": 0
+      },
+      "mining": {
+        "index": 107.1,
+        "growth": -4.3
+      },
+      "manufacturing": {
+        "index": 146.1,
+        "growth": 1.2
+      },
+      "electricity": {
+        "index": 212.3,
+        "growth": -3.7
+      },
+      "primaryGoods": {
+        "index": 141.6,
+        "growth": -2.6
+      },
+      "capitalGoods": {
+        "index": 107.4,
+        "growth": 0
+      },
+      "intermediateGoods": {
+        "index": 162.3,
+        "growth": 3.1
+      },
+      "infraGoods": {
+        "index": 181.5,
+        "growth": 2.7
+      },
+      "consumerDurables": {
+        "index": 129.8,
+        "growth": 5.4
+      },
+      "consumerNonDurables": {
+        "index": 141.8,
+        "growth": -4.4
+      }
+    },
+    {
+      "year": 2024,
+      "month": "September",
+      "label": "Sep 2024",
+      "date": "2024-09",
+      "general": {
+        "index": 146.9,
+        "growth": 3.2
+      },
+      "mining": {
+        "index": 111.7,
+        "growth": 0.2
+      },
+      "manufacturing": {
+        "index": 147.2,
+        "growth": 4
+      },
+      "electricity": {
+        "index": 206.9,
+        "growth": 0.5
+      },
+      "primaryGoods": {
+        "index": 141.3,
+        "growth": 1.8
+      },
+      "capitalGoods": {
+        "index": 116.5,
+        "growth": 3.5
+      },
+      "intermediateGoods": {
+        "index": 160.8,
+        "growth": 4.3
+      },
+      "infraGoods": {
+        "index": 178.8,
+        "growth": 3.5
+      },
+      "consumerDurables": {
+        "index": 132.9,
+        "growth": 6.3
+      },
+      "consumerNonDurables": {
+        "index": 145.7,
+        "growth": 2.2
+      }
+    },
+    {
+      "year": 2024,
+      "month": "October",
+      "label": "Oct 2024",
+      "date": "2024-10",
+      "general": {
+        "index": 150.3,
+        "growth": 3.7
+      },
+      "mining": {
+        "index": 128.5,
+        "growth": 0.9
+      },
+      "manufacturing": {
+        "index": 148.4,
+        "growth": 4.4
+      },
+      "electricity": {
+        "index": 207.8,
+        "growth": 2
+      },
+      "primaryGoods": {
+        "index": 149.8,
+        "growth": 2.5
+      },
+      "capitalGoods": {
+        "index": 109.2,
+        "growth": 2.9
+      },
+      "intermediateGoods": {
+        "index": 165,
+        "growth": 4.8
+      },
+      "infraGoods": {
+        "index": 184.2,
+        "growth": 4.7
+      },
+      "consumerDurables": {
+        "index": 129.8,
+        "growth": 5.5
+      },
+      "consumerNonDurables": {
+        "index": 146.4,
+        "growth": 2.8
+      }
+    },
+    {
+      "year": 2024,
+      "month": "November",
+      "label": "Nov 2024",
+      "date": "2024-11",
+      "general": {
+        "index": 148.1,
+        "growth": 5
+      },
+      "mining": {
+        "index": 133.8,
+        "growth": 1.9
+      },
+      "manufacturing": {
+        "index": 147,
+        "growth": 5.5
+      },
+      "electricity": {
+        "index": 184.1,
+        "growth": 4.4
+      },
+      "primaryGoods": {
+        "index": 147.7,
+        "growth": 2.7
+      },
+      "capitalGoods": {
+        "index": 106.7,
+        "growth": 8.9
+      },
+      "intermediateGoods": {
+        "index": 158.5,
+        "growth": 4.8
+      },
+      "infraGoods": {
+        "index": 177.3,
+        "growth": 8
+      },
+      "consumerDurables": {
+        "index": 121.5,
+        "growth": 14.1
+      },
+      "consumerNonDurables": {
+        "index": 158.1,
+        "growth": 0.6
+      }
+    },
+    {
+      "year": 2024,
+      "month": "December",
+      "label": "Dec 2024",
+      "date": "2024-12",
+      "general": {
+        "index": 158,
+        "growth": 3.7
+      },
+      "mining": {
+        "index": 143.2,
+        "growth": 2.7
+      },
+      "manufacturing": {
+        "index": 157.2,
+        "growth": 3.7
+      },
+      "electricity": {
+        "index": 192.8,
+        "growth": 6.2
+      },
+      "primaryGoods": {
+        "index": 157.7,
+        "growth": 3.8
+      },
+      "capitalGoods": {
+        "index": 114.7,
+        "growth": 10.5
+      },
+      "intermediateGoods": {
+        "index": 170.1,
+        "growth": 6.4
+      },
+      "infraGoods": {
+        "index": 195.4,
+        "growth": 8.4
+      },
+      "consumerDurables": {
+        "index": 123.8,
+        "growth": 8.1
+      },
+      "consumerNonDurables": {
+        "index": 166.9,
+        "growth": -7.1
+      }
+    },
+    {
+      "year": 2025,
+      "month": "January",
+      "label": "Jan 2025",
+      "date": "2025-01",
+      "general": {
+        "index": 161.6,
+        "growth": 5.2
+      },
+      "mining": {
+        "index": 150.7,
+        "growth": 4.4
+      },
+      "manufacturing": {
+        "index": 159.5,
+        "growth": 5.8
+      },
+      "electricity": {
+        "index": 201.9,
+        "growth": 2.4
+      },
+      "primaryGoods": {
+        "index": 162.8,
+        "growth": 5.5
+      },
+      "capitalGoods": {
+        "index": 119.3,
+        "growth": 10.2
+      },
+      "intermediateGoods": {
+        "index": 172.5,
+        "growth": 5.3
+      },
+      "infraGoods": {
+        "index": 200.2,
+        "growth": 7.3
+      },
+      "consumerDurables": {
+        "index": 130,
+        "growth": 7.1
+      },
+      "consumerNonDurables": {
+        "index": 165.1,
+        "growth": 0.1
+      }
+    },
+    {
+      "year": 2025,
+      "month": "February",
+      "label": "Feb 2025",
+      "date": "2025-02",
+      "general": {
+        "index": 151.1,
+        "growth": 2.7
+      },
+      "mining": {
+        "index": 141.9,
+        "growth": 1.6
+      },
+      "manufacturing": {
+        "index": 148.4,
+        "growth": 2.8
+      },
+      "electricity": {
+        "index": 194,
+        "growth": 3.6
+      },
+      "primaryGoods": {
+        "index": 152.3,
+        "growth": 2.8
+      },
+      "capitalGoods": {
+        "index": 115.4,
+        "growth": 8.2
+      },
+      "intermediateGoods": {
+        "index": 159.1,
+        "growth": 1
+      },
+      "infraGoods": {
+        "index": 191.7,
+        "growth": 6.8
+      },
+      "consumerDurables": {
+        "index": 126.4,
+        "growth": 3.7
+      },
+      "consumerNonDurables": {
+        "index": 146.7,
+        "growth": -2.1
+      }
+    },
+    {
+      "year": 2025,
+      "month": "March",
+      "label": "Mar 2025",
+      "date": "2025-03",
+      "general": {
+        "index": 166.3,
+        "growth": 3.9
+      },
+      "mining": {
+        "index": 158.1,
+        "growth": 1.2
+      },
+      "manufacturing": {
+        "index": 162.4,
+        "growth": 4
+      },
+      "electricity": {
+        "index": 219.5,
+        "growth": 7.5
+      },
+      "primaryGoods": {
+        "index": 169.5,
+        "growth": 3.9
+      },
+      "capitalGoods": {
+        "index": 136.3,
+        "growth": 3.6
+      },
+      "intermediateGoods": {
+        "index": 175.6,
+        "growth": 3.8
+      },
+      "infraGoods": {
+        "index": 214.6,
+        "growth": 9.9
+      },
+      "consumerDurables": {
+        "index": 138.8,
+        "growth": 6.9
+      },
+      "consumerNonDurables": {
+        "index": 149,
+        "growth": -4
+      }
+    },
+    {
+      "year": 2025,
+      "month": "April",
+      "label": "Apr 2025",
+      "date": "2025-04",
+      "general": {
+        "index": 151.8,
+        "growth": 2.6
+      },
+      "mining": {
+        "index": 130.7,
+        "growth": -0.2
+      },
+      "manufacturing": {
+        "index": 149.1,
+        "growth": 3.1
+      },
+      "electricity": {
+        "index": 215.7,
+        "growth": 1.7
+      },
+      "primaryGoods": {
+        "index": 151.9,
+        "growth": -0.2
+      },
+      "capitalGoods": {
+        "index": 108.3,
+        "growth": 14
+      },
+      "intermediateGoods": {
+        "index": 165.5,
+        "growth": 4.9
+      },
+      "infraGoods": {
+        "index": 192.9,
+        "growth": 4.7
+      },
+      "consumerDurables": {
+        "index": 126.9,
+        "growth": 6.2
+      },
+      "consumerNonDurables": {
+        "index": 146.9,
+        "growth": -2.7
+      }
+    },
+    {
+      "year": 2025,
+      "month": "May",
+      "label": "May 2025",
+      "date": "2025-05",
+      "general": {
+        "index": 157.6,
+        "growth": 1.9
+      },
+      "mining": {
+        "index": 136.4,
+        "growth": -0.1
+      },
+      "manufacturing": {
+        "index": 155.2,
+        "growth": 3.2
+      },
+      "electricity": {
+        "index": 218.5,
+        "growth": -4.7
+      },
+      "primaryGoods": {
+        "index": 158.6,
+        "growth": -1.4
+      },
+      "capitalGoods": {
+        "index": 119.3,
+        "growth": 13.3
+      },
+      "intermediateGoods": {
+        "index": 170,
+        "growth": 4.7
+      },
+      "infraGoods": {
+        "index": 198.8,
+        "growth": 6.7
+      },
+      "consumerDurables": {
+        "index": 129,
+        "growth": -0.9
+      },
+      "consumerNonDurables": {
+        "index": 152.5,
+        "growth": -1
+      }
+    },
+    {
+      "year": 2025,
+      "month": "June",
+      "label": "Jun 2025",
+      "date": "2025-06",
+      "general": {
+        "index": 153.3,
+        "growth": 1.5
+      },
+      "mining": {
+        "index": 123.2,
+        "growth": -8.7
+      },
+      "manufacturing": {
+        "index": 152,
+        "growth": 3.7
+      },
+      "electricity": {
+        "index": 220.1,
+        "growth": -1.2
+      },
+      "primaryGoods": {
+        "index": 152.1,
+        "growth": -2.5
+      },
+      "capitalGoods": {
+        "index": 114.6,
+        "growth": 3
+      },
+      "intermediateGoods": {
+        "index": 167.8,
+        "growth": 5.5
+      },
+      "infraGoods": {
+        "index": 197.3,
+        "growth": 6.7
+      },
+      "consumerDurables": {
+        "index": 130.7,
+        "growth": 2.8
+      },
+      "consumerNonDurables": {
+        "index": 143.9,
+        "growth": -0.9
+      }
+    },
+    {
+      "year": 2025,
+      "month": "July",
+      "label": "Jul 2025",
+      "date": "2025-07",
+      "general": {
+        "index": 156.2,
+        "growth": 4.3
+      },
+      "mining": {
+        "index": 107.7,
+        "growth": -7.2
+      },
+      "manufacturing": {
+        "index": 157.7,
+        "growth": 6
+      },
+      "electricity": {
+        "index": 228.4,
+        "growth": 3.7
+      },
+      "primaryGoods": {
+        "index": 149,
+        "growth": -0.7
+      },
+      "capitalGoods": {
+        "index": 121.7,
+        "growth": 6.8
+      },
+      "intermediateGoods": {
+        "index": 174.6,
+        "growth": 6.1
+      },
+      "infraGoods": {
+        "index": 204.3,
+        "growth": 13.7
+      },
+      "consumerDurables": {
+        "index": 135.8,
+        "growth": 7.3
+      },
+      "consumerNonDurables": {
+        "index": 147.9,
+        "growth": 0.5
+      }
+    },
+    {
+      "year": 2025,
+      "month": "August",
+      "label": "Aug 2025",
+      "date": "2025-08",
+      "general": {
+        "index": 151.8,
+        "growth": 4.1
+      },
+      "mining": {
+        "index": 114.2,
+        "growth": 6.6
+      },
+      "manufacturing": {
+        "index": 151.6,
+        "growth": 3.8
+      },
+      "electricity": {
+        "index": 221.1,
+        "growth": 4.1
+      },
+      "primaryGoods": {
+        "index": 149.2,
+        "growth": 5.4
+      },
+      "capitalGoods": {
+        "index": 112.2,
+        "growth": 4.5
+      },
+      "intermediateGoods": {
+        "index": 170.7,
+        "growth": 5.2
+      },
+      "infraGoods": {
+        "index": 200.4,
+        "growth": 10.4
+      },
+      "consumerDurables": {
+        "index": 134.3,
+        "growth": 3.5
+      },
+      "consumerNonDurables": {
+        "index": 132.7,
+        "growth": -6.4
+      }
+    },
+    {
+      "year": 2025,
+      "month": "September",
+      "label": "Sep 2025",
+      "date": "2025-09",
+      "general": {
+        "index": 153.7,
+        "growth": 4.6
+      },
+      "mining": {
+        "index": 111.2,
+        "growth": -0.4
+      },
+      "manufacturing": {
+        "index": 155.4,
+        "growth": 5.6
+      },
+      "electricity": {
+        "index": 213.4,
+        "growth": 3.1
+      },
+      "primaryGoods": {
+        "index": 143.2,
+        "growth": 1.3
+      },
+      "capitalGoods": {
+        "index": 122.8,
+        "growth": 5.4
+      },
+      "intermediateGoods": {
+        "index": 171,
+        "growth": 6.3
+      },
+      "infraGoods": {
+        "index": 197.7,
+        "growth": 10.6
+      },
+      "consumerDurables": {
+        "index": 146.2,
+        "growth": 10
+      },
+      "consumerNonDurables": {
+        "index": 145.2,
+        "growth": -0.3
+      }
+    },
+    {
+      "year": 2025,
+      "month": "October",
+      "label": "Oct 2025",
+      "date": "2025-10",
+      "general": {
+        "index": 151.1,
+        "growth": 0.5
+      },
+      "mining": {
+        "index": 126.2,
+        "growth": -1.8
+      },
+      "manufacturing": {
+        "index": 151.3,
+        "growth": 2
+      },
+      "electricity": {
+        "index": 193.4,
+        "growth": -6.9
+      },
+      "primaryGoods": {
+        "index": 148.9,
+        "growth": -0.6
+      },
+      "capitalGoods": {
+        "index": 111.5,
+        "growth": 2.1
+      },
+      "intermediateGoods": {
+        "index": 169.2,
+        "growth": 2.5
+      },
+      "infraGoods": {
+        "index": 197.3,
+        "growth": 7.1
+      },
+      "consumerDurables": {
+        "index": 128.1,
+        "growth": -1.3
+      },
+      "consumerNonDurables": {
+        "index": 138.8,
+        "growth": -5.2
+      }
+    },
+    {
+      "year": 2025,
+      "month": "November",
+      "label": "Nov 2025",
+      "date": "2025-11",
+      "general": {
+        "index": 158.7,
+        "growth": 7.2
+      },
+      "mining": {
+        "index": 141.6,
+        "growth": 5.8
+      },
+      "manufacturing": {
+        "index": 159.5,
+        "growth": 8.5
+      },
+      "electricity": {
+        "index": 181.3,
+        "growth": -1.5
+      },
+      "primaryGoods": {
+        "index": 151,
+        "growth": 2.2
+      },
+      "capitalGoods": {
+        "index": 117.5,
+        "growth": 10.1
+      },
+      "intermediateGoods": {
+        "index": 170.2,
+        "growth": 7.4
+      },
+      "infraGoods": {
+        "index": 200.3,
+        "growth": 13
+      },
+      "consumerDurables": {
+        "index": 135.1,
+        "growth": 11.2
+      },
+      "consumerNonDurables": {
+        "index": 170.8,
+        "growth": 8
+      }
+    },
+    {
+      "year": 2025,
+      "month": "December",
+      "label": "Dec 2025",
+      "date": "2025-12",
+      "general": {
+        "index": 170.7,
+        "growth": 8
+      },
+      "mining": {
+        "index": 153.1,
+        "growth": 6.9
+      },
+      "manufacturing": {
+        "index": 170.4,
+        "growth": 8.4
+      },
+      "electricity": {
+        "index": 204.9,
+        "growth": 6.3
+      },
+      "primaryGoods": {
+        "index": 164.6,
+        "growth": 4.4
+      },
+      "capitalGoods": {
+        "index": 124.2,
+        "growth": 8.3
+      },
+      "intermediateGoods": {
+        "index": 183.3,
+        "growth": 7.8
+      },
+      "infraGoods": {
+        "index": 220.4,
+        "growth": 12.8
+      },
+      "consumerDurables": {
+        "index": 139.2,
+        "growth": 12.4
+      },
+      "consumerNonDurables": {
+        "index": 181.1,
+        "growth": 8.5
+      }
+    }
+  ]
+}
