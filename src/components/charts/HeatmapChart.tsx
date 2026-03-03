@@ -163,13 +163,41 @@ export default function HeatmapChart({
   };
 
   // ── Optional cell annotations with contrast-aware text colour ─────────────
-  // pos in [0, 1] maps a value onto the colorscale range.
-  // The dark regions are near 0 (deep blue) and near 1 (deep red/orange),
-  // so we use white text there and dark text in the pale middle band.
   const annotRange = effectiveZmax - effectiveZmin;
+
+  // pos in [0,1] maps a value linearly onto the colorscale range.
+  // We calculate the threshold positions where the background becomes dark
+  // enough for white text to pass WCAG AA contrast (4.5:1), based on the
+  // actual stop colours used in buildDivergingColorscale:
+  //   pos=0            → deep blue  #1e40af  (L≈0.071)  ← white text needed
+  //   pos=posNeutral*½ → light blue #93c5fd  (L≈0.540)  ← dark text
+  //   pos=posNeutral   → white      #f8fafc             ← dark text
+  //   pos=posNeutral + (1-p)*0.35 → pale yellow #fde68a ← dark text
+  //   pos=posNeutral + (1-p)*0.65 → orange #f97316 (L≈0.322) ← dark text
+  //   pos=1            → deep red   #b2182b  (L≈0.103)  ← white text needed
+  //
+  // From luminance interpolation: white text wins at ~20% into the blue band
+  // and ~65% of the way from the orange stop to deep red.
+  let lowDarkThreshold: number;
+  let highDarkThreshold: number;
+
+  if (divideAt !== undefined && annotRange > 0) {
+    const posNeutral = Math.max(0.02, Math.min(0.98, (divideAt - effectiveZmin) / annotRange));
+    // Blue end: ~20% through the deep-blue → light-blue band
+    lowDarkThreshold = posNeutral * 0.20;
+    // Red end: 65% of the way from the orange stop toward deep red
+    const posOrange = posNeutral + (1 - posNeutral) * 0.65;
+    highDarkThreshold = posOrange + 0.65 * (1 - posOrange);
+  } else {
+    // Default symmetric colorscale thresholds
+    lowDarkThreshold = 0.15;
+    highDarkThreshold = 0.85;
+  }
+
   const annotTextColor = (val: number): string => {
     const pos = annotRange > 0 ? (val - effectiveZmin) / annotRange : 0.5;
-    return pos < 0.22 || pos > 0.72 ? "#ffffff" : "#1f2937";
+    // pos < 0 → clamped to deep blue; pos > 1 → clamped to deep red — both need white text
+    return pos < lowDarkThreshold || pos > highDarkThreshold ? "#ffffff" : "#1f2937";
   };
 
   const annotations: Partial<Plotly.Annotations>[] = showAnnotations
