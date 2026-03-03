@@ -381,6 +381,47 @@ export interface PetroleumData {
 }
 
 // ---------------------------------------------------------------------------
+// PLFS Quarterly types
+// ---------------------------------------------------------------------------
+
+/** Gender breakdown for a single sector (male / female / person total) */
+export interface PLFSGenderValues {
+  male: number | null;
+  female: number | null;
+  person: number | null;
+}
+
+/** One indicator's data split by sector for a single quarter */
+export interface PLFSSectorValues {
+  urban: PLFSGenderValues;
+  /** null = not released for this quarter (urban-only bulletin) */
+  rural: PLFSGenderValues | null;
+  /** null = not released for this quarter */
+  combined: PLFSGenderValues | null;
+}
+
+/** A single quarter's full snapshot (LFPR, WPR, UR) */
+export interface PLFSQuarterPoint {
+  year: string;       // Fiscal year, e.g. "2022-23"
+  quarter: string;    // e.g. "APR-JUN" | "JUL-SEP" | "OCT-DEC" | "JAN-MAR"
+  quarterNum: number; // 1=Q1 (APR-JUN) … 4=Q4 (JAN-MAR)
+  date: string;       // "YYYY-MM" — start-month of the quarter for chart x-axis
+  label: string;      // Human-readable, e.g. "Apr–Jun 2022"
+  lfpr: PLFSSectorValues;
+  wpr: PLFSSectorValues;
+  ur: PLFSSectorValues;
+}
+
+/** Complete PLFS quarterly dataset (generated from MoSPI quarterly bulletin) */
+export interface PLFSQuarterlyData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  quarters: PLFSQuarterPoint[];
+}
+
+// ---------------------------------------------------------------------------
 // WPI (Wholesale Price Index) — Monthly types
 // ---------------------------------------------------------------------------
 

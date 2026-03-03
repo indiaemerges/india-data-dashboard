@@ -1,0 +1,578 @@
+{
+  "source": "MoSPI, PLFS Quarterly Bulletin (frequency_code=2)",
+  "sourceUrl": "https://www.mospi.gov.in/publication/quarterly-bulletin-periodic-labour-force-survey-plfs",
+  "lastUpdated": "2025-26 Q3 (Oct–Dec 2025)",
+  "notes": "Urban-only data from 2017-18 to 2023-24 and 2024-25 Q2/Q3. Rural and rural+urban (combined) sectors available from 2024-25 Q1 onwards. Age group: 15 years and above. Usual status (PS+SS). APR-JUN quarters for 2018-19 and 2019-20 show anomalously high UR (~20%) and low WPR — these are sourced directly from the MoSPI API and likely reflect early quarterly bulletin data quality issues. 2020-21 Q2 female urban LFPR is null due to a typographic error ('20J') in the source API. 2025-26 Q1 (APR-JUN 2025) has not yet been released.",
+  "quarters": [
+    {
+      "year": "2017-18", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2017-04", "label": "Apr–Jun 2017",
+      "lfpr": {
+        "urban":    { "male": 73.6, "female": 18.8, "person": 46.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.0, "female": 16.4, "person": 41.8 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 8.9, "female": 12.7, "person": 9.7 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2018-19", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2018-04", "label": "Apr–Jun 2018",
+      "lfpr": {
+        "urban":    { "male": 73.3, "female": 19.0, "person": 46.5 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.3, "female": 16.9, "person": 42.4 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 20.1, "female": 27.4, "person": 21.6 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2018-19", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2018-07", "label": "Jul–Sep 2018",
+      "lfpr": {
+        "urban":    { "male": 73.5, "female": 19.6, "person": 46.7 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.0, "female": 17.1, "person": 42.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 8.9, "female": 12.6, "person": 9.6 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2018-19", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2018-10", "label": "Oct–Dec 2018",
+      "lfpr": {
+        "urban":    { "male": 73.6, "female": 19.5, "person": 46.8 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 66.9, "female": 17.2, "person": 42.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 9.0, "female": 12.1, "person": 9.7 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2018-19", "quarter": "JAN-MAR", "quarterNum": 4,
+      "date": "2019-01", "label": "Jan–Mar 2019",
+      "lfpr": {
+        "urban":    { "male": 73.4, "female": 19.1, "person": 46.5 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.0, "female": 16.9, "person": 42.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 8.6, "female": 11.6, "person": 9.2 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2019-20", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2019-04", "label": "Apr–Jun 2019",
+      "lfpr": {
+        "urban":    { "male": 71.7, "female": 19.6, "person": 45.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 56.9, "female": 15.5, "person": 36.4 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 20.7, "female": 21.1, "person": 20.8 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2019-20", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2019-07", "label": "Jul–Sep 2019",
+      "lfpr": {
+        "urban":    { "male": 73.9, "female": 20.3, "person": 47.3 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 68.0, "female": 18.1, "person": 43.4 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 8.0, "female": 9.7, "person": 8.1 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2019-20", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2019-10", "label": "Oct–Dec 2019",
+      "lfpr": {
+        "urban":    { "male": 73.8, "female": 21.1, "person": 47.8 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 68.4, "female": 19.0, "person": 44.1 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 7.3, "female": 9.8, "person": 7.8 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2019-20", "quarter": "JAN-MAR", "quarterNum": 4,
+      "date": "2020-01", "label": "Jan–Mar 2020",
+      "lfpr": {
+        "urban":    { "male": 73.7, "female": 21.9, "person": 48.1 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.3, "female": 19.6, "person": 43.7 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 8.6, "female": 10.6, "person": 9.1 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2020-21", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2020-04", "label": "Apr–Jun 2020",
+      "lfpr": {
+        "urban":    { "male": 73.1, "female": 20.1, "person": 46.8 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 64.2, "female": 17.2, "person": 40.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 12.2, "female": 14.3, "person": 12.6 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2020-21", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2020-07", "label": "Jul–Sep 2020",
+      "lfpr": {
+        "urban":    { "male": 73.5, "female": null, "person": 47.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 64.3, "female": 17.1, "person": 40.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 12.6, "female": 15.8, "person": 13.2 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2020-21", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2020-10", "label": "Oct–Dec 2020",
+      "lfpr": {
+        "urban":    { "male": 73.6, "female": 20.6, "person": 47.3 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 66.7, "female": 17.9, "person": 42.4 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 9.5, "female": 13.1, "person": 10.3 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2020-21", "quarter": "JAN-MAR", "quarterNum": 4,
+      "date": "2021-01", "label": "Jan–Mar 2021",
+      "lfpr": {
+        "urban":    { "male": 73.5, "female": 21.2, "person": 47.5 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.2, "female": 18.7, "person": 43.1 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 8.6, "female": 11.0, "person": 9.3 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2021-22", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2021-04", "label": "Apr–Jun 2021",
+      "lfpr": {
+        "urban":    { "male": 73.5, "female": 20.9, "person": 47.5 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 68.3, "female": 18.9, "person": 43.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 7.1, "female": 9.5, "person": 7.6 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2021-22", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2021-07", "label": "Jul–Sep 2021",
+      "lfpr": {
+        "urban":    { "male": 73.5, "female": 19.9, "person": 46.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 66.6, "female": 17.6, "person": 42.0 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 9.3, "female": 11.6, "person": 9.8 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2021-22", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2021-10", "label": "Oct–Dec 2021",
+      "lfpr": {
+        "urban":    { "male": 73.9, "female": 20.2, "person": 47.3 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.8, "female": 18.1, "person": 43.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 8.3, "female": 10.5, "person": 8.7 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2021-22", "quarter": "JAN-MAR", "quarterNum": 4,
+      "date": "2022-01", "label": "Jan–Mar 2022",
+      "lfpr": {
+        "urban":    { "male": 73.4, "female": 20.4, "person": 47.3 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 67.7, "female": 18.3, "person": 43.4 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 7.7, "female": 10.1, "person": 8.2 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2022-23", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2022-04", "label": "Apr–Jun 2022",
+      "lfpr": {
+        "urban":    { "male": 73.5, "female": 23.2, "person": 48.8 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 69.2, "female": 21.1, "person": 45.5 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 5.9, "female": 9.1, "person": 6.6 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2022-23", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2022-07", "label": "Jul–Sep 2022",
+      "lfpr": {
+        "urban":    { "male": 73.4, "female": 21.7, "person": 47.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 68.6, "female": 19.7, "person": 44.5 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 6.6, "female": 9.4, "person": 7.2 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2022-23", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2022-10", "label": "Oct–Dec 2022",
+      "lfpr": {
+        "urban":    { "male": 73.3, "female": 22.3, "person": 48.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 68.6, "female": 20.2, "person": 44.7 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 6.5, "female": 9.6, "person": 7.2 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2022-23", "quarter": "JAN-MAR", "quarterNum": 4,
+      "date": "2023-01", "label": "Jan–Mar 2023",
+      "lfpr": {
+        "urban":    { "male": 73.5, "female": 22.7, "person": 48.5 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 69.1, "female": 20.6, "person": 45.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 6.0, "female": 9.2, "person": 6.8 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2023-24", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2023-04", "label": "Apr–Jun 2023",
+      "lfpr": {
+        "urban":    { "male": 74.7, "female": 25.2, "person": 50.1 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 70.4, "female": 23.0, "person": 46.8 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 5.8, "female": 9.0, "person": 6.6 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2023-24", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2023-07", "label": "Jul–Sep 2023",
+      "lfpr": {
+        "urban":    { "male": 73.8, "female": 24.0, "person": 49.3 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 69.4, "female": 21.9, "person": 46.0 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 6.0, "female": 8.6, "person": 6.6 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2023-24", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2023-10", "label": "Oct–Dec 2023",
+      "lfpr": {
+        "urban":    { "male": 74.1, "female": 25.0, "person": 49.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 69.8, "female": 22.9, "person": 46.6 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 5.8, "female": 8.6, "person": 6.5 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2023-24", "quarter": "JAN-MAR", "quarterNum": 4,
+      "date": "2024-01", "label": "Jan–Mar 2024",
+      "lfpr": {
+        "urban":    { "male": 74.4, "female": 25.6, "person": 50.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 69.8, "female": 23.4, "person": 46.9 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 6.1, "female": 8.5, "person": 6.7 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2024-25", "quarter": "APR-JUN", "quarterNum": 1,
+      "date": "2024-04", "label": "Apr–Jun 2024",
+      "lfpr": {
+        "urban":    { "male": 75.1, "female": 25.6, "person": 50.6 },
+        "rural":    { "male": 78.4, "female": 37.0, "person": 57.1 },
+        "combined": { "male": 77.3, "female": 33.4, "person": 55.0 }
+      },
+      "wpr": {
+        "urban":    { "male": 70.5, "female": 23.3, "person": 47.1 },
+        "rural":    { "male": 74.5, "female": 35.4, "person": 54.4 },
+        "combined": { "male": 73.1, "female": 31.6, "person": 52.0 }
+      },
+      "ur": {
+        "urban":    { "male": 6.1, "female": 8.9, "person": 6.8 },
+        "rural":    { "male": 5.0, "female": 4.3, "person": 4.8 },
+        "combined": { "male": 5.4, "female": 5.4, "person": 5.4 }
+      }
+    },
+    {
+      "year": "2024-25", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2024-07", "label": "Jul–Sep 2024",
+      "lfpr": {
+        "urban":    { "male": 75.0, "female": 25.5, "person": 50.4 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 70.7, "female": 23.4, "person": 47.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 5.7, "female": 8.4, "person": 6.4 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2024-25", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2024-10", "label": "Oct–Dec 2024",
+      "lfpr": {
+        "urban":    { "male": 75.4, "female": 25.2, "person": 50.4 },
+        "rural":    null,
+        "combined": null
+      },
+      "wpr": {
+        "urban":    { "male": 70.9, "female": 23.2, "person": 47.2 },
+        "rural":    null,
+        "combined": null
+      },
+      "ur": {
+        "urban":    { "male": 5.8, "female": 8.1, "person": 6.4 },
+        "rural":    null,
+        "combined": null
+      }
+    },
+    {
+      "year": "2025-26", "quarter": "JUL-SEP", "quarterNum": 2,
+      "date": "2025-07", "label": "Jul–Sep 2025",
+      "lfpr": {
+        "urban":    { "male": 75.3, "female": 25.8, "person": 50.7 },
+        "rural":    { "male": 78.2, "female": 37.5, "person": 57.2 },
+        "combined": { "male": 77.2, "female": 33.7, "person": 55.1 }
+      },
+      "wpr": {
+        "urban":    { "male": 70.7, "female": 23.5, "person": 47.2 },
+        "rural":    { "male": 74.6, "female": 36.0, "person": 54.7 },
+        "combined": { "male": 73.2, "female": 32.0, "person": 52.2 }
+      },
+      "ur": {
+        "urban":    { "male": 6.2, "female": 9.0, "person": 6.9 },
+        "rural":    { "male": 4.7, "female": 4.0, "person": 4.4 },
+        "combined": { "male": 5.2, "female": 5.2, "person": 5.2 }
+      }
+    },
+    {
+      "year": "2025-26", "quarter": "OCT-DEC", "quarterNum": 3,
+      "date": "2025-10", "label": "Oct–Dec 2025",
+      "lfpr": {
+        "urban":    { "male": 75.1, "female": 25.5, "person": 50.4 },
+        "rural":    { "male": 78.8, "female": 39.4, "person": 58.4 },
+        "combined": { "male": 77.6, "female": 34.9, "person": 55.8 }
+      },
+      "wpr": {
+        "urban":    { "male": 70.7, "female": 23.2, "person": 47.1 },
+        "rural":    { "male": 75.5, "female": 37.9, "person": 56.1 },
+        "combined": { "male": 73.9, "female": 33.1, "person": 53.1 }
+      },
+      "ur": {
+        "urban":    { "male": 5.9, "female": 9.0, "person": 6.7 },
+        "rural":    { "male": 4.2, "female": 3.6, "person": 4.0 },
+        "combined": { "male": 4.8, "female": 4.9, "person": 4.8 }
+      }
+    }
+  ]
+}
