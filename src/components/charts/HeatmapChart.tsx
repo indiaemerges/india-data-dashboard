@@ -127,8 +127,12 @@ export default function HeatmapChart({
     },
     // Reverse y-axis so the first element of `y` appears at the TOP
     // (e.g. newest year at top for a year × month seasonal matrix).
+    // Also override the base theme's separatethousands:true so year labels
+    // like "2014" don't render as "2,014".
     yaxis: {
       autorange: "reversed" as const,
+      separatethousands: false,
+      tickformat: "d",  // integer — suppresses thousands comma on numeric labels
     },
     margin: { t: 10, b: 50, l: 100, r: 80 },
   };

@@ -94,17 +94,15 @@ function inflationColor(value: number | null): string {
   return "text-blue-600 dark:text-blue-400"; // deflation
 }
 
-// CPI colour scale: centred at 4% (RBI target midpoint).
-// Blue = deflation, pale yellow ≈ 4%, deep red = very high inflation.
-// zmin=-12, zmid=4, zmax=20 → symmetric ±16 around 4%.
+// CPI colour scale: symmetric around 0 (zmin=-12.5, zmid=0, zmax=+12.5).
+// Blue = deflation, near-white = zero, yellow = moderate, red = high inflation.
 const CPI_COLORSCALE: [number, string][] = [
-  [0,    "#1e40af"],  // deep blue   (deflation / strongly negative)
-  [0.25, "#60a5fa"],  // light blue  (~-8%)
-  [0.45, "#d1fae5"],  // pale green  (~2%)
-  [0.5,  "#fef9c3"],  // pale yellow (4% — RBI target midpoint)
-  [0.6,  "#fed7aa"],  // peach       (~7%)
-  [0.75, "#f97316"],  // orange      (~12%)
-  [1,    "#991b1b"],  // deep red    (>16%)
+  [0,    "#1e40af"],  // deep blue   (-12.5% — strong deflation)
+  [0.3,  "#93c5fd"],  // light blue  (~-4%)
+  [0.5,  "#f0fdf4"],  // very pale   (0% — neutral)
+  [0.65, "#fde68a"],  // yellow      (~+4% — RBI target zone)
+  [0.8,  "#f97316"],  // orange      (~+7%)
+  [1,    "#991b1b"],  // deep red    (+12.5% — high inflation)
 ];
 
 // ── Dashboard ─────────────────────────────────────────────────────────────────
@@ -311,13 +309,13 @@ export default function InflationDashboard() {
               x={generalHeatmap.x}
               y={generalHeatmap.y}
               colorscale={CPI_COLORSCALE}
-              zmid={4}
-              zmin={-12}
-              zmax={20}
+              zmid={0}
+              zmin={-12.5}
+              zmax={12.5}
               valueUnit="%"
               valuePrecision={1}
               title="CPI Inflation Calendar (Seasonal Heatmap)"
-              subtitle="Each cell = YoY % for that month. Newest year at top. Colour: blue = deflation, pale = near 4% target, red = high inflation"
+              subtitle="Each cell = YoY % for that month. Newest year at top. Scale: −12.5% to +12.5%, centred at 0%"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
               height={380}
@@ -359,14 +357,14 @@ export default function InflationDashboard() {
               x={foodHeatmap.x}
               y={foodHeatmap.y}
               colorscale={CPI_COLORSCALE}
-              zmid={4}
-              zmin={-20}
-              zmax={28}
+              zmid={0}
+              zmin={-12.5}
+              zmax={12.5}
               valueUnit="%"
               valuePrecision={1}
               showAnnotations={true}
               title="Food Sub-groups — Annual Average Inflation"
-              subtitle="Each cell = annual average YoY % for that food category. Highlights persistent inflators vs. seasonal deflators"
+              subtitle="Each cell = annual average YoY % for that food category. Scale: −12.5% to +12.5% (values outside range are clamped to max colour)"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
               height={320}
