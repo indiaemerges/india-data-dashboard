@@ -305,11 +305,12 @@ export default function InflationDashboard() {
               zmax={12.5}
               valueUnit="%"
               valuePrecision={1}
+              showAnnotations={true}
               title="CPI Inflation Calendar (Seasonal Heatmap)"
               subtitle="Each cell = YoY % for that month. Newest year at top. Blue = below 4.5% · White = 4.5% · Red = +12.5%"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
-              height={380}
+              height={460}
             />
           )}
 

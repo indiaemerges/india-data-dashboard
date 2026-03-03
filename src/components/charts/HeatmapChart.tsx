@@ -119,27 +119,22 @@ export default function HeatmapChart({
 }: HeatmapChartProps) {
   const fmt = (v: number) => v.toFixed(valuePrecision) + valueUnit;
 
-  // ── Resolve colorscale and bounds when divideAt is used ──────────────────
+  // ── Compute effective data bounds (used for colorscale & annotation contrast) ──
+  const allValues = z
+    .flat()
+    .filter((v): v is number => v !== null && isFinite(v));
+  const dataMin = allValues.length > 0 ? Math.min(...allValues) : -12.5;
+  const dataMax = allValues.length > 0 ? Math.max(...allValues) : 12.5;
+  const effectiveZmin = zmin !== undefined ? zmin : dataMin;
+  const effectiveZmax = zmax !== undefined ? zmax : dataMax;
+
+  // ── Resolve colorscale when divideAt is used ──────────────────────────────
   let resolvedColorscale: Plotly.ColorScale = colorscale;
   let resolvedZmid: number | undefined = zmid;
-  let resolvedZmin: number | undefined = zmin;
-  let resolvedZmax: number | undefined = zmax;
 
   if (divideAt !== undefined) {
-    // Compute effective data bounds
-    const allValues = z
-      .flat()
-      .filter((v): v is number => v !== null && isFinite(v));
-    const dataMin = allValues.length > 0 ? Math.min(...allValues) : -12.5;
-    const dataMax = allValues.length > 0 ? Math.max(...allValues) : 12.5;
-
-    const ezmin = zmin !== undefined ? zmin : dataMin;
-    const ezmax = zmax !== undefined ? zmax : dataMax;
-
-    resolvedZmin = ezmin;
-    resolvedZmax = ezmax;
     resolvedZmid = undefined;  // let the custom colorscale handle centering
-    resolvedColorscale = buildDivergingColorscale(ezmin, ezmax, divideAt);
+    resolvedColorscale = buildDivergingColorscale(effectiveZmin, effectiveZmax, divideAt);
   }
 
   // ── Plotly heatmap trace ──────────────────────────────────────────────────
@@ -150,8 +145,8 @@ export default function HeatmapChart({
     z,
     colorscale: resolvedColorscale,
     ...(resolvedZmid !== undefined ? { zmid: resolvedZmid } : {}),
-    ...(resolvedZmin !== undefined ? { zmin: resolvedZmin } : {}),
-    ...(resolvedZmax !== undefined ? { zmax: resolvedZmax } : {}),
+    zmin: effectiveZmin,
+    zmax: effectiveZmax,
     colorbar: {
       title: { text: valueUnit, side: "right" as const },
       ticksuffix: valueUnit,
@@ -167,7 +162,16 @@ export default function HeatmapChart({
     showscale: true,
   };
 
-  // ── Optional cell annotations ─────────────────────────────────────────────
+  // ── Optional cell annotations with contrast-aware text colour ─────────────
+  // pos in [0, 1] maps a value onto the colorscale range.
+  // The dark regions are near 0 (deep blue) and near 1 (deep red/orange),
+  // so we use white text there and dark text in the pale middle band.
+  const annotRange = effectiveZmax - effectiveZmin;
+  const annotTextColor = (val: number): string => {
+    const pos = annotRange > 0 ? (val - effectiveZmin) / annotRange : 0.5;
+    return pos < 0.22 || pos > 0.72 ? "#ffffff" : "#1f2937";
+  };
+
   const annotations: Partial<Plotly.Annotations>[] = showAnnotations
     ? y.flatMap((rowLabel, ri) =>
         x.map((colLabel, ci) => {
@@ -177,7 +181,7 @@ export default function HeatmapChart({
             y: rowLabel,
             text: val != null ? fmt(val) : "",
             showarrow: false,
-            font: { size: 9, color: "#1f2937" },
+            font: { size: 9, color: val != null ? annotTextColor(val) : "#1f2937" },
           } as Partial<Plotly.Annotations>;
         })
       )
