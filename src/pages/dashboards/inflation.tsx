@@ -94,8 +94,8 @@ function inflationColor(value: number | null): string {
   return "text-blue-600 dark:text-blue-400"; // deflation
 }
 
-// Heatmap colour scale is computed dynamically by HeatmapChart via divideAt={0}:
-// deep blue at data-minimum → white/neutral at 0% → deep red at zmax (+12.5%).
+// Heatmap colour scale is computed dynamically by HeatmapChart via divideAt={4.5}:
+// deep blue at data-minimum → white/neutral at 4.5% (RBI mid-target) → deep red at +12.5%.
 // No static colorscale constant needed here.
 
 // ── Dashboard ─────────────────────────────────────────────────────────────────
@@ -301,12 +301,12 @@ export default function InflationDashboard() {
               z={generalHeatmap.z}
               x={generalHeatmap.x}
               y={generalHeatmap.y}
-              divideAt={0}
+              divideAt={4.5}
               zmax={12.5}
               valueUnit="%"
               valuePrecision={1}
               title="CPI Inflation Calendar (Seasonal Heatmap)"
-              subtitle="Each cell = YoY % for that month. Newest year at top. Blue = deflation · White = 0% · Red = +12.5%"
+              subtitle="Each cell = YoY % for that month. Newest year at top. Blue = below 4.5% · White = 4.5% · Red = +12.5%"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
               height={380}
@@ -347,13 +347,13 @@ export default function InflationDashboard() {
               z={foodHeatmap.z}
               x={foodHeatmap.x}
               y={foodHeatmap.y}
-              divideAt={0}
+              divideAt={4.5}
               zmax={12.5}
               valueUnit="%"
               valuePrecision={1}
               showAnnotations={true}
               title="Food Sub-groups — Annual Average Inflation"
-              subtitle="Each cell = annual average YoY % for that food category. Blue = deflation · White = 0% · Red = high inflation (capped at +12.5%)"
+              subtitle="Each cell = annual average YoY % for that food category. Blue = below 4.5% · White = 4.5% · Red = high inflation (capped at +12.5%)"
               source={MOSPI_CPI_SOURCE}
               sourceUrl={MOSPI_CPI_URL}
               height={320}
@@ -392,8 +392,8 @@ export default function InflationDashboard() {
               MoSPI CPI portal
             </a>
             . Inflation figures are YoY % change pre-computed by MoSPI. Coverage: February 2014 –
-            December 2025. Heatmap colours: deep blue at the data minimum, white at 0%, deep red at
-            +12.5% (values above +12.5% are clamped).{" "}
+            December 2025. Heatmap colours: deep blue at the data minimum, white/neutral at 4.5%
+            (midpoint of RBI&apos;s 2–6% tolerance band), deep red at +12.5%.{" "}
             <strong>WPI</strong> data (base year 2011-12=100) covers Headline, Primary Articles,
             Fuel &amp; Power, and Food Index from the{" "}
             <a
