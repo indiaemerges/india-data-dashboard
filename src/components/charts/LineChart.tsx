@@ -55,12 +55,28 @@ export default function LineChart({
     firstSeriesDates.length > 0 &&
     /^\d{4}-\d{2} Q\d$/.test(firstSeriesDates[0]);
 
-  // Detect fiscal-year strings like "2008-09", "2017-18".
-  // Plotly auto-parses "YYYY-MM" as a date (e.g. "2008-09" → Sep 2008).
-  // Years where the month part is ≤ 12 (Sep–Dec) render; month 13+ silently
-  // disappears, so a 2008-09→2023-24 range only shows the first 4 years.
-  // Forcing type:'category' tells Plotly to treat these as opaque labels.
-  const isFiscalYear =
+  // Detect Indian fiscal-year strings like "2008-09", "2017-18".
+  //
+  // The naive regex /^\d{4}-\d{2}$/ also matches monthly "YYYY-MM" strings
+  // (e.g. "2012-04"), which would force type:'category' on monthly charts and
+  // produce a tick for every single month.
+  //
+  // The distinguishing rule: for Indian fiscal years the two-digit suffix
+  // equals (YYYY + 1) mod 100.  e.g. 2008-09 → (2008+1)%100 = 9 ✓
+  //                                  2012-04 → (2012+1)%100 = 13 ≠ 4 ✗
+  const isFiscalYear = (() => {
+    if (firstSeriesDates.length === 0) return false;
+    const m = firstSeriesDates[0].match(/^(\d{4})-(\d{2})$/);
+    if (!m) return false;
+    return parseInt(m[2], 10) === (parseInt(m[1], 10) + 1) % 100;
+  })();
+
+  // Detect calendar-monthly strings "YYYY-MM" that are NOT fiscal years.
+  // For these we apply an explicit 4-month tick interval so the axis stays
+  // readable regardless of how many months of data are loaded.
+  const isCalendarMonthly =
+    !isQuarterly &&
+    !isFiscalYear &&
     firstSeriesDates.length > 0 &&
     /^\d{4}-\d{2}$/.test(firstSeriesDates[0]);
 
@@ -114,14 +130,28 @@ export default function LineChart({
   // ── Build layout ───────────────────────────────────────────────────────
   const xaxisOverride: Partial<Plotly.LayoutAxis> = isQuarterly
     ? {
+        // Numeric index axis: one labeled tick per fiscal year at Q1.
         tickmode: "array" as const,
         tickvals: q1Entries.map(({ i }) => i),
         ticktext: q1Entries.map(({ d }) => d.replace(" Q1", "")),
         tickangle: -45,
       }
     : isFiscalYear
-      ? { type: "category" as const, tickangle: -45 }
-      : {};
+      ? {
+          // Category axis: Plotly must not try to parse "YYYY-YY" as a date.
+          type: "category" as const,
+          tickangle: -45,
+        }
+      : isCalendarMonthly
+        ? {
+            // Date axis with explicit 4-month interval so ~10 years of monthly
+            // data stays readable (≈30 ticks vs one per month which is ~150).
+            type: "date" as const,
+            dtick: "M4",
+            tickformat: "%b %Y",
+            tickangle: -45,
+          }
+        : {};
 
   const layout: Partial<Plotly.Layout> = {
     xaxis: xaxisOverride,
