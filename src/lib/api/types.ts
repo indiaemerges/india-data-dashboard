@@ -487,6 +487,45 @@ export interface WPIMonthlyData {
 }
 
 // ---------------------------------------------------------------------------
+// State-level PLFS data (generated from MoSPI PLFS annual API)
+// ---------------------------------------------------------------------------
+
+export interface PLFSStateSeries {
+  stateName: string;      // API state name (e.g. "Andhra Pradesh")
+  geoName: string;        // GeoJSON ST_NM match value (may differ for UTs)
+  ur_person: (number | null)[];    // Unemployment Rate (person, combined), parallel to years[]
+  lfpr_female: (number | null)[];  // Female LFPR (combined), parallel to years[]
+}
+
+export interface PLFSStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];          // Fiscal years, e.g. ["2017-18", ..., "2023-24"]
+  states: PLFSStateSeries[];
+}
+
+// ---------------------------------------------------------------------------
+// State-level CPI data (generated from MoSPI CPI API)
+// ---------------------------------------------------------------------------
+
+export interface CPIStateSeries {
+  stateName: string;
+  geoName: string;
+  inflation: (number | null)[]; // YoY % change (General/Combined), parallel to months[]
+}
+
+export interface CPIStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  months: string[];         // "YYYY-MM" labels, e.g. ["2024-01", ..., "2024-12"]
+  states: CPIStateSeries[];
+}
+
+// ---------------------------------------------------------------------------
 // CPI (Consumer Price Index) — Monthly types
 // ---------------------------------------------------------------------------
 

@@ -12,7 +12,7 @@ export interface DatasetEntry {
   chartTypes: string[];
   dashboardPath: string;
   icon: string; // Emoji icon for display
-  category: "economy" | "industry" | "energy" | "demographics" | "prices" | "social";
+  category: "economy" | "industry" | "energy" | "demographics" | "prices" | "social" | "regional";
 }
 
 export const datasets: DatasetEntry[] = [
@@ -181,6 +181,21 @@ export const datasets: DatasetEntry[] = [
     icon: "🏦",
     category: "economy",
   },
+  {
+    id: "state-maps",
+    title: "State Maps",
+    description:
+      "Choropleth maps of state-wise unemployment rate, female labour force participation, and CPI inflation across all Indian states and UTs.",
+    source: "MoSPI PLFS + CPI",
+    sourceUrl: "https://www.mospi.gov.in/",
+    dataType: "static-json",
+    updateFrequency: "Annual / Monthly",
+    tags: ["states", "choropleth", "map", "unemployment", "lfpr", "cpi", "regional"],
+    chartTypes: ["choropleth"],
+    dashboardPath: "/dashboards/state-maps",
+    icon: "🗺️",
+    category: "regional",
+  },
 ];
 
 // Group datasets by category
@@ -203,4 +218,5 @@ export const categoryLabels: Record<string, string> = {
   demographics: "Demographics & Society",
   prices: "Prices & Inflation",
   social: "Society & Human Development",
+  regional: "Regional Analysis",
 };
