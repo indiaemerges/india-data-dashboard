@@ -27,9 +27,6 @@ const HD_INDICATORS = [
   // Gender
   WORLD_BANK_INDICATORS.MALE_LFPR,
   WORLD_BANK_INDICATORS.FEMALE_LFPR,
-  // Poverty & Inequality
-  WORLD_BANK_INDICATORS.POVERTY_RATIO,
-  WORLD_BANK_INDICATORS.GINI_INDEX,
 ];
 
 const SOURCE_LABEL = "World Bank WDI";
@@ -114,15 +111,6 @@ function SectionHeader({ title, desc }: { title: string; desc?: string }) {
   );
 }
 
-function SparsityNote() {
-  return (
-    <p className="text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg px-3 py-2">
-      ⚠ Poverty and inequality surveys are conducted infrequently — India data
-      available for select years only.
-    </p>
-  );
-}
-
 // ── Dashboard ─────────────────────────────────────────────────────────────────
 
 export default function HumanDevelopmentDashboard() {
@@ -172,10 +160,6 @@ export default function HumanDevelopmentDashboard() {
   const maleLfpr       = get(wbSeries, WB.MALE_LFPR);
   const femaleLfpr     = get(wbSeries, WB.FEMALE_LFPR);
 
-  // Poverty
-  const poverty        = get(wbSeries, WB.POVERTY_RATIO);
-  const gini           = get(wbSeries, WB.GINI_INDEX);
-
   // ── Rename series labels for charts ───────────────────────────────────────
   function renamed(s: DataSeries | undefined, label: string): DataSeries | undefined {
     if (!s) return undefined;
@@ -197,8 +181,6 @@ export default function HumanDevelopmentDashboard() {
   const gpiR            = renamed(gpi,             "Gender Parity Index (Primary+Secondary)");
   const maleLfprR       = renamed(maleLfpr,        "Male LFPR");
   const femaleLfprR     = renamed(femaleLfpr,      "Female LFPR");
-  const povertyR        = renamed(poverty,         "Poverty Headcount ($2.15/day)");
-  const giniR           = renamed(gini,            "Gini Index");
 
   function seriesOf(...items: (DataSeries | undefined)[]): DataSeries[] {
     return items.filter((s): s is DataSeries => s !== undefined);
@@ -210,7 +192,7 @@ export default function HumanDevelopmentDashboard() {
         <title>Human Development · India Data Hub</title>
         <meta
           name="description"
-          content="Education, health, gender equality, and poverty indicators for India from World Bank WDI"
+          content="Education, health, and gender equality indicators for India from World Bank WDI"
         />
       </Head>
 
@@ -221,7 +203,7 @@ export default function HumanDevelopmentDashboard() {
             Human Development
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
-            Education · Health · Gender · Poverty &amp; Inequality ·{" "}
+            Education · Health · Gender Equality ·{" "}
             <a
               href={SOURCE_URL}
               target="_blank"
@@ -359,37 +341,9 @@ export default function HumanDevelopmentDashboard() {
           </div>
         </section>
 
-        {/* ── Section 4: Poverty & Inequality ── */}
-        <section>
-          <SectionHeader
-            title="Poverty &amp; Inequality"
-            desc="Poverty headcount and income distribution"
-          />
-          <SparsityNote />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-            <LineChart
-              series={seriesOf(povertyR)}
-              title="Poverty Headcount Ratio"
-              subtitle="Population below $2.15/day (2017 PPP), % of total"
-              source={SOURCE_LABEL}
-              sourceUrl={SOURCE_URL}
-              yAxisTitle="%"
-            />
-            <LineChart
-              series={seriesOf(giniR)}
-              title="Gini Index"
-              subtitle="Income inequality — 0 = perfect equality, 100 = perfect inequality"
-              source={SOURCE_LABEL}
-              sourceUrl={SOURCE_URL}
-              yAxisTitle="Gini coefficient"
-            />
-          </div>
-        </section>
-
         <p className="text-xs text-gray-400 dark:text-gray-500 pb-4">
           Source: World Bank World Development Indicators (WDI). Data for India.
-          Some indicators updated with a 1–3 year lag; poverty and Gini
-          estimates available only for survey years.
+          Some indicators updated with a 1–3 year lag.
         </p>
       </div>
     </>
