@@ -10,40 +10,65 @@ import {
   cpiStateLatest,
 } from "@/lib/hooks/useMospiState";
 
-const PLFS_SOURCE = "MoSPI PLFS";
-const PLFS_URL = "https://www.mospi.gov.in/";
-const CPI_SOURCE = "MoSPI CPI";
-const CPI_URL = "https://www.mospi.gov.in/";
+// ── Indicator catalogue ────────────────────────────────────────────────────────
 
-// ── Month label formatting ─────────────────────────────────────────────────────
+const INDICATORS = [
+  {
+    id: "ur_person",
+    label: "Unemployment Rate",
+    description: "% of labour force · all persons · combined (rural + urban) · age 15+ · PS+SS",
+    source: "MoSPI PLFS",
+    sourceUrl: "https://www.mospi.gov.in/",
+    colorscale: "YlOrRd",
+    reversescale: false,
+    unit: "%",
+    dataset: "plfs" as const,
+    field: "ur_person" as const,
+  },
+  {
+    id: "lfpr_female",
+    label: "Female LFPR",
+    description: "Female labour force participation · % of female population aged 15+ · combined",
+    source: "MoSPI PLFS",
+    sourceUrl: "https://www.mospi.gov.in/",
+    colorscale: "YlGn",
+    reversescale: false,
+    unit: "%",
+    dataset: "plfs" as const,
+    field: "lfpr_female" as const,
+  },
+  {
+    id: "cpi_general",
+    label: "CPI Inflation",
+    description: "Headline CPI (General) · YoY % change · combined (rural + urban) · base year 2012=100",
+    source: "MoSPI CPI",
+    sourceUrl: "https://www.mospi.gov.in/",
+    colorscale: "YlOrRd",
+    reversescale: false,
+    unit: "%",
+    dataset: "cpi" as const,
+    field: "inflation" as const,
+  },
+] as const;
+
+type IndicatorId = (typeof INDICATORS)[number]["id"];
+
+// ── Helpers ────────────────────────────────────────────────────────────────────
+
 function fmtMonth(yyyyMM: string): string {
   const [y, m] = yyyyMM.split("-");
-  const months = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-  ];
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   return `${months[parseInt(m, 10) - 1]} ${y}`;
 }
 
-// ── Helper: compute min/max ignoring nulls, rounded to nice numbers ───────────
-function dataRange(
-  vals: (number | null)[]
-): { min: number; max: number } {
+function dataRange(vals: (number | null)[]): { min: number; max: number } {
   const valid = vals.filter((v): v is number => v !== null);
   if (valid.length === 0) return { min: 0, max: 10 };
   return { min: Math.floor(Math.min(...valid)), max: Math.ceil(Math.max(...valid)) };
 }
 
-// ── Small selector chip ────────────────────────────────────────────────────────
-function YearChip({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
+// ── Chip button ────────────────────────────────────────────────────────────────
+function Chip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
@@ -59,67 +84,75 @@ function YearChip({
 }
 
 // ── Dashboard ──────────────────────────────────────────────────────────────────
+
 export default function StateMapsPage() {
-  const [yearIdx, setYearIdx] = useState<number | null>(null); // null = use latest
+  const [indicatorId, setIndicatorId] = useState<IndicatorId>("ur_person");
+  const [periodIdx, setPeriodIdx] = useState<number | null>(null); // null = latest
 
-  const {
-    data: plfsData,
-    isLoading: plfsLoading,
-    error: plfsError,
-    refetch: plfsRefetch,
-  } = usePLFSStateData();
-
-  const {
-    data: cpiData,
-    isLoading: cpiLoading,
-    error: cpiError,
-    refetch: cpiRefetch,
-  } = useCPIStateData();
+  const { data: plfsData, isLoading: plfsLoading, error: plfsError, refetch: plfsRefetch } =
+    usePLFSStateData();
+  const { data: cpiData, isLoading: cpiLoading, error: cpiError, refetch: cpiRefetch } =
+    useCPIStateData();
 
   if (plfsLoading || cpiLoading) {
     return <LoadingSpinner message="Loading state-level data…" />;
   }
-
   if (plfsError || !plfsData) {
     return (
       <ErrorDisplay
-        message={
-          plfsError instanceof Error
-            ? plfsError.message
-            : "Failed to load PLFS state data"
-        }
+        message={plfsError instanceof Error ? plfsError.message : "Failed to load PLFS state data"}
         onRetry={() => plfsRefetch()}
       />
     );
   }
-
   if (cpiError || !cpiData) {
     return (
       <ErrorDisplay
-        message={
-          cpiError instanceof Error
-            ? cpiError.message
-            : "Failed to load CPI state data"
-        }
+        message={cpiError instanceof Error ? cpiError.message : "Failed to load CPI state data"}
         onRetry={() => cpiRefetch()}
       />
     );
   }
 
-  // ── Resolve selected year index ─────────────────────────────────────────────
-  const resolvedYearIdx =
-    yearIdx !== null ? yearIdx : plfsData.years.length - 1;
-  const selectedYear = plfsData.years[resolvedYearIdx];
+  // ── Active indicator config ────────────────────────────────────────────────
+  const indicator = INDICATORS.find((ind) => ind.id === indicatorId)!;
 
-  // ── Extract data slices ─────────────────────────────────────────────────────
-  const urSlice = plfsStateSlice(plfsData, resolvedYearIdx, "ur_person");
-  const lfprSlice = plfsStateSlice(plfsData, resolvedYearIdx, "lfpr_female");
-  const { names: cpiNames, values: cpiValues, monthLabel } =
-    cpiStateLatest(cpiData);
+  // ── Period options based on dataset ───────────────────────────────────────
+  const periods: string[] =
+    indicator.dataset === "plfs" ? plfsData.years : cpiData.months.map(fmtMonth);
 
-  const urRange = dataRange(urSlice.values);
-  const lfprRange = dataRange(lfprSlice.values);
-  const cpiRange = dataRange(cpiValues);
+  const resolvedPeriodIdx =
+    periodIdx !== null && periodIdx < periods.length
+      ? periodIdx
+      : periods.length - 1;
+
+  // Reset period to latest when switching indicators
+  function handleIndicatorChange(id: IndicatorId) {
+    setIndicatorId(id);
+    setPeriodIdx(null);
+  }
+
+  // ── Resolve map data ───────────────────────────────────────────────────────
+  let mapStates: string[];
+  let mapValues: (number | null)[];
+  let periodLabel: string;
+
+  if (indicator.dataset === "plfs") {
+    const slice = plfsStateSlice(plfsData, resolvedPeriodIdx, indicator.field);
+    mapStates = slice.names;
+    mapValues = slice.values;
+    periodLabel = plfsData.years[resolvedPeriodIdx];
+  } else {
+    const { names, values, monthLabel } = cpiStateLatest(cpiData);
+    // Use resolvedPeriodIdx into cpiData.months
+    const monthValues = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
+    mapStates = cpiData.states.map((s) => s.geoName);
+    mapValues = monthValues;
+    periodLabel = fmtMonth(cpiData.months[resolvedPeriodIdx] ?? monthLabel);
+    void names; void values; // suppress unused-var
+  }
+
+  const { min: zmin, max: zmax } = dataRange(mapValues);
 
   return (
     <>
@@ -127,133 +160,83 @@ export default function StateMapsPage() {
         <title>State Maps · India Data Hub</title>
         <meta
           name="description"
-          content="State-wise choropleth maps of unemployment, female labour force participation, and CPI inflation across India"
+          content="State-wise choropleth maps of unemployment, female LFPR, and CPI inflation across India"
         />
       </Head>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
+      <div className="max-w-5xl mx-auto px-4 py-6 space-y-4">
         {/* ── Page header ── */}
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            State Maps
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">State Maps</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
-            State-wise choropleth maps · Labour &amp; Prices ·{" "}
-            <a
-              href={PLFS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-orange-600 hover:underline"
-            >
-              MoSPI PLFS
-            </a>{" "}
-            &amp;{" "}
-            <a
-              href={CPI_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-orange-600 hover:underline"
-            >
-              CPI
-            </a>
+            State-wise indicators across all Indian states and UTs · MoSPI PLFS &amp; CPI
           </p>
         </div>
 
-        {/* ── Year selector (PLFS) ── */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-3">
-          <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-2 uppercase tracking-wider">
-            PLFS Year
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {plfsData.years.map((yr, i) => (
-              <YearChip
-                key={yr}
-                label={yr}
-                active={i === resolvedYearIdx}
-                onClick={() => setYearIdx(i)}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* ── PLFS maps ── */}
-        <section>
-          <div className="mb-3">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Labour Market · {selectedYear}
-            </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-              Combined (rural + urban), persons aged 15+, PS+SS basis
+        {/* ── Controls panel ── */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-4 space-y-4">
+          {/* Indicator dropdown */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+            <label
+              htmlFor="indicator-select"
+              className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider shrink-0 w-24"
+            >
+              Indicator
+            </label>
+            <select
+              id="indicator-select"
+              value={indicatorId}
+              onChange={(e) => handleIndicatorChange(e.target.value as IndicatorId)}
+              className="w-full sm:w-auto text-sm border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+            >
+              {INDICATORS.map((ind) => (
+                <option key={ind.id} value={ind.id}>
+                  {ind.label}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-400 dark:text-gray-500 sm:ml-2 hidden sm:block">
+              {indicator.description}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <ChoroplethMap
-              title="Unemployment Rate"
-              subtitle={`${selectedYear} · % of labour force · All persons`}
-              states={urSlice.names}
-              values={urSlice.values}
-              unit="%"
-              colorscale="YlOrRd"
-              zmin={urRange.min}
-              zmax={urRange.max}
-              source={PLFS_SOURCE}
-              sourceUrl={PLFS_URL}
-            />
-
-            <ChoroplethMap
-              title="Female Labour Force Participation"
-              subtitle={`${selectedYear} · % of female population aged 15+`}
-              states={lfprSlice.names}
-              values={lfprSlice.values}
-              unit="%"
-              colorscale="YlGn"
-              zmin={lfprRange.min}
-              zmax={lfprRange.max}
-              source={PLFS_SOURCE}
-              sourceUrl={PLFS_URL}
-            />
-          </div>
-        </section>
-
-        {/* ── CPI map ── */}
-        <section>
-          <div className="mb-3">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Inflation · {fmtMonth(monthLabel)}
-            </h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-              Headline CPI — General, combined (rural + urban), base year 2012=100
+          {/* Period chips */}
+          <div>
+            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+              {indicator.dataset === "plfs" ? "Year" : "Month"}
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <ChoroplethMap
-              title="Headline CPI Inflation"
-              subtitle={`${fmtMonth(monthLabel)} · YoY % change`}
-              states={cpiNames}
-              values={cpiValues}
-              unit="%"
-              colorscale="YlOrRd"
-              zmin={cpiRange.min}
-              zmax={cpiRange.max}
-              source={CPI_SOURCE}
-              sourceUrl={CPI_URL}
-            />
-
-            {/* Placeholder / gap — can add a 4th map here later */}
-            <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center min-h-[480px]">
-              <p className="text-sm text-gray-400 dark:text-gray-500 text-center px-6">
-                More state-level indicators coming soon<br />
-                <span className="text-xs">(Literacy · Sex Ratio · ASI output per state)</span>
-              </p>
+            <div className="flex flex-wrap gap-2">
+              {periods.map((p, i) => (
+                <Chip
+                  key={p}
+                  label={p}
+                  active={i === resolvedPeriodIdx}
+                  onClick={() => setPeriodIdx(i)}
+                />
+              ))}
             </div>
           </div>
-        </section>
+        </div>
+
+        {/* ── Single choropleth map ── */}
+        <ChoroplethMap
+          title={`${indicator.label} · ${periodLabel}`}
+          subtitle={indicator.description}
+          states={mapStates}
+          values={mapValues}
+          unit="%"
+          colorscale={indicator.colorscale}
+          reversescale={indicator.reversescale}
+          zmin={zmin}
+          zmax={zmax}
+          source={indicator.source}
+          sourceUrl={indicator.sourceUrl}
+          height={560}
+        />
 
         <p className="text-xs text-gray-400 dark:text-gray-500 pb-4">
-          Sources: MoSPI Periodic Labour Force Survey (PLFS) and Consumer Price
-          Index (CPI) state-level data. Map boundaries are for reference only.
+          Sources: MoSPI Periodic Labour Force Survey (PLFS) and Consumer Price Index (CPI).
+          Map boundaries are for reference only and do not imply any political assertion.
         </p>
       </div>
     </>
