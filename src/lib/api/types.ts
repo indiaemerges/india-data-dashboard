@@ -422,6 +422,45 @@ export interface PLFSQuarterlyData {
 }
 
 // ---------------------------------------------------------------------------
+// ASI (Annual Survey of Industries) — Annual types
+// ---------------------------------------------------------------------------
+
+/** One NIC-sector's data arrays, parallel to years[] */
+export interface ASINICSector {
+  nicCode: string;
+  nicName: string;
+  nicNameShort: string;
+  gva: (number | null)[];          // ₹ lakhs
+  workers: (number | null)[];      // count
+  fixedCapital: (number | null)[]; // ₹ lakhs
+  wages: (number | null)[];        // ₹ lakhs
+}
+
+/** All-India aggregate arrays, parallel to years[] */
+export interface ASITotals {
+  factories: number[];
+  output: number[];       // ₹ lakhs
+  gva: number[];          // ₹ lakhs
+  fixedCapital: number[]; // ₹ lakhs
+  workers: number[];
+  personsEngaged: number[];
+  maleWorkers: number[];
+  femaleWorkers: number[];
+  wages: number[];        // ₹ lakhs
+}
+
+/** Complete ASI annual dataset (generated from MoSPI ASI API) */
+export interface ASIAnnualData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  totals: ASITotals;
+  byNIC: ASINICSector[];
+}
+
+// ---------------------------------------------------------------------------
 // WPI (Wholesale Price Index) — Monthly types
 // ---------------------------------------------------------------------------
 
