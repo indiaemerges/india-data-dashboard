@@ -4,10 +4,19 @@ import type { ASIAnnualData, DataSeries } from "@/lib/api/types";
 const BASE_PATH = "/india-data-dashboard";
 
 // ─── Scaling constants ────────────────────────────────────────────────────────
-/** Convert ₹ lakhs → ₹ Lakh Crore (1 lakh crore = 1,00,000 lakhs) */
-const TO_LAKH_CR = 1_00_000;
-/** Convert ₹ lakhs → ₹ Crore (1 crore = 100 lakhs) */
-// const TO_CRORE = 100;
+/**
+ * Convert ₹ lakhs → ₹ Lakh Crore.
+ *
+ * Derivation:
+ *   1 lakh crore  = 1,00,000 crore  (Indian numbering)
+ *                 = 1,00,000 × 1,00,00,000 rupees
+ *                 = 10^12 rupees
+ *   1 lakh        = 10^5  rupees
+ *   ∴ 1 lakh crore = 10^12 / 10^5 = 10^7 lakhs
+ *
+ * So: value_in_lakh_crore = value_in_lakhs / 10_000_000
+ */
+const TO_LAKH_CR = 1_00_00_000; // = 10_000_000
 
 // ─── Data fetching hook ───────────────────────────────────────────────────────
 

@@ -47,13 +47,22 @@ export default function LineChart({
     unitToAxis[uniqueUnits[1]] = "y2";
   }
 
-  // ── Quarterly detection ────────────────────────────────────────────────
+  // ── Axis type detection ────────────────────────────────────────────────
   // Check if the first non-empty series has quarterly labels "YYYY-YY Qn"
   const firstSeriesDates =
     series.length > 0 ? series[0].data.map((d) => d.date) : [];
   const isQuarterly =
     firstSeriesDates.length > 0 &&
     /^\d{4}-\d{2} Q\d$/.test(firstSeriesDates[0]);
+
+  // Detect fiscal-year strings like "2008-09", "2017-18".
+  // Plotly auto-parses "YYYY-MM" as a date (e.g. "2008-09" → Sep 2008).
+  // Years where the month part is ≤ 12 (Sep–Dec) render; month 13+ silently
+  // disappears, so a 2008-09→2023-24 range only shows the first 4 years.
+  // Forcing type:'category' tells Plotly to treat these as opaque labels.
+  const isFiscalYear =
+    firstSeriesDates.length > 0 &&
+    /^\d{4}-\d{2}$/.test(firstSeriesDates[0]);
 
   // Build a sorted union of all dates across all series (for multi-line charts
   // where different series may start/end at different quarters).
@@ -110,7 +119,9 @@ export default function LineChart({
         ticktext: q1Entries.map(({ d }) => d.replace(" Q1", "")),
         tickangle: -45,
       }
-    : {};
+    : isFiscalYear
+      ? { type: "category" as const, tickangle: -45 }
+      : {};
 
   const layout: Partial<Plotly.Layout> = {
     xaxis: xaxisOverride,

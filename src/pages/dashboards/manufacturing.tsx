@@ -23,7 +23,8 @@ const SOURCE_URL = "https://mospi.gov.in/annual-survey-industries";
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function fmtLakhCr(lakhs: number, decimals = 1): string {
-  return (lakhs / 1_00_000).toFixed(decimals);
+  // 1 lakh crore = 10^12 rupees = 10^7 lakhs → divide by 1,00,00,000
+  return (lakhs / 1_00_00_000).toFixed(decimals);
 }
 function fmtCr(n: number): string {
   return (n / 100).toLocaleString("en-IN", { maximumFractionDigits: 0 });
