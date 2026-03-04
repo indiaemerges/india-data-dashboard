@@ -12,7 +12,7 @@ export interface DatasetEntry {
   chartTypes: string[];
   dashboardPath: string;
   icon: string; // Emoji icon for display
-  category: "economy" | "industry" | "energy" | "demographics" | "prices";
+  category: "economy" | "industry" | "energy" | "demographics" | "prices" | "social";
 }
 
 export const datasets: DatasetEntry[] = [
@@ -122,6 +122,21 @@ export const datasets: DatasetEntry[] = [
     category: "demographics",
   },
   {
+    id: "human-development",
+    title: "Human Development",
+    description:
+      "Education, health, gender equality, and poverty indicators from World Bank WDI — literacy, life expectancy, infant mortality, LFPR, Gini.",
+    source: "World Bank WDI",
+    sourceUrl: "https://data.worldbank.org/country/india",
+    dataType: "live-api",
+    updateFrequency: "Annual",
+    tags: ["health", "education", "poverty", "gender", "inequality", "literacy", "human development"],
+    chartTypes: ["line"],
+    dashboardPath: "/dashboards/human-development",
+    icon: "🎓",
+    category: "social",
+  },
+  {
     id: "trade",
     title: "International Trade",
     description:
@@ -187,4 +202,5 @@ export const categoryLabels: Record<string, string> = {
   energy: "Energy & Resources",
   demographics: "Demographics & Society",
   prices: "Prices & Inflation",
+  social: "Society & Human Development",
 };

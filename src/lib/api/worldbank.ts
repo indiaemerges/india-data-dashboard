@@ -110,14 +110,37 @@ export const WORLD_BANK_INDICATORS = {
   INFLATION_CPI: "FP.CPI.TOTL.ZG",
   INFLATION_GDP_DEFLATOR: "NY.GDP.DEFL.KD.ZG",
 
-  // Development
+  // Poverty & Inequality
   POVERTY_RATIO: "SI.POV.DDAY",
   GINI_INDEX: "SI.POV.GINI",
   HDI: "HD.HCI.OVRL",
+  INCOME_SHARE_LOWEST_20: "SI.DST.FRST.20",
 
   // Finance
   BROAD_MONEY_GDP: "FM.LBL.BMNY.GD.ZS",
   DOMESTIC_CREDIT_GDP: "FS.AST.PRVT.GD.ZS",
+
+  // ── Human Development ────────────────────────────────────────────────────
+
+  // Education
+  LITERACY_RATE_ADULT: "SE.ADT.LITR.ZS",
+  LITERACY_RATE_FEMALE: "SE.ADT.LITR.FE.ZS",
+  LITERACY_RATE_MALE: "SE.ADT.LITR.MA.ZS",
+  ENROLLMENT_PRIMARY: "SE.PRM.ENRR",
+  ENROLLMENT_SECONDARY: "SE.SEC.ENRR",
+  ENROLLMENT_TERTIARY: "SE.TER.ENRR",
+  GPI_PRIMARY_SECONDARY: "SE.ENR.PRSC.FM.ZS",
+
+  // Health
+  INFANT_MORTALITY: "SP.DYN.IMRT.IN",
+  CHILD_MORTALITY_U5: "SH.DYN.MORT",
+  MATERNAL_MORTALITY: "SH.STA.MMRT",
+  IMMUNIZATION_MEASLES: "SH.IMM.MEAS",
+  IMMUNIZATION_DPT: "SH.IMM.IDPT",
+
+  // Gender
+  FEMALE_LFPR: "SL.TLF.CACT.FE.ZS",
+  MALE_LFPR: "SL.TLF.CACT.MA.ZS",
 };
 
 /**
@@ -126,6 +149,10 @@ export const WORLD_BANK_INDICATORS = {
 function guessUnit(indicatorId: string, name: string): string {
   const lowerName = name.toLowerCase();
   const lowerId = indicatorId.toLowerCase();
+
+  // Specific overrides for well-known indicators
+  if (lowerId === "sp.dyn.imrt.in" || lowerId === "sh.dyn.mort") return "per 1,000";
+  if (lowerId === "sh.sta.mmrt") return "per 100,000";
 
   if (lowerId.includes(".zs") || lowerId.includes(".zg") || lowerName.includes("% of gdp") || lowerName.includes("growth")) {
     return "%";
@@ -136,10 +163,10 @@ function guessUnit(indicatorId: string, name: string): string {
   if (lowerId.includes(".kd") || lowerName.includes("constant")) {
     return "Constant USD";
   }
-  if (lowerName.includes("index")) {
+  if (lowerName.includes("index") || lowerName.includes("gini")) {
     return "Index";
   }
-  if (lowerName.includes("years")) {
+  if (lowerName.includes("years") || lowerName.includes("life expectancy")) {
     return "Years";
   }
   if (lowerName.includes("population")) {

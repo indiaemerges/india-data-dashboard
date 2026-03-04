@@ -26,6 +26,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     "industry",
     "energy",
     "demographics",
+    "social",
   ];
 
   return (
