@@ -1,853 +1,1537 @@
-﻿{
-    "source":  "MoSPI PLFS (Annual)",
-    "sourceUrl":  "https://www.mospi.gov.in/",
-    "lastUpdated":  "2026-03-04",
-    "notes":  "Combined (rural+urban), PS+SS basis, age 15+. Excludes All India aggregate.",
-    "years":  [
-                  "2017-18",
-                  "2018-19",
-                  "2019-20",
-                  "2020-21",
-                  "2021-22",
-                  "2022-23",
-                  "2023-24"
-              ],
-    "states":  [
-                   {
-                       "stateName":  "Andaman \u0026 Nicobar Islands",
-                       "geoName":  "Andaman \u0026 Nicobar",
-                       "ur_person":  [
-                                         15.8,
-                                         13.5,
-                                         12.6,
-                                         9.1,
-                                         7.8,
-                                         9.7,
-                                         11.8
-                                     ],
-                       "lfpr_female":  [
-                                           33.5,
-                                           31.2,
-                                           35.9,
-                                           46.1,
-                                           45.7,
-                                           49.6,
-                                           46.3
-                                       ]
-                   },
-                   {
-                       "stateName":  "Andhra Pradesh",
-                       "geoName":  "Andhra Pradesh",
-                       "ur_person":  [
-                                         4.5,
-                                         5.3,
-                                         4.7,
-                                         4.1,
-                                         4.2,
-                                         4.1,
-                                         4.1
-                                     ],
-                       "lfpr_female":  [
-                                           42.5,
-                                           40.3,
-                                           39.2,
-                                           45.1,
-                                           43.3,
-                                           45.8,
-                                           44.8
-                                       ]
-                   },
-                   {
-                       "stateName":  "Arunachal Pradesh",
-                       "geoName":  "Arunachal Pradesh",
-                       "ur_person":  [
-                                         5.8,
-                                         7.7,
-                                         6.7,
-                                         5.7,
-                                         7.7,
-                                         4.8,
-                                         6.1
-                                     ],
-                       "lfpr_female":  [
-                                           14.7,
-                                           17.1,
-                                           22.9,
-                                           27.6,
-                                           31.2,
-                                           58.7,
-                                           66.5
-                                       ]
-                   },
-                   {
-                       "stateName":  "Assam",
-                       "geoName":  "Assam",
-                       "ur_person":  [
-                                         7.9,
-                                         6.7,
-                                         7.9,
-                                         4.1,
-                                         3.9,
-                                         1.7,
-                                         3.9
-                                     ],
-                       "lfpr_female":  [
-                                           12.7,
-                                           12.7,
-                                           16.4,
-                                           24.6,
-                                           28.2,
-                                           20.3,
-                                           50.2
-                                       ]
-                   },
-                   {
-                       "stateName":  "Bihar",
-                       "geoName":  "Bihar",
-                       "ur_person":  [
-                                         7,
-                                         9.8,
-                                         5.1,
-                                         4.6,
-                                         5.9,
-                                         3.9,
-                                         3
-                                     ],
-                       "lfpr_female":  [
-                                           4.1,
-                                           4.3,
-                                           9.5,
-                                           10.7,
-                                           10.2,
-                                           22.4,
-                                           30.5
-                                       ]
-                   },
-                   {
-                       "stateName":  "Chandigarh",
-                       "geoName":  "Chandigarh",
-                       "ur_person":  [
-                                         9,
-                                         7.3,
-                                         6.3,
-                                         7.1,
-                                         6.3,
-                                         4,
-                                         7.1
-                                     ],
-                       "lfpr_female":  [
-                                           25.2,
-                                           24.7,
-                                           20.4,
-                                           24.1,
-                                           16.8,
-                                           21.4,
-                                           31
-                                       ]
-                   },
-                   {
-                       "stateName":  "Chhattisgarh",
-                       "geoName":  "Chhattisgarh",
-                       "ur_person":  [
-                                         3.3,
-                                         2.4,
-                                         3.3,
-                                         2.5,
-                                         2.4,
-                                         2.4,
-                                         2.5
-                                     ],
-                       "lfpr_female":  [
-                                           49.3,
-                                           48.4,
-                                           53.1,
-                                           53.9,
-                                           51.6,
-                                           59.8,
-                                           59.5
-                                       ]
-                   },
-                   {
-                       "stateName":  "Dadra \u0026 Nagar Haveli",
-                       "geoName":  "Dadra and Nagar Haveli and Daman and Diu",
-                       "ur_person":  [
-                                         0.4,
-                                         1.5,
-                                         3,
-                                         null,
-                                         null,
-                                         null,
-                                         null
-                                     ],
-                       "lfpr_female":  [
-                                           39.7,
-                                           43,
-                                           52.3,
-                                           null,
-                                           null,
-                                           null,
-                                           null
-                                       ]
-                   },
-                   {
-                       "stateName":  "Dadra \u0026 Nagar Haveli \u0026 Daman \u0026 Diu",
-                       "geoName":  "Dadra and Nagar Haveli and Daman and Diu",
-                       "ur_person":  [
-                                         null,
-                                         null,
-                                         null,
-                                         4.2,
-                                         5.2,
-                                         2.5,
-                                         2.3
-                                     ],
-                       "lfpr_female":  [
-                                           null,
-                                           null,
-                                           null,
-                                           30.6,
-                                           43,
-                                           37.6,
-                                           46.5
-                                       ]
-                   },
-                   {
-                       "stateName":  "Daman \u0026 Diu",
-                       "geoName":  "Dadra and Nagar Haveli and Daman and Diu",
-                       "ur_person":  [
-                                         3.1,
-                                         0,
-                                         2.9,
-                                         null,
-                                         null,
-                                         null,
-                                         null
-                                     ],
-                       "lfpr_female":  [
-                                           24.9,
-                                           18.1,
-                                           35.8,
-                                           null,
-                                           null,
-                                           null,
-                                           null
-                                       ]
-                   },
-                   {
-                       "stateName":  "Delhi",
-                       "geoName":  "Delhi",
-                       "ur_person":  [
-                                         9.4,
-                                         10.4,
-                                         8.6,
-                                         6.3,
-                                         5.3,
-                                         1.9,
-                                         2.1
-                                     ],
-                       "lfpr_female":  [
-                                           14.3,
-                                           17.8,
-                                           16.1,
-                                           13.8,
-                                           12.2,
-                                           14.8,
-                                           18.5
-                                       ]
-                   },
-                   {
-                       "stateName":  "Goa",
-                       "geoName":  "Goa",
-                       "ur_person":  [
-                                         13.9,
-                                         8.7,
-                                         8.1,
-                                         10.5,
-                                         12,
-                                         9.7,
-                                         8.5
-                                     ],
-                       "lfpr_female":  [
-                                           30.9,
-                                           29.9,
-                                           28.2,
-                                           27.3,
-                                           20.7,
-                                           28.1,
-                                           29.3
-                                       ]
-                   },
-                   {
-                       "stateName":  "Gujarat",
-                       "geoName":  "Gujarat",
-                       "ur_person":  [
-                                         4.8,
-                                         3.2,
-                                         2,
-                                         2.2,
-                                         2,
-                                         1.7,
-                                         1.1
-                                     ],
-                       "lfpr_female":  [
-                                           19.9,
-                                           21.5,
-                                           31.1,
-                                           33.1,
-                                           34.4,
-                                           42.3,
-                                           46
-                                       ]
-                   },
-                   {
-                       "stateName":  "Haryana",
-                       "geoName":  "Haryana",
-                       "ur_person":  [
-                                         8.4,
-                                         9.3,
-                                         6.4,
-                                         6.3,
-                                         9,
-                                         6.1,
-                                         3.4
-                                     ],
-                       "lfpr_female":  [
-                                           14.3,
-                                           15.3,
-                                           15.7,
-                                           19.1,
-                                           19.1,
-                                           20.7,
-                                           24.2
-                                       ]
-                   },
-                   {
-                       "stateName":  "Himachal Pradesh",
-                       "geoName":  "Himachal Pradesh",
-                       "ur_person":  [
-                                         5.5,
-                                         5.1,
-                                         3.7,
-                                         3.3,
-                                         4,
-                                         4.3,
-                                         5.5
-                                     ],
-                       "lfpr_female":  [
-                                           49.6,
-                                           59.2,
-                                           65,
-                                           62.6,
-                                           66.1,
-                                           71.4,
-                                           67.6
-                                       ]
-                   },
-                   {
-                       "stateName":  "Jammu \u0026 Kashmir",
-                       "geoName":  "Jammu \u0026 Kashmir",
-                       "ur_person":  [
-                                         5.4,
-                                         5.1,
-                                         6.7,
-                                         5.9,
-                                         5.2,
-                                         4.4,
-                                         6.1
-                                     ],
-                       "lfpr_female":  [
-                                           30.2,
-                                           33.8,
-                                           37.4,
-                                           43.4,
-                                           44.9,
-                                           50.2,
-                                           52.1
-                                       ]
-                   },
-                   {
-                       "stateName":  "Jharkhand",
-                       "geoName":  "Jharkhand",
-                       "ur_person":  [
-                                         7.5,
-                                         5.2,
-                                         4.2,
-                                         3.1,
-                                         2,
-                                         1.7,
-                                         1.3
-                                     ],
-                       "lfpr_female":  [
-                                           15.4,
-                                           20.7,
-                                           35.7,
-                                           43.9,
-                                           45.2,
-                                           45.8,
-                                           49.8
-                                       ]
-                   },
-                   {
-                       "stateName":  "Karnataka",
-                       "geoName":  "Karnataka",
-                       "ur_person":  [
-                                         4.8,
-                                         3.6,
-                                         4.2,
-                                         2.7,
-                                         3.2,
-                                         2.4,
-                                         2.7
-                                     ],
-                       "lfpr_female":  [
-                                           26,
-                                           24.9,
-                                           33.8,
-                                           35.9,
-                                           31.8,
-                                           38.1,
-                                           38
-                                       ]
-                   },
-                   {
-                       "stateName":  "Kerala",
-                       "geoName":  "Kerala",
-                       "ur_person":  [
-                                         11.4,
-                                         9,
-                                         10,
-                                         10.1,
-                                         9.6,
-                                         7,
-                                         7.2
-                                     ],
-                       "lfpr_female":  [
-                                           26.5,
-                                           30.6,
-                                           31.9,
-                                           33.2,
-                                           37,
-                                           37.5,
-                                           40.8
-                                       ]
-                   },
-                   {
-                       "stateName":  "Ladakh",
-                       "geoName":  "Ladakh",
-                       "ur_person":  [
-                                         null,
-                                         null,
-                                         0.1,
-                                         2.9,
-                                         3.3,
-                                         6.1,
-                                         5.1
-                                     ],
-                       "lfpr_female":  [
-                                           null,
-                                           null,
-                                           51.1,
-                                           69.6,
-                                           46.5,
-                                           59.1,
-                                           51.6
-                                       ]
-                   },
-                   {
-                       "stateName":  "Lakshadweep",
-                       "geoName":  "Lakshadweep",
-                       "ur_person":  [
-                                         21.3,
-                                         31.6,
-                                         13.7,
-                                         13.4,
-                                         17.2,
-                                         11.1,
-                                         11.9
-                                     ],
-                       "lfpr_female":  [
-                                           18.4,
-                                           17.8,
-                                           29.7,
-                                           19.4,
-                                           16.8,
-                                           17.3,
-                                           17.1
-                                       ]
-                   },
-                   {
-                       "stateName":  "Madhya Pradesh",
-                       "geoName":  "Madhya Pradesh",
-                       "ur_person":  [
-                                         4.3,
-                                         3.5,
-                                         3,
-                                         1.9,
-                                         2.1,
-                                         1.6,
-                                         1
-                                     ],
-                       "lfpr_female":  [
-                                           31.7,
-                                           27.9,
-                                           37.7,
-                                           40.5,
-                                           41,
-                                           44.3,
-                                           52.3
-                                       ]
-                   },
-                   {
-                       "stateName":  "Maharashtra",
-                       "geoName":  "Maharashtra",
-                       "ur_person":  [
-                                         4.8,
-                                         5,
-                                         3.2,
-                                         3.7,
-                                         3.5,
-                                         3.1,
-                                         3.3
-                                     ],
-                       "lfpr_female":  [
-                                           30.8,
-                                           31.6,
-                                           38.7,
-                                           36,
-                                           38.4,
-                                           40.7,
-                                           40.1
-                                       ]
-                   },
-                   {
-                       "stateName":  "Manipur",
-                       "geoName":  "Manipur",
-                       "ur_person":  [
-                                         11.5,
-                                         9.4,
-                                         9.5,
-                                         5.6,
-                                         9,
-                                         4.7,
-                                         6.1
-                                     ],
-                       "lfpr_female":  [
-                                           23.5,
-                                           26.3,
-                                           29.9,
-                                           21.4,
-                                           23.4,
-                                           31.3,
-                                           48.7
-                                       ]
-                   },
-                   {
-                       "stateName":  "Meghalaya",
-                       "geoName":  "Meghalaya",
-                       "ur_person":  [
-                                         1.6,
-                                         2.7,
-                                         2.7,
-                                         1.7,
-                                         2.6,
-                                         6,
-                                         6.2
-                                     ],
-                       "lfpr_female":  [
-                                           51.2,
-                                           51.2,
-                                           45.7,
-                                           51.6,
-                                           50.2,
-                                           60.9,
-                                           71.8
-                                       ]
-                   },
-                   {
-                       "stateName":  "Mizoram",
-                       "geoName":  "Mizoram",
-                       "ur_person":  [
-                                         10.1,
-                                         7,
-                                         5.7,
-                                         3.5,
-                                         5.4,
-                                         2.2,
-                                         2.3
-                                     ],
-                       "lfpr_female":  [
-                                           30,
-                                           29.2,
-                                           37,
-                                           41.7,
-                                           34.7,
-                                           45.1,
-                                           41.7
-                                       ]
-                   },
-                   {
-                       "stateName":  "Nagaland",
-                       "geoName":  "Nagaland",
-                       "ur_person":  [
-                                         21.4,
-                                         17.4,
-                                         25.7,
-                                         19.2,
-                                         9.1,
-                                         4.3,
-                                         7.1
-                                     ],
-                       "lfpr_female":  [
-                                           16.7,
-                                           22.7,
-                                           43,
-                                           47.6,
-                                           51.5,
-                                           65.2,
-                                           64.3
-                                       ]
-                   },
-                   {
-                       "stateName":  "Odisha",
-                       "geoName":  "Odisha",
-                       "ur_person":  [
-                                         7.1,
-                                         7,
-                                         6.2,
-                                         5.3,
-                                         6,
-                                         3.9,
-                                         3.1
-                                     ],
-                       "lfpr_female":  [
-                                           19.5,
-                                           24.4,
-                                           33.1,
-                                           33.2,
-                                           32.9,
-                                           44.7,
-                                           49.4
-                                       ]
-                   },
-                   {
-                       "stateName":  "Puducherry",
-                       "geoName":  "Puducherry",
-                       "ur_person":  [
-                                         10.3,
-                                         8.3,
-                                         7.6,
-                                         6.7,
-                                         5.8,
-                                         5.6,
-                                         4.6
-                                     ],
-                       "lfpr_female":  [
-                                           17.1,
-                                           31.2,
-                                           31.6,
-                                           29.3,
-                                           35.7,
-                                           33.6,
-                                           34.2
-                                       ]
-                   },
-                   {
-                       "stateName":  "Punjab",
-                       "geoName":  "Punjab",
-                       "ur_person":  [
-                                         7.7,
-                                         7.4,
-                                         7.3,
-                                         6.2,
-                                         6.4,
-                                         6.1,
-                                         5.5
-                                     ],
-                       "lfpr_female":  [
-                                           15.5,
-                                           19.1,
-                                           23.7,
-                                           23.1,
-                                           24,
-                                           27.6,
-                                           31.1
-                                       ]
-                   },
-                   {
-                       "stateName":  "Rajasthan",
-                       "geoName":  "Rajasthan",
-                       "ur_person":  [
-                                         5,
-                                         5.7,
-                                         4.5,
-                                         4.7,
-                                         4.7,
-                                         4.4,
-                                         4.2
-                                     ],
-                       "lfpr_female":  [
-                                           27,
-                                           31.4,
-                                           38.6,
-                                           39.9,
-                                           40,
-                                           47.9,
-                                           50.9
-                                       ]
-                   },
-                   {
-                       "stateName":  "Sikkim",
-                       "geoName":  "Sikkim",
-                       "ur_person":  [
-                                         3.5,
-                                         3.1,
-                                         2.2,
-                                         1.1,
-                                         1.6,
-                                         2.2,
-                                         2.3
-                                     ],
-                       "lfpr_female":  [
-                                           43.9,
-                                           50.3,
-                                           59.4,
-                                           61.1,
-                                           57.8,
-                                           68.6,
-                                           68.2
-                                       ]
-                   },
-                   {
-                       "stateName":  "Tamil Nadu",
-                       "geoName":  "Tamil Nadu",
-                       "ur_person":  [
-                                         7.5,
-                                         6.6,
-                                         5.3,
-                                         5.2,
-                                         4.8,
-                                         4.3,
-                                         3.5
-                                     ],
-                       "lfpr_female":  [
-                                           33.7,
-                                           37,
-                                           40.2,
-                                           43,
-                                           40.7,
-                                           40.5,
-                                           43.2
-                                       ]
-                   },
-                   {
-                       "stateName":  "Telangana",
-                       "geoName":  "Telangana",
-                       "ur_person":  [
-                                         7.6,
-                                         8.3,
-                                         7,
-                                         4.9,
-                                         4.2,
-                                         4.4,
-                                         4.8
-                                     ],
-                       "lfpr_female":  [
-                                           32.6,
-                                           38.3,
-                                           44.3,
-                                           45.4,
-                                           44.7,
-                                           44.8,
-                                           46.7
-                                       ]
-                   },
-                   {
-                       "stateName":  "Tripura",
-                       "geoName":  "Tripura",
-                       "ur_person":  [
-                                         6.8,
-                                         10,
-                                         3.2,
-                                         3.2,
-                                         3,
-                                         1.4,
-                                         1.7
-                                     ],
-                       "lfpr_female":  [
-                                           12.5,
-                                           16.6,
-                                           24.2,
-                                           30.8,
-                                           26.7,
-                                           35.2,
-                                           47.1
-                                       ]
-                   },
-                   {
-                       "stateName":  "Uttar Pradesh",
-                       "geoName":  "Uttar Pradesh",
-                       "ur_person":  [
-                                         6.2,
-                                         5.7,
-                                         4.4,
-                                         4.2,
-                                         2.9,
-                                         2.4,
-                                         3.1
-                                     ],
-                       "lfpr_female":  [
-                                           13.5,
-                                           13.6,
-                                           17.7,
-                                           22.6,
-                                           26.3,
-                                           31.2,
-                                           34.5
-                                       ]
-                   },
-                   {
-                       "stateName":  "Uttarakhand",
-                       "geoName":  "Uttarakhand",
-                       "ur_person":  [
-                                         7.6,
-                                         8.9,
-                                         7.1,
-                                         6.9,
-                                         7.8,
-                                         4.5,
-                                         4.3
-                                     ],
-                       "lfpr_female":  [
-                                           18.1,
-                                           19.4,
-                                           31.8,
-                                           31.5,
-                                           33.1,
-                                           38.7,
-                                           45.6
-                                       ]
-                   },
-                   {
-                       "stateName":  "West Bengal",
-                       "geoName":  "West Bengal",
-                       "ur_person":  [
-                                         4.6,
-                                         3.8,
-                                         4.6,
-                                         3.5,
-                                         3.4,
-                                         2.2,
-                                         2.5
-                                     ],
-                       "lfpr_female":  [
-                                           20.8,
-                                           22.2,
-                                           24,
-                                           28.7,
-                                           27.9,
-                                           33.8,
-                                           40.4
-                                       ]
-                   }
-               ]
+{
+  "source": "MoSPI PLFS (Annual)",
+  "sourceUrl": "https://www.mospi.gov.in/",
+  "lastUpdated": "2026-03-04",
+  "notes": "Combined (rural+urban), PS+SS basis, age 15+. Excludes All India aggregate.",
+  "years": [
+    "2017-18",
+    "2018-19",
+    "2019-20",
+    "2020-21",
+    "2021-22",
+    "2022-23",
+    "2023-24"
+  ],
+  "states": [
+    {
+      "stateName": "Andaman & Nicobar Islands",
+      "geoName": "Andaman & Nicobar",
+      "ur_person": [
+        15.8,
+        13.5,
+        12.6,
+        9.1,
+        7.8,
+        9.7,
+        11.8
+      ],
+      "lfpr_female": [
+        33.5,
+        31.2,
+        35.9,
+        46.1,
+        45.7,
+        49.6,
+        46.3
+      ],
+      "lfpr_male": [
+        80.7,
+        81.2,
+        75.9,
+        80.9,
+        82,
+        82.4,
+        84.3
+      ],
+      "lfpr_person": [
+        57.9,
+        56.7,
+        57,
+        64,
+        64.1,
+        66.5,
+        65.7
+      ]
+    },
+    {
+      "stateName": "Andhra Pradesh",
+      "geoName": "Andhra Pradesh",
+      "ur_person": [
+        4.5,
+        5.3,
+        4.7,
+        4.1,
+        4.2,
+        4.1,
+        4.1
+      ],
+      "lfpr_female": [
+        42.5,
+        40.3,
+        39.2,
+        45.1,
+        43.3,
+        45.8,
+        44.8
+      ],
+      "lfpr_male": [
+        79.1,
+        76.2,
+        78.1,
+        77.6,
+        78.2,
+        77.2,
+        76.7
+      ],
+      "lfpr_person": [
+        59.9,
+        57.8,
+        58.2,
+        61.1,
+        60.4,
+        61.1,
+        60.2
+      ]
+    },
+    {
+      "stateName": "Arunachal Pradesh",
+      "geoName": "Arunachal Pradesh",
+      "ur_person": [
+        5.8,
+        7.7,
+        6.7,
+        5.7,
+        7.7,
+        4.8,
+        6.1
+      ],
+      "lfpr_female": [
+        14.7,
+        17.1,
+        22.9,
+        27.6,
+        31.2,
+        58.7,
+        66.5
+      ],
+      "lfpr_male": [
+        69.8,
+        66.2,
+        68.8,
+        73,
+        69.5,
+        77.2,
+        79.2
+      ],
+      "lfpr_person": [
+        45,
+        44.3,
+        47.5,
+        51.4,
+        51.1,
+        68.2,
+        73
+      ]
+    },
+    {
+      "stateName": "Assam",
+      "geoName": "Assam",
+      "ur_person": [
+        7.9,
+        6.7,
+        7.9,
+        4.1,
+        3.9,
+        1.7,
+        3.9
+      ],
+      "lfpr_female": [
+        12.7,
+        12.7,
+        16.4,
+        24.6,
+        28.2,
+        20.3,
+        50.2
+      ],
+      "lfpr_male": [
+        80.3,
+        77.6,
+        77,
+        79.2,
+        79.5,
+        90.1,
+        83.3
+      ],
+      "lfpr_person": [
+        47.5,
+        46.5,
+        46.9,
+        52.7,
+        54.2,
+        55.4,
+        66.9
+      ]
+    },
+    {
+      "stateName": "Bihar",
+      "geoName": "Bihar",
+      "ur_person": [
+        7,
+        9.8,
+        5.1,
+        4.6,
+        5.9,
+        3.9,
+        3
+      ],
+      "lfpr_female": [
+        4.1,
+        4.3,
+        9.5,
+        10.7,
+        10.2,
+        22.4,
+        30.5
+      ],
+      "lfpr_male": [
+        68.6,
+        73.1,
+        73,
+        71,
+        72.2,
+        74.6,
+        75.8
+      ],
+      "lfpr_person": [
+        38.2,
+        40.4,
+        41.8,
+        41.9,
+        41.8,
+        48.9,
+        53.2
+      ]
+    },
+    {
+      "stateName": "Chandigarh",
+      "geoName": "Chandigarh",
+      "ur_person": [
+        9,
+        7.3,
+        6.3,
+        7.1,
+        6.3,
+        4,
+        7.1
+      ],
+      "lfpr_female": [
+        25.2,
+        24.7,
+        20.4,
+        24.1,
+        16.8,
+        21.4,
+        31
+      ],
+      "lfpr_male": [
+        78,
+        74.4,
+        77.3,
+        68.7,
+        70.4,
+        72.3,
+        76.9
+      ],
+      "lfpr_person": [
+        51.5,
+        51.1,
+        48.5,
+        46.4,
+        45.1,
+        47.5,
+        54.7
+      ]
+    },
+    {
+      "stateName": "Chhattisgarh",
+      "geoName": "Chhattisgarh",
+      "ur_person": [
+        3.3,
+        2.4,
+        3.3,
+        2.5,
+        2.4,
+        2.4,
+        2.5
+      ],
+      "lfpr_female": [
+        49.3,
+        48.4,
+        53.1,
+        53.9,
+        51.6,
+        59.8,
+        59.5
+      ],
+      "lfpr_male": [
+        79.2,
+        76.7,
+        82.3,
+        76.2,
+        81.9,
+        83.5,
+        83.4
+      ],
+      "lfpr_person": [
+        64.5,
+        62.7,
+        67.6,
+        65.2,
+        66.5,
+        71.8,
+        71.5
+      ]
+    },
+    {
+      "stateName": "Dadra & Nagar Haveli",
+      "geoName": "Dadra and Nagar Haveli and Daman and Diu",
+      "ur_person": [
+        0.4,
+        1.5,
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lfpr_female": [
+        39.7,
+        43,
+        52.3,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lfpr_male": [
+        87.3,
+        87.2,
+        89.5,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lfpr_person": [
+        66.6,
+        69.6,
+        74.4,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "stateName": "Dadra & Nagar Haveli & Daman & Diu",
+      "geoName": "Dadra and Nagar Haveli and Daman and Diu",
+      "ur_person": [
+        null,
+        null,
+        null,
+        4.2,
+        5.2,
+        2.5,
+        2.3
+      ],
+      "lfpr_female": [
+        null,
+        null,
+        null,
+        30.6,
+        43,
+        37.6,
+        46.5
+      ],
+      "lfpr_male": [
+        87.3,
+        87.2,
+        89.5,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lfpr_person": [
+        66.6,
+        69.6,
+        74.4,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "stateName": "Daman & Diu",
+      "geoName": "Dadra and Nagar Haveli and Daman and Diu",
+      "ur_person": [
+        3.1,
+        0,
+        2.9,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lfpr_female": [
+        24.9,
+        18.1,
+        35.8,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lfpr_male": [
+        87.3,
+        87.2,
+        89.5,
+        null,
+        null,
+        null,
+        null
+      ],
+      "lfpr_person": [
+        66.6,
+        69.6,
+        74.4,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "stateName": "Delhi",
+      "geoName": "Delhi",
+      "ur_person": [
+        9.4,
+        10.4,
+        8.6,
+        6.3,
+        5.3,
+        1.9,
+        2.1
+      ],
+      "lfpr_female": [
+        14.3,
+        17.8,
+        16.1,
+        13.8,
+        12.2,
+        14.8,
+        18.5
+      ],
+      "lfpr_male": [
+        75,
+        75.2,
+        73.5,
+        72.3,
+        72.6,
+        74.4,
+        70.1
+      ],
+      "lfpr_person": [
+        47.1,
+        49.7,
+        47.3,
+        45.6,
+        44.6,
+        46.7,
+        46.4
+      ]
+    },
+    {
+      "stateName": "Goa",
+      "geoName": "Goa",
+      "ur_person": [
+        13.9,
+        8.7,
+        8.1,
+        10.5,
+        12,
+        9.7,
+        8.5
+      ],
+      "lfpr_female": [
+        30.9,
+        29.9,
+        28.2,
+        27.3,
+        20.7,
+        28.1,
+        29.3
+      ],
+      "lfpr_male": [
+        70,
+        72.4,
+        75.7,
+        68.7,
+        73.6,
+        72.4,
+        74.1
+      ],
+      "lfpr_person": [
+        49.8,
+        50.3,
+        51.5,
+        48.5,
+        47.3,
+        50,
+        51.8
+      ]
+    },
+    {
+      "stateName": "Gujarat",
+      "geoName": "Gujarat",
+      "ur_person": [
+        4.8,
+        3.2,
+        2,
+        2.2,
+        2,
+        1.7,
+        1.1
+      ],
+      "lfpr_female": [
+        19.9,
+        21.5,
+        31.1,
+        33.1,
+        34.4,
+        42.3,
+        46
+      ],
+      "lfpr_male": [
+        77.8,
+        79.3,
+        79.4,
+        78.4,
+        79.9,
+        82,
+        82.4
+      ],
+      "lfpr_person": [
+        49.8,
+        51.3,
+        55.9,
+        56.3,
+        58,
+        62.6,
+        64.6
+      ]
+    },
+    {
+      "stateName": "Haryana",
+      "geoName": "Haryana",
+      "ur_person": [
+        8.4,
+        9.3,
+        6.4,
+        6.3,
+        9,
+        6.1,
+        3.4
+      ],
+      "lfpr_female": [
+        14.3,
+        15.3,
+        15.7,
+        19.1,
+        19.1,
+        20.7,
+        24.2
+      ],
+      "lfpr_male": [
+        74.3,
+        74.4,
+        73.7,
+        72.4,
+        71.4,
+        72.9,
+        72.7
+      ],
+      "lfpr_person": [
+        45.5,
+        46.2,
+        45.8,
+        46.9,
+        46.7,
+        47.9,
+        49.5
+      ]
+    },
+    {
+      "stateName": "Himachal Pradesh",
+      "geoName": "Himachal Pradesh",
+      "ur_person": [
+        5.5,
+        5.1,
+        3.7,
+        3.3,
+        4,
+        4.3,
+        5.5
+      ],
+      "lfpr_female": [
+        49.6,
+        59.2,
+        65,
+        62.6,
+        66.1,
+        71.4,
+        67.6
+      ],
+      "lfpr_male": [
+        75.8,
+        75.8,
+        82,
+        81.7,
+        82.7,
+        83.1,
+        81.7
+      ],
+      "lfpr_person": [
+        62.4,
+        67.4,
+        73.2,
+        71.9,
+        74.2,
+        77.1,
+        74.4
+      ]
+    },
+    {
+      "stateName": "Jammu & Kashmir",
+      "geoName": "Jammu & Kashmir",
+      "ur_person": [
+        5.4,
+        5.1,
+        6.7,
+        5.9,
+        5.2,
+        4.4,
+        6.1
+      ],
+      "lfpr_female": [
+        30.2,
+        33.8,
+        37.4,
+        43.4,
+        44.9,
+        50.2,
+        52.1
+      ],
+      "lfpr_male": [
+        75.9,
+        76.6,
+        74.3,
+        74,
+        77.1,
+        76.5,
+        75.7
+      ],
+      "lfpr_person": [
+        53.9,
+        55.8,
+        56.3,
+        59,
+        61.5,
+        63.5,
+        64.3
+      ]
+    },
+    {
+      "stateName": "Jharkhand",
+      "geoName": "Jharkhand",
+      "ur_person": [
+        7.5,
+        5.2,
+        4.2,
+        3.1,
+        2,
+        1.7,
+        1.3
+      ],
+      "lfpr_female": [
+        15.4,
+        20.7,
+        35.7,
+        43.9,
+        45.2,
+        45.8,
+        49.8
+      ],
+      "lfpr_male": [
+        73.9,
+        76.4,
+        76.9,
+        78.9,
+        79.3,
+        78.6,
+        78.3
+      ],
+      "lfpr_person": [
+        45.1,
+        47.4,
+        55.9,
+        61.6,
+        61.9,
+        61.9,
+        63.8
+      ]
+    },
+    {
+      "stateName": "Karnataka",
+      "geoName": "Karnataka",
+      "ur_person": [
+        4.8,
+        3.6,
+        4.2,
+        2.7,
+        3.2,
+        2.4,
+        2.7
+      ],
+      "lfpr_female": [
+        26,
+        24.9,
+        33.8,
+        35.9,
+        31.8,
+        38.1,
+        38
+      ],
+      "lfpr_male": [
+        77.8,
+        76.5,
+        77.4,
+        78.4,
+        77.2,
+        75.4,
+        75.5
+      ],
+      "lfpr_person": [
+        51.6,
+        51.2,
+        55.5,
+        56.9,
+        54.7,
+        57,
+        56.8
+      ]
+    },
+    {
+      "stateName": "Kerala",
+      "geoName": "Kerala",
+      "ur_person": [
+        11.4,
+        9,
+        10,
+        10.1,
+        9.6,
+        7,
+        7.2
+      ],
+      "lfpr_female": [
+        26.5,
+        30.6,
+        31.9,
+        33.2,
+        37,
+        37.5,
+        40.8
+      ],
+      "lfpr_male": [
+        70.1,
+        71.2,
+        71.7,
+        72.2,
+        73.4,
+        73.7,
+        74.4
+      ],
+      "lfpr_person": [
+        46.5,
+        49.3,
+        50.3,
+        51.3,
+        54,
+        54.3,
+        56.2
+      ]
+    },
+    {
+      "stateName": "Ladakh",
+      "geoName": "Ladakh",
+      "ur_person": [
+        null,
+        null,
+        0.1,
+        2.9,
+        3.3,
+        6.1,
+        5.1
+      ],
+      "lfpr_female": [
+        null,
+        null,
+        51.1,
+        69.6,
+        46.5,
+        59.1,
+        51.6
+      ],
+      "lfpr_male": [
+        null,
+        null,
+        72.8,
+        72.4,
+        73.6,
+        62.2,
+        72.5
+      ],
+      "lfpr_person": [
+        null,
+        null,
+        62.8,
+        71.1,
+        60.1,
+        60.7,
+        62.5
+      ]
+    },
+    {
+      "stateName": "Lakshadweep",
+      "geoName": "Lakshadweep",
+      "ur_person": [
+        21.3,
+        31.6,
+        13.7,
+        13.4,
+        17.2,
+        11.1,
+        11.9
+      ],
+      "lfpr_female": [
+        18.4,
+        17.8,
+        29.7,
+        19.4,
+        16.8,
+        17.3,
+        17.1
+      ],
+      "lfpr_male": [
+        74.9,
+        71.7,
+        81.2,
+        74.5,
+        73.2,
+        69.2,
+        74.7
+      ],
+      "lfpr_person": [
+        43.7,
+        43.1,
+        55.6,
+        46.3,
+        44.9,
+        39.9,
+        48.5
+      ]
+    },
+    {
+      "stateName": "Madhya Pradesh",
+      "geoName": "Madhya Pradesh",
+      "ur_person": [
+        4.3,
+        3.5,
+        3,
+        1.9,
+        2.1,
+        1.6,
+        1
+      ],
+      "lfpr_female": [
+        31.7,
+        27.9,
+        37.7,
+        40.5,
+        41,
+        44.3,
+        52.3
+      ],
+      "lfpr_male": [
+        80,
+        78.8,
+        80,
+        81.4,
+        81.9,
+        83.4,
+        85
+      ],
+      "lfpr_person": [
+        56.7,
+        54.2,
+        59.4,
+        61.4,
+        62,
+        64.5,
+        68.9
+      ]
+    },
+    {
+      "stateName": "Maharashtra",
+      "geoName": "Maharashtra",
+      "ur_person": [
+        4.8,
+        5,
+        3.2,
+        3.7,
+        3.5,
+        3.1,
+        3.3
+      ],
+      "lfpr_female": [
+        30.8,
+        31.6,
+        38.7,
+        36,
+        38.4,
+        40.7,
+        40.1
+      ],
+      "lfpr_male": [
+        74.9,
+        73.8,
+        75.6,
+        75.4,
+        76.4,
+        77.4,
+        77.2
+      ],
+      "lfpr_person": [
+        53.1,
+        53.3,
+        57.5,
+        56,
+        57.9,
+        59.4,
+        59
+      ]
+    },
+    {
+      "stateName": "Manipur",
+      "geoName": "Manipur",
+      "ur_person": [
+        11.5,
+        9.4,
+        9.5,
+        5.6,
+        9,
+        4.7,
+        6.1
+      ],
+      "lfpr_female": [
+        23.5,
+        26.3,
+        29.9,
+        21.4,
+        23.4,
+        31.3,
+        48.7
+      ],
+      "lfpr_male": [
+        71.3,
+        72,
+        70.9,
+        65.4,
+        65.5,
+        70.6,
+        70.8
+      ],
+      "lfpr_person": [
+        48.1,
+        48.9,
+        50.3,
+        43.4,
+        44.7,
+        51.1,
+        59.6
+      ]
+    },
+    {
+      "stateName": "Meghalaya",
+      "geoName": "Meghalaya",
+      "ur_person": [
+        1.6,
+        2.7,
+        2.7,
+        1.7,
+        2.6,
+        6,
+        6.2
+      ],
+      "lfpr_female": [
+        51.2,
+        51.2,
+        45.7,
+        51.6,
+        50.2,
+        60.9,
+        71.8
+      ],
+      "lfpr_male": [
+        76.4,
+        76.2,
+        75.3,
+        75.4,
+        74.4,
+        79.6,
+        82.3
+      ],
+      "lfpr_person": [
+        63.2,
+        63.5,
+        60.2,
+        63.1,
+        62.1,
+        70,
+        76.9
+      ]
+    },
+    {
+      "stateName": "Mizoram",
+      "geoName": "Mizoram",
+      "ur_person": [
+        10.1,
+        7,
+        5.7,
+        3.5,
+        5.4,
+        2.2,
+        2.3
+      ],
+      "lfpr_female": [
+        30,
+        29.2,
+        37,
+        41.7,
+        34.7,
+        45.1,
+        41.7
+      ],
+      "lfpr_male": [
+        73.6,
+        68.7,
+        69.8,
+        70.3,
+        67.4,
+        67.2,
+        66.1
+      ],
+      "lfpr_person": [
+        51.6,
+        49,
+        53.8,
+        56.5,
+        51.6,
+        56.4,
+        54.2
+      ]
+    },
+    {
+      "stateName": "Nagaland",
+      "geoName": "Nagaland",
+      "ur_person": [
+        21.4,
+        17.4,
+        25.7,
+        19.2,
+        9.1,
+        4.3,
+        7.1
+      ],
+      "lfpr_female": [
+        16.7,
+        22.7,
+        43,
+        47.6,
+        51.5,
+        65.2,
+        64.3
+      ],
+      "lfpr_male": [
+        64.8,
+        69.1,
+        76,
+        74.1,
+        75.8,
+        79.3,
+        82.4
+      ],
+      "lfpr_person": [
+        41.8,
+        46.1,
+        60.3,
+        61.3,
+        64.2,
+        72.5,
+        73.3
+      ]
+    },
+    {
+      "stateName": "Odisha",
+      "geoName": "Odisha",
+      "ur_person": [
+        7.1,
+        7,
+        6.2,
+        5.3,
+        6,
+        3.9,
+        3.1
+      ],
+      "lfpr_female": [
+        19.5,
+        24.4,
+        33.1,
+        33.2,
+        32.9,
+        44.7,
+        49.4
+      ],
+      "lfpr_male": [
+        78.6,
+        79,
+        78.3,
+        80.1,
+        78.9,
+        78.1,
+        81.7
+      ],
+      "lfpr_person": [
+        48.3,
+        51.2,
+        55.3,
+        56.5,
+        55.8,
+        61.3,
+        64.9
+      ]
+    },
+    {
+      "stateName": "Puducherry",
+      "geoName": "Puducherry",
+      "ur_person": [
+        10.3,
+        8.3,
+        7.6,
+        6.7,
+        5.8,
+        5.6,
+        4.6
+      ],
+      "lfpr_female": [
+        17.1,
+        31.2,
+        31.6,
+        29.3,
+        35.7,
+        33.6,
+        34.2
+      ],
+      "lfpr_male": [
+        69.4,
+        76.7,
+        71.6,
+        76.9,
+        74.3,
+        74.8,
+        73.3
+      ],
+      "lfpr_person": [
+        42.2,
+        52.1,
+        51.7,
+        51.6,
+        54.4,
+        52.5,
+        52.4
+      ]
+    },
+    {
+      "stateName": "Punjab",
+      "geoName": "Punjab",
+      "ur_person": [
+        7.7,
+        7.4,
+        7.3,
+        6.2,
+        6.4,
+        6.1,
+        5.5
+      ],
+      "lfpr_female": [
+        15.5,
+        19.1,
+        23.7,
+        23.1,
+        24,
+        27.6,
+        31.1
+      ],
+      "lfpr_male": [
+        74.9,
+        73.9,
+        77.2,
+        77.2,
+        77.2,
+        78.3,
+        79.8
+      ],
+      "lfpr_person": [
+        46.5,
+        47.7,
+        51.6,
+        50.4,
+        51.8,
+        53.5,
+        55.7
+      ]
+    },
+    {
+      "stateName": "Rajasthan",
+      "geoName": "Rajasthan",
+      "ur_person": [
+        5,
+        5.7,
+        4.5,
+        4.7,
+        4.7,
+        4.4,
+        4.2
+      ],
+      "lfpr_female": [
+        27,
+        31.4,
+        38.6,
+        39.9,
+        40,
+        47.9,
+        50.9
+      ],
+      "lfpr_male": [
+        73.5,
+        74.5,
+        76.2,
+        75.7,
+        74.6,
+        74.8,
+        78.2
+      ],
+      "lfpr_person": [
+        50.7,
+        53,
+        57.6,
+        58.1,
+        57.4,
+        61.5,
+        64.4
+      ]
+    },
+    {
+      "stateName": "Sikkim",
+      "geoName": "Sikkim",
+      "ur_person": [
+        3.5,
+        3.1,
+        2.2,
+        1.1,
+        1.6,
+        2.2,
+        2.3
+      ],
+      "lfpr_female": [
+        43.9,
+        50.3,
+        59.4,
+        61.1,
+        57.8,
+        68.6,
+        68.2
+      ],
+      "lfpr_male": [
+        76,
+        73.9,
+        79.8,
+        82.5,
+        83.5,
+        82.1,
+        83.4
+      ],
+      "lfpr_person": [
+        60.9,
+        63,
+        70.4,
+        72.1,
+        71,
+        75.7,
+        76.2
+      ]
+    },
+    {
+      "stateName": "Tamil Nadu",
+      "geoName": "Tamil Nadu",
+      "ur_person": [
+        7.5,
+        6.6,
+        5.3,
+        5.2,
+        4.8,
+        4.3,
+        3.5
+      ],
+      "lfpr_female": [
+        33.7,
+        37,
+        40.2,
+        43,
+        40.7,
+        40.5,
+        43.2
+      ],
+      "lfpr_male": [
+        77.7,
+        74.8,
+        77.9,
+        78.5,
+        77.5,
+        74.5,
+        75.7
+      ],
+      "lfpr_person": [
+        55.1,
+        55.1,
+        58.4,
+        60,
+        58.6,
+        57.1,
+        58.8
+      ]
+    },
+    {
+      "stateName": "Telangana",
+      "geoName": "Telangana",
+      "ur_person": [
+        7.6,
+        8.3,
+        7,
+        4.9,
+        4.2,
+        4.4,
+        4.8
+      ],
+      "lfpr_female": [
+        32.6,
+        38.3,
+        44.3,
+        45.4,
+        44.7,
+        44.8,
+        46.7
+      ],
+      "lfpr_male": [
+        74.9,
+        72.4,
+        75.7,
+        76,
+        76.6,
+        75.6,
+        78.5
+      ],
+      "lfpr_person": [
+        53.9,
+        55.1,
+        59.9,
+        60.8,
+        60.7,
+        60.3,
+        62.2
+      ]
+    },
+    {
+      "stateName": "Tripura",
+      "geoName": "Tripura",
+      "ur_person": [
+        6.8,
+        10,
+        3.2,
+        3.2,
+        3,
+        1.4,
+        1.7
+      ],
+      "lfpr_female": [
+        12.5,
+        16.6,
+        24.2,
+        30.8,
+        26.7,
+        35.2,
+        47.1
+      ],
+      "lfpr_male": [
+        75,
+        75.6,
+        78.1,
+        80.6,
+        76.7,
+        74.9,
+        78.9
+      ],
+      "lfpr_person": [
+        45.1,
+        46.6,
+        51.2,
+        55.6,
+        52.2,
+        55.1,
+        63
+      ]
+    },
+    {
+      "stateName": "Uttar Pradesh",
+      "geoName": "Uttar Pradesh",
+      "ur_person": [
+        6.2,
+        5.7,
+        4.4,
+        4.2,
+        2.9,
+        2.4,
+        3.1
+      ],
+      "lfpr_female": [
+        13.5,
+        13.6,
+        17.7,
+        22.6,
+        26.3,
+        31.2,
+        34.5
+      ],
+      "lfpr_male": [
+        75.1,
+        73.1,
+        76,
+        77.3,
+        77,
+        79.3,
+        79.5
+      ],
+      "lfpr_person": [
+        44.6,
+        43.2,
+        47.1,
+        50.1,
+        51.6,
+        55.2,
+        56.9
+      ]
+    },
+    {
+      "stateName": "Uttarakhand",
+      "geoName": "Uttarakhand",
+      "ur_person": [
+        7.6,
+        8.9,
+        7.1,
+        6.9,
+        7.8,
+        4.5,
+        4.3
+      ],
+      "lfpr_female": [
+        18.1,
+        19.4,
+        31.8,
+        31.5,
+        33.1,
+        38.7,
+        45.6
+      ],
+      "lfpr_male": [
+        69.8,
+        71.7,
+        74.6,
+        72.5,
+        71.7,
+        73.5,
+        76.4
+      ],
+      "lfpr_person": [
+        43.9,
+        45.4,
+        53.4,
+        52.3,
+        52.8,
+        56,
+        60.7
+      ]
+    },
+    {
+      "stateName": "West Bengal",
+      "geoName": "West Bengal",
+      "ur_person": [
+        4.6,
+        3.8,
+        4.6,
+        3.5,
+        3.4,
+        2.2,
+        2.5
+      ],
+      "lfpr_female": [
+        20.8,
+        22.2,
+        24,
+        28.7,
+        27.9,
+        33.8,
+        40.4
+      ],
+      "lfpr_male": [
+        79.3,
+        81.1,
+        80,
+        81.7,
+        80.7,
+        80.8,
+        82.4
+      ],
+      "lfpr_person": [
+        50.1,
+        51.6,
+        52.1,
+        54.9,
+        54.6,
+        57.3,
+        61.1
+      ]
+    }
+  ]
 }

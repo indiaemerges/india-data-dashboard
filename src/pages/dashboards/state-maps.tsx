@@ -38,6 +38,17 @@ const INDICATORS = [
     field: "ur_person" as const,
   },
   {
+    id: "lfpr_person",
+    label: "LFPR (Total)",
+    description: "Total labour force participation rate · all persons · combined (rural + urban) · age 15+ · PS+SS",
+    unit: "%",
+    source: "MoSPI PLFS",
+    sourceUrl: "https://www.mospi.gov.in/",
+    defaultColormap: "Blues" as ColormapId,
+    dataset: "plfs" as const,
+    field: "lfpr_person" as const,
+  },
+  {
     id: "lfpr_female",
     label: "Female LFPR",
     description: "Female labour force participation · % of female population aged 15+ · combined",
@@ -47,6 +58,17 @@ const INDICATORS = [
     defaultColormap: "Greens" as ColormapId,
     dataset: "plfs" as const,
     field: "lfpr_female" as const,
+  },
+  {
+    id: "lfpr_male",
+    label: "Male LFPR",
+    description: "Male labour force participation rate · % of male population aged 15+ · combined",
+    unit: "%",
+    source: "MoSPI PLFS",
+    sourceUrl: "https://www.mospi.gov.in/",
+    defaultColormap: "Oranges" as ColormapId,
+    dataset: "plfs" as const,
+    field: "lfpr_male" as const,
   },
   {
     id: "cpi_general",
@@ -221,7 +243,7 @@ export default function StateMapsPage() {
         <title>State Maps · India Data Hub</title>
         <meta
           name="description"
-          content="State-wise choropleth maps of unemployment, female LFPR, CPI inflation, and GSDP across India"
+          content="State-wise choropleth maps of unemployment, LFPR (total, male, female), CPI inflation, and GSDP across India"
         />
       </Head>
 

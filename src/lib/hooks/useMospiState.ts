@@ -66,7 +66,7 @@ export function useGSDPStateData() {
 export function plfsStateSlice(
   data: PLFSStateData,
   yearIndex: number,
-  indicator: "ur_person" | "lfpr_female"
+  indicator: "ur_person" | "lfpr_female" | "lfpr_male" | "lfpr_person"
 ): { names: string[]; values: (number | null)[] } {
   const names: string[] = [];
   const values: (number | null)[] = [];

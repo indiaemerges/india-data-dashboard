@@ -495,6 +495,8 @@ export interface PLFSStateSeries {
   geoName: string;        // GeoJSON ST_NM match value (may differ for UTs)
   ur_person: (number | null)[];    // Unemployment Rate (person, combined), parallel to years[]
   lfpr_female: (number | null)[];  // Female LFPR (combined), parallel to years[]
+  lfpr_male: (number | null)[];    // Male LFPR (combined), parallel to years[]
+  lfpr_person: (number | null)[];  // Total LFPR (combined, all persons), parallel to years[]
 }
 
 export interface PLFSStateData {
