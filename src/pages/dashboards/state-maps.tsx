@@ -13,11 +13,11 @@ import {
 
 const COLORMAPS = [
   { id: "YlOrRd",  label: "Yellow → Red"   },
-  { id: "YlGn",    label: "Yellow → Green" },
+  { id: "Greens",  label: "Greens"         },
   { id: "Blues",   label: "Blues"          },
   { id: "Oranges", label: "Oranges"        },
   { id: "Viridis", label: "Viridis"        },
-  { id: "RdYlGn",  label: "Diverging"      },
+  { id: "RdBu",    label: "Diverging"      },
 ] as const;
 type ColormapId = (typeof COLORMAPS)[number]["id"];
 
@@ -40,7 +40,7 @@ const INDICATORS = [
     description: "Female labour force participation · % of female population aged 15+ · combined",
     source: "MoSPI PLFS",
     sourceUrl: "https://www.mospi.gov.in/",
-    defaultColormap: "YlGn" as ColormapId,
+    defaultColormap: "Greens" as ColormapId,
     dataset: "plfs" as const,
     field: "lfpr_female" as const,
   },
