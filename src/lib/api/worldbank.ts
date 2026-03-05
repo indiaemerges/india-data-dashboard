@@ -93,12 +93,21 @@ export const WORLD_BANK_INDICATORS = {
   GDP_PER_CAPITA_GROWTH: "NY.GDP.PCAP.KD.ZG",
   GNI_PER_CAPITA_ATLAS: "NY.GNP.PCAP.CD",
 
-  // Trade
+  // Trade — % of GDP (openness ratios)
   EXPORTS_GDP_PCT: "NE.EXP.GNFS.ZS",
   IMPORTS_GDP_PCT: "NE.IMP.GNFS.ZS",
   TRADE_BALANCE_GDP_PCT: "NE.RSB.GNFS.ZS",
   FDI_NET_INFLOWS_GDP: "BX.KLT.DINV.WD.GD.ZS",
   CURRENT_ACCOUNT_GDP: "BN.CAB.XOKA.GD.ZS",
+
+  // Trade — absolute USD values (current prices, BoP basis)
+  MERCH_EXPORTS_USD: "TX.VAL.MRCH.CD.WT",       // Merchandise exports
+  MERCH_IMPORTS_USD: "TM.VAL.MRCH.CD.WT",       // Merchandise imports
+  SERVICES_EXPORTS_USD: "BX.GSR.NFSV.CD",       // Service exports
+  SERVICES_IMPORTS_USD: "BM.GSR.NFSV.CD",       // Service imports
+  FDI_INFLOWS_USD: "BX.KLT.DINV.CD.WD",         // FDI net inflows
+  CURRENT_ACCOUNT_USD: "BN.CAB.XOKA.CD",        // Current account balance
+  HIGH_TECH_EXPORTS_PCT: "TX.VAL.TECH.MF.ZS",   // High-tech exports (% of mfg exports)
 
   // Population
   POPULATION: "SP.POP.TOTL",
