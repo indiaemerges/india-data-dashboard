@@ -15,19 +15,24 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.21",
+    "d3-scale-chromatic": "^3.1.0",
     "next": "^15.1.0",
     "next-themes": "^0.4.6",
+    "plotly.js": "^3.4.0",
     "plotly.js-basic-dist-min": "^3.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-plotly.js": "^2.6.0"
+    "react-plotly.js": "^2.6.0",
+    "react-simple-maps": "^3.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/d3-scale-chromatic": "^3.1.0",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-plotly.js": "^2.6.4",
+    "@types/react-simple-maps": "^3.0.6",
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
     "eslint-config-next": "^15.1.0",

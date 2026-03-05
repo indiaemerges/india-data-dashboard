@@ -1,19 +1,62 @@
-import dynamic from "next/dynamic";
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+  Marker,
+} from "react-simple-maps";
+import {
+  interpolateYlOrRd,
+  interpolateGreens,
+  interpolateBlues,
+  interpolateOranges,
+  interpolateViridis,
+  interpolateRdBu,
+} from "d3-scale-chromatic";
 import { useTheme } from "next-themes";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useIndiaGeoJSON } from "@/lib/hooks/useMospiState";
 
-// Dynamically import react-plotly.js (requires window)
-const Plot = dynamic(() => import("react-plotly.js"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center h-80 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-2" />
-        <p className="text-sm text-gray-500 dark:text-gray-400">Loading map…</p>
-      </div>
-    </div>
-  ),
-});
+// ── Colorscale interpolators ───────────────────────────────────────────────────
+
+type ColorInterpolator = (t: number) => string;
+
+const INTERPOLATORS: Record<string, ColorInterpolator> = {
+  YlOrRd:  interpolateYlOrRd,
+  Greens:  interpolateGreens,
+  Blues:   interpolateBlues,
+  Oranges: interpolateOranges,
+  Viridis: interpolateViridis,
+  RdBu:    interpolateRdBu,
+};
+
+// ── Contrast-adaptive text colour ─────────────────────────────────────────────
+// d3 interpolators return "rgb(r, g, b)" strings — we parse directly so there
+// is no separate color-stop lookup table needed.
+
+function parseRgb(css: string): [number, number, number] {
+  const m = css.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+  if (m) return [+m[1], +m[2], +m[3]];
+  if (css.startsWith("#"))
+    return [
+      parseInt(css.slice(1, 3), 16),
+      parseInt(css.slice(3, 5), 16),
+      parseInt(css.slice(5, 7), 16),
+    ];
+  return [128, 128, 128];
+}
+
+function relativeLuminance([r, g, b]: [number, number, number]): number {
+  const lin = (c: number) => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+}
+
+/** WCAG-compliant contrast choice: dark text on light fills, white on dark. */
+function contrastTextColor(fillCss: string): string {
+  return relativeLuminance(parseRgb(fillCss)) > 0.179 ? "#111827" : "#f9fafb";
+}
 
 // ── Centroid computation from GeoJSON geometry ─────────────────────────────────
 
@@ -35,8 +78,8 @@ function featureCentroid(
       return ringCentroid((geom.coordinates as Coord[][])[0]);
     }
     if (geom.type === "MultiPolygon") {
-      // Use the largest polygon's outer ring for a sensible label position
-      const rings = (geom.coordinates as Coord[][][]).map((poly) => poly[0]);
+      // Use the largest polygon ring so island-chains label sensibly
+      const rings = (geom.coordinates as Coord[][][]).map((p) => p[0]);
       const largest = rings.reduce((a, b) => (a.length > b.length ? a : b));
       return ringCentroid(largest);
     }
@@ -46,59 +89,36 @@ function featureCentroid(
   }
 }
 
-// ── Colorscale stops for contrast-adaptive annotation text ────────────────────
-// Mirrors each named Plotly colorscale used in this dashboard (position 0–1).
+// ── Colorbar ──────────────────────────────────────────────────────────────────
 
-type ColorStop = [number, string];
-
-const COLORSCALE_STOPS: Record<string, ColorStop[]> = {
-  YlOrRd:  [[0,"#ffffcc"],[0.25,"#fed976"],[0.5,"#fd8d3c"],[0.75,"#e31a1c"],[1,"#800026"]],
-  Greens:  [[0,"#f7fcf5"],[0.25,"#c7e9c0"],[0.5,"#74c476"],[0.75,"#238b45"],[1,"#00441b"]],
-  Blues:   [[0,"#f7fbff"],[0.25,"#c6dbef"],[0.5,"#6baed6"],[0.75,"#2171b5"],[1,"#08306b"]],
-  Oranges: [[0,"#fff5eb"],[0.25,"#fdd0a2"],[0.5,"#fd8d3c"],[0.75,"#d94801"],[1,"#7f2704"]],
-  Viridis: [[0,"#440154"],[0.25,"#3b528b"],[0.5,"#21908c"],[0.75,"#5dc963"],[1,"#fde725"]],
-  RdBu:    [[0,"#67001f"],[0.25,"#d6604d"],[0.5,"#f7f7f7"],[0.75,"#4393c3"],[1,"#053061"]],
-};
-
-function hexToRgb(hex: string): [number, number, number] {
-  return [
-    parseInt(hex.slice(1, 3), 16),
-    parseInt(hex.slice(3, 5), 16),
-    parseInt(hex.slice(5, 7), 16),
-  ];
+interface ColorBarProps {
+  lo: number;
+  hi: number;
+  interpolator: ColorInterpolator;
+  reversescale: boolean;
+  unit: string;
 }
 
-function lerpNum(a: number, b: number, t: number) { return a + (b - a) * t; }
+function ColorBar({ lo, hi, interpolator, reversescale, unit }: ColorBarProps) {
+  // 11 stops → smooth gradient
+  const stops = Array.from({ length: 11 }, (_, i) => {
+    const t = i / 10;
+    return interpolator(reversescale ? 1 - t : t);
+  }).join(", ");
 
-function interpolateStops(stops: ColorStop[], t: number): [number, number, number] {
-  t = Math.max(0, Math.min(1, t));
-  let lo = stops[0], hi = stops[stops.length - 1];
-  for (let i = 0; i < stops.length - 1; i++) {
-    if (t <= stops[i + 1][0]) { lo = stops[i]; hi = stops[i + 1]; break; }
-  }
-  const f = lo[0] === hi[0] ? 0 : (t - lo[0]) / (hi[0] - lo[0]);
-  const [r1, g1, b1] = hexToRgb(lo[1]);
-  const [r2, g2, b2] = hexToRgb(hi[1]);
-  return [lerpNum(r1, r2, f), lerpNum(g1, g2, f), lerpNum(b1, b2, f)];
-}
-
-function relativeLuminance([r, g, b]: [number, number, number]): number {
-  const lin = (c: number) => {
-    const s = c / 255;
-    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
-  };
-  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-}
-
-/**
- * Returns "#111827" (near-black) or "#f9fafb" (near-white) to maximise
- * contrast against the interpolated colorscale colour at normalised t ∈ [0,1].
- * Switch-over at L ≈ 0.179 satisfies WCAG 2.1 AA for both choices.
- */
-function contrastColor(colorscaleName: string, t: number): string {
-  const stops = COLORSCALE_STOPS[colorscaleName] ?? COLORSCALE_STOPS["YlOrRd"];
-  const lum = relativeLuminance(interpolateStops(stops, t));
-  return lum > 0.179 ? "#111827" : "#f9fafb";
+  return (
+    <div className="mt-3 px-1">
+      <div
+        className="h-3 rounded"
+        style={{ background: `linear-gradient(to right, ${stops})` }}
+      />
+      <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
+        <span>{lo.toFixed(1)}</span>
+        <span className="text-gray-400 dark:text-gray-500 text-[10px]">{unit}</span>
+        <span>{hi.toFixed(1)}</span>
+      </div>
+    </div>
+  );
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -119,6 +139,7 @@ interface ChoroplethMapProps {
   zmax?: number;
   /** Show numeric value labels at each state centroid (default: true) */
   showAnnotations?: boolean;
+  /** Kept for API compatibility; SVG auto-sizes via aspect ratio */
   height?: number;
   className?: string;
 }
@@ -136,148 +157,57 @@ export default function ChoroplethMap({
   zmin,
   zmax,
   showAnnotations = true,
-  height = 480,
   className = "",
 }: ChoroplethMapProps) {
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   const { data: geoJson, isLoading: geoLoading } = useIndiaGeoJSON();
+  const mapRef = useRef<HTMLDivElement>(null);
 
-  // Theme-aware colours
-  const borderColor = isDark ? "#6b7280" : "#d1d5db";       // gray-500 | gray-300
-  const grayFill    = isDark ? "rgba(75,85,99,0.5)"          // gray-600/50
-                             : "rgba(229,231,235,0.8)";       // gray-200/80
-  const axisColor   = isDark ? "#9ca3af" : "#6b7280";         // gray-400 | gray-500
+  // ── Responsive: hide dense annotations on phones/tablets ─────────────────
+  const [hideAnnotations, setHideAnnotations] = useState(false);
+  useEffect(() => {
+    const check = () => setHideAnnotations(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
-  // ── Non-null pairs for the data trace ────────────────────────────────────
-  const nonNull = states
-    .map((name, i) => ({ name, value: values[i] }))
-    .filter((d): d is { name: string; value: number } => d.value !== null);
+  // ── Hover / tap tooltip ───────────────────────────────────────────────────
+  const [tooltip, setTooltip] = useState<{
+    name: string;
+    value: number | null;
+    x: number;
+    y: number;
+  } | null>(null);
 
-  // ── Centroid annotations ─────────────────────────────────────────────────
-  const annoLons: number[]   = [];
-  const annoLats: number[]   = [];
-  const annoTexts: string[]  = [];
-  const annoColors: string[] = [];   // per-point contrast-adaptive text colour
+  // ── Colour scale ──────────────────────────────────────────────────────────
+  const valueMap = useMemo(
+    () => new Map(states.map((s, i) => [s, values[i]])),
+    [states, values]
+  );
 
-  if (geoJson && showAnnotations) {
-    const geo = geoJson as {
-      features: Array<{
-        properties: { ST_NM: string };
-        geometry: { type: string; coordinates: unknown };
-      }>;
-    };
-    const valueMap = new Map<string, number | null>(
-      states.map((s, i) => [s, values[i]])
-    );
-    // Normalised range used to position each value on the colorscale
-    const lo = zmin ?? Math.min(...(values.filter((v) => v !== null) as number[]));
-    const hi = zmax ?? Math.max(...(values.filter((v) => v !== null) as number[]));
-    const range = hi - lo || 1;
+  const nonNullVals = useMemo(
+    () => values.filter((v): v is number => v !== null),
+    [values]
+  );
 
-    for (const feat of geo.features) {
-      const name = feat.properties.ST_NM;
-      const val = valueMap.get(name);
-      if (val == null) continue;               // skip no-data states
-      const c = featureCentroid(feat.geometry);
-      if (!c) continue;
-      annoLons.push(c.lon);
-      annoLats.push(c.lat);
-      annoTexts.push(val.toFixed(1));
-      const t = Math.max(0, Math.min(1, (val - lo) / range));
-      annoColors.push(contrastColor(colorscale, t));
-    }
-  }
+  const lo = zmin ?? (nonNullVals.length ? Math.min(...nonNullVals) : 0);
+  const hi = zmax ?? (nonNullVals.length ? Math.max(...nonNullVals) : 1);
+  const range = hi - lo || 1;
 
-  // ── Build Plotly traces ──────────────────────────────────────────────────
+  const interpolator = INTERPOLATORS[colorscale] ?? INTERPOLATORS.YlOrRd;
 
-  // Trace 1 — base: every state shown in neutral gray so no boundaries vanish
-  const baseTrace = {
-    type: "choropleth",
-    geojson: geoJson,
-    featureidkey: "properties.ST_NM",
-    locations: states,
-    z: states.map(() => 0),
-    zmin: -1,
-    zmax: 1,
-    // Flat neutral colorscale (start = end = same grey)
-    colorscale: [[0, grayFill], [0.5, grayFill], [1, grayFill]],
-    showscale: false,
-    marker: { line: { color: borderColor, width: 1 } },
-    hoverinfo: "skip" as const,
+  const colorFn = (val: number): string => {
+    const t = Math.max(0, Math.min(1, (val - lo) / range));
+    return interpolator(reversescale ? 1 - t : t);
   };
 
-  // Trace 2 — data: non-null states filled by indicator value
-  const dataTrace = {
-    type: "choropleth",
-    geojson: geoJson,
-    featureidkey: "properties.ST_NM",
-    locations: nonNull.map((d) => d.name),
-    z: nonNull.map((d) => d.value),
-    colorscale,
-    reversescale,
-    ...(zmin !== undefined ? { zmin } : {}),
-    ...(zmax !== undefined ? { zmax } : {}),
-    marker: { line: { color: borderColor, width: 1 } },
-    colorbar: {
-      title: {
-        text: unit,
-        font: { size: 11, color: axisColor },
-        side: "right",
-      },
-      thickness: 14,
-      len: 0.65,
-      tickfont: { size: 10, color: axisColor },
-      outlinewidth: 0,
-    },
-    hovertemplate: "<b>%{location}</b><br>%{z:.1f} " + unit + "<extra></extra>",
-  };
+  // ── Theme-aware static colours ────────────────────────────────────────────
+  const noDataFill  = isDark ? "#374151" : "#e5e7eb";   // gray-700 | gray-200
+  const strokeColor = isDark ? "#6b7280" : "#d1d5db";   // gray-500 | gray-300
 
-  // Trace 3 — annotation: text values at state centroids
-  // textfont.color is a per-point array — dark on light fills, white on dark fills
-  const annotTrace = {
-    type: "scattergeo",
-    lon: annoLons,
-    lat: annoLats,
-    text: annoTexts,
-    mode: "text",
-    textfont: { size: 12, color: annoColors, family: "sans-serif" },
-    hoverinfo: "skip" as const,
-    showlegend: false,
-  };
-
-  const traces = showAnnotations
-    ? [baseTrace, dataTrace, annotTrace]
-    : [baseTrace, dataTrace];
-
-  // ── Layout ───────────────────────────────────────────────────────────────
-  const layout: Partial<Plotly.Layout> = {
-    paper_bgcolor: isDark ? "#1f2937" : "white",
-    plot_bgcolor:  isDark ? "#1f2937" : "white",
-    height,
-    margin: { t: 0, b: 0, l: 0, r: 0, pad: 0 },
-    showlegend: false,
-    geo: {
-      showframe: false,
-      showcoastlines: false,
-      showland: false,
-      showocean: false,
-      showlakes: false,
-      showcountries: false,
-      // Use base trace (all states) to define map extent
-      fitbounds: "locations" as const,
-      bgcolor: isDark ? "#1f2937" : "white",
-      projection: { type: "mercator" as const },
-    },
-  };
-
-  const config: Partial<Plotly.Config> = {
-    displayModeBar: false,
-    responsive: true,
-    scrollZoom: false,
-  };
-
-  const isReady = !geoLoading && geoJson;
+  const isReady = !geoLoading && !!geoJson;
 
   return (
     <div
@@ -301,10 +231,7 @@ export default function ChoroplethMap({
 
       {/* Map or loading state */}
       {!isReady ? (
-        <div
-          className="flex items-center justify-center bg-gray-50 dark:bg-gray-700 rounded-lg"
-          style={{ height }}
-        >
+        <div className="flex items-center justify-center h-80 bg-gray-50 dark:bg-gray-700 rounded-lg">
           <div className="text-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-2" />
             <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -313,13 +240,139 @@ export default function ChoroplethMap({
           </div>
         </div>
       ) : (
-        <Plot
-          data={traces as Plotly.Data[]}
-          layout={layout}
-          config={config}
-          useResizeHandler
-          className="w-full"
-          style={{ width: "100%" }}
+        <div ref={mapRef} className="relative select-none">
+          <ComposableMap
+            projection="geoMercator"
+            projectionConfig={{ center: [82, 22], scale: 800 }}
+            width={800}
+            height={600}
+            style={{ width: "100%", height: "auto", display: "block" }}
+          >
+            <Geographies geography={geoJson}>
+              {({ geographies }) => (
+                <>
+                  {/* ── Fill layer ── */}
+                  {geographies.map((geo) => {
+                    const name = geo.properties.ST_NM as string;
+                    const val = valueMap.get(name) ?? null;
+                    const fill = val !== null ? colorFn(val) : noDataFill;
+                    return (
+                      <Geography
+                        key={geo.rsmKey}
+                        geography={geo}
+                        fill={fill}
+                        stroke={strokeColor}
+                        strokeWidth={0.5}
+                        style={{
+                          default: { outline: "none" },
+                          hover:   { outline: "none", opacity: 0.8, cursor: "pointer" },
+                          pressed: { outline: "none" },
+                        }}
+                        onMouseEnter={(e: React.MouseEvent) => {
+                          const rect = mapRef.current?.getBoundingClientRect();
+                          if (!rect) return;
+                          setTooltip({
+                            name,
+                            value: val,
+                            x: e.clientX - rect.left,
+                            y: e.clientY - rect.top,
+                          });
+                        }}
+                        onMouseLeave={() => setTooltip(null)}
+                        onClick={(e: React.MouseEvent) => {
+                          // Tap-to-reveal on touch devices
+                          const rect = mapRef.current?.getBoundingClientRect();
+                          if (!rect) return;
+                          setTooltip((prev) =>
+                            prev?.name === name
+                              ? null
+                              : {
+                                  name,
+                                  value: val,
+                                  x: e.clientX - rect.left,
+                                  y: e.clientY - rect.top,
+                                }
+                          );
+                        }}
+                      />
+                    );
+                  })}
+
+                  {/* ── Annotation layer — hidden below md breakpoint ── */}
+                  {showAnnotations &&
+                    !hideAnnotations &&
+                    geographies.map((geo) => {
+                      const name = geo.properties.ST_NM as string;
+                      const val = valueMap.get(name) ?? null;
+                      if (val === null) return null;
+                      const c = featureCentroid(
+                        geo.geometry as {
+                          type: string;
+                          coordinates: unknown;
+                        }
+                      );
+                      if (!c) return null;
+                      const fill = colorFn(val);
+                      return (
+                        <Marker
+                          key={`anno-${name}`}
+                          coordinates={[c.lon, c.lat]}
+                        >
+                          <text
+                            textAnchor="middle"
+                            dominantBaseline="central"
+                            fontSize={8}
+                            fontFamily="sans-serif"
+                            fontWeight="500"
+                            fill={contrastTextColor(fill)}
+                            style={{
+                              pointerEvents: "none",
+                              userSelect: "none",
+                            }}
+                          >
+                            {val.toFixed(1)}
+                          </text>
+                        </Marker>
+                      );
+                    })}
+                </>
+              )}
+            </Geographies>
+          </ComposableMap>
+
+          {/* Tooltip */}
+          {tooltip && (
+            <div
+              className="absolute z-10 pointer-events-none bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg px-2.5 py-1.5 text-sm"
+              style={{
+                left: Math.min(
+                  tooltip.x + 12,
+                  (mapRef.current?.offsetWidth ?? 300) - 170
+                ),
+                top: Math.max(tooltip.y - 44, 4),
+              }}
+            >
+              <p className="font-medium text-gray-900 dark:text-white leading-tight">
+                {tooltip.name}
+              </p>
+              <p className="text-gray-600 dark:text-gray-300 leading-tight">
+                {tooltip.value !== null
+                  ? `${tooltip.value.toFixed(1)} ${unit}`
+                  : "No data"}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Colorbar */}
+      {isReady && nonNullVals.length > 0 && (
+        <ColorBar
+          lo={lo}
+          hi={hi}
+          interpolator={interpolator}
+          reversescale={reversescale}
+          unit={unit}
         />
       )}
 

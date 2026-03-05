@@ -34,12 +34,12 @@ export function useCPIStateData() {
 }
 
 export function useIndiaGeoJSON() {
-  return useQuery<object>({
+  return useQuery<Record<string, unknown>>({
     queryKey: ["geo", "india-states"],
     queryFn: async () => {
       const res = await fetch(`${BASE_PATH}/data/geo/india-states.geojson`);
       if (!res.ok) throw new Error("India states GeoJSON not available");
-      return res.json() as Promise<object>;
+      return res.json() as Promise<Record<string, unknown>>;
     },
     staleTime: Infinity,
     gcTime: 1000 * 60 * 60 * 24,
