@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useCPIMonthlyData, cpiToSeries } from "@/lib/hooks/useMospiCPI";
 import { useWPIMonthlyData, wpiToSeries } from "@/lib/hooks/useMospiWPI";
 import LineChart from "@/components/charts/LineChart";
+import SeriesFilterChart from "@/components/charts/SeriesFilterChart";
 import HeatmapChart from "@/components/charts/HeatmapChart";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
@@ -316,7 +317,7 @@ export default function InflationDashboard() {
 
           {/* 3 — CPI major components (since 2020) */}
           {cpiComponentSeries.length > 0 && (
-            <LineChart
+            <SeriesFilterChart
               series={cpiComponentSeries}
               showMarkers={false}
               title="CPI by Major Component (2020 onwards)"
@@ -330,7 +331,7 @@ export default function InflationDashboard() {
 
           {/* 4 — CPI food sub-groups (since 2021) */}
           {cpiFoodSeries.length > 0 && (
-            <LineChart
+            <SeriesFilterChart
               series={cpiFoodSeries}
               showMarkers={false}
               title="CPI Food Sub-Groups (2021 onwards)"
@@ -363,7 +364,7 @@ export default function InflationDashboard() {
 
           {/* 6 — WPI components */}
           {wpiSeries.length > 0 && (
-            <LineChart
+            <SeriesFilterChart
               series={wpiSeries}
               showMarkers={false}
               title="WPI by Component (Monthly)"

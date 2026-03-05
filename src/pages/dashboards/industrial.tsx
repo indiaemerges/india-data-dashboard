@@ -7,6 +7,7 @@ import {
   type IIPMonthField,
 } from "@/lib/hooks/useMospiIIP";
 import LineChart from "@/components/charts/LineChart";
+import SeriesFilterChart from "@/components/charts/SeriesFilterChart";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
 import type { DataSeries } from "@/lib/api/types";
@@ -245,7 +246,7 @@ export default function IndustrialDashboard() {
 
           {/* Monthly sectoral growth rates */}
           {monthlySectoralGrowth.length > 0 && (
-            <LineChart
+            <SeriesFilterChart
               series={monthlySectoralGrowth}
               showMarkers={false}
               title="IIP Growth Rate — Sectoral (Monthly)"
@@ -259,7 +260,7 @@ export default function IndustrialDashboard() {
 
           {/* Monthly use-based growth rates */}
           {monthlyUseBasedGrowth.length > 0 && (
-            <LineChart
+            <SeriesFilterChart
               series={monthlyUseBasedGrowth}
               showMarkers={false}
               title="IIP Growth Rate — Use-based Classification (Monthly)"
@@ -292,7 +293,7 @@ export default function IndustrialDashboard() {
 
               {/* Annual use-based growth rates */}
               {useBasedGrowthSeries.length > 0 && (
-                <LineChart
+                <SeriesFilterChart
                   series={useBasedGrowthSeries}
                   title="IIP Growth Rate — Use-based (Annual Average)"
                   subtitle="Annual average growth rates by use-based category"
