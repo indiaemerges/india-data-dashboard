@@ -13,6 +13,11 @@ export interface DataSeries {
   unit: string; // e.g., "%" , "USD", "INR Crore", "Index"
   frequency: "annual" | "quarterly" | "monthly" | "daily";
   data: DataPoint[];
+  /** Optional explicit line/marker color (CSS color string). When set, LineChart
+   *  uses this instead of Plotly's automatic color cycle. Used by SeriesFilterChart
+   *  to keep chip dot colors consistent with the chart lines even when some series
+   *  are hidden and the filtered array changes positions. */
+  color?: string;
   metadata: {
     lastUpdated: string;
     sourceUrl: string;

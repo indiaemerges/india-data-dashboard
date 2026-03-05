@@ -119,8 +119,8 @@ export default function LineChart({
     y: s.data.map((d) => d.value),
     // Store original label for hover tooltip
     customdata: s.data.map((d) => d.date),
-    marker: { size: lineShape === "hv" ? 4 : 5 },
-    line: { width: 2, shape: lineShape },
+    marker: { size: lineShape === "hv" ? 4 : 5, ...(s.color ? { color: s.color } : {}) },
+    line: { width: 2, shape: lineShape, ...(s.color ? { color: s.color } : {}) },
     hovertemplate: isQuarterly
       ? `<b>${s.indicator}</b><br>%{customdata}: %{y:.2f} ${s.unit}<extra></extra>`
       : `<b>${s.indicator}</b><br>%{x}: %{y:.2f} ${s.unit}<extra></extra>`,

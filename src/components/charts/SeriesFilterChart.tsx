@@ -72,8 +72,16 @@ export default function SeriesFilterChart({
 
   // ── Derived ─────────────────────────────────────────────────────────────────
 
+  // Stamp each series with its designated colour so LineChart uses the same
+  // colour regardless of how many series are hidden (Plotly's auto-cycle would
+  // otherwise reassign colours by position in the filtered subset).
+  const coloredSeries = series.map((s, i) => ({
+    ...s,
+    color: PLOTLY_COLORS[i % PLOTLY_COLORS.length],
+  }));
+
   const allVisible  = visibleIds.size === series.length;
-  const filtered    = series.filter((s) => visibleIds.has(seriesKey(s)));
+  const filtered    = coloredSeries.filter((s) => visibleIds.has(seriesKey(s)));
 
   // ── Render ──────────────────────────────────────────────────────────────────
 
