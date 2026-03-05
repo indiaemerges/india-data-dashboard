@@ -46,6 +46,61 @@ function featureCentroid(
   }
 }
 
+// ── Colorscale stops for contrast-adaptive annotation text ────────────────────
+// Mirrors each named Plotly colorscale used in this dashboard (position 0–1).
+
+type ColorStop = [number, string];
+
+const COLORSCALE_STOPS: Record<string, ColorStop[]> = {
+  YlOrRd:  [[0,"#ffffcc"],[0.25,"#fed976"],[0.5,"#fd8d3c"],[0.75,"#e31a1c"],[1,"#800026"]],
+  Greens:  [[0,"#f7fcf5"],[0.25,"#c7e9c0"],[0.5,"#74c476"],[0.75,"#238b45"],[1,"#00441b"]],
+  Blues:   [[0,"#f7fbff"],[0.25,"#c6dbef"],[0.5,"#6baed6"],[0.75,"#2171b5"],[1,"#08306b"]],
+  Oranges: [[0,"#fff5eb"],[0.25,"#fdd0a2"],[0.5,"#fd8d3c"],[0.75,"#d94801"],[1,"#7f2704"]],
+  Viridis: [[0,"#440154"],[0.25,"#3b528b"],[0.5,"#21908c"],[0.75,"#5dc963"],[1,"#fde725"]],
+  RdBu:    [[0,"#67001f"],[0.25,"#d6604d"],[0.5,"#f7f7f7"],[0.75,"#4393c3"],[1,"#053061"]],
+};
+
+function hexToRgb(hex: string): [number, number, number] {
+  return [
+    parseInt(hex.slice(1, 3), 16),
+    parseInt(hex.slice(3, 5), 16),
+    parseInt(hex.slice(5, 7), 16),
+  ];
+}
+
+function lerpNum(a: number, b: number, t: number) { return a + (b - a) * t; }
+
+function interpolateStops(stops: ColorStop[], t: number): [number, number, number] {
+  t = Math.max(0, Math.min(1, t));
+  let lo = stops[0], hi = stops[stops.length - 1];
+  for (let i = 0; i < stops.length - 1; i++) {
+    if (t <= stops[i + 1][0]) { lo = stops[i]; hi = stops[i + 1]; break; }
+  }
+  const f = lo[0] === hi[0] ? 0 : (t - lo[0]) / (hi[0] - lo[0]);
+  const [r1, g1, b1] = hexToRgb(lo[1]);
+  const [r2, g2, b2] = hexToRgb(hi[1]);
+  return [lerpNum(r1, r2, f), lerpNum(g1, g2, f), lerpNum(b1, b2, f)];
+}
+
+function relativeLuminance([r, g, b]: [number, number, number]): number {
+  const lin = (c: number) => {
+    const s = c / 255;
+    return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+}
+
+/**
+ * Returns "#111827" (near-black) or "#f9fafb" (near-white) to maximise
+ * contrast against the interpolated colorscale colour at normalised t ∈ [0,1].
+ * Switch-over at L ≈ 0.179 satisfies WCAG 2.1 AA for both choices.
+ */
+function contrastColor(colorscaleName: string, t: number): string {
+  const stops = COLORSCALE_STOPS[colorscaleName] ?? COLORSCALE_STOPS["YlOrRd"];
+  const lum = relativeLuminance(interpolateStops(stops, t));
+  return lum > 0.179 ? "#111827" : "#f9fafb";
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 interface ChoroplethMapProps {
@@ -92,7 +147,6 @@ export default function ChoroplethMap({
   const borderColor = isDark ? "#6b7280" : "#d1d5db";       // gray-500 | gray-300
   const grayFill    = isDark ? "rgba(75,85,99,0.5)"          // gray-600/50
                              : "rgba(229,231,235,0.8)";       // gray-200/80
-  const textColor   = isDark ? "#f9fafb" : "#111827";         // gray-50 | gray-900
   const axisColor   = isDark ? "#9ca3af" : "#6b7280";         // gray-400 | gray-500
 
   // ── Non-null pairs for the data trace ────────────────────────────────────
@@ -101,9 +155,10 @@ export default function ChoroplethMap({
     .filter((d): d is { name: string; value: number } => d.value !== null);
 
   // ── Centroid annotations ─────────────────────────────────────────────────
-  const annoLons: number[] = [];
-  const annoLats: number[] = [];
-  const annoTexts: string[] = [];
+  const annoLons: number[]   = [];
+  const annoLats: number[]   = [];
+  const annoTexts: string[]  = [];
+  const annoColors: string[] = [];   // per-point contrast-adaptive text colour
 
   if (geoJson && showAnnotations) {
     const geo = geoJson as {
@@ -115,6 +170,11 @@ export default function ChoroplethMap({
     const valueMap = new Map<string, number | null>(
       states.map((s, i) => [s, values[i]])
     );
+    // Normalised range used to position each value on the colorscale
+    const lo = zmin ?? Math.min(...(values.filter((v) => v !== null) as number[]));
+    const hi = zmax ?? Math.max(...(values.filter((v) => v !== null) as number[]));
+    const range = hi - lo || 1;
+
     for (const feat of geo.features) {
       const name = feat.properties.ST_NM;
       const val = valueMap.get(name);
@@ -124,6 +184,8 @@ export default function ChoroplethMap({
       annoLons.push(c.lon);
       annoLats.push(c.lat);
       annoTexts.push(val.toFixed(1));
+      const t = Math.max(0, Math.min(1, (val - lo) / range));
+      annoColors.push(contrastColor(colorscale, t));
     }
   }
 
@@ -172,13 +234,14 @@ export default function ChoroplethMap({
   };
 
   // Trace 3 — annotation: text values at state centroids
+  // textfont.color is a per-point array — dark on light fills, white on dark fills
   const annotTrace = {
     type: "scattergeo",
     lon: annoLons,
     lat: annoLats,
     text: annoTexts,
     mode: "text",
-    textfont: { size: 8, color: textColor, family: "sans-serif" },
+    textfont: { size: 12, color: annoColors, family: "sans-serif" },
     hoverinfo: "skip" as const,
     showlegend: false,
   };
