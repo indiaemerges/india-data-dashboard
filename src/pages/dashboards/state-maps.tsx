@@ -6,7 +6,9 @@ import ErrorDisplay from "@/components/ui/ErrorDisplay";
 import {
   usePLFSStateData,
   useCPIStateData,
+  useGSDPStateData,
   plfsStateSlice,
+  gsdpStateSlice,
 } from "@/lib/hooks/useMospiState";
 
 // ── Colormap catalogue ─────────────────────────────────────────────────────────
@@ -28,6 +30,7 @@ const INDICATORS = [
     id: "ur_person",
     label: "Unemployment Rate",
     description: "% of labour force · all persons · combined (rural + urban) · age 15+ · PS+SS",
+    unit: "%",
     source: "MoSPI PLFS",
     sourceUrl: "https://www.mospi.gov.in/",
     defaultColormap: "YlOrRd" as ColormapId,
@@ -38,6 +41,7 @@ const INDICATORS = [
     id: "lfpr_female",
     label: "Female LFPR",
     description: "Female labour force participation · % of female population aged 15+ · combined",
+    unit: "%",
     source: "MoSPI PLFS",
     sourceUrl: "https://www.mospi.gov.in/",
     defaultColormap: "Greens" as ColormapId,
@@ -48,11 +52,45 @@ const INDICATORS = [
     id: "cpi_general",
     label: "CPI Inflation",
     description: "Headline CPI (General) · YoY % change · combined (rural + urban) · base year 2012=100",
+    unit: "%",
     source: "MoSPI CPI",
     sourceUrl: "https://www.mospi.gov.in/",
     defaultColormap: "YlOrRd" as ColormapId,
     dataset: "cpi" as const,
     field: "inflation" as const,
+  },
+  {
+    id: "gsdp_growth",
+    label: "GSDP Growth Rate",
+    description: "Real GSDP growth · YoY % · constant 2011-12 prices · RBI Handbook of Statistics",
+    unit: "%",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "RdBu" as ColormapId,
+    dataset: "gsdp" as const,
+    field: "gsdp_growth" as const,
+  },
+  {
+    id: "gsdp_real",
+    label: "GSDP (Real)",
+    description: "Gross State Domestic Product at constant 2011-12 prices · ₹ Crore",
+    unit: "₹ Cr",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "Blues" as ColormapId,
+    dataset: "gsdp" as const,
+    field: "gsdp_real_cr" as const,
+  },
+  {
+    id: "gsdp_nominal",
+    label: "GSDP (Nominal)",
+    description: "Gross State Domestic Product at current prices · ₹ Crore",
+    unit: "₹ Cr",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "Oranges" as ColormapId,
+    dataset: "gsdp" as const,
+    field: "gsdp_nominal_cr" as const,
   },
 ] as const;
 
@@ -99,8 +137,10 @@ export default function StateMapsPage() {
     usePLFSStateData();
   const { data: cpiData, isLoading: cpiLoading, error: cpiError, refetch: cpiRefetch } =
     useCPIStateData();
+  const { data: gsdpData, isLoading: gsdpLoading, error: gsdpError, refetch: gsdpRefetch } =
+    useGSDPStateData();
 
-  if (plfsLoading || cpiLoading) {
+  if (plfsLoading || cpiLoading || gsdpLoading) {
     return <LoadingSpinner message="Loading state-level data…" />;
   }
   if (plfsError || !plfsData) {
@@ -119,13 +159,23 @@ export default function StateMapsPage() {
       />
     );
   }
+  if (gsdpError || !gsdpData) {
+    return (
+      <ErrorDisplay
+        message={gsdpError instanceof Error ? gsdpError.message : "Failed to load GSDP state data"}
+        onRetry={() => gsdpRefetch()}
+      />
+    );
+  }
 
   // ── Active indicator ───────────────────────────────────────────────────────
   const indicator = INDICATORS.find((ind) => ind.id === indicatorId)!;
 
   // ── Period options ─────────────────────────────────────────────────────────
   const periods: string[] =
-    indicator.dataset === "plfs" ? plfsData.years : cpiData.months.map(fmtMonth);
+    indicator.dataset === "plfs" ? plfsData.years :
+    indicator.dataset === "gsdp" ? gsdpData.years :
+    cpiData.months.map(fmtMonth);
 
   const resolvedPeriodIdx =
     periodIdx !== null && periodIdx < periods.length ? periodIdx : periods.length - 1;
@@ -145,12 +195,21 @@ export default function StateMapsPage() {
 
   if (indicator.dataset === "plfs") {
     const slice = plfsStateSlice(plfsData, resolvedPeriodIdx, indicator.field);
-    mapStates  = slice.names;
-    mapValues  = slice.values;
+    mapStates   = slice.names;
+    mapValues   = slice.values;
     periodLabel = plfsData.years[resolvedPeriodIdx];
+  } else if (indicator.dataset === "gsdp") {
+    const slice = gsdpStateSlice(
+      gsdpData,
+      resolvedPeriodIdx,
+      indicator.field as "gsdp_real_cr" | "gsdp_nominal_cr" | "gsdp_growth",
+    );
+    mapStates   = slice.names;
+    mapValues   = slice.values;
+    periodLabel = gsdpData.years[resolvedPeriodIdx];
   } else {
-    mapStates  = cpiData.states.map((s) => s.geoName);
-    mapValues  = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
+    mapStates   = cpiData.states.map((s) => s.geoName);
+    mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
     periodLabel = fmtMonth(cpiData.months[resolvedPeriodIdx] ?? cpiData.months.slice(-1)[0]);
   }
 
@@ -162,7 +221,7 @@ export default function StateMapsPage() {
         <title>State Maps · India Data Hub</title>
         <meta
           name="description"
-          content="State-wise choropleth maps of unemployment, female LFPR, and CPI inflation across India"
+          content="State-wise choropleth maps of unemployment, female LFPR, CPI inflation, and GSDP across India"
         />
       </Head>
 
@@ -171,7 +230,7 @@ export default function StateMapsPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">State Maps</h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
-            State-wise indicators across all Indian states and UTs · MoSPI PLFS &amp; CPI
+            State-wise indicators across all Indian states and UTs · MoSPI PLFS, CPI &amp; RBI GSDP
           </p>
         </div>
 
@@ -206,7 +265,7 @@ export default function StateMapsPage() {
           {/* Row 2 — Period chips */}
           <div>
             <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-              {indicator.dataset === "plfs" ? "Year" : "Month"}
+              {indicator.dataset === "cpi" ? "Month" : "Year"}
             </p>
             <div className="flex flex-wrap gap-2">
               {periods.map((p, i) => (
@@ -239,7 +298,7 @@ export default function StateMapsPage() {
           subtitle={indicator.description}
           states={mapStates}
           values={mapValues}
-          unit="%"
+          unit={indicator.unit}
           colorscale={colormap}
           zmin={zmin}
           zmax={zmax}
@@ -250,7 +309,7 @@ export default function StateMapsPage() {
         />
 
         <p className="text-xs text-gray-400 dark:text-gray-500 pb-4">
-          Sources: MoSPI Periodic Labour Force Survey (PLFS) and Consumer Price Index (CPI).
+          Sources: MoSPI Periodic Labour Force Survey (PLFS), Consumer Price Index (CPI), and RBI Handbook of Statistics on Indian States (GSDP).
           Map boundaries are for reference only and do not imply any political assertion.
         </p>
       </div>

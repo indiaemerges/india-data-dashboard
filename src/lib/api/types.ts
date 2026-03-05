@@ -526,6 +526,31 @@ export interface CPIStateData {
 }
 
 // ---------------------------------------------------------------------------
+// State-level GSDP data (sourced from RBI Handbook of Statistics)
+// ---------------------------------------------------------------------------
+
+export interface GSDPStateSeries {
+  stateName: string;
+  geoName: string;
+  /** Real GSDP in ₹ Crore at constant 2011-12 prices */
+  gsdp_real_cr: (number | null)[];
+  /** Nominal GSDP in ₹ Crore at current prices */
+  gsdp_nominal_cr: (number | null)[];
+  /** YoY growth rate (%) computed from real GSDP; null for first year */
+  gsdp_growth: (number | null)[];
+}
+
+export interface GSDPStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  /** Fiscal year labels, e.g. ["2011-12", ..., "2024-25"] */
+  years: string[];
+  states: GSDPStateSeries[];
+}
+
+// ---------------------------------------------------------------------------
 // CPI (Consumer Price Index) — Monthly types
 // ---------------------------------------------------------------------------
 

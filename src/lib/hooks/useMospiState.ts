@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { PLFSStateData, CPIStateData } from "@/lib/api/types";
+import type { PLFSStateData, CPIStateData, GSDPStateData } from "@/lib/api/types";
 
 const BASE_PATH = "/india-data-dashboard";
 
@@ -47,6 +47,20 @@ export function useIndiaGeoJSON() {
   });
 }
 
+export function useGSDPStateData() {
+  return useQuery<GSDPStateData>({
+    queryKey: ["rbi", "gsdp", "state"],
+    queryFn: async () => {
+      const res = await fetch(`${BASE_PATH}/data/mospi/gsdp-state.json`);
+      if (!res.ok) throw new Error("GSDP state data not available");
+      return res.json() as Promise<GSDPStateData>;
+    },
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24,
+    retry: 1,
+  });
+}
+
 // ── Helper: extract parallel [geoName, value] arrays for a PLFS year index ──
 
 export function plfsStateSlice(
@@ -59,6 +73,22 @@ export function plfsStateSlice(
   for (const s of data.states) {
     names.push(s.geoName);
     values.push(s[indicator][yearIndex] ?? null);
+  }
+  return { names, values };
+}
+
+// ── Helper: extract parallel [geoName, value] arrays for a GSDP year index ──
+
+export function gsdpStateSlice(
+  data: GSDPStateData,
+  yearIndex: number,
+  field: "gsdp_real_cr" | "gsdp_nominal_cr" | "gsdp_growth"
+): { names: string[]; values: (number | null)[] } {
+  const names: string[] = [];
+  const values: (number | null)[] = [];
+  for (const s of data.states) {
+    names.push(s.geoName);
+    values.push(s[field][yearIndex] ?? null);
   }
   return { names, values };
 }
