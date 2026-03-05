@@ -7,8 +7,19 @@ import {
   usePLFSStateData,
   useCPIStateData,
   plfsStateSlice,
-  cpiStateLatest,
 } from "@/lib/hooks/useMospiState";
+
+// ── Colormap catalogue ─────────────────────────────────────────────────────────
+
+const COLORMAPS = [
+  { id: "YlOrRd",  label: "Yellow → Red"   },
+  { id: "YlGn",    label: "Yellow → Green" },
+  { id: "Blues",   label: "Blues"          },
+  { id: "Oranges", label: "Oranges"        },
+  { id: "Viridis", label: "Viridis"        },
+  { id: "RdYlGn",  label: "Diverging"      },
+] as const;
+type ColormapId = (typeof COLORMAPS)[number]["id"];
 
 // ── Indicator catalogue ────────────────────────────────────────────────────────
 
@@ -19,9 +30,7 @@ const INDICATORS = [
     description: "% of labour force · all persons · combined (rural + urban) · age 15+ · PS+SS",
     source: "MoSPI PLFS",
     sourceUrl: "https://www.mospi.gov.in/",
-    colorscale: "YlOrRd",
-    reversescale: false,
-    unit: "%",
+    defaultColormap: "YlOrRd" as ColormapId,
     dataset: "plfs" as const,
     field: "ur_person" as const,
   },
@@ -31,9 +40,7 @@ const INDICATORS = [
     description: "Female labour force participation · % of female population aged 15+ · combined",
     source: "MoSPI PLFS",
     sourceUrl: "https://www.mospi.gov.in/",
-    colorscale: "YlGn",
-    reversescale: false,
-    unit: "%",
+    defaultColormap: "YlGn" as ColormapId,
     dataset: "plfs" as const,
     field: "lfpr_female" as const,
   },
@@ -43,9 +50,7 @@ const INDICATORS = [
     description: "Headline CPI (General) · YoY % change · combined (rural + urban) · base year 2012=100",
     source: "MoSPI CPI",
     sourceUrl: "https://www.mospi.gov.in/",
-    colorscale: "YlOrRd",
-    reversescale: false,
-    unit: "%",
+    defaultColormap: "YlOrRd" as ColormapId,
     dataset: "cpi" as const,
     field: "inflation" as const,
   },
@@ -87,7 +92,8 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
 
 export default function StateMapsPage() {
   const [indicatorId, setIndicatorId] = useState<IndicatorId>("ur_person");
-  const [periodIdx, setPeriodIdx] = useState<number | null>(null); // null = latest
+  const [periodIdx, setPeriodIdx]     = useState<number | null>(null);
+  const [colormap, setColormap]       = useState<string>(INDICATORS[0].defaultColormap);
 
   const { data: plfsData, isLoading: plfsLoading, error: plfsError, refetch: plfsRefetch } =
     usePLFSStateData();
@@ -114,22 +120,22 @@ export default function StateMapsPage() {
     );
   }
 
-  // ── Active indicator config ────────────────────────────────────────────────
+  // ── Active indicator ───────────────────────────────────────────────────────
   const indicator = INDICATORS.find((ind) => ind.id === indicatorId)!;
 
-  // ── Period options based on dataset ───────────────────────────────────────
+  // ── Period options ─────────────────────────────────────────────────────────
   const periods: string[] =
     indicator.dataset === "plfs" ? plfsData.years : cpiData.months.map(fmtMonth);
 
   const resolvedPeriodIdx =
-    periodIdx !== null && periodIdx < periods.length
-      ? periodIdx
-      : periods.length - 1;
+    periodIdx !== null && periodIdx < periods.length ? periodIdx : periods.length - 1;
 
-  // Reset period to latest when switching indicators
+  // Reset period + colormap when switching indicators
   function handleIndicatorChange(id: IndicatorId) {
+    const next = INDICATORS.find((ind) => ind.id === id)!;
     setIndicatorId(id);
     setPeriodIdx(null);
+    setColormap(next.defaultColormap);
   }
 
   // ── Resolve map data ───────────────────────────────────────────────────────
@@ -139,17 +145,13 @@ export default function StateMapsPage() {
 
   if (indicator.dataset === "plfs") {
     const slice = plfsStateSlice(plfsData, resolvedPeriodIdx, indicator.field);
-    mapStates = slice.names;
-    mapValues = slice.values;
+    mapStates  = slice.names;
+    mapValues  = slice.values;
     periodLabel = plfsData.years[resolvedPeriodIdx];
   } else {
-    const { names, values, monthLabel } = cpiStateLatest(cpiData);
-    // Use resolvedPeriodIdx into cpiData.months
-    const monthValues = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
-    mapStates = cpiData.states.map((s) => s.geoName);
-    mapValues = monthValues;
-    periodLabel = fmtMonth(cpiData.months[resolvedPeriodIdx] ?? monthLabel);
-    void names; void values; // suppress unused-var
+    mapStates  = cpiData.states.map((s) => s.geoName);
+    mapValues  = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
+    periodLabel = fmtMonth(cpiData.months[resolvedPeriodIdx] ?? cpiData.months.slice(-1)[0]);
   }
 
   const { min: zmin, max: zmax } = dataRange(mapValues);
@@ -175,7 +177,8 @@ export default function StateMapsPage() {
 
         {/* ── Controls panel ── */}
         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-4 space-y-4">
-          {/* Indicator dropdown */}
+
+          {/* Row 1 — Indicator dropdown */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-2">
             <label
               htmlFor="indicator-select"
@@ -195,23 +198,35 @@ export default function StateMapsPage() {
                 </option>
               ))}
             </select>
-            <p className="text-xs text-gray-400 dark:text-gray-500 sm:ml-2 hidden sm:block">
+            <p className="text-xs text-gray-400 dark:text-gray-500 sm:ml-2 hidden sm:block truncate">
               {indicator.description}
             </p>
           </div>
 
-          {/* Period chips */}
+          {/* Row 2 — Period chips */}
           <div>
             <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
               {indicator.dataset === "plfs" ? "Year" : "Month"}
             </p>
             <div className="flex flex-wrap gap-2">
               {periods.map((p, i) => (
+                <Chip key={p} label={p} active={i === resolvedPeriodIdx} onClick={() => setPeriodIdx(i)} />
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 — Colormap chips */}
+          <div>
+            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+              Colormap
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {COLORMAPS.map((cm) => (
                 <Chip
-                  key={p}
-                  label={p}
-                  active={i === resolvedPeriodIdx}
-                  onClick={() => setPeriodIdx(i)}
+                  key={cm.id}
+                  label={cm.label}
+                  active={colormap === cm.id}
+                  onClick={() => setColormap(cm.id)}
                 />
               ))}
             </div>
@@ -225,13 +240,13 @@ export default function StateMapsPage() {
           states={mapStates}
           values={mapValues}
           unit="%"
-          colorscale={indicator.colorscale}
-          reversescale={indicator.reversescale}
+          colorscale={colormap}
           zmin={zmin}
           zmax={zmax}
+          showAnnotations
           source={indicator.source}
           sourceUrl={indicator.sourceUrl}
-          height={560}
+          height={580}
         />
 
         <p className="text-xs text-gray-400 dark:text-gray-500 pb-4">
