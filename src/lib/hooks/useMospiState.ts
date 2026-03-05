@@ -72,7 +72,7 @@ export function plfsStateSlice(
   const values: (number | null)[] = [];
   for (const s of data.states) {
     names.push(s.geoName);
-    values.push(s[indicator][yearIndex] ?? null);
+    values.push(s[indicator]?.[yearIndex] ?? null);
   }
   return { names, values };
 }
