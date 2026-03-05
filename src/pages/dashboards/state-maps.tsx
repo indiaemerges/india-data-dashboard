@@ -95,8 +95,8 @@ const INDICATORS = [
   {
     id: "gsdp_real",
     label: "GSDP (Real)",
-    description: "Gross State Domestic Product at constant 2011-12 prices · ₹ Crore",
-    unit: "₹ Cr",
+    description: "Gross State Domestic Product at constant 2011-12 prices · ₹ '000 Crore",
+    unit: "₹ '000 Cr",
     source: "RBI Handbook of Statistics on Indian States",
     sourceUrl: "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
     defaultColormap: "Blues" as ColormapId,
@@ -106,8 +106,8 @@ const INDICATORS = [
   {
     id: "gsdp_nominal",
     label: "GSDP (Nominal)",
-    description: "Gross State Domestic Product at current prices · ₹ Crore",
-    unit: "₹ Cr",
+    description: "Gross State Domestic Product at current prices · ₹ '000 Crore",
+    unit: "₹ '000 Cr",
     source: "RBI Handbook of Statistics on Indian States",
     sourceUrl: "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
     defaultColormap: "Oranges" as ColormapId,
@@ -221,13 +221,12 @@ export default function StateMapsPage() {
     mapValues   = slice.values;
     periodLabel = plfsData.years[resolvedPeriodIdx];
   } else if (indicator.dataset === "gsdp") {
-    const slice = gsdpStateSlice(
-      gsdpData,
-      resolvedPeriodIdx,
-      indicator.field as "gsdp_real_cr" | "gsdp_nominal_cr" | "gsdp_growth",
-    );
+    const field = indicator.field as "gsdp_real_cr" | "gsdp_nominal_cr" | "gsdp_growth";
+    const slice = gsdpStateSlice(gsdpData, resolvedPeriodIdx, field);
     mapStates   = slice.names;
-    mapValues   = slice.values;
+    // Scale real/nominal GSDP from ₹ Crore → ₹ '000 Crore for readable annotations
+    const scale = (field === "gsdp_real_cr" || field === "gsdp_nominal_cr") ? 1000 : 1;
+    mapValues   = slice.values.map((v) => (v !== null ? Math.round(v / scale) : null));
     periodLabel = gsdpData.years[resolvedPeriodIdx];
   } else {
     mapStates   = cpiData.states.map((s) => s.geoName);
