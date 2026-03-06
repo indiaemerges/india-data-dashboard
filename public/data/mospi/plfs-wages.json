@@ -1,0 +1,51 @@
+{
+  "source": "MoSPI, Periodic Labour Force Survey (PLFS)",
+  "sourceUrl": "https://www.mospi.gov.in/publication/periodic-labour-force-survey-plfs-1",
+  "lastUpdated": "2026-03-05",
+  "notes": "All India, rural + urban combined, usual status (PS+SS), age 15+. Regular wages and casual wages are annual averages of four quarterly observations. Worker distribution uses the annual (full-year) figures from the API. Regular wages = average monthly earnings (₹) from salaried employment. Casual wages = average daily earnings (₹) from casual work. Self-employment = average gross monthly earnings (₹). Worker distribution = % share of each type among all workers.",
+  "years": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23", "2023-24"],
+
+  "regularWages": {
+    "note": "Average wage/salary earnings per calendar month from regular wage/salaried employment (₹)",
+    "years": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23", "2023-24"],
+    "person": [16527.0, 15884.8, 16728.3, 17571.9, 18391.0, 19491.5, 20702.3],
+    "male":   [17298.7, 16858.6, 17664.3, 18772.0, 19463.3, 20666.0, 22092.3],
+    "female": [13816.9, 12487.0, 13771.3, 13731.3, 14691.6, 15722.2, 16497.8]
+  },
+
+  "casualWages": {
+    "note": "Average wage earnings per day from casual labour work other than public works (₹/day)",
+    "years": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23", "2023-24"],
+    "person": [255.8, 277.3, 290.7, 318.5, 374.2, 402.6, 417.9],
+    "male":   [277.4, 298.7, 318.9, 347.5, 401.5, 432.9, 450.2],
+    "female": [175.3, 190.7, 202.6, 224.9, 267.2, 279.4, 296.5]
+  },
+
+  "selfEmpEarnings": {
+    "note": "Average gross earnings during last 30 days from self-employment (₹/month)",
+    "years": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23", "2023-24"],
+    "person": [12028.6, 10323.4, 10453.8, 10562.8, 11677.9, 13130.7, 13278.9],
+    "male":   [12912.8, 11171.2, 11369.1, 11357.2, 13062.0, 15197.0, 16006.9],
+    "female": [ 5935.2,  4845.3,  5334.7,  5093.6,  5353.6,  5515.6,  5496.7]
+  },
+
+  "workerDist": {
+    "note": "Percentage distribution of workers by broad employment status — All India, rural+urban, PS+SS, all industries",
+    "years": ["2017-18", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23", "2023-24"],
+    "selfEmployed": {
+      "person": [52.2, 52.1, 53.5, 55.6, 55.8, 57.3, 58.4],
+      "male":   [52.3, 51.7, 52.4, 53.9, 53.2, 53.6, 53.6],
+      "female": [51.9, 53.4, 56.3, 59.4, 62.1, 65.3, 67.4]
+    },
+    "regularWage": {
+      "person": [22.8, 23.8, 22.9, 21.1, 21.5, 20.9, 21.7],
+      "male":   [23.4, 24.4, 24.0, 22.7, 23.6, 23.2, 24.9],
+      "female": [21.0, 21.9, 20.0, 17.4, 16.5, 15.9, 15.9]
+    },
+    "casualLabour": {
+      "person": [24.9, 24.1, 23.6, 23.3, 22.7, 21.8, 19.8],
+      "male":   [24.3, 24.0, 23.6, 23.3, 23.2, 23.2, 21.5],
+      "female": [27.0, 24.7, 23.7, 23.2, 21.4, 18.8, 16.7]
+    }
+  }
+}

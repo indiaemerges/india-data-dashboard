@@ -492,6 +492,50 @@ export interface WPIMonthlyData {
 }
 
 // ---------------------------------------------------------------------------
+// PLFS Wages & Worker Distribution (All India annual, from MoSPI PLFS API)
+// ---------------------------------------------------------------------------
+
+/** Male / Female / Person breakdown for a wage or earnings series */
+export interface PLFSGenderWage {
+  note: string;
+  years: string[];
+  person: number[];
+  male:   number[];
+  female: number[];
+}
+
+/** Worker distribution % by broad employment status */
+export interface PLFSWorkerDistCategory {
+  person: number[];
+  male:   number[];
+  female: number[];
+}
+
+export interface PLFSWorkerDist {
+  note: string;
+  years: string[];
+  selfEmployed: PLFSWorkerDistCategory;
+  regularWage:  PLFSWorkerDistCategory;
+  casualLabour: PLFSWorkerDistCategory;
+}
+
+export interface PLFSWagesData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  /** Average monthly wage from regular salaried employment (₹/month) */
+  regularWages: PLFSGenderWage;
+  /** Average daily wage from casual labour work (₹/day) */
+  casualWages: PLFSGenderWage;
+  /** Average gross earnings from self-employment in last 30 days (₹/month) */
+  selfEmpEarnings: PLFSGenderWage;
+  /** % distribution of workers by broad employment status */
+  workerDist: PLFSWorkerDist;
+}
+
+// ---------------------------------------------------------------------------
 // State-level PLFS data (generated from MoSPI PLFS annual API)
 // ---------------------------------------------------------------------------
 

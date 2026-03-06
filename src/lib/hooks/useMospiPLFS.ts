@@ -3,6 +3,7 @@ import type {
   PLFSAnnualData,
   PLFSQuarterlyData,
   PLFSQuarterPoint,
+  PLFSWagesData,
   DataSeries,
 } from "@/lib/api/types";
 
@@ -181,6 +182,122 @@ export function plfsLatestQuarter(
     .reverse()
     .find((q) => q.ur[sector] !== null);
   return relevant ?? null;
+}
+
+// ── PLFS Wages & Worker Distribution ──────────────────────────────────────
+
+/**
+ * Load pre-fetched PLFS wages and worker distribution data
+ * (All India, rural+urban, PS+SS, annual averages from PLFS annual report).
+ */
+export function usePLFSWagesData() {
+  return useQuery<PLFSWagesData>({
+    queryKey: ["mospi", "plfs", "wages"],
+    queryFn: async () => {
+      const url = `${BASE_PATH}/data/mospi/plfs-wages.json`;
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("PLFS wages data not available");
+      const text = await response.text();
+      try {
+        return JSON.parse(text) as PLFSWagesData;
+      } catch {
+        throw new Error("PLFS wages data returned invalid format");
+      }
+    },
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24,
+    retry: 1,
+  });
+}
+
+type WagesGender = "male" | "female" | "person";
+const GENDER_WAGE_LABELS: Record<WagesGender, string> = {
+  male: "Male", female: "Female", person: "Overall",
+};
+
+/**
+ * Build DataSeries[] for a wages/earnings indicator across genders.
+ * Casual wages are converted from ₹/day to ₹/month (×26 working days).
+ */
+export function plfsWagesSeries(
+  data: PLFSWagesData,
+  type: "regular" | "casual" | "selfEmp",
+  genders: WagesGender[] = ["male", "female", "person"]
+): DataSeries[] {
+  const CFG = {
+    regular: {
+      src: data.regularWages,
+      label: "Regular Wage",
+      unit: "₹ / month",
+      scale: 1,
+      notes: "Average monthly earnings from salaried employment",
+    },
+    casual: {
+      src: data.casualWages,
+      label: "Casual Daily Wage",
+      unit: "₹ / day",
+      scale: 1,
+      notes: "Average daily earnings from casual labour work",
+    },
+    selfEmp: {
+      src: data.selfEmpEarnings,
+      label: "Self-Employment Earnings",
+      unit: "₹ / month",
+      scale: 1,
+      notes: "Average gross earnings from self-employment (30-day period)",
+    },
+  };
+
+  const { src, label, unit, scale, notes } = CFG[type];
+  return genders.map((g) => ({
+    source: "mospi" as const,
+    indicator: `${label} — ${GENDER_WAGE_LABELS[g]}`,
+    indicatorId: `PLFS_wages_${type}_${g}`,
+    unit,
+    frequency: "annual" as const,
+    data: src.years.map((year, i) => ({
+      date: year,
+      value: src[g]?.[i] != null ? Math.round((src[g][i] as number) * scale) : null,
+    })),
+    metadata: {
+      lastUpdated: data.lastUpdated,
+      sourceUrl: data.sourceUrl,
+      notes,
+    },
+  }));
+}
+
+/**
+ * Build DataSeries[] for worker distribution (% share) by employment status.
+ * Returns 3 series: Self-Employed, Regular Wage, Casual Labour.
+ */
+export function plfsWorkerDistSeries(
+  data: PLFSWagesData,
+  gender: WagesGender = "person"
+): DataSeries[] {
+  const dist = data.workerDist;
+  const categories: Array<{ key: keyof typeof dist; label: string }> = [
+    { key: "selfEmployed", label: "Self-Employed" },
+    { key: "regularWage",  label: "Regular Wage / Salaried" },
+    { key: "casualLabour", label: "Casual Labour" },
+  ];
+
+  return categories.map(({ key, label }) => ({
+    source: "mospi" as const,
+    indicator: label,
+    indicatorId: `PLFS_dist_${key}_${gender}`,
+    unit: "%",
+    frequency: "annual" as const,
+    data: dist.years.map((year, i) => ({
+      date: year,
+      value: (dist[key] as Record<WagesGender, number[]>)[gender]?.[i] ?? null,
+    })),
+    metadata: {
+      lastUpdated: data.lastUpdated,
+      sourceUrl: data.sourceUrl,
+      notes: "% of all workers, PS+SS status, age 15+, All India rural+urban",
+    },
+  }));
 }
 
 /**
