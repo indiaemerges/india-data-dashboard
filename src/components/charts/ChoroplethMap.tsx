@@ -376,6 +376,40 @@ export default function ChoroplethMap({
         />
       )}
 
+      {/* Mobile: ranked state/UT table — replaces unreadable SVG annotations */}
+      {isReady && nonNullVals.length > 0 && (
+        <div className="mt-4 md:hidden">
+          <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-2">
+            All states &amp; UTs — {unit}
+          </p>
+          <div className="grid grid-cols-2 gap-x-3 gap-y-1">
+            {states
+              .map((name, i) => ({ name, value: values[i] }))
+              .filter((item): item is { name: string; value: number } =>
+                item.value !== null
+              )
+              .sort((a, b) => b.value - a.value)
+              .map(({ name, value }) => {
+                const fill = colorFn(value);
+                return (
+                  <div key={name} className="flex items-center gap-1.5 min-w-0">
+                    <div
+                      className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
+                      style={{ backgroundColor: fill }}
+                    />
+                    <span className="text-[11px] text-gray-600 dark:text-gray-300 truncate flex-1">
+                      {name}
+                    </span>
+                    <span className="text-[11px] font-semibold tabular-nums text-gray-900 dark:text-white flex-shrink-0">
+                      {value.toFixed(1)}
+                    </span>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+      )}
+
       {/* Source attribution */}
       {source && (
         <div className="mt-2 text-xs text-gray-400 dark:text-gray-500">
