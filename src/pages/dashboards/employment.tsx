@@ -3,12 +3,16 @@ import Head from "next/head";
 import {
   usePLFSAnnualData,
   usePLFSQuarterlyData,
+  usePLFSWagesData,
   plfsGenderSeries,
   plfsUrSectorSeries,
   plfsQuarterlySeries,
   plfsLatestQuarter,
+  plfsWagesSeries,
+  plfsWorkerDistSeries,
 } from "@/lib/hooks/useMospiPLFS";
 import LineChart from "@/components/charts/LineChart";
+import SeriesFilterChart from "@/components/charts/SeriesFilterChart";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
 
@@ -26,8 +30,9 @@ export default function EmploymentDashboard() {
 
   const annual = usePLFSAnnualData();
   const quarterly = usePLFSQuarterlyData();
+  const wages = usePLFSWagesData();
 
-  if (annual.isLoading || quarterly.isLoading) {
+  if (annual.isLoading || quarterly.isLoading || wages.isLoading) {
     return <LoadingSpinner message="Loading PLFS data..." />;
   }
 
@@ -120,6 +125,21 @@ export default function EmploymentDashboard() {
   const aUrSectorSeries = plfsUrSectorSeries(data);
   const aLfprSeries = plfsGenderSeries(data, "lfpr", ["male", "female", "person"]);
   const aWprSeries = plfsGenderSeries(data, "wpr", ["male", "female", "person"]);
+
+  // ── Wages data series (requires wages data) ────────────────────────────────
+  const wData = wages.data;
+  const aWorkerDistSeries = wData ? plfsWorkerDistSeries(wData, "person") : [];
+  const aRegularWageSeries = wData
+    ? plfsWagesSeries(wData, "regular", ["male", "female", "person"])
+    : [];
+  const aSelfEmpSeries = wData
+    ? plfsWagesSeries(wData, "selfEmp", ["male", "female", "person"])
+    : [];
+  const aCasualWageSeries = wData
+    ? plfsWagesSeries(wData, "casual", ["male", "female", "person"])
+    : [];
+  // Combined for the earnings comparison chart (same ₹/month unit)
+  const aMonthlyEarningsSeries = [...aRegularWageSeries, ...aSelfEmpSeries];
 
   // ── Toggle button styles ───────────────────────────────────────────────────
   const btnBase =
@@ -301,6 +321,39 @@ export default function EmploymentDashboard() {
               yAxisTitle="WPR (%)"
               height={420}
             />
+
+            {/* Wages & worker distribution charts */}
+            {wData && (
+              <>
+                <SeriesFilterChart
+                  series={aWorkerDistSeries}
+                  title="Worker Distribution by Employment Type"
+                  subtitle="% of all workers by employment status, persons, All India"
+                  source={SOURCE_LABEL}
+                  sourceUrl={SOURCE_URL}
+                  yAxisTitle="Share of Workers (%)"
+                  height={420}
+                />
+                <SeriesFilterChart
+                  series={aMonthlyEarningsSeries}
+                  title="Average Monthly Earnings — Regular Wage & Self-Employment"
+                  subtitle="₹ per month, usual status (PS+SS), age 15+, All India"
+                  source={SOURCE_LABEL}
+                  sourceUrl={SOURCE_URL}
+                  yAxisTitle="₹ / month"
+                  height={420}
+                />
+                <LineChart
+                  series={aCasualWageSeries}
+                  title="Casual Labour Daily Wages by Gender"
+                  subtitle="Average ₹ per day, usual status (PS+SS), age 15+, All India"
+                  source={SOURCE_LABEL}
+                  sourceUrl={SOURCE_URL}
+                  yAxisTitle="₹ / day"
+                  height={420}
+                />
+              </>
+            )}
           </div>
         )}
 
@@ -316,6 +369,12 @@ export default function EmploymentDashboard() {
             usual status (PS+SS) for population aged 15+.
             LFPR = Labour Force Participation Rate · WPR = Worker Population
             Ratio · UR = Unemployment Rate.
+          </p>
+          <p className="text-sm text-blue-700 dark:text-blue-300 mt-2">
+            The annual view also includes worker distribution (share of workers
+            by employment type) and average earnings by employment category from
+            PLFS Annual Reports. Regular wages and self-employment earnings are
+            in ₹/month; casual wages in ₹/day. Data covers rural + urban India.
           </p>
           <p className="text-sm text-blue-700 dark:text-blue-300 mt-2">
             Sources:{" "}
