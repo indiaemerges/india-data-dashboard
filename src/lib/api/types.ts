@@ -602,6 +602,51 @@ export interface GSDPStateData {
 }
 
 // ---------------------------------------------------------------------------
+// RBI Banking & Credit — Annual types
+// ---------------------------------------------------------------------------
+
+/** GNPA (Gross Non-Performing Assets) data — available from 2011-12 onwards */
+export interface RBIBankingGNPA {
+  years: string[];
+  /** GNPA as % of Gross Advances */
+  ratio: number[];
+}
+
+/** Sectoral credit deployment as % of non-food credit — from 2011-12 onwards */
+export interface RBIBankingSectoral {
+  years: string[];
+  agriculture: number[];
+  industry: number[];
+  services: number[];
+  personalLoans: number[];
+}
+
+/** Complete RBI Banking & Credit annual dataset (static JSON from RBI DBIE / Handbook) */
+export interface RBIBankingData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  unit: string;
+  notes: string;
+  /** Fiscal years, e.g. ["2004-05", ..., "2024-25"] */
+  years: string[];
+  /** Non-food bank credit (₹ lakh crore, end of March) */
+  credit: number[];
+  /** Bank deposits (₹ lakh crore, end of March) */
+  deposits: number[];
+  /** YoY credit growth (%), null for first year */
+  creditGrowth: (number | null)[];
+  /** YoY deposit growth (%), null for first year */
+  depositGrowth: (number | null)[];
+  /** Credit-to-Deposit ratio (%) */
+  cdRatio: number[];
+  /** Bank credit as % of nominal GDP */
+  creditToGDP: number[];
+  gnpa: RBIBankingGNPA;
+  sectoralCredit: RBIBankingSectoral;
+}
+
+// ---------------------------------------------------------------------------
 // CPI (Consumer Price Index) — Monthly types
 // ---------------------------------------------------------------------------
 

@@ -182,6 +182,21 @@ export const datasets: DatasetEntry[] = [
     category: "economy",
   },
   {
+    id: "banking",
+    title: "Banking & Credit",
+    description:
+      "Bank credit, deposits, Gross NPA ratio, sectoral credit deployment, and credit-to-GDP from RBI Handbook of Statistics and Financial Stability Reports.",
+    source: "RBI DBIE",
+    sourceUrl: "https://dbie.rbi.org.in/",
+    dataType: "static-json",
+    updateFrequency: "Annual",
+    tags: ["banking", "credit", "npa", "deposits", "financial stability", "rbi"],
+    chartTypes: ["line", "bar"],
+    dashboardPath: "/dashboards/banking",
+    icon: "🏛️",
+    category: "economy",
+  },
+  {
     id: "state-maps",
     title: "State Maps",
     description:

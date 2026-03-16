@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "india-data-dashboard",
+      "runtimeExecutable": "C:/Users/Chintan/miniconda3/node.exe",
+      "runtimeArgs": ["-e", "const http=require('http');http.createServer((_,r)=>{r.end('ok')}).listen(3001)"],
+      "port": 3001
+    }
+  ]
+}
