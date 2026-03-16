@@ -6,6 +6,8 @@ import {
   bankingCreditToGDPSeries,
   bankingCDRatioSeries,
   bankingGNPASeries,
+  bankingGNPABySectorSeries,
+  bankingCRARSeries,
   bankingSectoralSeries,
 } from "@/lib/hooks/useRBIBanking";
 import LineChart from "@/components/charts/LineChart";
@@ -42,6 +44,8 @@ export default function BankingDashboard() {
   const creditToGDPSeries = bankingCreditToGDPSeries(data);
   const cdRatioSeries = bankingCDRatioSeries(data);
   const gnpaSeries = bankingGNPASeries(data);
+  const gnpaBySectorSeries = bankingGNPABySectorSeries(data);
+  const crarSeries = bankingCRARSeries(data);
   const sectoralSeries = bankingSectoralSeries(data);
 
   return (
@@ -153,15 +157,27 @@ export default function BankingDashboard() {
             height={400}
           />
 
-          {/* GNPA Ratio */}
+          {/* GNPA by bank type */}
           <LineChart
-            series={[gnpaSeries]}
-            title="Gross NPA Ratio"
-            subtitle="Gross Non-Performing Assets as % of Gross Advances — NPA crisis (2015–18) and subsequent clean-up"
+            series={gnpaBySectorSeries}
+            title="Gross NPA Ratio — Public vs Private Banks"
+            subtitle="PSBs peaked at 14.6% in 2017-18; private banks stayed below 5% throughout"
             source={SOURCE}
             sourceUrl={SOURCE_URL}
             yAxisTitle="GNPA (%)"
-            height={360}
+            height={380}
+            showMarkers={false}
+          />
+
+          {/* Capital Adequacy */}
+          <LineChart
+            series={crarSeries}
+            title="Capital Adequacy Ratio (CRAR)"
+            subtitle="Basel III CRAR (%) — regulatory minimum 11.5% (incl. capital conservation buffer). PSBs were dangerously close in 2013–15 before govt recapitalisation."
+            source="RBI Financial Stability Reports; Trend and Progress of Banking in India"
+            sourceUrl={SOURCE_URL}
+            yAxisTitle="CRAR (%)"
+            height={380}
             showMarkers={false}
           />
 

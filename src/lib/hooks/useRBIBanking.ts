@@ -98,18 +98,60 @@ export function bankingCDRatioSeries(data: RBIBankingData): DataSeries {
   };
 }
 
-/** GNPA ratio (%) */
+/** GNPA ratio (%) — all SCBs (single series, used for summary card) */
 export function bankingGNPASeries(data: RBIBankingData): DataSeries {
   const g = data.gnpa;
   return {
     source: "rbi",
-    indicator: "Gross NPA Ratio",
+    indicator: "All SCBs",
     indicatorId: "RBI_GNPA",
     unit: "%",
     frequency: "annual",
     data: g.years.map((y, i) => ({ date: y, value: g.ratio[i] })),
     metadata: meta(data),
   };
+}
+
+/** GNPA ratio split by bank type — PSB vs Private vs All SCBs */
+export function bankingGNPABySectorSeries(data: RBIBankingData): DataSeries[] {
+  const g = data.gnpa;
+  const m = meta(data);
+  const make = (indicator: string, id: string, values: number[], color: string): DataSeries => ({
+    source: "rbi",
+    indicator,
+    indicatorId: id,
+    unit: "%",
+    frequency: "annual",
+    color,
+    data: g.years.map((y, i) => ({ date: y, value: values[i] })),
+    metadata: m,
+  });
+  return [
+    make("Public Sector Banks",  "RBI_GNPA_PSB",     g.psb,          "#ef4444"),
+    make("All SCBs",             "RBI_GNPA_ALL",     g.ratio,        "#f97316"),
+    make("Private Sector Banks", "RBI_GNPA_PRIVATE", g.privateBanks, "#22c55e"),
+  ];
+}
+
+/** Capital Adequacy Ratio (CRAR, %) — all SCBs, PSBs, and Private banks */
+export function bankingCRARSeries(data: RBIBankingData): DataSeries[] {
+  const c = data.crar;
+  const m = meta(data);
+  const make = (indicator: string, id: string, values: number[], color: string): DataSeries => ({
+    source: "rbi",
+    indicator,
+    indicatorId: id,
+    unit: "%",
+    frequency: "annual",
+    color,
+    data: c.years.map((y, i) => ({ date: y, value: values[i] })),
+    metadata: m,
+  });
+  return [
+    make("Private Sector Banks", "RBI_CRAR_PRIVATE", c.privateBanks, "#22c55e"),
+    make("All SCBs",             "RBI_CRAR_ALL",     c.allBanks,     "#f97316"),
+    make("Public Sector Banks",  "RBI_CRAR_PSB",     c.psb,          "#ef4444"),
+  ];
 }
 
 /** Sectoral credit shares (%) as individual series */

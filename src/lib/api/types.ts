@@ -608,8 +608,20 @@ export interface GSDPStateData {
 /** GNPA (Gross Non-Performing Assets) data — available from 2011-12 onwards */
 export interface RBIBankingGNPA {
   years: string[];
-  /** GNPA as % of Gross Advances */
+  /** GNPA as % of Gross Advances — all SCBs */
   ratio: number[];
+  /** GNPA ratio for Public Sector Banks (PSBs) */
+  psb: number[];
+  /** GNPA ratio for Private Sector Banks */
+  privateBanks: number[];
+}
+
+/** Capital Adequacy (CRAR) — Basel III, % of Risk-Weighted Assets */
+export interface RBIBankingCRAR {
+  years: string[];
+  allBanks: number[];
+  psb: number[];
+  privateBanks: number[];
 }
 
 /** Sectoral credit deployment as % of non-food credit — from 2011-12 onwards */
@@ -644,6 +656,7 @@ export interface RBIBankingData {
   creditToGDP: number[];
   gnpa: RBIBankingGNPA;
   sectoralCredit: RBIBankingSectoral;
+  crar: RBIBankingCRAR;
 }
 
 // ---------------------------------------------------------------------------
