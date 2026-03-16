@@ -54,6 +54,10 @@ export default function BarChart({
       : [];
   const isQuarterly =
     allDates.length > 0 && /^\d{4}-\d{2} Q\d$/.test(allDates[0]);
+  // Fiscal year strings like "2011-12" must be treated as categories,
+  // otherwise Plotly parses them as dates (December 2011) and collapses all bars.
+  const isFiscalYear =
+    allDates.length > 0 && /^\d{4}-\d{2}$/.test(allDates[0]);
 
   const dateToIndex = new Map<string, number>(allDates.map((d, i) => [d, i]));
 
@@ -105,7 +109,9 @@ export default function BarChart({
         ticktext: q1Entries.map(({ d }) => d.replace(" Q1", "")),
         tickangle: -45,
       }
-    : {};
+    : isFiscalYear
+      ? { type: "category" as const, tickangle: -45 }
+      : {};
 
   const layout: Partial<Plotly.Layout> = {
     barmode: barMode,
