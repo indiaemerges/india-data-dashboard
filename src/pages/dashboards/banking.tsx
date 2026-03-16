@@ -8,6 +8,8 @@ import {
   bankingGNPASeries,
   bankingGNPABySectorSeries,
   bankingCRARSeries,
+  bankingCreditGrowthByTypeSeries,
+  bankingMarketShareSeries,
   bankingSectoralSeries,
 } from "@/lib/hooks/useRBIBanking";
 import LineChart from "@/components/charts/LineChart";
@@ -46,6 +48,8 @@ export default function BankingDashboard() {
   const gnpaSeries = bankingGNPASeries(data);
   const gnpaBySectorSeries = bankingGNPABySectorSeries(data);
   const crarSeries = bankingCRARSeries(data);
+  const creditGrowthByTypeSeries = bankingCreditGrowthByTypeSeries(data);
+  const marketShareSeries = bankingMarketShareSeries(data);
   const sectoralSeries = bankingSectoralSeries(data);
 
   return (
@@ -142,6 +146,30 @@ export default function BankingDashboard() {
             sourceUrl={SOURCE_URL}
             yAxisTitle="Growth (%)"
             height={380}
+            showMarkers={false}
+          />
+
+          {/* Credit growth by bank type */}
+          <LineChart
+            series={creditGrowthByTypeSeries}
+            title="Credit Growth: PSB vs Private Banks"
+            subtitle="YoY credit growth (%) — private banks pulled ahead during the PSB NPA clean-up (2015–20), then PSBs rebounded post-recapitalisation"
+            source={SOURCE}
+            sourceUrl={SOURCE_URL}
+            yAxisTitle="Growth (%)"
+            height={380}
+            showMarkers={false}
+          />
+
+          {/* Market share */}
+          <LineChart
+            series={marketShareSeries}
+            title="Share of SCB Credit by Bank Group"
+            subtitle="PSBs' share of total bank credit (%) — declined from ~73% in 2007 to ~55% today as private banks captured market"
+            source={SOURCE}
+            sourceUrl={SOURCE_URL}
+            yAxisTitle="% of SCB credit"
+            height={360}
             showMarkers={false}
           />
 

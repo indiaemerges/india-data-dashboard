@@ -154,6 +154,66 @@ export function bankingCRARSeries(data: RBIBankingData): DataSeries[] {
   ];
 }
 
+/** YoY credit growth (%) by bank type — PSB vs Private. Derived from credit levels. */
+export function bankingCreditGrowthByTypeSeries(data: RBIBankingData): DataSeries[] {
+  const c = data.creditByBankType;
+  const m = meta(data);
+  const growth = (arr: number[]) =>
+    arr.map((v, i) => (i === 0 ? null : Math.round(((v - arr[i - 1]) / arr[i - 1]) * 1000) / 10));
+
+  const make = (
+    indicator: string,
+    id: string,
+    values: (number | null)[],
+    color: string
+  ): DataSeries => ({
+    source: "rbi",
+    indicator,
+    indicatorId: id,
+    unit: "%",
+    frequency: "annual",
+    color,
+    data: c.years.map((y, i) => ({ date: y, value: values[i] })),
+    metadata: m,
+  });
+
+  return [
+    make("Private Sector Banks", "RBI_CREDIT_GROWTH_PVT", growth(c.privateBanks), "#22c55e"),
+    make("Public Sector Banks",  "RBI_CREDIT_GROWTH_PSB", growth(c.psb),          "#ef4444"),
+  ];
+}
+
+/** PSB and Private bank shares of total SCB credit (%) */
+export function bankingMarketShareSeries(data: RBIBankingData): DataSeries[] {
+  const c = data.creditByBankType;
+  const total = data.credit;          // all-SCB non-food credit (same years array)
+  const m = meta(data);
+
+  const make = (
+    indicator: string,
+    id: string,
+    credits: number[],
+    color: string
+  ): DataSeries => ({
+    source: "rbi",
+    indicator,
+    indicatorId: id,
+    unit: "%",
+    frequency: "annual",
+    color,
+    data: c.years.map((y, i) => ({
+      date: y,
+      value: Math.round((credits[i] / total[i]) * 1000) / 10,
+    })),
+    metadata: m,
+  });
+
+  return [
+    make("Public Sector Banks",  "RBI_SHARE_PSB",     c.psb,          "#ef4444"),
+    make("Private Sector Banks", "RBI_SHARE_PRIVATE", c.privateBanks, "#22c55e"),
+  ];
+}
+
 /** Sectoral credit shares (%) as individual series */
 export function bankingSectoralSeries(data: RBIBankingData): DataSeries[] {
   const s = data.sectoralCredit;

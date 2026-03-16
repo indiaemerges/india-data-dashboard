@@ -616,6 +616,16 @@ export interface RBIBankingGNPA {
   privateBanks: number[];
 }
 
+/** Credit outstanding split by bank group (₹ lakh crore, end-March) */
+export interface RBIBankingCreditByType {
+  notes: string;
+  years: string[];
+  /** Public Sector Banks credit (₹ lakh crore) */
+  psb: number[];
+  /** Private Sector Banks credit (₹ lakh crore) */
+  privateBanks: number[];
+}
+
 /** Capital Adequacy (CRAR) — Basel III, % of Risk-Weighted Assets */
 export interface RBIBankingCRAR {
   years: string[];
@@ -657,6 +667,7 @@ export interface RBIBankingData {
   gnpa: RBIBankingGNPA;
   sectoralCredit: RBIBankingSectoral;
   crar: RBIBankingCRAR;
+  creditByBankType: RBIBankingCreditByType;
 }
 
 // ---------------------------------------------------------------------------
