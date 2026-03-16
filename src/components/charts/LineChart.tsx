@@ -72,13 +72,48 @@ export default function LineChart({
   })();
 
   // Detect calendar-monthly strings "YYYY-MM" that are NOT fiscal years.
-  // For these we apply an explicit 4-month tick interval so the axis stays
+  // For these we apply an explicit annual tick interval so the axis stays
   // readable regardless of how many months of data are loaded.
   const isCalendarMonthly =
     !isQuarterly &&
     !isFiscalYear &&
     firstSeriesDates.length > 0 &&
     /^\d{4}-\d{2}$/.test(firstSeriesDates[0]);
+
+  // Detect "MMM YYYY" strings (e.g. "Mar 2014") — used by CPI and similar
+  // monthly series. These are category labels; we thin to one tick per year
+  // by keeping only "Jan YYYY" entries (or the earliest per year if Jan absent).
+  const isMonthYear =
+    !isQuarterly &&
+    !isFiscalYear &&
+    !isCalendarMonthly &&
+    firstSeriesDates.length > 0 &&
+    /^[A-Z][a-z]{2} \d{4}$/.test(firstSeriesDates[0]);
+
+  // For "MMM YYYY" axes build annual tick arrays (index → label).
+  const monthYearAnnualTicks: { vals: number[]; texts: string[] } = (() => {
+    if (!isMonthYear) return { vals: [], texts: [] };
+    const dates = firstSeriesDates;
+    const seenYears = new Set<string>();
+    const vals: number[] = [];
+    const texts: string[] = [];
+    dates.forEach((d, i) => {
+      const year = d.slice(-4);
+      const month = d.slice(0, 3);
+      if (!seenYears.has(year) || month === "Jan") {
+        if (!seenYears.has(year)) {
+          seenYears.add(year);
+          vals.push(i);
+          texts.push(year);
+        } else if (month === "Jan") {
+          // Replace the earlier entry with Jan if we find it later
+          const idx = texts.indexOf(year);
+          if (idx !== -1) { vals[idx] = i; }
+        }
+      }
+    });
+    return { vals, texts };
+  })();
 
   // Build a sorted union of all dates across all series (for multi-line charts
   // where different series may start/end at different quarters).
@@ -144,14 +179,23 @@ export default function LineChart({
         }
       : isCalendarMonthly
         ? {
-            // Date axis with explicit 4-month interval so ~10 years of monthly
-            // data stays readable (≈30 ticks vs one per month which is ~150).
+            // Date axis with annual ticks so ~10+ years of monthly
+            // data stays readable (~13 ticks vs one per month which is ~150+).
             type: "date" as const,
-            dtick: "M4",
-            tickformat: "%b %Y",
-            tickangle: -45,
+            dtick: "M12",
+            tickformat: "%Y",
+            tickangle: 0,
           }
-        : {};
+        : isMonthYear
+          ? {
+              // Category axis ("MMM YYYY"): show only one tick per year.
+              type: "category" as const,
+              tickmode: "array" as const,
+              tickvals: monthYearAnnualTicks.vals,
+              ticktext: monthYearAnnualTicks.texts,
+              tickangle: 0,
+            }
+          : {};
 
   const layout: Partial<Plotly.Layout> = {
     xaxis: xaxisOverride,
