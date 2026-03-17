@@ -12,7 +12,7 @@ export interface DatasetEntry {
   chartTypes: string[];
   dashboardPath: string;
   icon: string; // Emoji icon for display
-  category: "economy" | "industry" | "energy" | "demographics" | "prices" | "social" | "regional";
+  category: "economy" | "industry" | "energy" | "agriculture" | "demographics" | "prices" | "social" | "regional";
 }
 
 export const datasets: DatasetEntry[] = [
@@ -197,6 +197,21 @@ export const datasets: DatasetEntry[] = [
     category: "economy",
   },
   {
+    id: "agriculture",
+    title: "Agriculture & Food Security",
+    description:
+      "Foodgrain production, crop trends (Rice, Wheat, Pulses, Millets), Minimum Support Prices, FCI buffer stocks, and monsoon rainfall from MoAFW, FCI, and IMD (2000-01 to 2024-25).",
+    source: "MoAFW; FCI; IMD",
+    sourceUrl: "https://agricoop.nic.in/",
+    dataType: "static-json",
+    updateFrequency: "Annual",
+    tags: ["agriculture", "foodgrain", "rice", "wheat", "msp", "fci", "monsoon", "kharif", "rabi"],
+    chartTypes: ["line", "bar"],
+    dashboardPath: "/dashboards/agriculture",
+    icon: "🌾",
+    category: "agriculture",
+  },
+  {
     id: "state-maps",
     title: "State Maps",
     description:
@@ -232,6 +247,7 @@ export const categoryLabels: Record<string, string> = {
   energy: "Energy & Resources",
   demographics: "Demographics & Society",
   prices: "Prices & Inflation",
+  agriculture: "Agriculture & Food",
   social: "Society & Human Development",
   regional: "Regional Analysis",
 };

@@ -25,6 +25,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     "prices",
     "industry",
     "energy",
+    "agriculture",
     "demographics",
     "social",
     "regional",

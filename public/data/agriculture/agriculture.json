@@ -1,0 +1,41 @@
+{
+  "source": "MoAFW; FCI; IMD",
+  "sourceUrl": "https://agricoop.nic.in/",
+  "lastUpdated": "2025-03",
+  "notes": "Foodgrain production from Ministry of Agriculture & Farmers Welfare (MoAFW) 4th Advance Estimates / Final Estimates. MSP from CACP annual reports. FCI central pool stocks as of April 1 each year from FCI Annual Report. Southwest monsoon (Jun-Sep) departure from Long Period Average (LPA = 880.6 mm) from India Meteorological Department (IMD). 2024-25 figures are advance/provisional estimates.",
+  "years": [
+    "2000-01","2001-02","2002-03","2003-04","2004-05",
+    "2005-06","2006-07","2007-08","2008-09","2009-10",
+    "2010-11","2011-12","2012-13","2013-14","2014-15",
+    "2015-16","2016-17","2017-18","2018-19","2019-20",
+    "2020-21","2021-22","2022-23","2023-24","2024-25"
+  ],
+  "foodgrain": {
+    "notes": "Total foodgrain production including rice, wheat, coarse cereals and pulses (Million Tonnes). Source: MoAFW.",
+    "total":  [196.8, 212.0, 174.8, 213.2, 198.4, 208.6, 217.3, 230.8, 234.5, 218.1, 244.5, 259.3, 255.4, 265.0, 252.0, 251.6, 275.1, 284.9, 285.0, 296.7, 308.7, 315.7, 323.5, 328.9, 332.0],
+    "kharif": [104.7, 116.4,  91.2, 116.5, 106.6, 109.9, 112.8, 128.0, 119.5, 104.0, 120.4, 135.0, 129.2, 133.1, 128.0, 135.0, 141.7, 143.0, 141.7, 142.7, 150.5, 154.9, 154.5, 157.2, 163.6],
+    "rabi":   [ 92.1,  95.6,  83.6,  96.7,  91.8,  98.7, 104.5, 102.8, 115.0, 114.1, 124.1, 124.3, 126.2, 131.9, 124.0, 116.6, 133.4, 141.9, 143.3, 154.0, 158.2, 160.8, 169.0, 171.7, 168.4]
+  },
+  "crops": {
+    "notes": "Major crop production (Million Tonnes). Coarse Cereals = Total minus Rice minus Wheat minus Pulses. Source: MoAFW.",
+    "rice":          [ 84.98,  93.34,  71.82,  88.53,  83.13,  91.79,  93.36,  96.69,  99.18,  89.09,  95.98, 105.30, 104.32, 106.65, 105.48, 104.41, 109.70, 116.48, 116.47, 118.87, 124.37, 129.47, 135.76, 137.82, 141.00],
+    "wheat":         [ 69.68,  72.77,  65.76,  72.15,  72.15,  69.35,  75.81,  78.57,  80.68,  80.80,  86.87,  94.88,  94.35,  95.85,  86.53,  92.29,  98.51,  98.51, 103.60, 107.59, 109.52, 106.84, 110.55, 113.29, 115.00],
+    "pulses":        [ 11.07,  13.37,  11.14,  14.76,  13.13,  13.39,  14.20,  14.76,  14.57,  14.66,  18.24,  17.09,  18.34,  19.27,  17.15,  16.35,  22.95,  23.03,  23.40,  23.03,  25.73,  27.47,  26.06,  24.39,  25.00],
+    "coarseCereals": [ 31.07,  32.52,  26.08,  37.76,  29.99,  34.07,  33.93,  40.78,  40.07,  33.55,  43.41,  42.03,  38.39,  43.23,  42.84,  38.55,  43.94,  46.88,  41.53,  47.21,  49.08,  51.92,  51.13,  53.40,  51.00]
+  },
+  "msp": {
+    "notes": "Minimum Support Price recommended by CACP and approved by CCEA. Rice: Common grade. Wheat: FAQ grade. Unit: Rs per quintal. Source: CACP Annual Reports.",
+    "rice":  [ 510,  530,  530,  550,  560,  570,  580,  645,  900,  950, 1000, 1080, 1250, 1310, 1360, 1410, 1470, 1550, 1750, 1815, 1868, 1940, 2040, 2183, 2300],
+    "wheat": [ 580,  610,  620,  630,  640,  650,  650,  700, 1000, 1100, 1170, 1285, 1350, 1400, 1450, 1525, 1625, 1735, 1840, 1925, 1975, 2015, 2015, 2150, 2275]
+  },
+  "fciStocks": {
+    "notes": "FCI Central Pool stocks (rice + wheat) as on April 1 of the marketing year. Mandatory buffer norm for April 1 is 21.4 Mt (rice + wheat combined). Unit: Million Tonnes. Source: FCI Annual Report.",
+    "rice":  [15.15, 24.71, 21.82, 14.47, 13.39, 11.05, 13.85, 11.43, 15.24, 24.78, 27.15, 26.81, 32.34, 28.30, 27.08, 22.24, 19.24, 20.04, 27.19, 24.08, 31.51, 43.04, 31.22, 31.70, 29.50],
+    "wheat": [18.35, 21.90, 28.11, 23.68, 10.37,  6.57,  5.03,  4.10, 14.96, 31.64, 20.82, 30.11, 45.69, 39.85, 29.37, 25.16, 21.27, 24.33, 42.22, 27.51, 30.19, 32.43, 19.42, 13.52, 14.80],
+    "bufferNorm": 21.4
+  },
+  "monsoon": {
+    "notes": "Southwest (June-September) monsoon seasonal rainfall departure from Long Period Average (LPA = 880.6 mm, 1971-2020 average). Negative = below-normal; Positive = above-normal. Source: India Meteorological Department (IMD).",
+    "departure": [-8, -1, -19, 2, -13, -1, 0, 5, -2, -23, 2, -2, -7, -6, -12, -14, -3, -5, -9, 10, 9, 0, -8, 6, 3]
+  }
+}

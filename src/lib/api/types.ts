@@ -7,7 +7,7 @@ export interface DataPoint {
 }
 
 export interface DataSeries {
-  source: "worldbank" | "mospi" | "datagov" | "census" | "rbi" | "ppac";
+  source: "worldbank" | "mospi" | "datagov" | "census" | "rbi" | "ppac" | "moafw" | "fci" | "imd";
   indicator: string; // Human-readable indicator name
   indicatorId?: string; // Machine-readable ID (e.g., "NY.GDP.MKTP.KD.ZG")
   unit: string; // e.g., "%" , "USD", "INR Crore", "Index"
@@ -599,6 +599,64 @@ export interface GSDPStateData {
   /** Fiscal year labels, e.g. ["2011-12", ..., "2024-25"] */
   years: string[];
   states: GSDPStateSeries[];
+}
+
+// ---------------------------------------------------------------------------
+// Agriculture — Annual types
+// ---------------------------------------------------------------------------
+
+export interface AgricultureFoodgrain {
+  notes: string;
+  /** Total foodgrain production (Mt) */
+  total: number[];
+  /** Kharif season production (Mt) */
+  kharif: number[];
+  /** Rabi season production (Mt) */
+  rabi: number[];
+}
+
+export interface AgricultureCrops {
+  notes: string;
+  rice: number[];
+  wheat: number[];
+  pulses: number[];
+  coarseCereals: number[];
+}
+
+export interface AgricultureMSP {
+  notes: string;
+  /** Rice MSP (₹ per quintal, Common/Grade A) */
+  rice: number[];
+  /** Wheat MSP (₹ per quintal) */
+  wheat: number[];
+}
+
+export interface AgricultureFCIStocks {
+  notes: string;
+  rice: number[];
+  wheat: number[];
+  /** Mandatory minimum buffer norm for April 1 (rice + wheat combined, Mt) */
+  bufferNorm: number;
+}
+
+export interface AgricultureMonsoon {
+  notes: string;
+  /** % departure from Long Period Average (LPA = 880.6 mm, Jun–Sep) */
+  departure: number[];
+}
+
+export interface AgricultureData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  /** Fiscal years, e.g. ["2000-01", ..., "2024-25"] */
+  years: string[];
+  foodgrain: AgricultureFoodgrain;
+  crops: AgricultureCrops;
+  msp: AgricultureMSP;
+  fciStocks: AgricultureFCIStocks;
+  monsoon: AgricultureMonsoon;
 }
 
 // ---------------------------------------------------------------------------
