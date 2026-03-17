@@ -181,9 +181,12 @@ export default function LineChart({
         ? {
             // Date axis with annual ticks so ~10+ years of monthly
             // data stays readable (~13 ticks vs one per month which is ~150+).
+            // hoverformat is separate from tickformat so hover still shows
+            // the full month ("Apr 2012") while ticks only show the year.
             type: "date" as const,
             dtick: "M12",
             tickformat: "%Y",
+            hoverformat: "%b %Y",
             tickangle: 0,
           }
         : isMonthYear
