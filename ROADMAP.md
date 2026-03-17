@@ -1,8 +1,9 @@
 # India Data Dashboard — Expansion Roadmap
 
-> Last updated: 2026-03-03
-> Current state: 10 dashboards live (GDP, Inflation, Employment, Industrial, Energy Flow,
-> Population, Trade, Petroleum, RBI Monetary). Data Explorer placeholder exists at /explore.
+> Last updated: 2026-03-17
+> Current state: 12 dashboards live (GDP, Inflation, Employment, Industrial, Energy Flow,
+> Population, Trade, Petroleum, RBI Monetary, Banking & Credit, Agriculture & Food Security,
+> Manufacturing ASI). Data Explorer placeholder exists at /explore.
 
 ---
 
@@ -134,10 +135,55 @@
   NPA ratio, credit-to-GDP, deposit growth, financial inclusion
 - **Files**: scripts/generate-banking.mjs, public/data/rbi/banking.json, dashboards/banking.tsx (new)
 
-### 5c. Agriculture Dashboard
-- **Source**: Ministry of Agriculture, FCI, IMD
-- **Key metrics**: Kharif/rabi crop production by crop, MSP trends, foodgrain stocks, rainfall
-- **Files**: scripts/generate-agriculture.mjs, public/data/agriculture/, dashboards/agriculture.tsx (new)
+### 5c. Agriculture Dashboard ✅ LIVE (v1)
+- **Source**: MoAFW, FCI, IMD
+- **Live charts**: Total foodgrain production, Kharif vs Rabi, Major crops (rice/wheat/pulses/
+  coarse cereals), MSP rice & wheat, FCI buffer stocks vs norm, Southwest monsoon departure
+- **Data file**: `public/data/agriculture/agriculture.json` (2000-01 to 2024-25, 25 years)
+
+#### 5c-v2. Agriculture Dashboard Enrichments (PLANNED)
+
+**UPAg Portal audit (2026-03-17):**
+UPAg (upag.gov.in) is the GoI unified agricultural statistics hub. Key findings:
+- **Dashboards (public, no login)**: APY Trends (FAO, 2011–2024), Agmarknet prices & arrivals,
+  NCDEX daily spot prices by state/market/commodity, Market Intelligence (cereals/pulses/oilseeds/
+  vegetables), Crop/Commodity Profile (production + mandi arrivals per crop)
+- **Open API** (`data.upag.gov.in`, requires registration): 22 sources including `agmarknet`
+  (mandi prices), `fci_stock`, `fci_procurement`, `dafw_state` (state APY), `horticulture`,
+  `cwwg` (sowing progress), `pmfby_ay` (crop insurance), `ncdex`, `enam`, `pink_sheet`
+
+**Planned enrichments (priority order):**
+
+1. **Crop yield (kg/hectare)** — No registration needed, from MoAFW advance estimates PDFs
+   - Add `yield` arrays to `crops` object (rice, wheat, pulses, coarse cereals)
+   - New LineChart: "Crop Yield Trends" showing yield growth story
+   - Source: MoAFW 4th Advance Estimates, same as production data
+
+2. **Horticulture production** — NHB Annual Statistics (public PDF/press releases)
+   - India produces ~350 Mt horticulture vs ~332 Mt foodgrain — it's a bigger story!
+   - Add new `horticulture` object to agriculture.json: `fruits`, `vegetables`, `total` arrays
+   - New LineChart: "Horticulture vs Foodgrain" comparing the two
+   - Source: National Horticulture Board (nhb.gov.in) Area & Production data
+
+3. **FCI procurement** — MoAFW/FCI annual reports (public)
+   - How much government buys vs total production (procurement ratio %)
+   - Add `fciProcurement` object: `rice`, `wheat` arrays (Mt procured each year)
+   - New LineChart: "FCI Procurement vs Production" showing growing procurement footprint
+   - Source: FCI Annual Report / MoAFW press releases
+
+4. **Agmarknet wholesale prices** (requires UPAg API registration OR manual compilation)
+   - Annual modal price series for rice, wheat at key mandis
+   - New LineChart: "Wholesale Price vs MSP" — do farmers actually get MSP?
+   - Source: `agmarknet` via UPAg API OR manually from agmarknet.gov.in
+
+5. **State-level crop production** (UPAg `dafw_state` API, requires registration)
+   - Top 5 rice states, top 5 wheat states time series
+   - Future use in choropleth map (Phase 4)
+   - Source: UPAg `dafw_state` endpoint
+
+**Files to touch for v2:**
+`public/data/agriculture/agriculture.json`, `src/lib/api/types.ts`,
+`src/lib/hooks/useAgriculture.ts`, `src/pages/dashboards/agriculture.tsx`
 
 ---
 

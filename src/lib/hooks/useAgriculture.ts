@@ -154,6 +154,112 @@ export function agricultureFCIStocksSeries(data: AgricultureData): DataSeries[] 
   ];
 }
 
+/** Rice and wheat yield (kg/hectare) */
+export function agricultureCropYieldSeries(data: AgricultureData): DataSeries[] {
+  const m = meta(data);
+  return [
+    {
+      source: "moafw",
+      indicator: "Rice Yield",
+      indicatorId: "AGRI_YIELD_RICE",
+      unit: "kg/ha",
+      frequency: "annual",
+      color: "#3b82f6",
+      data: data.years.map((y, i) => ({ date: y, value: data.cropYield.rice[i] })),
+      metadata: m,
+    },
+    {
+      source: "moafw",
+      indicator: "Wheat Yield",
+      indicatorId: "AGRI_YIELD_WHEAT",
+      unit: "kg/ha",
+      frequency: "annual",
+      color: "#f59e0b",
+      data: data.years.map((y, i) => ({ date: y, value: data.cropYield.wheat[i] })),
+      metadata: m,
+    },
+  ];
+}
+
+/** Horticulture production — total, fruits, vegetables (Mt) */
+export function agricultureHorticultureSeries(data: AgricultureData): DataSeries[] {
+  const m = meta(data);
+  const make = (
+    indicator: string,
+    id: string,
+    values: number[],
+    color: string
+  ): DataSeries => ({
+    source: "moafw",
+    indicator,
+    indicatorId: id,
+    unit: "Mt",
+    frequency: "annual",
+    color,
+    data: data.years.map((y, i) => ({ date: y, value: values[i] })),
+    metadata: m,
+  });
+  return [
+    make("Total Horticulture", "AGRI_HORTI_TOTAL",  data.horticulture.total,      "#f97316"),
+    make("Vegetables",         "AGRI_HORTI_VEG",    data.horticulture.vegetables, "#22c55e"),
+    make("Fruits",             "AGRI_HORTI_FRUITS",  data.horticulture.fruits,     "#a855f7"),
+  ];
+}
+
+/** Total foodgrain vs total horticulture — two-line comparison */
+export function agricultureFoodgrainVsHorticultureSeries(data: AgricultureData): DataSeries[] {
+  const m = meta(data);
+  return [
+    {
+      source: "moafw",
+      indicator: "Horticulture",
+      indicatorId: "AGRI_HORTI_TOTAL",
+      unit: "Mt",
+      frequency: "annual",
+      color: "#f97316",
+      data: data.years.map((y, i) => ({ date: y, value: data.horticulture.total[i] })),
+      metadata: m,
+    },
+    {
+      source: "moafw",
+      indicator: "Foodgrain",
+      indicatorId: "AGRI_FOODGRAIN_TOTAL",
+      unit: "Mt",
+      frequency: "annual",
+      color: "#3b82f6",
+      data: data.years.map((y, i) => ({ date: y, value: data.foodgrain.total[i] })),
+      metadata: m,
+    },
+  ];
+}
+
+/** FCI procurement of rice and wheat (Mt) */
+export function agricultureFCIProcurementSeries(data: AgricultureData): DataSeries[] {
+  const m = meta(data);
+  return [
+    {
+      source: "fci",
+      indicator: "Rice Procurement",
+      indicatorId: "AGRI_PROC_RICE",
+      unit: "Mt",
+      frequency: "annual",
+      color: "#3b82f6",
+      data: data.years.map((y, i) => ({ date: y, value: data.fciProcurement.rice[i] })),
+      metadata: m,
+    },
+    {
+      source: "fci",
+      indicator: "Wheat Procurement",
+      indicatorId: "AGRI_PROC_WHEAT",
+      unit: "Mt",
+      frequency: "annual",
+      color: "#f59e0b",
+      data: data.years.map((y, i) => ({ date: y, value: data.fciProcurement.wheat[i] })),
+      metadata: m,
+    },
+  ];
+}
+
 /** Southwest monsoon rainfall % departure from LPA */
 export function agricultureMonsoonSeries(data: AgricultureData): DataSeries {
   return {

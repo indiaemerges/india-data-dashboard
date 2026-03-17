@@ -4,8 +4,11 @@ import {
   agricultureTotalFoodgrainSeries,
   agricultureKharifRabiSeries,
   agricultureCropsSeries,
+  agricultureCropYieldSeries,
   agricultureMSPSeries,
   agricultureFCIStocksSeries,
+  agricultureFCIProcurementSeries,
+  agricultureFoodgrainVsHorticultureSeries,
   agricultureMonsoonSeries,
 } from "@/lib/hooks/useAgriculture";
 import LineChart from "@/components/charts/LineChart";
@@ -37,6 +40,7 @@ export default function AgricultureDashboard() {
   const latestMonsoon = data.monsoon.departure.at(-1)!;
   const latestFCITotal =
     data.fciStocks.rice.at(-1)! + data.fciStocks.wheat.at(-1)!;
+  const latestHorticulture = data.horticulture.total.at(-1)!;
 
   // Record year
   const maxTotal = Math.max(...data.foodgrain.total);
@@ -46,8 +50,11 @@ export default function AgricultureDashboard() {
   const totalSeries = agricultureTotalFoodgrainSeries(data);
   const kharifRabiSeries = agricultureKharifRabiSeries(data);
   const cropsSeries = agricultureCropsSeries(data);
+  const yieldSeries = agricultureCropYieldSeries(data);
   const mspSeries = agricultureMSPSeries(data);
   const fciSeries = agricultureFCIStocksSeries(data);
+  const procurementSeries = agricultureFCIProcurementSeries(data);
+  const hortFoodgrainSeries = agricultureFoodgrainVsHorticultureSeries(data);
   const monsoonSeries = agricultureMonsoonSeries(data);
 
   return (
@@ -97,6 +104,18 @@ export default function AgricultureDashboard() {
             </p>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
               Two staple crops combined
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              Horticulture ({latestYear})
+            </p>
+            <p className="text-2xl font-bold text-orange-600 mt-1">
+              {latestHorticulture.toFixed(1)} Mt
+            </p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+              Fruits + vegetables (exceeds foodgrain)
             </p>
           </div>
 
@@ -164,6 +183,30 @@ export default function AgricultureDashboard() {
             showMarkers={false}
           />
 
+          {/* Crop yield */}
+          <LineChart
+            series={yieldSeries}
+            title="Crop Yield — Rice &amp; Wheat"
+            subtitle="Yield in kg per hectare — India's rice yield has risen ~50% since 2000; wheat yield growth has been equally impressive, driven by HYV adoption and irrigation expansion"
+            source={SOURCE}
+            sourceUrl={SOURCE_URL}
+            yAxisTitle="kg per hectare"
+            height={380}
+            showMarkers={false}
+          />
+
+          {/* Horticulture vs Foodgrain */}
+          <LineChart
+            series={hortFoodgrainSeries}
+            title="Horticulture vs Foodgrain Production"
+            subtitle="Total horticulture (fruits + vegetables + spices + plantations) has surpassed foodgrain — India is now the world's 2nd largest producer of fruits and vegetables"
+            source="National Horticulture Board (NHB)"
+            sourceUrl="https://nhb.gov.in/"
+            yAxisTitle="Million Tonnes (Mt)"
+            height={380}
+            showMarkers={false}
+          />
+
           {/* MSP trends */}
           <LineChart
             series={mspSeries}
@@ -188,6 +231,18 @@ export default function AgricultureDashboard() {
             showMarkers={false}
           />
 
+          {/* FCI procurement */}
+          <LineChart
+            series={procurementSeries}
+            title="FCI Procurement — Rice &amp; Wheat"
+            subtitle="Government procurement by FCI + state agencies (Mt) — procurement has more than doubled since 2000 as MSP operations expanded; COVID-era wheat procurement hit record 43 Mt in FY22"
+            source="Food Corporation of India (FCI)"
+            sourceUrl="https://fci.gov.in/"
+            yAxisTitle="Million Tonnes (Mt)"
+            height={380}
+            showMarkers={false}
+          />
+
           {/* Monsoon departure */}
           <BarChart
             series={[monsoonSeries]}
@@ -205,12 +260,18 @@ export default function AgricultureDashboard() {
         <div className="mt-8 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">
           <h3 className="text-sm font-semibold text-green-900 dark:text-green-200">About this data</h3>
           <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-            Foodgrain production figures are 4th Advance Estimates or Final Estimates from the{" "}
+            Foodgrain and crop production figures are 4th Advance Estimates or Final Estimates from the{" "}
             <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="underline hover:text-green-900 dark:hover:text-green-100">
               Directorate of Economics and Statistics, MoAFW
             </a>
-            . FCI stocks are central pool holdings (rice + wheat) as reported at the start of April each year.
-            MSP figures are from CACP recommendations as notified by the Government of India.
+            . Crop yield (kg/ha) is derived from production and area estimates.
+            Horticulture data is from{" "}
+            <a href="https://nhb.gov.in/" target="_blank" rel="noopener noreferrer" className="underline hover:text-green-900 dark:hover:text-green-100">
+              National Horticulture Board (NHB)
+            </a>{" "}
+            Area & Production Statistics. FCI stocks are central pool holdings as on April 1;
+            procurement figures are FCI + state agency combined for the marketing season.
+            MSP figures are CACP recommendations notified by the Government of India.
             Monsoon data is IMD&apos;s all-India southwest monsoon (Jun–Sep) seasonal rainfall departure
             from the Long Period Average of 880.6 mm (1971–2020 baseline).
           </p>

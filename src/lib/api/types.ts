@@ -623,6 +623,32 @@ export interface AgricultureCrops {
   coarseCereals: number[];
 }
 
+export interface AgricultureCropYield {
+  notes: string;
+  /** Rice yield (kg per hectare) */
+  rice: number[];
+  /** Wheat yield (kg per hectare) */
+  wheat: number[];
+}
+
+export interface AgricultureHorticulture {
+  notes: string;
+  /** Total horticulture production including fruits, vegetables, spices, plantations (Mt) */
+  total: number[];
+  /** Fruits production (Mt) */
+  fruits: number[];
+  /** Vegetables production (Mt) */
+  vegetables: number[];
+}
+
+export interface AgricultureFCIProcurement {
+  notes: string;
+  /** Rice procured by FCI + state agencies (Mt) */
+  rice: number[];
+  /** Wheat procured by FCI + state agencies (Mt) */
+  wheat: number[];
+}
+
 export interface AgricultureMSP {
   notes: string;
   /** Rice MSP (₹ per quintal, Common/Grade A) */
@@ -654,8 +680,11 @@ export interface AgricultureData {
   years: string[];
   foodgrain: AgricultureFoodgrain;
   crops: AgricultureCrops;
+  cropYield: AgricultureCropYield;
   msp: AgricultureMSP;
   fciStocks: AgricultureFCIStocks;
+  fciProcurement: AgricultureFCIProcurement;
+  horticulture: AgricultureHorticulture;
   monsoon: AgricultureMonsoon;
 }
 
