@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { PLFSStateData, CPIStateData, GSDPStateData } from "@/lib/api/types";
+import type { PLFSStateData, CPIStateData, GSDPStateData, AgriStateData } from "@/lib/api/types";
 
 const BASE_PATH = "/india-data-dashboard";
 
@@ -89,6 +89,36 @@ export function gsdpStateSlice(
   for (const s of data.states) {
     names.push(s.geoName);
     values.push(s[field][yearIndex] ?? null);
+  }
+  return { names, values };
+}
+
+// ── Agriculture state data ─────────────────────────────────────────────────
+
+export function useAgriStateData() {
+  return useQuery<AgriStateData>({
+    queryKey: ["agri", "state"],
+    queryFn: async () => {
+      const res = await fetch(`${BASE_PATH}/data/agriculture/agri-state.json`);
+      if (!res.ok) throw new Error("Agriculture state data not available");
+      return res.json() as Promise<AgriStateData>;
+    },
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24,
+    retry: 1,
+  });
+}
+
+export function agriStateSlice(
+  data: AgriStateData,
+  yearIndex: number,
+  field: "rice_mt" | "wheat_mt"
+): { names: string[]; values: (number | null)[] } {
+  const names: string[] = [];
+  const values: (number | null)[] = [];
+  for (const s of data.states) {
+    names.push(s.geoName);
+    values.push(s[field]?.[yearIndex] ?? null);
   }
   return { names, values };
 }

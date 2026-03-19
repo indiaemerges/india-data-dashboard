@@ -7,8 +7,10 @@ import {
   usePLFSStateData,
   useCPIStateData,
   useGSDPStateData,
+  useAgriStateData,
   plfsStateSlice,
   gsdpStateSlice,
+  agriStateSlice,
 } from "@/lib/hooks/useMospiState";
 
 // ── Colormap catalogue ─────────────────────────────────────────────────────────
@@ -114,6 +116,28 @@ const INDICATORS = [
     dataset: "gsdp" as const,
     field: "gsdp_nominal_cr" as const,
   },
+  {
+    id: "rice_prod",
+    label: "Rice Production",
+    description: "State-wise rice production · Kharif + Rabi paddy converted to rice · Million Tonnes · MoAFW DES",
+    unit: "Mt",
+    source: "MoAFW Directorate of Economics & Statistics",
+    sourceUrl: "https://aps.dac.gov.in/APY/Public_Report1.aspx",
+    defaultColormap: "Greens" as ColormapId,
+    dataset: "agri" as const,
+    field: "rice_mt" as const,
+  },
+  {
+    id: "wheat_prod",
+    label: "Wheat Production",
+    description: "State-wise wheat production · Rabi crop · Million Tonnes · MoAFW DES",
+    unit: "Mt",
+    source: "MoAFW Directorate of Economics & Statistics",
+    sourceUrl: "https://aps.dac.gov.in/APY/Public_Report1.aspx",
+    defaultColormap: "YlOrRd" as ColormapId,
+    dataset: "agri" as const,
+    field: "wheat_mt" as const,
+  },
 ] as const;
 
 type IndicatorId = (typeof INDICATORS)[number]["id"];
@@ -161,8 +185,10 @@ export default function StateMapsPage() {
     useCPIStateData();
   const { data: gsdpData, isLoading: gsdpLoading, error: gsdpError, refetch: gsdpRefetch } =
     useGSDPStateData();
+  const { data: agriData, isLoading: agriLoading, error: agriError, refetch: agriRefetch } =
+    useAgriStateData();
 
-  if (plfsLoading || cpiLoading || gsdpLoading) {
+  if (plfsLoading || cpiLoading || gsdpLoading || agriLoading) {
     return <LoadingSpinner message="Loading state-level data…" />;
   }
   if (plfsError || !plfsData) {
@@ -189,6 +215,14 @@ export default function StateMapsPage() {
       />
     );
   }
+  if (agriError || !agriData) {
+    return (
+      <ErrorDisplay
+        message={agriError instanceof Error ? agriError.message : "Failed to load agriculture state data"}
+        onRetry={() => agriRefetch()}
+      />
+    );
+  }
 
   // ── Active indicator ───────────────────────────────────────────────────────
   const indicator = INDICATORS.find((ind) => ind.id === indicatorId)!;
@@ -197,6 +231,7 @@ export default function StateMapsPage() {
   const periods: string[] =
     indicator.dataset === "plfs" ? plfsData.years :
     indicator.dataset === "gsdp" ? gsdpData.years :
+    indicator.dataset === "agri" ? agriData.years :
     cpiData.months.map(fmtMonth);
 
   const resolvedPeriodIdx =
@@ -228,6 +263,12 @@ export default function StateMapsPage() {
     const scale = (field === "gsdp_real_cr" || field === "gsdp_nominal_cr") ? 1000 : 1;
     mapValues   = slice.values.map((v) => (v !== null ? Math.round(v / scale) : null));
     periodLabel = gsdpData.years[resolvedPeriodIdx];
+  } else if (indicator.dataset === "agri") {
+    const field = indicator.field as "rice_mt" | "wheat_mt";
+    const slice = agriStateSlice(agriData, resolvedPeriodIdx, field);
+    mapStates   = slice.names;
+    mapValues   = slice.values;
+    periodLabel = agriData.years[resolvedPeriodIdx];
   } else {
     mapStates   = cpiData.states.map((s) => s.geoName);
     mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
@@ -286,7 +327,7 @@ export default function StateMapsPage() {
           {/* Row 2 — Period chips */}
           <div>
             <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-              {indicator.dataset === "cpi" ? "Month" : "Year"}
+              {indicator.dataset === "cpi" ? "Month" : "Fiscal Year"}
             </p>
             <div className="flex flex-wrap gap-2">
               {periods.map((p, i) => (
@@ -330,7 +371,7 @@ export default function StateMapsPage() {
         />
 
         <p className="text-xs text-gray-400 dark:text-gray-500 pb-4">
-          Sources: MoSPI Periodic Labour Force Survey (PLFS), Consumer Price Index (CPI), and RBI Handbook of Statistics on Indian States (GSDP).
+          Sources: MoSPI Periodic Labour Force Survey (PLFS), Consumer Price Index (CPI), RBI Handbook of Statistics on Indian States (GSDP), and MoAFW Directorate of Economics &amp; Statistics (Crop Production).
           Map boundaries are for reference only and do not imply any political assertion.
         </p>
       </div>

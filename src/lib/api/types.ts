@@ -602,6 +602,28 @@ export interface GSDPStateData {
 }
 
 // ---------------------------------------------------------------------------
+// Agriculture — State-level types
+// ---------------------------------------------------------------------------
+
+export interface AgriStateEntry {
+  stateName: string;
+  geoName: string;
+  /** Rice production in Million Tonnes per year (index-aligned to AgriStateData.years) */
+  rice_mt: (number | null)[];
+  /** Wheat production in Million Tonnes per year (index-aligned to AgriStateData.years) */
+  wheat_mt: (number | null)[];
+}
+
+export interface AgriStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  states: AgriStateEntry[];
+}
+
+// ---------------------------------------------------------------------------
 // Agriculture — Annual types
 // ---------------------------------------------------------------------------
 
