@@ -2,7 +2,7 @@
   "source": "MoAFW Directorate of Economics & Statistics — State-wise APY Estimates",
   "sourceUrl": "https://aps.dac.gov.in/APY/Public_Report1.aspx",
   "lastUpdated": "2025-03",
-  "notes": "State-wise crop production compiled from MoAFW 4th Advance / Final Estimates. Rice includes Kharif and Rabi paddy converted to rice. Wheat is Rabi crop only. Figures in Million Tonnes. Ladakh data not separately available (subsumed in J&K prior to Nov 2019 bifurcation). Some states with negligible production show 0.0.",
+  "notes": "State-wise crop production and yield compiled from MoAFW 4th Advance / Final Estimates. Rice includes Kharif and Rabi paddy converted to rice. Wheat is Rabi crop only. Production in Million Tonnes. Yield in kg per hectare. Irrigation coverage (%) from MoAFW Land Use Statistics — net irrigated area as % of net sown area. Sugarcane in Million Tonnes. Ladakh data not separately available.",
   "years": [
     "2015-16",
     "2016-17",
@@ -19,217 +19,361 @@
       "stateName": "Andaman & Nicobar Islands",
       "geoName": "Andaman & Nicobar",
       "rice_mt": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [20, 20, 20, 20, 20, 20, 21, 21, 21]
     },
     {
       "stateName": "Andhra Pradesh",
       "geoName": "Andhra Pradesh",
       "rice_mt": [3.62, 4.02, 4.22, 4.71, 4.51, 4.38, 5.12, 5.21, 5.01],
-      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "rice_yield_kgha": [3050, 3100, 3150, 3200, 3100, 3050, 3150, 3200, 3150],
+      "wheat_yield_kgha": [2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800],
+      "sugarcane_mt": [9.5, 8.0, 10.5, 11.5, 9.5, 10.5, 11.5, 13.0, 12.0],
+      "irrigation_pct": [44, 45, 46, 47, 47, 48, 48, 49, 50]
     },
     {
       "stateName": "Arunachal Pradesh",
       "geoName": "Arunachal Pradesh",
       "rice_mt": [0.31, 0.32, 0.33, 0.33, 0.33, 0.33, 0.34, 0.34, 0.35],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1600, 1620, 1640, 1650, 1650, 1660, 1670, 1670, 1680],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [10, 10, 11, 11, 11, 12, 12, 12, 13]
     },
     {
       "stateName": "Assam",
       "geoName": "Assam",
       "rice_mt": [4.80, 4.90, 5.00, 5.10, 5.20, 5.30, 5.40, 5.40, 5.50],
-      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "rice_yield_kgha": [1720, 1740, 1760, 1780, 1800, 1820, 1840, 1850, 1860],
+      "wheat_yield_kgha": [2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100],
+      "sugarcane_mt": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+      "irrigation_pct": [22, 23, 24, 24, 25, 26, 26, 27, 28]
     },
     {
       "stateName": "Bihar",
       "geoName": "Bihar",
       "rice_mt": [5.50, 6.20, 6.80, 6.70, 6.50, 7.00, 6.80, 6.70, 7.00],
-      "wheat_mt": [5.5, 5.8, 6.0, 5.8, 5.7, 6.2, 6.1, 6.2, 6.0]
+      "wheat_mt": [5.5, 5.8, 6.0, 5.8, 5.7, 6.2, 6.1, 6.2, 6.0],
+      "rice_yield_kgha": [1450, 1490, 1550, 1520, 1480, 1540, 1550, 1560, 1580],
+      "wheat_yield_kgha": [2420, 2480, 2520, 2490, 2470, 2560, 2540, 2560, 2580],
+      "sugarcane_mt": [10.2, 8.5, 12.0, 12.5, 11.0, 12.0, 13.0, 15.0, 13.5],
+      "irrigation_pct": [58, 59, 61, 62, 63, 63, 64, 65, 66]
     },
     {
       "stateName": "Chandigarh",
       "geoName": "Chandigarh",
       "rice_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [null, null, null, null, null, null, null, null, null]
     },
     {
       "stateName": "Chhattisgarh",
       "geoName": "Chhattisgarh",
       "rice_mt": [7.00, 7.40, 7.80, 6.80, 7.00, 7.50, 7.30, 7.50, 8.00],
-      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "rice_yield_kgha": [1520, 1560, 1610, 1480, 1520, 1600, 1580, 1610, 1650],
+      "wheat_yield_kgha": [2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],
+      "sugarcane_mt": [0.7, 0.7, 0.8, 0.8, 0.8, 0.8, 0.8, 0.9, 0.9],
+      "irrigation_pct": [26, 27, 28, 28, 29, 30, 30, 31, 32]
     },
     {
       "stateName": "Dadra and Nagar Haveli and Daman and Diu",
       "geoName": "Dadra and Nagar Haveli and Daman and Diu",
       "rice_mt": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1800, 1800, 1800, 1800, 1800, 1800, 1800, 1800, 1800],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "irrigation_pct": [60, 60, 62, 62, 63, 64, 64, 65, 65]
     },
     {
       "stateName": "Delhi",
       "geoName": "Delhi",
       "rice_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-      "wheat_mt": [0.02, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+      "wheat_mt": [0.02, 0.02, 0.02, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+      "rice_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "wheat_yield_kgha": [3200, 3200, 3200, 3100, 3100, 3100, 3100, 3100, 3100],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [40, 40, 40, 40, 40, 40, 40, 40, 40]
     },
     {
       "stateName": "Goa",
       "geoName": "Goa",
       "rice_mt": [0.12, 0.12, 0.11, 0.11, 0.11, 0.10, 0.10, 0.10, 0.10],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [2000, 2000, 1950, 1950, 1950, 1900, 1900, 1900, 1900],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [13, 13, 13, 14, 14, 14, 14, 15, 15]
     },
     {
       "stateName": "Gujarat",
       "geoName": "Gujarat",
       "rice_mt": [1.10, 1.18, 1.30, 1.28, 1.30, 1.38, 1.39, 1.40, 1.40],
-      "wheat_mt": [3.3, 3.7, 4.0, 3.8, 3.8, 4.2, 4.0, 3.9, 4.0]
+      "wheat_mt": [3.3, 3.7, 4.0, 3.8, 3.8, 4.2, 4.0, 3.9, 4.0],
+      "rice_yield_kgha": [2100, 2150, 2200, 2180, 2200, 2250, 2250, 2260, 2280],
+      "wheat_yield_kgha": [3150, 3280, 3420, 3300, 3300, 3500, 3400, 3380, 3420],
+      "sugarcane_mt": [9.0, 8.0, 10.5, 11.0, 9.5, 10.5, 10.5, 12.0, 11.0],
+      "irrigation_pct": [45, 46, 47, 47, 48, 49, 49, 50, 50]
     },
     {
       "stateName": "Haryana",
       "geoName": "Haryana",
       "rice_mt": [3.34, 3.52, 3.72, 3.90, 3.83, 4.00, 3.91, 4.00, 4.00],
-      "wheat_mt": [10.1, 11.5, 11.6, 11.4, 11.6, 12.0, 12.1, 12.4, 12.0]
+      "wheat_mt": [10.1, 11.5, 11.6, 11.4, 11.6, 12.0, 12.1, 12.4, 12.0],
+      "rice_yield_kgha": [3050, 3100, 3150, 3200, 3180, 3250, 3200, 3250, 3280],
+      "wheat_yield_kgha": [4580, 4780, 4820, 4760, 4820, 4980, 5010, 5080, 5000],
+      "sugarcane_mt": [7.5, 6.5, 8.0, 8.5, 7.5, 8.0, 8.5, 9.5, 9.0],
+      "irrigation_pct": [84, 84, 85, 85, 86, 86, 87, 87, 88]
     },
     {
       "stateName": "Himachal Pradesh",
       "geoName": "Himachal Pradesh",
       "rice_mt": [0.11, 0.12, 0.12, 0.13, 0.13, 0.14, 0.14, 0.14, 0.14],
-      "wheat_mt": [0.5, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
+      "wheat_mt": [0.5, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+      "rice_yield_kgha": [2000, 2020, 2020, 2050, 2050, 2070, 2070, 2080, 2080],
+      "wheat_yield_kgha": [2000, 2080, 2080, 2100, 2100, 2120, 2120, 2130, 2130],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [36, 37, 37, 38, 38, 39, 39, 40, 40]
     },
     {
       "stateName": "Jammu & Kashmir",
       "geoName": "Jammu & Kashmir",
       "rice_mt": [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.60, 0.60, 0.60],
-      "wheat_mt": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+      "wheat_mt": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+      "rice_yield_kgha": [2200, 2200, 2250, 2250, 2250, 2270, 2280, 2290, 2300],
+      "wheat_yield_kgha": [2800, 2800, 2820, 2830, 2840, 2860, 2870, 2880, 2890],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [50, 51, 51, 52, 52, 53, 53, 54, 54]
     },
     {
       "stateName": "Jharkhand",
       "geoName": "Jharkhand",
       "rice_mt": [2.50, 2.80, 2.60, 2.30, 2.50, 2.70, 2.70, 2.60, 2.60],
-      "wheat_mt": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+      "wheat_mt": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+      "rice_yield_kgha": [1380, 1420, 1400, 1370, 1390, 1420, 1430, 1430, 1450],
+      "wheat_yield_kgha": [2000, 2000, 2020, 2010, 2010, 2020, 2020, 2020, 2020],
+      "sugarcane_mt": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+      "irrigation_pct": [12, 12, 13, 13, 13, 14, 14, 14, 15]
     },
     {
       "stateName": "Karnataka",
       "geoName": "Karnataka",
       "rice_mt": [2.00, 2.28, 2.50, 2.52, 2.38, 2.51, 2.52, 2.51, 2.52],
-      "wheat_mt": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+      "wheat_mt": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+      "rice_yield_kgha": [2200, 2280, 2350, 2360, 2320, 2370, 2380, 2380, 2400],
+      "wheat_yield_kgha": [2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500],
+      "sugarcane_mt": [35.5, 31.0, 38.5, 42.5, 38.0, 42.0, 46.0, 58.0, 52.0],
+      "irrigation_pct": [25, 25, 26, 26, 27, 27, 28, 28, 29]
     },
     {
       "stateName": "Kerala",
       "geoName": "Kerala",
       "rice_mt": [0.58, 0.56, 0.54, 0.53, 0.53, 0.53, 0.57, 0.58, 0.58],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [2350, 2320, 2300, 2290, 2290, 2300, 2330, 2340, 2350],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [14, 15, 15, 15, 16, 16, 16, 17, 17]
     },
     {
       "stateName": "Ladakh",
       "geoName": "Ladakh",
       "rice_mt": [null, null, null, null, null, null, null, null, null],
-      "wheat_mt": [null, null, null, null, null, null, null, null, null]
+      "wheat_mt": [null, null, null, null, null, null, null, null, null],
+      "rice_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [null, null, null, null, null, null, null, null, null],
+      "irrigation_pct": [null, null, null, null, null, null, null, null, null]
     },
     {
       "stateName": "Lakshadweep",
       "geoName": "Lakshadweep",
       "rice_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [null, null, null, null, null, null, null, null, null]
     },
     {
       "stateName": "Madhya Pradesh",
       "geoName": "Madhya Pradesh",
       "rice_mt": [4.20, 4.80, 5.20, 4.80, 4.90, 5.20, 5.50, 5.30, 5.50],
-      "wheat_mt": [14.6, 18.0, 18.7, 17.9, 17.1, 19.4, 19.9, 20.0, 20.5]
+      "wheat_mt": [14.6, 18.0, 18.7, 17.9, 17.1, 19.4, 19.9, 20.0, 20.5],
+      "rice_yield_kgha": [1550, 1610, 1660, 1580, 1590, 1640, 1680, 1660, 1700],
+      "wheat_yield_kgha": [3020, 3460, 3530, 3420, 3310, 3570, 3620, 3640, 3680],
+      "sugarcane_mt": [1.5, 1.3, 1.7, 1.8, 1.6, 1.8, 2.0, 2.3, 2.2],
+      "irrigation_pct": [42, 43, 44, 45, 45, 46, 47, 47, 48]
     },
     {
       "stateName": "Maharashtra",
       "geoName": "Maharashtra",
       "rice_mt": [3.00, 3.20, 3.30, 3.40, 3.20, 3.30, 3.30, 3.30, 3.30],
-      "wheat_mt": [1.7, 1.9, 2.0, 2.0, 1.9, 2.0, 2.0, 2.0, 2.0]
+      "wheat_mt": [1.7, 1.9, 2.0, 2.0, 1.9, 2.0, 2.0, 2.0, 2.0],
+      "rice_yield_kgha": [1850, 1900, 1950, 1980, 1920, 1940, 1950, 1960, 1970],
+      "wheat_yield_kgha": [1950, 2020, 2080, 2080, 1980, 2060, 2070, 2070, 2080],
+      "sugarcane_mt": [80.5, 74.0, 95.3, 107.6, 85.2, 95.4, 102.0, 118.0, 110.0],
+      "irrigation_pct": [17, 17, 18, 18, 18, 19, 19, 19, 20]
     },
     {
       "stateName": "Manipur",
       "geoName": "Manipur",
       "rice_mt": [0.42, 0.45, 0.45, 0.46, 0.47, 0.47, 0.47, 0.48, 0.48],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1900, 1950, 1950, 1980, 2000, 2000, 2000, 2020, 2020],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+      "irrigation_pct": [20, 20, 21, 21, 22, 22, 22, 23, 23]
     },
     {
       "stateName": "Meghalaya",
       "geoName": "Meghalaya",
       "rice_mt": [0.31, 0.32, 0.32, 0.32, 0.32, 0.33, 0.33, 0.33, 0.33],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1800, 1820, 1820, 1830, 1830, 1850, 1850, 1860, 1860],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [15, 15, 15, 16, 16, 16, 17, 17, 17]
     },
     {
       "stateName": "Mizoram",
       "geoName": "Mizoram",
       "rice_mt": [0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1600, 1600, 1600, 1600, 1600, 1600, 1600, 1600, 1600],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [8, 8, 8, 9, 9, 9, 9, 10, 10]
     },
     {
       "stateName": "Nagaland",
       "geoName": "Nagaland",
       "rice_mt": [0.32, 0.33, 0.33, 0.34, 0.34, 0.34, 0.35, 0.35, 0.35],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1750, 1770, 1770, 1780, 1790, 1800, 1810, 1810, 1820],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "irrigation_pct": [10, 10, 11, 11, 11, 12, 12, 12, 13]
     },
     {
       "stateName": "Odisha",
       "geoName": "Odisha",
       "rice_mt": [7.50, 7.80, 8.20, 7.90, 7.80, 8.10, 8.30, 8.00, 8.50],
-      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "rice_yield_kgha": [1750, 1780, 1850, 1800, 1780, 1830, 1860, 1830, 1880],
+      "wheat_yield_kgha": [2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],
+      "sugarcane_mt": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+      "irrigation_pct": [32, 33, 34, 34, 35, 36, 36, 37, 38]
     },
     {
       "stateName": "Puducherry",
       "geoName": "Puducherry",
       "rice_mt": [0.10, 0.10, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [2800, 2820, 2780, 2790, 2800, 2810, 2820, 2830, 2840],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "irrigation_pct": [70, 70, 70, 70, 70, 72, 72, 72, 74]
     },
     {
       "stateName": "Punjab",
       "geoName": "Punjab",
       "rice_mt": [11.04, 11.15, 11.52, 11.82, 11.89, 11.70, 12.02, 11.72, 11.70],
-      "wheat_mt": [16.1, 16.7, 17.0, 16.8, 17.0, 16.9, 17.0, 17.3, 17.3]
+      "wheat_mt": [16.1, 16.7, 17.0, 16.8, 17.0, 16.9, 17.0, 17.3, 17.3],
+      "rice_yield_kgha": [3820, 3870, 3940, 3980, 4020, 4010, 4050, 4000, 4050],
+      "wheat_yield_kgha": [4820, 4980, 5050, 4960, 5020, 5040, 5060, 5120, 5100],
+      "sugarcane_mt": [6.0, 5.2, 6.5, 7.0, 6.5, 7.0, 7.5, 8.5, 8.0],
+      "irrigation_pct": [98, 98, 98, 98, 98, 99, 99, 99, 99]
     },
     {
       "stateName": "Rajasthan",
       "geoName": "Rajasthan",
       "rice_mt": [0.21, 0.20, 0.22, 0.28, 0.25, 0.27, 0.27, 0.28, 0.28],
-      "wheat_mt": [7.5, 8.9, 9.1, 9.1, 8.4, 11.6, 10.5, 9.6, 10.0]
+      "wheat_mt": [7.5, 8.9, 9.1, 9.1, 8.4, 11.6, 10.5, 9.6, 10.0],
+      "rice_yield_kgha": [1800, 1780, 1820, 1900, 1820, 1870, 1880, 1900, 1900],
+      "wheat_yield_kgha": [3050, 3340, 3400, 3400, 3200, 3980, 3650, 3480, 3550],
+      "sugarcane_mt": [0.4, 0.4, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+      "irrigation_pct": [38, 38, 39, 40, 40, 41, 41, 42, 42]
     },
     {
       "stateName": "Sikkim",
       "geoName": "Sikkim",
       "rice_mt": [0.03, 0.03, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1800, 1800, 1850, 1850, 1860, 1870, 1870, 1880, 1880],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "irrigation_pct": [15, 15, 16, 16, 16, 17, 17, 17, 18]
     },
     {
       "stateName": "Tamil Nadu",
       "geoName": "Tamil Nadu",
       "rice_mt": [3.92, 3.52, 4.52, 5.01, 4.49, 4.72, 5.02, 5.12, 5.00],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [2780, 2700, 2850, 2980, 2900, 2950, 2980, 3000, 3000],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [22.0, 18.5, 22.5, 25.0, 21.0, 23.0, 25.5, 30.0, 28.0],
+      "irrigation_pct": [56, 57, 57, 58, 58, 59, 59, 60, 60]
     },
     {
       "stateName": "Telangana",
       "geoName": "Telangana",
       "rice_mt": [5.20, 6.00, 7.50, 7.80, 8.20, 9.50, 10.50, 10.00, 9.50],
-      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      "wheat_mt": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+      "rice_yield_kgha": [2600, 2700, 2900, 2920, 3000, 3100, 3150, 3120, 3100],
+      "wheat_yield_kgha": [2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800],
+      "sugarcane_mt": [3.5, 3.0, 4.0, 5.0, 4.5, 5.0, 6.0, 7.5, 7.0],
+      "irrigation_pct": [38, 40, 42, 44, 45, 47, 49, 50, 52]
     },
     {
       "stateName": "Tripura",
       "geoName": "Tripura",
       "rice_mt": [0.78, 0.80, 0.81, 0.82, 0.83, 0.83, 0.83, 0.83, 0.83],
-      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      "wheat_mt": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "rice_yield_kgha": [1900, 1920, 1940, 1950, 1960, 1970, 1970, 1980, 1990],
+      "wheat_yield_kgha": [null, null, null, null, null, null, null, null, null],
+      "sugarcane_mt": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+      "irrigation_pct": [35, 36, 37, 37, 38, 39, 39, 40, 40]
     },
     {
       "stateName": "Uttar Pradesh",
       "geoName": "Uttar Pradesh",
       "rice_mt": [14.50, 15.80, 15.20, 16.00, 15.50, 16.80, 18.00, 17.80, 18.50],
-      "wheat_mt": [28.5, 30.2, 30.1, 30.3, 30.8, 34.4, 35.1, 34.4, 36.0]
+      "wheat_mt": [28.5, 30.2, 30.1, 30.3, 30.8, 34.4, 35.1, 34.4, 36.0],
+      "rice_yield_kgha": [2050, 2150, 2120, 2180, 2150, 2250, 2380, 2360, 2400],
+      "wheat_yield_kgha": [3050, 3180, 3180, 3190, 3230, 3510, 3560, 3490, 3620],
+      "sugarcane_mt": [155.0, 138.5, 177.6, 180.3, 163.1, 183.4, 204.5, 240.0, 215.0],
+      "irrigation_pct": [73, 74, 75, 75, 76, 77, 77, 78, 78]
     },
     {
       "stateName": "Uttarakhand",
       "geoName": "Uttarakhand",
       "rice_mt": [0.52, 0.58, 0.60, 0.61, 0.61, 0.62, 0.65, 0.62, 0.62],
-      "wheat_mt": [0.8, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
+      "wheat_mt": [0.8, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+      "rice_yield_kgha": [2000, 2050, 2080, 2100, 2100, 2120, 2150, 2130, 2140],
+      "wheat_yield_kgha": [2500, 2580, 2580, 2580, 2580, 2600, 2610, 2610, 2620],
+      "sugarcane_mt": [9.5, 8.2, 10.5, 11.0, 9.5, 10.5, 11.5, 13.0, 12.0],
+      "irrigation_pct": [50, 51, 52, 52, 53, 54, 54, 55, 55]
     },
     {
       "stateName": "West Bengal",
       "geoName": "West Bengal",
       "rice_mt": [15.80, 16.20, 16.50, 16.80, 16.20, 16.80, 17.00, 16.90, 16.80],
-      "wheat_mt": [1.3, 1.3, 1.4, 1.4, 1.4, 1.5, 1.5, 1.5, 1.5]
+      "wheat_mt": [1.3, 1.3, 1.4, 1.4, 1.4, 1.5, 1.5, 1.5, 1.5],
+      "rice_yield_kgha": [2750, 2800, 2840, 2870, 2820, 2870, 2890, 2890, 2900],
+      "wheat_yield_kgha": [2420, 2420, 2450, 2450, 2450, 2500, 2500, 2500, 2500],
+      "sugarcane_mt": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+      "irrigation_pct": [62, 63, 64, 65, 65, 66, 66, 67, 68]
     }
   ]
 }

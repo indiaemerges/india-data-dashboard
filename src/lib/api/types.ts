@@ -608,10 +608,12 @@ export interface GSDPStateData {
 export interface AgriStateEntry {
   stateName: string;
   geoName: string;
-  /** Rice production in Million Tonnes per year (index-aligned to AgriStateData.years) */
   rice_mt: (number | null)[];
-  /** Wheat production in Million Tonnes per year (index-aligned to AgriStateData.years) */
   wheat_mt: (number | null)[];
+  rice_yield_kgha: (number | null)[];
+  wheat_yield_kgha: (number | null)[];
+  sugarcane_mt: (number | null)[];
+  irrigation_pct: (number | null)[];
 }
 
 export interface AgriStateData {

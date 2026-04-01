@@ -112,7 +112,7 @@ export function useAgriStateData() {
 export function agriStateSlice(
   data: AgriStateData,
   yearIndex: number,
-  field: "rice_mt" | "wheat_mt"
+  field: "rice_mt" | "wheat_mt" | "rice_yield_kgha" | "wheat_yield_kgha" | "sugarcane_mt" | "irrigation_pct"
 ): { names: string[]; values: (number | null)[] } {
   const names: string[] = [];
   const values: (number | null)[] = [];

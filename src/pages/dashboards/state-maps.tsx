@@ -138,6 +138,50 @@ const INDICATORS = [
     dataset: "agri" as const,
     field: "wheat_mt" as const,
   },
+  {
+    id: "rice_yield",
+    label: "Rice Yield",
+    description: "Rice yield in kg per hectare · Punjab 4,000+ vs Jharkhand ~1,400 — productivity gap between green-revolution and rain-fed states",
+    unit: "kg/ha",
+    source: "MoAFW Directorate of Economics & Statistics",
+    sourceUrl: "https://aps.dac.gov.in/APY/Public_Report1.aspx",
+    defaultColormap: "Greens" as ColormapId,
+    dataset: "agri" as const,
+    field: "rice_yield_kgha" as const,
+  },
+  {
+    id: "wheat_yield",
+    label: "Wheat Yield",
+    description: "Wheat yield in kg per hectare · Punjab/Haryana 5,000+ vs Bihar ~2,500 — north-west wheat belt productivity advantage",
+    unit: "kg/ha",
+    source: "MoAFW Directorate of Economics & Statistics",
+    sourceUrl: "https://aps.dac.gov.in/APY/Public_Report1.aspx",
+    defaultColormap: "YlOrRd" as ColormapId,
+    dataset: "agri" as const,
+    field: "wheat_yield_kgha" as const,
+  },
+  {
+    id: "sugarcane_prod",
+    label: "Sugarcane Production",
+    description: "State-wise sugarcane production · Million Tonnes · UP + Maharashtra account for ~70% of India's sugar output",
+    unit: "Mt",
+    source: "MoAFW Directorate of Economics & Statistics",
+    sourceUrl: "https://aps.dac.gov.in/APY/Public_Report1.aspx",
+    defaultColormap: "Greens" as ColormapId,
+    dataset: "agri" as const,
+    field: "sugarcane_mt" as const,
+  },
+  {
+    id: "irrigation_pct",
+    label: "Irrigation Coverage",
+    description: "Net irrigated area as % of net sown area · Punjab ~99% vs Jharkhand ~15% — water access divide mirrors yield gap",
+    unit: "%",
+    source: "MoAFW Land Use Statistics",
+    sourceUrl: "https://desagri.gov.in/",
+    defaultColormap: "Blues" as ColormapId,
+    dataset: "agri" as const,
+    field: "irrigation_pct" as const,
+  },
 ] as const;
 
 type IndicatorId = (typeof INDICATORS)[number]["id"];
@@ -264,7 +308,7 @@ export default function StateMapsPage() {
     mapValues   = slice.values.map((v) => (v !== null ? Math.round(v / scale) : null));
     periodLabel = gsdpData.years[resolvedPeriodIdx];
   } else if (indicator.dataset === "agri") {
-    const field = indicator.field as "rice_mt" | "wheat_mt";
+    const field = indicator.field as "rice_mt" | "wheat_mt" | "rice_yield_kgha" | "wheat_yield_kgha" | "sugarcane_mt" | "irrigation_pct";
     const slice = agriStateSlice(agriData, resolvedPeriodIdx, field);
     mapStates   = slice.names;
     mapValues   = slice.values;
