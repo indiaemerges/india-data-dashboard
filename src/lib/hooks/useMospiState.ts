@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { PLFSStateData, CPIStateData, GSDPStateData, AgriStateData } from "@/lib/api/types";
+import type { PLFSStateData, CPIStateData, GSDPStateData, AgriStateData, EnergyStateData } from "@/lib/api/types";
 
 const BASE_PATH = "/india-data-dashboard";
 
@@ -113,6 +113,36 @@ export function agriStateSlice(
   data: AgriStateData,
   yearIndex: number,
   field: "rice_mt" | "wheat_mt" | "rice_yield_kgha" | "wheat_yield_kgha" | "sugarcane_mt" | "irrigation_pct"
+): { names: string[]; values: (number | null)[] } {
+  const names: string[] = [];
+  const values: (number | null)[] = [];
+  for (const s of data.states) {
+    names.push(s.geoName);
+    values.push(s[field]?.[yearIndex] ?? null);
+  }
+  return { names, values };
+}
+
+// ── Energy state data ──────────────────────────────────────────────────────
+
+export function useEnergyStateData() {
+  return useQuery<EnergyStateData>({
+    queryKey: ["energy", "state"],
+    queryFn: async () => {
+      const res = await fetch(`${BASE_PATH}/data/energy/energy-state.json`);
+      if (!res.ok) throw new Error("Energy state data not available");
+      return res.json() as Promise<EnergyStateData>;
+    },
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24,
+    retry: 1,
+  });
+}
+
+export function energyStateSlice(
+  data: EnergyStateData,
+  yearIndex: number,
+  field: "elec_kwh_pc" | "renewable_gw"
 ): { names: string[]; values: (number | null)[] } {
   const names: string[] = [];
   const values: (number | null)[] = [];

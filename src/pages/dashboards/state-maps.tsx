@@ -8,9 +8,11 @@ import {
   useCPIStateData,
   useGSDPStateData,
   useAgriStateData,
+  useEnergyStateData,
   plfsStateSlice,
   gsdpStateSlice,
   agriStateSlice,
+  energyStateSlice,
 } from "@/lib/hooks/useMospiState";
 
 // ── Colormap catalogue ─────────────────────────────────────────────────────────
@@ -182,6 +184,28 @@ const INDICATORS = [
     dataset: "agri" as const,
     field: "irrigation_pct" as const,
   },
+  {
+    id: "elec_kwh_pc",
+    label: "Electricity Consumption",
+    description: "Per capita electricity consumption in kWh/year · Dadra & NH is an industrial outlier; Punjab/Gujarat/Haryana lead among major states · Bihar lowest at ~330 kWh",
+    unit: "kWh",
+    source: "Central Electricity Authority (CEA)",
+    sourceUrl: "https://cea.nic.in/",
+    defaultColormap: "YlOrRd" as ColormapId,
+    dataset: "energy" as const,
+    field: "elec_kwh_pc" as const,
+  },
+  {
+    id: "renewable_gw",
+    label: "Renewable Energy Capacity",
+    description: "Installed renewable energy capacity in GW (solar + wind + hydro + biomass) · Rajasthan leads the solar boom; Karnataka & Tamil Nadu add wind",
+    unit: "GW",
+    source: "Ministry of New & Renewable Energy (MNRE) / CEA",
+    sourceUrl: "https://mnre.gov.in/",
+    defaultColormap: "Greens" as ColormapId,
+    dataset: "energy" as const,
+    field: "renewable_gw" as const,
+  },
 ] as const;
 
 type IndicatorId = (typeof INDICATORS)[number]["id"];
@@ -231,8 +255,10 @@ export default function StateMapsPage() {
     useGSDPStateData();
   const { data: agriData, isLoading: agriLoading, error: agriError, refetch: agriRefetch } =
     useAgriStateData();
+  const { data: energyData, isLoading: energyLoading, error: energyError, refetch: energyRefetch } =
+    useEnergyStateData();
 
-  if (plfsLoading || cpiLoading || gsdpLoading || agriLoading) {
+  if (plfsLoading || cpiLoading || gsdpLoading || agriLoading || energyLoading) {
     return <LoadingSpinner message="Loading state-level data…" />;
   }
   if (plfsError || !plfsData) {
@@ -267,15 +293,24 @@ export default function StateMapsPage() {
       />
     );
   }
+  if (energyError || !energyData) {
+    return (
+      <ErrorDisplay
+        message={energyError instanceof Error ? energyError.message : "Failed to load energy state data"}
+        onRetry={() => energyRefetch()}
+      />
+    );
+  }
 
   // ── Active indicator ───────────────────────────────────────────────────────
   const indicator = INDICATORS.find((ind) => ind.id === indicatorId)!;
 
   // ── Period options ─────────────────────────────────────────────────────────
   const periods: string[] =
-    indicator.dataset === "plfs" ? plfsData.years :
-    indicator.dataset === "gsdp" ? gsdpData.years :
-    indicator.dataset === "agri" ? agriData.years :
+    indicator.dataset === "plfs"   ? plfsData.years :
+    indicator.dataset === "gsdp"   ? gsdpData.years :
+    indicator.dataset === "agri"   ? agriData.years :
+    indicator.dataset === "energy" ? energyData.years :
     cpiData.months.map(fmtMonth);
 
   const resolvedPeriodIdx =
@@ -313,6 +348,12 @@ export default function StateMapsPage() {
     mapStates   = slice.names;
     mapValues   = slice.values;
     periodLabel = agriData.years[resolvedPeriodIdx];
+  } else if (indicator.dataset === "energy") {
+    const field = indicator.field as "elec_kwh_pc" | "renewable_gw";
+    const slice = energyStateSlice(energyData, resolvedPeriodIdx, field);
+    mapStates   = slice.names;
+    mapValues   = slice.values;
+    periodLabel = energyData.years[resolvedPeriodIdx];
   } else {
     mapStates   = cpiData.states.map((s) => s.geoName);
     mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);

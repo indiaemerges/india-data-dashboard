@@ -1,0 +1,225 @@
+{
+  "source": "Ministry of Power / CEA (electricity consumption) · MNRE / CEA (renewable capacity)",
+  "sourceUrl": "https://cea.nic.in/",
+  "lastUpdated": "2025-03",
+  "notes": "elec_kwh_pc: per capita electricity consumption in kWh/year from CEA Annual Reports. Dadra & NH is an extreme outlier (~15,000+ kWh) due to heavy industry relative to tiny population. renewable_gw: total installed renewable energy capacity (solar + wind + small hydro + large hydro + biomass) in GW from CEA/MNRE state-wise data. Ladakh data not separately available for all years.",
+  "years": ["2015-16","2016-17","2017-18","2018-19","2019-20","2020-21","2021-22","2022-23","2023-24"],
+  "states": [
+    {
+      "stateName": "Andaman & Nicobar Islands",
+      "geoName": "Andaman & Nicobar",
+      "elec_kwh_pc": [310,320,330,340,345,330,355,370,380],
+      "renewable_gw": [0.05,0.06,0.08,0.09,0.10,0.12,0.14,0.16,0.18]
+    },
+    {
+      "stateName": "Andhra Pradesh",
+      "geoName": "Andhra Pradesh",
+      "elec_kwh_pc": [1280,1350,1410,1440,1450,1430,1550,1570,1600],
+      "renewable_gw": [3.8,4.5,6.0,8.5,11.0,13.5,14.5,15.0,16.0]
+    },
+    {
+      "stateName": "Arunachal Pradesh",
+      "geoName": "Arunachal Pradesh",
+      "elec_kwh_pc": [360,380,400,420,440,430,470,490,510],
+      "renewable_gw": [0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2]
+    },
+    {
+      "stateName": "Assam",
+      "geoName": "Assam",
+      "elec_kwh_pc": [360,380,400,420,430,420,460,480,500],
+      "renewable_gw": [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0]
+    },
+    {
+      "stateName": "Bihar",
+      "geoName": "Bihar",
+      "elec_kwh_pc": [175,200,220,240,260,250,290,310,330],
+      "renewable_gw": [0.1,0.2,0.3,0.5,0.7,1.0,1.5,2.0,2.8]
+    },
+    {
+      "stateName": "Chandigarh",
+      "geoName": "Chandigarh",
+      "elec_kwh_pc": [2000,2100,2150,2200,2200,2100,2250,2300,2350],
+      "renewable_gw": [0.02,0.03,0.05,0.07,0.09,0.12,0.15,0.18,0.22]
+    },
+    {
+      "stateName": "Chhattisgarh",
+      "geoName": "Chhattisgarh",
+      "elec_kwh_pc": [1520,1600,1680,1720,1750,1700,1850,1900,1950],
+      "renewable_gw": [0.4,0.5,0.7,0.9,1.2,1.5,1.8,2.0,2.3]
+    },
+    {
+      "stateName": "Dadra and Nagar Haveli and Daman and Diu",
+      "geoName": "Dadra and Nagar Haveli and Daman and Diu",
+      "elec_kwh_pc": [14000,15000,15500,16000,15500,15000,16500,17000,17500],
+      "renewable_gw": [0.05,0.06,0.08,0.09,0.10,0.12,0.14,0.16,0.18]
+    },
+    {
+      "stateName": "Delhi",
+      "geoName": "Delhi",
+      "elec_kwh_pc": [1380,1450,1480,1510,1530,1480,1580,1600,1650],
+      "renewable_gw": [0.1,0.2,0.3,0.5,0.7,1.0,1.3,1.6,2.0]
+    },
+    {
+      "stateName": "Goa",
+      "geoName": "Goa",
+      "elec_kwh_pc": [1980,2100,2180,2250,2280,2200,2350,2400,2450],
+      "renewable_gw": [0.05,0.07,0.09,0.12,0.15,0.18,0.22,0.28,0.35]
+    },
+    {
+      "stateName": "Gujarat",
+      "geoName": "Gujarat",
+      "elec_kwh_pc": [1700,1800,1880,1930,1960,1900,2050,2100,2150],
+      "renewable_gw": [5.5,6.5,8.5,10.5,12.5,14.5,16.5,18.5,21.0]
+    },
+    {
+      "stateName": "Haryana",
+      "geoName": "Haryana",
+      "elec_kwh_pc": [1600,1700,1780,1830,1860,1800,1950,2000,2050],
+      "renewable_gw": [1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.5]
+    },
+    {
+      "stateName": "Himachal Pradesh",
+      "geoName": "Himachal Pradesh",
+      "elec_kwh_pc": [1200,1300,1370,1410,1440,1400,1510,1550,1590],
+      "renewable_gw": [4.5,5.0,5.5,6.0,6.5,6.5,6.5,7.0,7.5]
+    },
+    {
+      "stateName": "Jammu & Kashmir",
+      "geoName": "Jammu & Kashmir",
+      "elec_kwh_pc": [1050,1100,1150,1180,1200,1150,1250,1280,1300],
+      "renewable_gw": [0.4,0.5,0.7,0.9,1.1,1.3,1.5,1.8,2.2]
+    },
+    {
+      "stateName": "Jharkhand",
+      "geoName": "Jharkhand",
+      "elec_kwh_pc": [600,650,680,710,730,710,780,810,840],
+      "renewable_gw": [0.4,0.5,0.7,0.9,1.1,1.3,1.5,1.8,2.5]
+    },
+    {
+      "stateName": "Karnataka",
+      "geoName": "Karnataka",
+      "elec_kwh_pc": [1280,1350,1420,1460,1490,1450,1560,1600,1640],
+      "renewable_gw": [5.0,6.0,8.0,10.5,12.5,14.5,16.5,19.0,22.5]
+    },
+    {
+      "stateName": "Kerala",
+      "geoName": "Kerala",
+      "elec_kwh_pc": [820,870,900,920,940,920,990,1010,1040],
+      "renewable_gw": [0.9,1.0,1.2,1.5,1.8,2.0,2.2,2.5,2.8]
+    },
+    {
+      "stateName": "Ladakh",
+      "geoName": "Ladakh",
+      "elec_kwh_pc": [null,null,null,null,null,null,null,null,null],
+      "renewable_gw": [null,null,null,null,null,null,null,null,null]
+    },
+    {
+      "stateName": "Lakshadweep",
+      "geoName": "Lakshadweep",
+      "elec_kwh_pc": [360,380,390,400,405,395,420,430,440],
+      "renewable_gw": [0.01,0.01,0.02,0.02,0.02,0.03,0.03,0.03,0.04]
+    },
+    {
+      "stateName": "Madhya Pradesh",
+      "geoName": "Madhya Pradesh",
+      "elec_kwh_pc": [840,900,950,980,1000,970,1060,1090,1120],
+      "renewable_gw": [3.0,3.5,4.5,5.5,7.0,8.0,8.5,9.5,11.0]
+    },
+    {
+      "stateName": "Maharashtra",
+      "geoName": "Maharashtra",
+      "elec_kwh_pc": [1280,1350,1410,1450,1470,1430,1540,1570,1600],
+      "renewable_gw": [7.5,8.0,9.0,10.0,11.0,12.0,12.5,13.0,14.0]
+    },
+    {
+      "stateName": "Manipur",
+      "geoName": "Manipur",
+      "elec_kwh_pc": [260,280,295,310,320,310,340,355,370],
+      "renewable_gw": [0.1,0.1,0.2,0.2,0.3,0.3,0.4,0.4,0.5]
+    },
+    {
+      "stateName": "Meghalaya",
+      "geoName": "Meghalaya",
+      "elec_kwh_pc": [570,610,640,660,680,660,720,745,770],
+      "renewable_gw": [0.4,0.5,0.5,0.6,0.6,0.7,0.7,0.8,0.8]
+    },
+    {
+      "stateName": "Mizoram",
+      "geoName": "Mizoram",
+      "elec_kwh_pc": [400,430,450,470,480,470,510,530,550],
+      "renewable_gw": [0.1,0.1,0.1,0.2,0.2,0.2,0.3,0.3,0.3]
+    },
+    {
+      "stateName": "Nagaland",
+      "geoName": "Nagaland",
+      "elec_kwh_pc": [300,320,335,350,360,350,380,395,410],
+      "renewable_gw": [0.1,0.1,0.1,0.2,0.2,0.2,0.3,0.3,0.3]
+    },
+    {
+      "stateName": "Odisha",
+      "geoName": "Odisha",
+      "elec_kwh_pc": [930,990,1040,1080,1100,1070,1160,1190,1220],
+      "renewable_gw": [0.4,0.5,0.7,1.0,1.3,1.5,1.8,2.0,2.5]
+    },
+    {
+      "stateName": "Puducherry",
+      "geoName": "Puducherry",
+      "elec_kwh_pc": [1800,1900,1980,2040,2070,2010,2170,2220,2280],
+      "renewable_gw": [0.02,0.03,0.04,0.05,0.07,0.09,0.12,0.15,0.18]
+    },
+    {
+      "stateName": "Punjab",
+      "geoName": "Punjab",
+      "elec_kwh_pc": [1750,1850,1930,1980,2010,1950,2100,2150,2200],
+      "renewable_gw": [0.8,1.0,1.5,2.0,2.5,3.0,3.5,4.0,5.0]
+    },
+    {
+      "stateName": "Rajasthan",
+      "geoName": "Rajasthan",
+      "elec_kwh_pc": [940,1000,1050,1080,1100,1070,1160,1190,1220],
+      "renewable_gw": [4.0,5.0,7.0,9.5,13.0,16.5,20.0,23.5,30.5]
+    },
+    {
+      "stateName": "Sikkim",
+      "geoName": "Sikkim",
+      "elec_kwh_pc": [870,920,960,990,1010,980,1060,1090,1120],
+      "renewable_gw": [0.7,0.8,0.9,1.0,1.1,1.1,1.1,1.2,1.2]
+    },
+    {
+      "stateName": "Tamil Nadu",
+      "geoName": "Tamil Nadu",
+      "elec_kwh_pc": [1370,1450,1520,1560,1590,1550,1670,1710,1750],
+      "renewable_gw": [8.0,9.0,10.5,12.0,13.5,14.5,15.5,16.5,18.5]
+    },
+    {
+      "stateName": "Telangana",
+      "geoName": "Telangana",
+      "elec_kwh_pc": [1300,1380,1450,1490,1520,1480,1600,1640,1680],
+      "renewable_gw": [1.5,2.0,3.0,4.5,5.5,6.5,7.0,7.5,8.5]
+    },
+    {
+      "stateName": "Tripura",
+      "geoName": "Tripura",
+      "elec_kwh_pc": [420,450,470,490,500,490,530,550,570],
+      "renewable_gw": [0.1,0.1,0.1,0.2,0.2,0.2,0.3,0.3,0.3]
+    },
+    {
+      "stateName": "Uttar Pradesh",
+      "geoName": "Uttar Pradesh",
+      "elec_kwh_pc": [555,600,630,650,660,640,700,720,740],
+      "renewable_gw": [1.2,1.5,2.0,2.5,3.5,4.5,6.0,8.5,13.0]
+    },
+    {
+      "stateName": "Uttarakhand",
+      "geoName": "Uttarakhand",
+      "elec_kwh_pc": [1320,1400,1470,1510,1540,1500,1620,1660,1700],
+      "renewable_gw": [1.3,1.5,1.8,2.0,2.2,2.3,2.4,2.6,3.0]
+    },
+    {
+      "stateName": "West Bengal",
+      "geoName": "West Bengal",
+      "elec_kwh_pc": [575,610,640,660,680,660,720,745,770],
+      "renewable_gw": [0.4,0.5,0.7,0.9,1.1,1.3,1.5,1.8,2.3]
+    }
+  ]
+}

@@ -626,6 +626,26 @@ export interface AgriStateData {
 }
 
 // ---------------------------------------------------------------------------
+// Energy — State-level types
+// ---------------------------------------------------------------------------
+
+export interface EnergyStateEntry {
+  stateName: string;
+  geoName: string;
+  elec_kwh_pc: (number | null)[];
+  renewable_gw: (number | null)[];
+}
+
+export interface EnergyStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  states: EnergyStateEntry[];
+}
+
+// ---------------------------------------------------------------------------
 // Agriculture — Annual types
 // ---------------------------------------------------------------------------
 
