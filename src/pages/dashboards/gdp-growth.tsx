@@ -1,4 +1,5 @@
 import Head from "next/head";
+import StateMapPanel from "@/components/charts/StateMapPanel";
 import { useWorldBankIndicators } from "@/lib/hooks/useWorldBank";
 import { useNASQuarterlyData, nasQuarterlyToSeries, useNASGVASectorData, nasGVAToSeries } from "@/lib/hooks/useMospiNAS";
 import { WORLD_BANK_INDICATORS } from "@/lib/api/worldbank";
@@ -359,6 +360,9 @@ export default function GDPGrowthDashboard() {
             )}
           </div>
         )}
+
+        {/* State Distribution Maps */}
+        <StateMapPanel indicators={["gsdp_growth", "gsdp_real", "gsdp_nominal"]} />
 
         {/* Data source info */}
         <div className="mt-8 space-y-3">

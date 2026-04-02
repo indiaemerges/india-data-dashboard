@@ -1,8 +1,5 @@
-import Head from "next/head";
-import { useState } from "react";
+import { useState, useId } from "react";
 import ChoroplethMap from "@/components/charts/ChoroplethMap";
-import LoadingSpinner from "@/components/ui/LoadingSpinner";
-import ErrorDisplay from "@/components/ui/ErrorDisplay";
 import {
   usePLFSStateData,
   useCPIStateData,
@@ -18,12 +15,12 @@ import {
 // ── Colormap catalogue ─────────────────────────────────────────────────────────
 
 const COLORMAPS = [
-  { id: "YlOrRd",  label: "Yellow → Red"   },
-  { id: "Greens",  label: "Greens"         },
-  { id: "Blues",   label: "Blues"          },
-  { id: "Oranges", label: "Oranges"        },
-  { id: "Viridis", label: "Viridis"        },
-  { id: "RdBu",    label: "Diverging"      },
+  { id: "YlOrRd",  label: "Yellow → Red" },
+  { id: "Greens",  label: "Greens"       },
+  { id: "Blues",   label: "Blues"        },
+  { id: "Oranges", label: "Oranges"      },
+  { id: "Viridis", label: "Viridis"      },
+  { id: "RdBu",    label: "Diverging"    },
 ] as const;
 type ColormapId = (typeof COLORMAPS)[number]["id"];
 
@@ -208,7 +205,7 @@ const INDICATORS = [
   },
 ] as const;
 
-type IndicatorId = (typeof INDICATORS)[number]["id"];
+export type IndicatorId = (typeof INDICATORS)[number]["id"];
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
@@ -224,7 +221,6 @@ function dataRange(vals: (number | null)[]): { min: number; max: number } {
   return { min: Math.floor(Math.min(...valid)), max: Math.ceil(Math.max(...valid)) };
 }
 
-// ── Chip button ────────────────────────────────────────────────────────────────
 function Chip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
     <button
@@ -240,206 +236,174 @@ function Chip({ label, active, onClick }: { label: string; active: boolean; onCl
   );
 }
 
-// ── Dashboard ──────────────────────────────────────────────────────────────────
+// ── Component ──────────────────────────────────────────────────────────────────
 
-export default function StateMapsPage() {
-  const [indicatorId, setIndicatorId] = useState<IndicatorId>("ur_person");
+interface Props {
+  indicators: IndicatorId[];
+}
+
+export default function StateMapPanel({ indicators }: Props) {
+  const uid = useId();
+  const selectId = `${uid}-indicator`;
+
+  const allowed = INDICATORS.filter((ind) => indicators.includes(ind.id));
+
+  const [indicatorId, setIndicatorId] = useState<IndicatorId>(allowed[0].id);
   const [periodIdx, setPeriodIdx]     = useState<number | null>(null);
-  const [colormap, setColormap]       = useState<string>(INDICATORS[0].defaultColormap);
+  const [colormap, setColormap]       = useState<string>(allowed[0].defaultColormap);
 
-  const { data: plfsData, isLoading: plfsLoading, error: plfsError, refetch: plfsRefetch } =
-    usePLFSStateData();
-  const { data: cpiData, isLoading: cpiLoading, error: cpiError, refetch: cpiRefetch } =
-    useCPIStateData();
-  const { data: gsdpData, isLoading: gsdpLoading, error: gsdpError, refetch: gsdpRefetch } =
-    useGSDPStateData();
-  const { data: agriData, isLoading: agriLoading, error: agriError, refetch: agriRefetch } =
-    useAgriStateData();
-  const { data: energyData, isLoading: energyLoading, error: energyError, refetch: energyRefetch } =
-    useEnergyStateData();
+  // Load all datasets — React Query caches, so only fetches what isn't already loaded
+  const { data: plfsData }   = usePLFSStateData();
+  const { data: cpiData }    = useCPIStateData();
+  const { data: gsdpData }   = useGSDPStateData();
+  const { data: agriData }   = useAgriStateData();
+  const { data: energyData } = useEnergyStateData();
 
-  if (plfsLoading || cpiLoading || gsdpLoading || agriLoading || energyLoading) {
-    return <LoadingSpinner message="Loading state-level data…" />;
-  }
-  if (plfsError || !plfsData) {
-    return (
-      <ErrorDisplay
-        message={plfsError instanceof Error ? plfsError.message : "Failed to load PLFS state data"}
-        onRetry={() => plfsRefetch()}
-      />
-    );
-  }
-  if (cpiError || !cpiData) {
-    return (
-      <ErrorDisplay
-        message={cpiError instanceof Error ? cpiError.message : "Failed to load CPI state data"}
-        onRetry={() => cpiRefetch()}
-      />
-    );
-  }
-  if (gsdpError || !gsdpData) {
-    return (
-      <ErrorDisplay
-        message={gsdpError instanceof Error ? gsdpError.message : "Failed to load GSDP state data"}
-        onRetry={() => gsdpRefetch()}
-      />
-    );
-  }
-  if (agriError || !agriData) {
-    return (
-      <ErrorDisplay
-        message={agriError instanceof Error ? agriError.message : "Failed to load agriculture state data"}
-        onRetry={() => agriRefetch()}
-      />
-    );
-  }
-  if (energyError || !energyData) {
-    return (
-      <ErrorDisplay
-        message={energyError instanceof Error ? energyError.message : "Failed to load energy state data"}
-        onRetry={() => energyRefetch()}
-      />
-    );
-  }
+  const needed = new Set(allowed.map((i) => i.dataset));
+  const isLoading =
+    (needed.has("plfs")   && !plfsData)   ||
+    (needed.has("cpi")    && !cpiData)    ||
+    (needed.has("gsdp")   && !gsdpData)   ||
+    (needed.has("agri")   && !agriData)   ||
+    (needed.has("energy") && !energyData);
 
-  // ── Active indicator ───────────────────────────────────────────────────────
-  const indicator = INDICATORS.find((ind) => ind.id === indicatorId)!;
+  const indicator = allowed.find((ind) => ind.id === indicatorId) ?? allowed[0];
 
-  // ── Period options ─────────────────────────────────────────────────────────
-  const periods: string[] =
-    indicator.dataset === "plfs"   ? plfsData.years :
-    indicator.dataset === "gsdp"   ? gsdpData.years :
-    indicator.dataset === "agri"   ? agriData.years :
-    indicator.dataset === "energy" ? energyData.years :
-    cpiData.months.map(fmtMonth);
-
-  const resolvedPeriodIdx =
-    periodIdx !== null && periodIdx < periods.length ? periodIdx : periods.length - 1;
-
-  // Reset period + colormap when switching indicators
   function handleIndicatorChange(id: IndicatorId) {
-    const next = INDICATORS.find((ind) => ind.id === id)!;
+    const next = allowed.find((ind) => ind.id === id)!;
     setIndicatorId(id);
     setPeriodIdx(null);
     setColormap(next.defaultColormap);
   }
 
-  // ── Resolve map data ───────────────────────────────────────────────────────
-  let mapStates: string[];
-  let mapValues: (number | null)[];
-  let periodLabel: string;
+  // ── Periods ──────────────────────────────────────────────────────────────────
+  const periods: string[] = isLoading ? [] :
+    indicator.dataset === "plfs"   ? (plfsData?.years   ?? []) :
+    indicator.dataset === "gsdp"   ? (gsdpData?.years   ?? []) :
+    indicator.dataset === "agri"   ? (agriData?.years   ?? []) :
+    indicator.dataset === "energy" ? (energyData?.years ?? []) :
+    (cpiData?.months.map(fmtMonth) ?? []);
 
-  if (indicator.dataset === "plfs") {
-    const slice = plfsStateSlice(plfsData, resolvedPeriodIdx, indicator.field);
-    mapStates   = slice.names;
-    mapValues   = slice.values;
-    periodLabel = plfsData.years[resolvedPeriodIdx];
-  } else if (indicator.dataset === "gsdp") {
-    const field = indicator.field as "gsdp_real_cr" | "gsdp_nominal_cr" | "gsdp_growth";
-    const slice = gsdpStateSlice(gsdpData, resolvedPeriodIdx, field);
-    mapStates   = slice.names;
-    // Scale real/nominal GSDP from ₹ Crore → ₹ '000 Crore for readable annotations
-    const scale = (field === "gsdp_real_cr" || field === "gsdp_nominal_cr") ? 1000 : 1;
-    mapValues   = slice.values.map((v) => (v !== null ? Math.round(v / scale) : null));
-    periodLabel = gsdpData.years[resolvedPeriodIdx];
-  } else if (indicator.dataset === "agri") {
-    const field = indicator.field as "rice_mt" | "wheat_mt" | "rice_yield_kgha" | "wheat_yield_kgha" | "sugarcane_mt" | "irrigation_pct";
-    const slice = agriStateSlice(agriData, resolvedPeriodIdx, field);
-    mapStates   = slice.names;
-    mapValues   = slice.values;
-    periodLabel = agriData.years[resolvedPeriodIdx];
-  } else if (indicator.dataset === "energy") {
-    const field = indicator.field as "elec_kwh_pc" | "renewable_gw";
-    const slice = energyStateSlice(energyData, resolvedPeriodIdx, field);
-    mapStates   = slice.names;
-    mapValues   = slice.values;
-    periodLabel = energyData.years[resolvedPeriodIdx];
-  } else {
-    mapStates   = cpiData.states.map((s) => s.geoName);
-    mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
-    periodLabel = fmtMonth(cpiData.months[resolvedPeriodIdx] ?? cpiData.months.slice(-1)[0]);
+  const resolvedPeriodIdx =
+    periodIdx !== null && periodIdx < periods.length ? periodIdx : periods.length - 1;
+
+  // ── Map data ─────────────────────────────────────────────────────────────────
+  let mapStates: string[]          = [];
+  let mapValues: (number | null)[] = [];
+  let periodLabel                  = "";
+
+  if (!isLoading) {
+    if (indicator.dataset === "plfs" && plfsData) {
+      const slice = plfsStateSlice(plfsData, resolvedPeriodIdx, indicator.field);
+      mapStates   = slice.names;
+      mapValues   = slice.values;
+      periodLabel = plfsData.years[resolvedPeriodIdx];
+    } else if (indicator.dataset === "gsdp" && gsdpData) {
+      const field = indicator.field as "gsdp_real_cr" | "gsdp_nominal_cr" | "gsdp_growth";
+      const slice = gsdpStateSlice(gsdpData, resolvedPeriodIdx, field);
+      const scale = (field === "gsdp_real_cr" || field === "gsdp_nominal_cr") ? 1000 : 1;
+      mapStates   = slice.names;
+      mapValues   = slice.values.map((v) => (v !== null ? Math.round(v / scale) : null));
+      periodLabel = gsdpData.years[resolvedPeriodIdx];
+    } else if (indicator.dataset === "agri" && agriData) {
+      const field = indicator.field as "rice_mt" | "wheat_mt" | "rice_yield_kgha" | "wheat_yield_kgha" | "sugarcane_mt" | "irrigation_pct";
+      const slice = agriStateSlice(agriData, resolvedPeriodIdx, field);
+      mapStates   = slice.names;
+      mapValues   = slice.values;
+      periodLabel = agriData.years[resolvedPeriodIdx];
+    } else if (indicator.dataset === "energy" && energyData) {
+      const field = indicator.field as "elec_kwh_pc" | "renewable_gw";
+      const slice = energyStateSlice(energyData, resolvedPeriodIdx, field);
+      mapStates   = slice.names;
+      mapValues   = slice.values;
+      periodLabel = energyData.years[resolvedPeriodIdx];
+    } else if (indicator.dataset === "cpi" && cpiData) {
+      mapStates   = cpiData.states.map((s) => s.geoName);
+      mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
+      periodLabel = fmtMonth(cpiData.months[resolvedPeriodIdx] ?? cpiData.months.slice(-1)[0]);
+    }
   }
 
   const { min: zmin, max: zmax } = dataRange(mapValues);
 
   return (
-    <>
-      <Head>
-        <title>State Maps · India Data Hub</title>
-        <meta
-          name="description"
-          content="State-wise choropleth maps of unemployment, LFPR (total, male, female), CPI inflation, and GSDP across India"
-        />
-      </Head>
+    <div className="space-y-4">
+      {/* ── Section heading ── */}
+      <div>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">State-level Distribution</h2>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+          Choropleth map across all Indian states and UTs · select indicator, year, and colour scheme below
+        </p>
+      </div>
 
-      <div className="max-w-5xl mx-auto px-4 py-6 space-y-4">
-        {/* ── Page header ── */}
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">State Maps</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
-            State-wise indicators across all Indian states and UTs · MoSPI PLFS, CPI &amp; RBI GSDP
+      {/* ── Controls ── */}
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-4 space-y-4">
+
+        {/* Row 1 — Indicator */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+          <label
+            htmlFor={selectId}
+            className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider shrink-0 w-24"
+          >
+            Indicator
+          </label>
+          <select
+            id={selectId}
+            value={indicatorId}
+            onChange={(e) => handleIndicatorChange(e.target.value as IndicatorId)}
+            className="w-full sm:w-auto text-sm border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+          >
+            {allowed.map((ind) => (
+              <option key={ind.id} value={ind.id}>
+                {ind.label}
+              </option>
+            ))}
+          </select>
+          <p className="text-xs text-gray-400 dark:text-gray-500 sm:ml-2 hidden sm:block truncate">
+            {indicator.description}
           </p>
         </div>
 
-        {/* ── Controls panel ── */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 px-4 py-4 space-y-4">
-
-          {/* Row 1 — Indicator dropdown */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-            <label
-              htmlFor="indicator-select"
-              className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider shrink-0 w-24"
-            >
-              Indicator
-            </label>
-            <select
-              id="indicator-select"
-              value={indicatorId}
-              onChange={(e) => handleIndicatorChange(e.target.value as IndicatorId)}
-              className="w-full sm:w-auto text-sm border border-gray-300 dark:border-gray-600 rounded-md px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
-            >
-              {INDICATORS.map((ind) => (
-                <option key={ind.id} value={ind.id}>
-                  {ind.label}
-                </option>
-              ))}
-            </select>
-            <p className="text-xs text-gray-400 dark:text-gray-500 sm:ml-2 hidden sm:block truncate">
-              {indicator.description}
-            </p>
-          </div>
-
-          {/* Row 2 — Period chips */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-              {indicator.dataset === "cpi" ? "Month" : "Fiscal Year"}
-            </p>
+        {/* Row 2 — Period chips */}
+        <div>
+          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+            {indicator.dataset === "cpi" ? "Month" : "Fiscal Year"}
+          </p>
+          {isLoading ? (
+            <div className="h-7 bg-gray-100 dark:bg-gray-700 rounded animate-pulse w-64" />
+          ) : (
             <div className="flex flex-wrap gap-2">
               {periods.map((p, i) => (
                 <Chip key={p} label={p} active={i === resolvedPeriodIdx} onClick={() => setPeriodIdx(i)} />
               ))}
             </div>
-          </div>
-
-          {/* Row 3 — Colormap chips */}
-          <div>
-            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-              Colormap
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {COLORMAPS.map((cm) => (
-                <Chip
-                  key={cm.id}
-                  label={cm.label}
-                  active={colormap === cm.id}
-                  onClick={() => setColormap(cm.id)}
-                />
-              ))}
-            </div>
-          </div>
+          )}
         </div>
 
-        {/* ── Single choropleth map ── */}
+        {/* Row 3 — Colormap chips */}
+        <div>
+          <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+            Colormap
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {COLORMAPS.map((cm) => (
+              <Chip
+                key={cm.id}
+                label={cm.label}
+                active={colormap === cm.id}
+                onClick={() => setColormap(cm.id)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Map ── */}
+      {isLoading ? (
+        <div className="h-96 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse flex items-center justify-center">
+          <p className="text-sm text-gray-400">Loading state data…</p>
+        </div>
+      ) : (
         <ChoroplethMap
           title={`${indicator.label} · ${periodLabel}`}
           subtitle={indicator.description}
@@ -454,12 +418,11 @@ export default function StateMapsPage() {
           sourceUrl={indicator.sourceUrl}
           height={580}
         />
+      )}
 
-        <p className="text-xs text-gray-400 dark:text-gray-500 pb-4">
-          Sources: MoSPI Periodic Labour Force Survey (PLFS), Consumer Price Index (CPI), RBI Handbook of Statistics on Indian States (GSDP), and MoAFW Directorate of Economics &amp; Statistics (Crop Production).
-          Map boundaries are for reference only and do not imply any political assertion.
-        </p>
-      </div>
-    </>
+      <p className="text-xs text-gray-400 dark:text-gray-500">
+        Map boundaries are for reference only and do not imply any political assertion.
+      </p>
+    </div>
   );
 }

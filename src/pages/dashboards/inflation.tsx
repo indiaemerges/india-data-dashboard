@@ -1,4 +1,5 @@
 import Head from "next/head";
+import StateMapPanel from "@/components/charts/StateMapPanel";
 import { useCPIMonthlyData, cpiToSeries } from "@/lib/hooks/useMospiCPI";
 import { useWPIMonthlyData, wpiToSeries } from "@/lib/hooks/useMospiWPI";
 import LineChart from "@/components/charts/LineChart";
@@ -376,6 +377,9 @@ export default function InflationDashboard() {
             />
           )}
         </div>
+
+        {/* State Distribution Maps */}
+        <StateMapPanel indicators={["cpi_general"]} />
 
         {/* About this data */}
         <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">

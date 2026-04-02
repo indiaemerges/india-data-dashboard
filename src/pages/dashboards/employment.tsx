@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Head from "next/head";
+import StateMapPanel from "@/components/charts/StateMapPanel";
 import {
   usePLFSAnnualData,
   usePLFSQuarterlyData,
@@ -356,6 +357,9 @@ export default function EmploymentDashboard() {
             )}
           </div>
         )}
+
+        {/* State Distribution Maps */}
+        <StateMapPanel indicators={["ur_person", "lfpr_person", "lfpr_female", "lfpr_male"]} />
 
         {/* About this data */}
         <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800">

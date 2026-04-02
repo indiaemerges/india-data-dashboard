@@ -1,4 +1,5 @@
 import Head from "next/head";
+import StateMapPanel from "@/components/charts/StateMapPanel";
 import {
   useAgricultureData,
   agricultureTotalFoodgrainSeries,
@@ -255,6 +256,9 @@ export default function AgricultureDashboard() {
           />
 
         </div>
+
+        {/* State Distribution Maps */}
+        <StateMapPanel indicators={["rice_prod", "wheat_prod", "rice_yield", "wheat_yield", "sugarcane_prod", "irrigation_pct"]} />
 
         {/* About */}
         <div className="mt-8 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-100 dark:border-green-800">

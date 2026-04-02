@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import StateMapPanel from "@/components/charts/StateMapPanel";
 import { useSankeyData } from "@/lib/hooks/useMospiEnergy";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
@@ -193,6 +194,9 @@ export default function EnergyFlowDashboard() {
             height={720}
           />
         )}
+
+        {/* State Distribution Maps */}
+        <StateMapPanel indicators={["elec_kwh_pc", "renewable_gw"]} />
 
         {/* Reading guide */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
