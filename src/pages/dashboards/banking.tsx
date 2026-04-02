@@ -14,6 +14,7 @@ import {
 } from "@/lib/hooks/useRBIBanking";
 import LineChart from "@/components/charts/LineChart";
 import BarChart from "@/components/charts/BarChart";
+import StateMapPanel from "@/components/charts/StateMapPanel";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ErrorDisplay from "@/components/ui/ErrorDisplay";
 
@@ -231,6 +232,19 @@ export default function BankingDashboard() {
             yAxisTitle="%"
             height={360}
             showMarkers={false}
+          />
+        </div>
+
+        {/* State-level maps */}
+        <div className="mt-8">
+          <StateMapPanel
+            indicators={[
+              "banking_cd_ratio",
+              "banking_branch_density",
+              "banking_credit_pc",
+              "banking_deposits_pc",
+              "banking_branches",
+            ]}
           />
         </div>
 

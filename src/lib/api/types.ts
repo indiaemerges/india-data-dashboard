@@ -672,6 +672,38 @@ export interface ASIStateData {
 }
 
 // ---------------------------------------------------------------------------
+// RBI Banking — State-level types
+// ---------------------------------------------------------------------------
+
+export interface BankingStateEntry {
+  stateName: string;
+  geoName: string;
+  /** Number of SCB offices (count) */
+  branches: (number | null)[];
+  /** Credit-Deposit ratio, Place of Utilisation basis (%) */
+  cd_ratio: (number | null)[];
+  /** Outstanding credit (₹ crore) */
+  credit_cr: (number | null)[];
+  /** Outstanding deposits (₹ crore) */
+  deposits_cr: (number | null)[];
+  /** Branches per lakh population (derived) */
+  branch_density: (number | null)[];
+  /** Bank credit per capita (₹ thousand, derived) */
+  credit_pc_k: (number | null)[];
+  /** Bank deposits per capita (₹ thousand, derived) */
+  deposits_pc_k: (number | null)[];
+}
+
+export interface BankingStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  states: BankingStateEntry[];
+}
+
+// ---------------------------------------------------------------------------
 // Agriculture — Annual types
 // ---------------------------------------------------------------------------
 

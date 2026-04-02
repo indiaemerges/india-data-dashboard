@@ -7,11 +7,13 @@ import {
   useAgriStateData,
   useEnergyStateData,
   useASIStateData,
+  useRBIBankingStateData,
   plfsStateSlice,
   gsdpStateSlice,
   agriStateSlice,
   energyStateSlice,
   asiStateSlice,
+  bankingStateSlice,
 } from "@/lib/hooks/useMospiState";
 
 // ── Colormap catalogue ─────────────────────────────────────────────────────────
@@ -261,6 +263,62 @@ const INDICATORS = [
     dataset: "asi" as const,
     field: "factories_in_op" as const,
   },
+  // ── RBI Banking (state-level) ───────────────────────────────────────────────
+  {
+    id: "banking_cd_ratio",
+    label: "Credit-Deposit Ratio",
+    description: "State-wise CD ratio (Place of Utilisation basis, %) — above 100 = state lends more than it deposits (Delhi, Maharashtra); below 50 = deposit-rich, credit-poor (NE states)",
+    unit: "%",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "RdBu" as ColormapId,
+    dataset: "banking" as const,
+    field: "cd_ratio" as const,
+  },
+  {
+    id: "banking_branch_density",
+    label: "Bank Branch Density",
+    description: "SCB offices per lakh population · Goa and Kerala lead (50+/lakh); Bihar and UP have lowest penetration (<10/lakh)",
+    unit: "per lakh",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "Blues" as ColormapId,
+    dataset: "banking" as const,
+    field: "branch_density" as const,
+  },
+  {
+    id: "banking_credit_pc",
+    label: "Credit Per Capita",
+    description: "Bank credit per person in ₹ thousand · Delhi and Maharashtra far above average; UP, Bihar, and NE states well below national average",
+    unit: "₹ '000",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "Oranges" as ColormapId,
+    dataset: "banking" as const,
+    field: "credit_pc_k" as const,
+  },
+  {
+    id: "banking_deposits_pc",
+    label: "Deposits Per Capita",
+    description: "Bank deposits per person in ₹ thousand · proxy for household savings mobilisation; Delhi, Maharashtra and Gujarat lead",
+    unit: "₹ '000",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "Greens" as ColormapId,
+    dataset: "banking" as const,
+    field: "deposits_pc_k" as const,
+  },
+  {
+    id: "banking_branches",
+    label: "Bank Branches (Count)",
+    description: "Total SCB offices in state — absolute count · UP and Maharashtra have the most; Lakshadweep and Ladakh the fewest",
+    unit: "offices",
+    source: "RBI Handbook of Statistics on Indian States",
+    sourceUrl: "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
+    defaultColormap: "YlOrRd" as ColormapId,
+    dataset: "banking" as const,
+    field: "branches" as const,
+  },
 ] as const;
 
 export type IndicatorId = (typeof INDICATORS)[number]["id"];
@@ -311,21 +369,23 @@ export default function StateMapPanel({ indicators }: Props) {
   const [colormap, setColormap]       = useState<string>(allowed[0].defaultColormap);
 
   // Load all datasets — React Query caches, so only fetches what isn't already loaded
-  const { data: plfsData }   = usePLFSStateData();
-  const { data: cpiData }    = useCPIStateData();
-  const { data: gsdpData }   = useGSDPStateData();
-  const { data: agriData }   = useAgriStateData();
-  const { data: energyData } = useEnergyStateData();
-  const { data: asiData }    = useASIStateData();
+  const { data: plfsData }    = usePLFSStateData();
+  const { data: cpiData }     = useCPIStateData();
+  const { data: gsdpData }    = useGSDPStateData();
+  const { data: agriData }    = useAgriStateData();
+  const { data: energyData }  = useEnergyStateData();
+  const { data: asiData }     = useASIStateData();
+  const { data: bankingData } = useRBIBankingStateData();
 
   const needed = new Set(allowed.map((i) => i.dataset));
   const isLoading =
-    (needed.has("plfs")   && !plfsData)   ||
-    (needed.has("cpi")    && !cpiData)    ||
-    (needed.has("gsdp")   && !gsdpData)   ||
-    (needed.has("agri")   && !agriData)   ||
-    (needed.has("energy") && !energyData) ||
-    (needed.has("asi")    && !asiData);
+    (needed.has("plfs")    && !plfsData)    ||
+    (needed.has("cpi")     && !cpiData)     ||
+    (needed.has("gsdp")    && !gsdpData)    ||
+    (needed.has("agri")    && !agriData)    ||
+    (needed.has("energy")  && !energyData)  ||
+    (needed.has("asi")     && !asiData)     ||
+    (needed.has("banking") && !bankingData);
 
   const indicator = allowed.find((ind) => ind.id === indicatorId) ?? allowed[0];
 
@@ -338,11 +398,12 @@ export default function StateMapPanel({ indicators }: Props) {
 
   // ── Periods ──────────────────────────────────────────────────────────────────
   const periods: string[] = isLoading ? [] :
-    indicator.dataset === "plfs"   ? (plfsData?.years   ?? []) :
-    indicator.dataset === "gsdp"   ? (gsdpData?.years   ?? []) :
-    indicator.dataset === "agri"   ? (agriData?.years   ?? []) :
-    indicator.dataset === "energy" ? (energyData?.years ?? []) :
-    indicator.dataset === "asi"    ? (asiData?.years    ?? []) :
+    indicator.dataset === "plfs"    ? (plfsData?.years    ?? []) :
+    indicator.dataset === "gsdp"    ? (gsdpData?.years    ?? []) :
+    indicator.dataset === "agri"    ? (agriData?.years    ?? []) :
+    indicator.dataset === "energy"  ? (energyData?.years  ?? []) :
+    indicator.dataset === "asi"     ? (asiData?.years     ?? []) :
+    indicator.dataset === "banking" ? (bankingData?.years ?? []) :
     (cpiData?.months.map(fmtMonth) ?? []);
 
   const resolvedPeriodIdx =
@@ -395,6 +456,12 @@ export default function StateMapPanel({ indicators }: Props) {
           ? slice.values.map((v) => (v !== null ? Math.round(v / 100) / 10 : null))
           : slice.values;
       periodLabel = asiData.years[resolvedPeriodIdx];
+    } else if (indicator.dataset === "banking" && bankingData) {
+      const field = indicator.field as "branches" | "cd_ratio" | "credit_cr" | "deposits_cr" | "branch_density" | "credit_pc_k" | "deposits_pc_k";
+      const slice = bankingStateSlice(bankingData, resolvedPeriodIdx, field);
+      mapStates   = slice.names;
+      mapValues   = slice.values;
+      periodLabel = bankingData.years[resolvedPeriodIdx];
     } else if (indicator.dataset === "cpi" && cpiData) {
       mapStates   = cpiData.states.map((s) => s.geoName);
       mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
@@ -445,7 +512,7 @@ export default function StateMapPanel({ indicators }: Props) {
         {/* Row 2 — Period chips */}
         <div>
           <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
-            {indicator.dataset === "cpi" ? "Month" : "Fiscal Year"}
+            {indicator.dataset === "cpi" ? "Month" : "Fiscal Year (end-March)"}
           </p>
           {isLoading ? (
             <div className="h-7 bg-gray-100 dark:bg-gray-700 rounded animate-pulse w-64" />

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { PLFSStateData, CPIStateData, GSDPStateData, AgriStateData, EnergyStateData, ASIStateData } from "@/lib/api/types";
+import type { PLFSStateData, CPIStateData, GSDPStateData, AgriStateData, EnergyStateData, ASIStateData, BankingStateData } from "@/lib/api/types";
 
 const BASE_PATH = "/india-data-dashboard";
 
@@ -199,4 +199,34 @@ export function cpiStateLatest(data: CPIStateData): {
     values.push(s.inflation[lastIdx] ?? null);
   }
   return { names, values, monthLabel };
+}
+
+// ── RBI Banking State ──────────────────────────────────────────────────────
+
+export function useRBIBankingStateData() {
+  return useQuery<BankingStateData>({
+    queryKey: ["rbi", "banking", "state"],
+    queryFn: async () => {
+      const res = await fetch(`${BASE_PATH}/data/rbi/banking-state.json`);
+      if (!res.ok) throw new Error("RBI banking state data not available");
+      return res.json() as Promise<BankingStateData>;
+    },
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24,
+    retry: 1,
+  });
+}
+
+export function bankingStateSlice(
+  data: BankingStateData,
+  yearIndex: number,
+  field: "branches" | "cd_ratio" | "credit_cr" | "deposits_cr" | "branch_density" | "credit_pc_k" | "deposits_pc_k"
+): { names: string[]; values: (number | null)[] } {
+  const names: string[] = [];
+  const values: (number | null)[] = [];
+  for (const s of data.states) {
+    names.push(s.geoName);
+    values.push(s[field]?.[yearIndex] ?? null);
+  }
+  return { names, values };
 }
