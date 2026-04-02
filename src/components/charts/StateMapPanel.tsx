@@ -289,8 +289,8 @@ const INDICATORS = [
   {
     id: "banking_credit_pc",
     label: "Credit Per Capita",
-    description: "Bank credit per person in ₹ thousand · Delhi and Maharashtra far above average; UP, Bihar, and NE states well below national average",
-    unit: "₹ '000",
+    description: "Bank credit per person in ₹ lakh · Delhi and Maharashtra far above average; UP, Bihar, and NE states well below national average",
+    unit: "₹ lakh",
     source: "RBI Handbook of Statistics on Indian States",
     sourceUrl: "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
     defaultColormap: "Oranges" as ColormapId,
@@ -300,8 +300,8 @@ const INDICATORS = [
   {
     id: "banking_deposits_pc",
     label: "Deposits Per Capita",
-    description: "Bank deposits per person in ₹ thousand · proxy for household savings mobilisation; Delhi, Maharashtra and Gujarat lead",
-    unit: "₹ '000",
+    description: "Bank deposits per person in ₹ lakh · proxy for household savings mobilisation; Delhi, Maharashtra and Gujarat lead",
+    unit: "₹ lakh",
     source: "RBI Handbook of Statistics on Indian States",
     sourceUrl: "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+States",
     defaultColormap: "Greens" as ColormapId,
@@ -459,8 +459,12 @@ export default function StateMapPanel({ indicators }: Props) {
     } else if (indicator.dataset === "banking" && bankingData) {
       const field = indicator.field as "branches" | "cd_ratio" | "credit_cr" | "deposits_cr" | "branch_density" | "credit_pc_k" | "deposits_pc_k";
       const slice = bankingStateSlice(bankingData, resolvedPeriodIdx, field);
+      const isPerCapita = field === "credit_pc_k" || field === "deposits_pc_k";
       mapStates   = slice.names;
-      mapValues   = slice.values;
+      // credit_pc_k / deposits_pc_k are stored as ₹ thousand → convert to ₹ lakh (÷ 100)
+      mapValues   = isPerCapita
+        ? slice.values.map((v) => (v !== null ? Math.round(v) / 100 : null))
+        : slice.values;
       periodLabel = bankingData.years[resolvedPeriodIdx];
     } else if (indicator.dataset === "cpi" && cpiData) {
       mapStates   = cpiData.states.map((s) => s.geoName);
