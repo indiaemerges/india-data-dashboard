@@ -1,4 +1,5 @@
 import Head from "next/head";
+import StateMapPanel from "@/components/charts/StateMapPanel";
 import {
   useASIAnnualData,
   asiOutputSeries,
@@ -306,6 +307,9 @@ export default function ManufacturingDashboard() {
             />
           </div>
         </section>
+
+        {/* ── State Distribution Maps ── */}
+        <StateMapPanel indicators={["asi_gva", "asi_workers", "asi_female_pct", "asi_wages", "asi_factories"]} />
 
         {/* ── Data note ── */}
         <p className="text-xs text-gray-400 dark:text-gray-500 pb-4">

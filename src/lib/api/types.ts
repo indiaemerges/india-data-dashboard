@@ -646,6 +646,32 @@ export interface EnergyStateData {
 }
 
 // ---------------------------------------------------------------------------
+// ASI — State-level types
+// ---------------------------------------------------------------------------
+
+export interface ASIStateEntry {
+  stateName: string;
+  geoName: string;
+  factories_in_op: (number | null)[];
+  fixed_capital_lakh: (number | null)[];
+  gva_lakh: (number | null)[];
+  persons_engaged: (number | null)[];
+  female_workers: (number | null)[];
+  wages_lakh: (number | null)[];
+  /** Derived: female_workers / persons_engaged × 100, rounded to 1 dp */
+  female_workers_pct: (number | null)[];
+}
+
+export interface ASIStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  states: ASIStateEntry[];
+}
+
+// ---------------------------------------------------------------------------
 // Agriculture — Annual types
 // ---------------------------------------------------------------------------
 

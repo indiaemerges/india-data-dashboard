@@ -6,10 +6,12 @@ import {
   useGSDPStateData,
   useAgriStateData,
   useEnergyStateData,
+  useASIStateData,
   plfsStateSlice,
   gsdpStateSlice,
   agriStateSlice,
   energyStateSlice,
+  asiStateSlice,
 } from "@/lib/hooks/useMospiState";
 
 // ── Colormap catalogue ─────────────────────────────────────────────────────────
@@ -203,6 +205,62 @@ const INDICATORS = [
     dataset: "energy" as const,
     field: "renewable_gw" as const,
   },
+  // ── ASI (Annual Survey of Industries) ──────────────────────────────────────
+  {
+    id: "asi_gva",
+    label: "Manufacturing GVA",
+    description: "Gross Value Added from registered manufacturing · ₹ Lakh Crore · NIC 2008 · ASI combined sector · Maharashtra, Gujarat & Tamil Nadu dominate",
+    unit: "₹ L.Cr",
+    source: "MoSPI Annual Survey of Industries",
+    sourceUrl: "https://mospi.gov.in/annual-survey-industries",
+    defaultColormap: "Oranges" as ColormapId,
+    dataset: "asi" as const,
+    field: "gva_lakh" as const,
+  },
+  {
+    id: "asi_workers",
+    label: "Factory Workers",
+    description: "Total persons engaged in registered factories · includes workers, supervisors and managers · Tamil Nadu, Gujarat & Maharashtra are the largest employers",
+    unit: "persons",
+    source: "MoSPI Annual Survey of Industries",
+    sourceUrl: "https://mospi.gov.in/annual-survey-industries",
+    defaultColormap: "Blues" as ColormapId,
+    dataset: "asi" as const,
+    field: "persons_engaged" as const,
+  },
+  {
+    id: "asi_female_pct",
+    label: "Female Worker Share",
+    description: "Share of directly employed female workers in total factory workforce · Tamil Nadu ~24% leads; most northern states under 5%",
+    unit: "%",
+    source: "MoSPI Annual Survey of Industries",
+    sourceUrl: "https://mospi.gov.in/annual-survey-industries",
+    defaultColormap: "Greens" as ColormapId,
+    dataset: "asi" as const,
+    field: "female_workers_pct" as const,
+  },
+  {
+    id: "asi_wages",
+    label: "Factory Wages Paid",
+    description: "Total wages & salaries including employer's contribution · ₹ Lakh Crore · proxy for manufacturing income concentrated in industrial states",
+    unit: "₹ L.Cr",
+    source: "MoSPI Annual Survey of Industries",
+    sourceUrl: "https://mospi.gov.in/annual-survey-industries",
+    defaultColormap: "YlOrRd" as ColormapId,
+    dataset: "asi" as const,
+    field: "wages_lakh" as const,
+  },
+  {
+    id: "asi_factories",
+    label: "Factories in Operation",
+    description: "Number of registered factories in operation · Tamil Nadu leads with 30,000+ factories; Bihar and NE states have the fewest",
+    unit: "factories",
+    source: "MoSPI Annual Survey of Industries",
+    sourceUrl: "https://mospi.gov.in/annual-survey-industries",
+    defaultColormap: "Viridis" as ColormapId,
+    dataset: "asi" as const,
+    field: "factories_in_op" as const,
+  },
 ] as const;
 
 export type IndicatorId = (typeof INDICATORS)[number]["id"];
@@ -258,6 +316,7 @@ export default function StateMapPanel({ indicators }: Props) {
   const { data: gsdpData }   = useGSDPStateData();
   const { data: agriData }   = useAgriStateData();
   const { data: energyData } = useEnergyStateData();
+  const { data: asiData }    = useASIStateData();
 
   const needed = new Set(allowed.map((i) => i.dataset));
   const isLoading =
@@ -265,7 +324,8 @@ export default function StateMapPanel({ indicators }: Props) {
     (needed.has("cpi")    && !cpiData)    ||
     (needed.has("gsdp")   && !gsdpData)   ||
     (needed.has("agri")   && !agriData)   ||
-    (needed.has("energy") && !energyData);
+    (needed.has("energy") && !energyData) ||
+    (needed.has("asi")    && !asiData);
 
   const indicator = allowed.find((ind) => ind.id === indicatorId) ?? allowed[0];
 
@@ -282,6 +342,7 @@ export default function StateMapPanel({ indicators }: Props) {
     indicator.dataset === "gsdp"   ? (gsdpData?.years   ?? []) :
     indicator.dataset === "agri"   ? (agriData?.years   ?? []) :
     indicator.dataset === "energy" ? (energyData?.years ?? []) :
+    indicator.dataset === "asi"    ? (asiData?.years    ?? []) :
     (cpiData?.months.map(fmtMonth) ?? []);
 
   const resolvedPeriodIdx =
@@ -317,6 +378,16 @@ export default function StateMapPanel({ indicators }: Props) {
       mapStates   = slice.names;
       mapValues   = slice.values;
       periodLabel = energyData.years[resolvedPeriodIdx];
+    } else if (indicator.dataset === "asi" && asiData) {
+      const field = indicator.field as "factories_in_op" | "gva_lakh" | "persons_engaged" | "female_workers_pct" | "wages_lakh" | "fixed_capital_lakh";
+      const slice = asiStateSlice(asiData, resolvedPeriodIdx, field);
+      // Scale ₹ lakh → lakh crore for GVA and wages display
+      const isMonetary = field === "gva_lakh" || field === "wages_lakh" || field === "fixed_capital_lakh";
+      mapStates   = slice.names;
+      mapValues   = isMonetary
+        ? slice.values.map((v) => (v !== null ? Math.round(v / 100000) : null))
+        : slice.values;
+      periodLabel = asiData.years[resolvedPeriodIdx];
     } else if (indicator.dataset === "cpi" && cpiData) {
       mapStates   = cpiData.states.map((s) => s.geoName);
       mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);

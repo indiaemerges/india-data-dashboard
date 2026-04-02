@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { PLFSStateData, CPIStateData, GSDPStateData, AgriStateData, EnergyStateData } from "@/lib/api/types";
+import type { PLFSStateData, CPIStateData, GSDPStateData, AgriStateData, EnergyStateData, ASIStateData } from "@/lib/api/types";
 
 const BASE_PATH = "/india-data-dashboard";
 
@@ -143,6 +143,36 @@ export function energyStateSlice(
   data: EnergyStateData,
   yearIndex: number,
   field: "elec_kwh_pc" | "renewable_gw"
+): { names: string[]; values: (number | null)[] } {
+  const names: string[] = [];
+  const values: (number | null)[] = [];
+  for (const s of data.states) {
+    names.push(s.geoName);
+    values.push(s[field]?.[yearIndex] ?? null);
+  }
+  return { names, values };
+}
+
+// ── ASI state data ─────────────────────────────────────────────────────────
+
+export function useASIStateData() {
+  return useQuery<ASIStateData>({
+    queryKey: ["asi", "state"],
+    queryFn: async () => {
+      const res = await fetch(`${BASE_PATH}/data/industry/asi-state.json`);
+      if (!res.ok) throw new Error("ASI state data not available");
+      return res.json() as Promise<ASIStateData>;
+    },
+    staleTime: Infinity,
+    gcTime: 1000 * 60 * 60 * 24,
+    retry: 1,
+  });
+}
+
+export function asiStateSlice(
+  data: ASIStateData,
+  yearIndex: number,
+  field: "factories_in_op" | "gva_lakh" | "persons_engaged" | "female_workers_pct" | "wages_lakh" | "fixed_capital_lakh"
 ): { names: string[]; values: (number | null)[] } {
   const names: string[] = [];
   const values: (number | null)[] = [];
