@@ -221,7 +221,7 @@ const INDICATORS = [
     id: "asi_workers",
     label: "Factory Workers",
     description: "Total persons engaged in registered factories · includes workers, supervisors and managers · Tamil Nadu, Gujarat & Maharashtra are the largest employers",
-    unit: "persons",
+    unit: "lakh",
     source: "MoSPI Annual Survey of Industries",
     sourceUrl: "https://mospi.gov.in/annual-survey-industries",
     defaultColormap: "Blues" as ColormapId,
@@ -254,7 +254,7 @@ const INDICATORS = [
     id: "asi_factories",
     label: "Factories in Operation",
     description: "Number of registered factories in operation · Tamil Nadu leads with 30,000+ factories; Bihar and NE states have the fewest",
-    unit: "factories",
+    unit: "K",
     source: "MoSPI Annual Survey of Industries",
     sourceUrl: "https://mospi.gov.in/annual-survey-industries",
     defaultColormap: "Viridis" as ColormapId,
@@ -381,12 +381,19 @@ export default function StateMapPanel({ indicators }: Props) {
     } else if (indicator.dataset === "asi" && asiData) {
       const field = indicator.field as "factories_in_op" | "gva_lakh" | "persons_engaged" | "female_workers_pct" | "wages_lakh" | "fixed_capital_lakh";
       const slice = asiStateSlice(asiData, resolvedPeriodIdx, field);
-      // Scale ₹ lakh → lakh crore for GVA and wages display
-      const isMonetary = field === "gva_lakh" || field === "wages_lakh" || field === "fixed_capital_lakh";
-      mapStates   = slice.names;
-      mapValues   = isMonetary
-        ? slice.values.map((v) => (v !== null ? Math.round(v / 100000) : null))
-        : slice.values;
+      // Scale for annotation readability:
+      //   ₹ lakh → lakh crore  (÷ 100,000)
+      //   persons → lakh persons (÷ 100,000)
+      //   factories → thousands  (÷ 1,000)
+      const isMonetary  = field === "gva_lakh" || field === "wages_lakh" || field === "fixed_capital_lakh";
+      const isHeadcount = field === "persons_engaged";
+      const isFactories = field === "factories_in_op";
+      mapStates = slice.names;
+      mapValues = isMonetary || isHeadcount
+        ? slice.values.map((v) => (v !== null ? Math.round(v / 1000) / 100 : null))
+        : isFactories
+          ? slice.values.map((v) => (v !== null ? Math.round(v / 100) / 10 : null))
+          : slice.values;
       periodLabel = asiData.years[resolvedPeriodIdx];
     } else if (indicator.dataset === "cpi" && cpiData) {
       mapStates   = cpiData.states.map((s) => s.geoName);
