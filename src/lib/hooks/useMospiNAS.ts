@@ -72,6 +72,12 @@ export function useNASGVASectorData() {
   });
 }
 
+/** Reformat label from "2012-13 Q4" → "Q4 2012-13" for cleaner hover tooltips */
+function fmtQuarterLabel(label: string): string {
+  const m = label.match(/^(\d{4}-\d{2})\s+(Q\d)$/);
+  return m ? `${m[2]} ${m[1]}` : label;
+}
+
 type GVASectorKey = keyof Omit<NASGVAQuarterDataPoint, "year" | "quarter" | "label">;
 
 /**
@@ -91,7 +97,7 @@ export function nasGVAToSeries(
     data: data.quarters
       .filter((q) => q[key] !== null)
       .map((q) => ({
-        date: q.label,
+        date: fmtQuarterLabel(q.label),
         value: q[key] as number | null,
       })),
     metadata: {
@@ -153,7 +159,7 @@ export function nasQuarterlyToSeries(
     data: data.quarters
       .filter((q: NASQuarterDataPoint) => q[metric] !== null)
       .map((q: NASQuarterDataPoint) => ({
-        date: q.label,
+        date: fmtQuarterLabel(q.label),
         value: q[metric] as number | null,
       })),
     metadata: {
