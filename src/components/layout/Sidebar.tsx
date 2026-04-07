@@ -87,8 +87,20 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             );
           })}
 
-          {/* Explorer link */}
-          <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+          {/* Data Stories + Explorer links */}
+          <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-0.5">
+            <Link
+              href="/stories"
+              className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-sm no-underline transition-colors ${
+                router.pathname.startsWith("/stories")
+                  ? "bg-orange-50 dark:bg-orange-900/20 text-orange-700 dark:text-orange-400 font-medium"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+              }`}
+              onClick={onClose}
+            >
+              <span className="text-base">📖</span>
+              <span>Data Stories</span>
+            </Link>
             <Link
               href="/explore"
               className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-sm no-underline transition-colors ${
