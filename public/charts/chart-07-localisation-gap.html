@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Current gas use vs full localisation requirement</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: #111827; font-family: 'Inter', -apple-system, sans-serif; padding: 16px; display: flex; flex-direction: column; }
+  .chart-title { font-size: 13px; font-weight: 600; color: #d1d5db; margin-bottom: 2px; }
+  .chart-sub   { font-size: 11px; color: #4b5563; margin-bottom: 8px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+  .legend span { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #6b7280; }
+  .sw { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .chart-wrap { flex: 1; position: relative; min-height: 0; }
+</style>
+</head>
+<body>
+<div class="chart-title">Current gas use vs full localisation requirement</div>
+<div class="chart-sub">MT LNG-equivalent per year (FY24 baseline)</div>
+<div class="legend">
+  <span><span class="sw" style="background:#185FA5;"></span>LNG (existing)</span>
+  <span><span class="sw" style="background:#5DCAA5;"></span>APM gas (existing)</span>
+  <span><span class="sw" style="background:#888780;"></span>Others (existing)</span>
+  <span><span class="sw" style="background:#3D7A1A;"></span>Incremental needed</span>
+</div>
+<div class="chart-wrap"><canvas id="c"></canvas></div>
+<script>
+'use strict';
+var GRID = 'rgba(255,255,255,0.06)';
+var TICK = '#6b7280';
+var TT = { backgroundColor:'#1f2937', borderColor:'#374151', borderWidth:1, titleColor:'#d1d5db', bodyColor:'#9ca3af' };
+new Chart(document.getElementById('c'), {
+  type:'bar',
+  data:{
+    labels:['LNG (existing)','APM gas (existing)','Others (existing)','Incr. for urea imports','Incr. for NH₃ imports'],
+    datasets:[
+      { label:'Current',     data:[15.0,5.0,1.0,0,0],  backgroundColor:['#185FA5','#5DCAA5','#888780','transparent','transparent'], stack:'s' },
+      { label:'Incremental', data:[0,0,0,4.2,1.5],      backgroundColor:['transparent','transparent','transparent','#3D7A1A','#3D7A1A'], stack:'s' }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, animation:{duration:400},
+    indexAxis:'y',
+    plugins:{ legend:{display:false}, tooltip:{ ...TT, callbacks:{
+      label:function(c){ var v=c.parsed.x; if(!v) return null; return '  '+(c.datasetIndex===0?'Current':'Incremental')+': '+v.toFixed(1)+' MT LNG-equiv'; }
+    }}},
+    scales:{
+      x:{ stacked:true, max:22, grid:{color:GRID}, ticks:{color:TICK,font:{size:10}}, title:{display:true,text:'MT LNG-equiv/yr',font:{size:10},color:TICK} },
+      y:{ stacked:true, grid:{color:GRID}, ticks:{color:TICK,font:{size:10}} }
+    }
+  }
+});
+</script>
+</body>
+</html>
