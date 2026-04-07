@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LNG share of fertiliser sector gas: 50% → 67%</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: #111827; font-family: 'Inter', -apple-system, sans-serif; padding: 16px; display: flex; flex-direction: column; }
+  .chart-title { font-size: 13px; font-weight: 600; color: #d1d5db; margin-bottom: 2px; }
+  .chart-sub   { font-size: 11px; color: #4b5563; margin-bottom: 10px; }
+  .chart-wrap  { flex: 1; position: relative; min-height: 0; }
+</style>
+</head>
+<body>
+<div class="chart-title">R-LNG share of fertiliser sector gas: 50% → 67%</div>
+<div class="chart-sub">% of total fertiliser gas from imported R-LNG, FY16–FY25</div>
+<div class="chart-wrap"><canvas id="c"></canvas></div>
+<script>
+'use strict';
+var GRID = 'rgba(255,255,255,0.06)';
+var TICK = '#6b7280';
+var TT = { backgroundColor:'#1f2937', borderColor:'#374151', borderWidth:1, titleColor:'#d1d5db', bodyColor:'#9ca3af' };
+new Chart(document.getElementById('c'), {
+  type:'line',
+  data:{ labels:['FY16','FY17','FY18','FY19','FY20','FY21','FY22','FY23','FY24','FY25'],
+    datasets:[{ label:'R-LNG share', data:[50,53,56,59,62,64,64,67,68,67],
+      borderColor:'#D85A30', backgroundColor:'rgba(216,90,48,0.12)',
+      fill:true, borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#D85A30',
+      pointBorderColor:'#111827', pointBorderWidth:1, tension:0.3 }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, animation:{duration:400},
+    plugins:{ legend:{display:false}, tooltip:{ ...TT, callbacks:{ label:function(c){ return '  LNG share: '+c.parsed.y+'%'; } }}},
+    scales:{
+      x:{ grid:{color:GRID}, ticks:{color:TICK,font:{size:10},autoSkip:false,maxRotation:0} },
+      y:{ min:40, max:80, grid:{color:GRID}, ticks:{color:TICK,font:{size:10},callback:function(v){ return v+'%'; }}, title:{display:true,text:'%',font:{size:10},color:TICK} }
+    }
+  }
+});
+</script>
+</body>
+</html>

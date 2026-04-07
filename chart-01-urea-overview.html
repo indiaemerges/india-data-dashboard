@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urea: production, imports and consumption</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: #111827; font-family: 'Inter', -apple-system, sans-serif; padding: 16px; display: flex; flex-direction: column; }
+  .chart-header { margin-bottom: 10px; }
+  .chart-title { font-size: 13px; font-weight: 600; color: #d1d5db; margin-bottom: 2px; }
+  .chart-sub   { font-size: 11px; color: #4b5563; margin-bottom: 8px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+  .legend span { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #6b7280; }
+  .sw      { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+  .sw-line { width: 18px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+  .chart-wrap { flex: 1; position: relative; min-height: 0; }
+</style>
+</head>
+<body>
+<div class="chart-header">
+  <div class="chart-title">Urea: production, imports and consumption</div>
+  <div class="chart-sub">Million tonnes per year, FY16–FY25</div>
+  <div class="legend">
+    <span><span class="sw" style="background:#185FA5;"></span>Domestic production</span>
+    <span><span class="sw" style="background:#D85A30;"></span>Imports (stacked)</span>
+    <span><span class="sw-line" style="background:#639922;"></span>Consumption</span>
+  </div>
+</div>
+<div class="chart-wrap"><canvas id="c"></canvas></div>
+<script>
+'use strict';
+var FY = ['FY16','FY17','FY18','FY19','FY20','FY21','FY22','FY23','FY24','FY25'];
+var GRID = 'rgba(255,255,255,0.06)';
+var TICK = '#6b7280';
+var TT = { backgroundColor:'#1f2937', borderColor:'#374151', borderWidth:1, titleColor:'#d1d5db', bodyColor:'#9ca3af', footerColor:'#f3f4f6', footerFont:{weight:'600'}, mode:'index', intersect:false };
+
+new Chart(document.getElementById('c'), {
+  type: 'bar',
+  data: { labels: FY, datasets: [
+    { label:'Domestic production', data:[22.0,22.1,24.0,24.2,24.4,24.5,25.0,27.9,31.4,30.7], backgroundColor:'#185FA5', stack:'s', order:2 },
+    { label:'Imports',             data:[8.4,5.7,5.8,7.5,8.6,9.3,8.6,8.4,7.0,8.1],           backgroundColor:'#D85A30', stack:'s', order:2 },
+    { label:'Consumption',         data:[29.7,27.3,29.1,31.3,32.3,33.6,33.4,35.7,37.6,38.8],  type:'line', order:1,
+      borderColor:'#639922', backgroundColor:'transparent', borderWidth:2.5,
+      pointRadius:4, pointBackgroundColor:'#639922', pointBorderColor:'#111827', pointBorderWidth:1, tension:0.3 }
+  ]},
+  options: {
+    responsive:true, maintainAspectRatio:false, animation:{duration:400},
+    plugins: { legend:{display:false}, tooltip:{ ...TT, callbacks:{
+      label: function(c){ return '  '+c.dataset.label+': '+c.parsed.y.toFixed(1)+' MT'; },
+      footer: function(items){
+        var prod = items.find(function(i){ return i.dataset.label==='Domestic production'; });
+        var imp  = items.find(function(i){ return i.dataset.label==='Imports'; });
+        var tot  = (prod?prod.parsed.y:0)+(imp?imp.parsed.y:0);
+        return tot>0?'Total supply: '+tot.toFixed(1)+' MT':'';
+      }
+    }}},
+    scales:{
+      x:{ stacked:true, grid:{color:GRID}, ticks:{color:TICK,font:{size:10},autoSkip:false,maxRotation:0} },
+      y:{ stacked:false, grid:{color:GRID}, ticks:{color:TICK,font:{size:10}}, title:{display:true,text:'MT/yr',font:{size:10},color:TICK} }
+    }
+  }
+});
+</script>
+</body>
+</html>

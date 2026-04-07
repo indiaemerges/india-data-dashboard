@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>True fiscal exposure of India's ammonia complex</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: #111827; font-family: 'Inter', -apple-system, sans-serif; padding: 16px; display: flex; flex-direction: column; }
+  .chart-title { font-size: 13px; font-weight: 600; color: #d1d5db; margin-bottom: 2px; }
+  .chart-sub   { font-size: 11px; color: #4b5563; margin-bottom: 10px; }
+  .chart-note  { font-size: 10px; color: #4b5563; margin-top: 6px; }
+  .chart-wrap  { flex: 1; position: relative; min-height: 0; }
+</style>
+</head>
+<body>
+<div class="chart-title">True fiscal exposure of India's ammonia complex</div>
+<div class="chart-sub">Annual cost estimate, $B/yr (2024 basis)</div>
+<div class="chart-wrap"><canvas id="c"></canvas></div>
+<div class="chart-note">Note: bars are not additive — "Combined fiscal exposure" shows the total.</div>
+<script>
+'use strict';
+var GRID = 'rgba(255,255,255,0.06)';
+var TICK = '#6b7280';
+var TT = { backgroundColor:'#1f2937', borderColor:'#374151', borderWidth:1, titleColor:'#d1d5db', bodyColor:'#9ca3af' };
+new Chart(document.getElementById('c'), {
+  type:'bar',
+  data:{
+    labels:['Direct ammonia\nimports','LNG embedded in\ndomestic NH₃','Urea subsidy\nbill (total)','Combined\nfiscal exposure'],
+    datasets:[{ label:'$B/yr', data:[1.2,8.0,22.0,30.0], backgroundColor:['#D85A30','#D85A30','#6b7280','#f97316'] }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, animation:{duration:400},
+    plugins:{ legend:{display:false}, tooltip:{ ...TT, callbacks:{ label:function(c){ return '  $'+c.parsed.y.toFixed(1)+'B / yr'; } }}},
+    scales:{
+      x:{ grid:{color:GRID}, ticks:{color:TICK,font:{size:10}} },
+      y:{ grid:{color:GRID}, ticks:{color:TICK,font:{size:10},callback:function(v){ return '$'+v+'B'; }}, title:{display:true,text:'$B / yr',font:{size:10},color:TICK} }
+    }
+  }
+});
+</script>
+</body>
+</html>

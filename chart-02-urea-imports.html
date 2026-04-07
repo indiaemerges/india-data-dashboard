@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urea imports: flat for nearly a decade</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body { background: #111827; font-family: 'Inter', -apple-system, sans-serif; padding: 16px; display: flex; flex-direction: column; }
+  .chart-title { font-size: 13px; font-weight: 600; color: #d1d5db; margin-bottom: 2px; }
+  .chart-sub   { font-size: 11px; color: #4b5563; margin-bottom: 10px; }
+  .chart-wrap  { flex: 1; position: relative; min-height: 0; }
+</style>
+</head>
+<body>
+<div class="chart-title">Urea imports: flat for nearly a decade</div>
+<div class="chart-sub">MT per year, FY16–FY25 — no structural decline despite new domestic plants</div>
+<div class="chart-wrap"><canvas id="c"></canvas></div>
+<script>
+'use strict';
+var GRID = 'rgba(255,255,255,0.06)';
+var TICK = '#6b7280';
+var TT = { backgroundColor:'#1f2937', borderColor:'#374151', borderWidth:1, titleColor:'#d1d5db', bodyColor:'#9ca3af' };
+new Chart(document.getElementById('c'), {
+  type:'bar',
+  data:{ labels:['FY16','FY17','FY18','FY19','FY20','FY21','FY22','FY23','FY24','FY25'],
+    datasets:[{ label:'Urea imports', data:[8.4,5.7,5.8,7.5,8.6,9.3,8.6,8.4,7.0,8.1], backgroundColor:'#D85A30' }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false, animation:{duration:400},
+    plugins:{ legend:{display:false}, tooltip:{ ...TT, callbacks:{ label:function(c){ return '  Imports: '+c.parsed.y.toFixed(1)+' MT'; } }}},
+    scales:{
+      x:{ grid:{color:GRID}, ticks:{color:TICK,font:{size:10},autoSkip:false,maxRotation:0} },
+      y:{ min:0, max:12, grid:{color:GRID}, ticks:{color:TICK,font:{size:10}}, title:{display:true,text:'MT/yr',font:{size:10},color:TICK} }
+    }
+  }
+});
+</script>
+</body>
+</html>
