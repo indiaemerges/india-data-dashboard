@@ -11,18 +11,7 @@ interface Story {
   status: "live" | "coming-soon";
 }
 
-const stories: Story[] = [
-  {
-    slug: "fertiliser-localisation",
-    title: "India's Fertiliser Dependency: Can India Wean Itself Off Imports?",
-    description:
-      "India spends over ₹1.5 lakh crore a year subsidising fertilisers — yet imports nearly half its urea. This story traces the supply chain, maps regional consumption patterns, and examines whether domestic capacity expansion and nano-urea can close the gap.",
-    date: "2026-04",
-    readingTime: "8 min",
-    tags: ["Agriculture", "Trade", "Policy"],
-    status: "live",
-  },
-];
+const stories: Story[] = [];
 
 const TAG_COLORS: Record<string, string> = {
   Agriculture: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400",
