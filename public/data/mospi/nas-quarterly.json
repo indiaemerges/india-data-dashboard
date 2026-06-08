@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-02-23",
+  "lastUpdated": "2026-06-05",
   "source": "MoSPI National Accounts Statistics (NAS)",
   "sourceUrl": "https://www.mospi.gov.in/",
   "baseYear": "2011-12",
-  "unit": "₹ Crore",
-  "notes": "Quarterly GDP at current prices (nominal) and constant 2011-12 prices (real). Q1=Apr-Jun, Q2=Jul-Sep, Q3=Oct-Dec, Q4=Jan-Mar. Growth rates are year-on-year (same quarter of prior fiscal year). Data sourced from MoSPI NAS API, indicator codes 5 (GDP) and 22 (GDP Growth Rate), Current series, base year 2011-12.",
+  "unit": "\u20b9 Crore",
+  "notes": "Quarterly GDP at current prices (nominal) and constant 2011-12 prices (real). Q1=Apr-Jun, Q2=Jul-Sep, Q3=Oct-Dec, Q4=Jan-Mar. Growth rates are year-on-year (same quarter of prior fiscal year). Data sourced from MoSPI NAS API, indicator codes 5 (GDP) and 22 (GDP Growth Rate), Current series, base year 2011-12. Q3 and Q4 FY2025-26 data added from MoSPI Provisional Estimates press note, 5 June 2026 (base year 2022-23).",
   "quarters": [
     {
       "year": "2011-12",
@@ -527,6 +527,24 @@
       "nominalGrowth": 8.733345698,
       "nominalGDP": 8525070,
       "realGDP": 4863340
+    },
+    {
+      "year": "2025-26",
+      "quarter": "Q3",
+      "label": "2025-26 Q3",
+      "realGrowth": 8.0,
+      "nominalGrowth": 9.2,
+      "nominalGDP": 9115599,
+      "realGDP": 8464935
+    },
+    {
+      "year": "2025-26",
+      "quarter": "Q4",
+      "label": "2025-26 Q4",
+      "realGrowth": 7.8,
+      "nominalGrowth": 9.1,
+      "nominalGDP": 9465440,
+      "realGDP": 8777104
     }
   ]
 }

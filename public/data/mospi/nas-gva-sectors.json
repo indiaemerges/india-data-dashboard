@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-02-23",
+  "lastUpdated": "2026-06-05",
   "source": "MoSPI National Accounts Statistics (NAS)",
   "sourceUrl": "https://www.mospi.gov.in/",
   "baseYear": "2011-12",
   "unit": "%",
-  "notes": "Quarterly GVA growth rates at constant 2011-12 prices (real, year-on-year). Q1=Apr-Jun, Q2=Jul-Sep, Q3=Oct-Dec, Q4=Jan-Mar. Broad sector aggregates (Agriculture/Industry/Services) are simple averages of constituent sub-sector growth rates — an approximation. Source: MoSPI NAS API, indicator code 21 (GVA Growth Rate), Current series.",
+  "notes": "Quarterly GVA growth rates at constant 2011-12 prices (real, year-on-year). Q1=Apr-Jun, Q2=Jul-Sep, Q3=Oct-Dec, Q4=Jan-Mar. Broad sector aggregates (Agriculture/Industry/Services) are simple averages of constituent sub-sector growth rates \u2014 an approximation. Source: MoSPI NAS API, indicator code 21 (GVA Growth Rate), Current series.",
   "sectorLabels": {
     "agriculture": "Agriculture",
     "industry": "Industry (avg)",
@@ -946,6 +946,38 @@
       "financialRealEstate": 10.2,
       "publicAdmin": 9.7,
       "totalGVA": 8.122
+    },
+    {
+      "year": "2025-26",
+      "quarter": "Q3",
+      "label": "2025-26 Q3",
+      "agriculture": 1.9,
+      "industry": 9.8,
+      "services": 9.9,
+      "mining": 4.7,
+      "manufacturing": 12.8,
+      "electricity": 1.5,
+      "construction": 6.7,
+      "tradeHotelsTransport": 11.2,
+      "financialRealEstate": 11.6,
+      "publicAdmin": 4.9,
+      "totalGVA": 8.0
+    },
+    {
+      "year": "2025-26",
+      "quarter": "Q4",
+      "label": "2025-26 Q4",
+      "agriculture": 3.6,
+      "industry": 7.4,
+      "services": 9.9,
+      "mining": 5.4,
+      "manufacturing": 7.3,
+      "electricity": 4.1,
+      "construction": 8.4,
+      "tradeHotelsTransport": 12.5,
+      "financialRealEstate": 10.4,
+      "publicAdmin": 5.8,
+      "totalGVA": 7.9
     }
   ]
 }
