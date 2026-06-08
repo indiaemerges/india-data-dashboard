@@ -215,20 +215,6 @@ export default function GdpFy26ProvisionalDashboard() {
   const last8nominal = nominalSeries.data.slice(-8);
   const qLabels      = last8real.map((d) => d.date);
 
-  // ── GVA sector quarterly line (last 8Q) ──────────────────────────────────
-  const gvaLineTraces: Plotly.Data[] = gvaData
-    ? SECTOR_ORDER.map((key) => ({
-        type: "scatter" as const,
-        mode: "lines+markers" as const,
-        name: SECTOR_LABELS[key],
-        line: { color: SC[key], width: 2 },
-        marker: { color: SC[key], size: 5 },
-        x: gvaData.quarters.slice(-8).map((q) => q.label.replace(/^(\d{4}-\d{2}) (Q\d)$/, "$2 $1")),
-        y: gvaData.quarters.slice(-8).map((q) => q[key]),
-        hovertemplate: `<b>${SECTOR_LABELS[key]}</b><br>%{x}: %{y:.1f}%<extra></extra>`,
-      }))
-    : [];
-
   // ── Q4 sector snapshot (horizontal bar, per-sector colors) ───────────────
   const q4Labels  = SECTOR_ORDER.map((k) => SECTOR_LABELS[k]);
   const q4Values  = SECTOR_ORDER.map((k) => SECTOR_Q4[k]);
@@ -396,12 +382,65 @@ export default function GdpFy26ProvisionalDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
             title="GVA Growth by Sector (Last 8 Quarters)"
-            subtitle="Real YoY growth (%) at constant 2022-23 prices"
+            subtitle="Real YoY growth (%) at constant 2022-23 prices — cell color = growth rate"
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
-              data={gvaLineTraces}
-              layout={plotLayout({ height: 360, margin: { ...base.margin, t: 20 } })}
+              data={[{
+                type: "heatmap",
+                // Sectors on y-axis (rows), quarters on x-axis (columns)
+                x: gvaData ? gvaData.quarters.slice(-8).map((q) =>
+                  q.label.replace(/^(\d{4}-\d{2}) (Q\d)$/, "$2 $1")
+                ) : [],
+                y: [...SECTOR_ORDER].reverse().map((k) => SECTOR_LABELS[k]),
+                z: [...SECTOR_ORDER].reverse().map((k) =>
+                  gvaData ? gvaData.quarters.slice(-8).map((q) => q[k] ?? null) : []
+                ),
+                colorscale: [
+                  [0.0,  "#7f1d1d"],   // deep red   — strong negative
+                  [0.15, "#ef4444"],   // red        — negative
+                  [0.30, "#fbbf24"],   // amber      — weak/near-zero
+                  [0.50, "#86efac"],   // light green — moderate
+                  [0.70, "#16a34a"],   // green       — solid
+                  [1.0,  "#14532d"],   // deep green  — strong positive
+                ],
+                zmin: -4,
+                zmax: 14,
+                colorbar: {
+                  title: { text: "%", side: "right" },
+                  tickfont: { size: 11, color: isDark ? "#9ca3af" : "#6b7280" },
+                  thickness: 14,
+                  len: 0.9,
+                },
+                xgap: 2,
+                ygap: 2,
+                hovertemplate:
+                  "<b>%{y}</b><br>%{x}<br>Growth: <b>%{z:.1f}%</b><extra></extra>",
+                // Show value in each cell
+                text: [...SECTOR_ORDER].reverse().map((k) =>
+                  gvaData ? gvaData.quarters.slice(-8).map((q) =>
+                    q[k] != null ? (q[k] as number).toFixed(1) : ""
+                  ) : []
+                ),
+                texttemplate: "%{text}",
+                textfont: { size: 10, color: "white" },
+              }]}
+              layout={plotLayout({
+                height: 360,
+                margin: { l: 120, r: 80, t: 20, b: 80 },
+                xaxis: {
+                  ...base.xaxis,
+                  tickangle: -35,
+                  tickfont: { size: 11 },
+                  side: "bottom",
+                },
+                yaxis: {
+                  ...base.yaxis,
+                  tickfont: { size: 11 },
+                  autorange: true,
+                },
+                showlegend: false,
+              })}
               config={defaultConfig}
               useResizeHandler style={{ width: "100%" }}
             />
