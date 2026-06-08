@@ -416,13 +416,7 @@ export default function GdpFy26ProvisionalDashboard() {
                 ygap: 2,
                 hovertemplate:
                   "<b>%{y}</b><br>%{x}<br>Growth: <b>%{z:.1f}%</b><extra></extra>",
-                // Show value in each cell
-                text: [...SECTOR_ORDER].reverse().map((k) =>
-                  gvaData ? gvaData.quarters.slice(-8).map((q) =>
-                    q[k] != null ? (q[k] as number).toFixed(1) : ""
-                  ) : []
-                ),
-                texttemplate: "%{text}",
+                texttemplate: "%{z:.1f}",
                 textfont: { size: 10, color: "white" },
               }]}
               layout={plotLayout({
