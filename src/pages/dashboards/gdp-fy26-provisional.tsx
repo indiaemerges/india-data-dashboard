@@ -535,39 +535,95 @@ export default function GdpFy26ProvisionalDashboard() {
             />
           </ChartCard>
 
-          {/* Broad sector summary card */}
+            <ChartCard
+            title="Broad Sector GVA Growth (Real)"
+            subtitle="Primary / Secondary / Tertiary, FY23-24 to FY25-26 PE"
+            source="MoSPI NAS" sourceUrl={SOURCE_URL}
+          >
+            <Plot
+              data={[
+                {
+                  type: "bar", name: "Primary",
+                  x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
+                  y: [4.9, 4.9, 3.2],
+                  marker: { color: "#16a34a" },
+                  hovertemplate: "<b>Primary</b> %{x}: %{y:.1f}%<extra></extra>",
+                },
+                {
+                  type: "bar", name: "Secondary",
+                  x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
+                  y: [11.6, 8.0, 8.8],
+                  marker: { color: "#2563eb" },
+                  hovertemplate: "<b>Secondary</b> %{x}: %{y:.1f}%<extra></extra>",
+                },
+                {
+                  type: "bar", name: "Tertiary",
+                  x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
+                  y: [7.0, 7.9, 9.3],
+                  marker: { color: "#ea580c" },
+                  hovertemplate: "<b>Tertiary</b> %{x}: %{y:.1f}%<extra></extra>",
+                },
+              ]}
+              layout={plotLayout({
+                barmode: "group",
+                height: 300,
+                margin: { ...base.margin, t: 20 },
+                yaxis: { ...base.yaxis, title: { text: "Growth (%)" } },
+              })}
+              config={defaultConfig}
+              useResizeHandler style={{ width: "100%" }}
+            />
+          </ChartCard>
+        </div>
+
+        {/* Row 5: GVA composition donut + broad sector note */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <ChartCard
+            title="Nominal GVA Composition, FY2025-26"
+            subtitle="Share of sectors in total GVA at current prices · Statement 4"
+            source="MoSPI NAS" sourceUrl={SOURCE_URL}
+          >
+            <Plot
+              data={[{
+                type: "pie",
+                hole: 0.55,
+                labels: ["Agriculture & Fish", "Mining & Quar.", "Manufacturing", "Electricity & Util.", "Construction", "Trade & Hotels", "Finance & RE", "Public Admin"],
+                values: [18, 2, 15, 3, 8, 14, 27, 13],
+                marker: { colors: Object.values(SC) },
+                textinfo: "label+percent",
+                textfont: { size: 11 },
+                hovertemplate: "<b>%{label}</b><br>%{value}% of GVA<extra></extra>",
+              }]}
+              layout={plotLayout({
+                height: 320,
+                showlegend: false,
+                margin: { l: 20, r: 20, t: 20, b: 20 },
+              })}
+              config={defaultConfig}
+              useResizeHandler style={{ width: "100%" }}
+            />
+          </ChartCard>
+
           <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white">Broad Sector Summary</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 mb-4">
-              Real GVA growth (%) by broad sector · FY25 vs FY26 PE
-            </p>
-            {[
-              { label: "Primary",   sub: "Agriculture + Mining",                fy25: 4.9,  fy26: 3.2, color: "#16a34a" },
-              { label: "Secondary", sub: "Manufacturing + Electricity + Construction", fy25: 8.0, fy26: 8.8, color: "#2563eb" },
-              { label: "Tertiary",  sub: "Trade + Finance + Public Admin",       fy25: 7.9,  fy26: 9.3, color: "#ea580c" },
-            ].map((row) => (
-              <div key={row.label} className="mb-5">
-                <div className="flex justify-between items-baseline mb-1">
-                  <div>
-                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{row.label}</span>
-                    <span className="text-xs text-gray-400 dark:text-gray-500 ml-2">{row.sub}</span>
-                  </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    FY25 <strong>{row.fy25}%</strong> &#8594;{" "}
-                    FY26 PE <strong style={{ color: row.color }}>{row.fy26}%</strong>
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-3">Sector Color Key</h3>
+            <div className="grid grid-cols-1 gap-2">
+              {(Object.keys(SC) as (keyof typeof SC)[]).map((k) => (
+                <div key={k} className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: SC[k] }} />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 w-32">{SECTOR_LABELS[k]}</span>
+                  <div className="flex gap-4 text-xs text-gray-500 dark:text-gray-400">
+                    <span>FY26 annual: <strong className="text-gray-700 dark:text-gray-200">{SECTOR_ANNUAL[k].fy26}%</strong></span>
+                    <span>Q4: <strong className="text-gray-700 dark:text-gray-200">{SECTOR_Q4[k]}%</strong></span>
                   </div>
                 </div>
-                <div className="flex gap-1 items-center">
-                  <div className="h-4 rounded-sm" style={{ width: `${row.fy25 / 12 * 100}%`, background: row.color + "44" }} />
-                  <div className="h-4 rounded-sm" style={{ width: `${row.fy26 / 12 * 100}%`, background: row.color }} />
-                </div>
-              </div>
-            ))}
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+              ))}
+            </div>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-4">
+              Same colors used across all sector charts above.
               Source:{" "}
               <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">
                 MoSPI NAS
-              </a>{" "}· Statement 3
+              </a>{" "}· Statements 3 and 6
             </p>
           </div>
         </div>
