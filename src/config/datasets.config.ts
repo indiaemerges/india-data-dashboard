@@ -17,6 +17,22 @@ export interface DatasetEntry {
 
 export const datasets: DatasetEntry[] = [
   {
+    id: "gdp-fy26-provisional",
+    title: "GDP FY2025-26: Provisional Estimates",
+    description:
+      "MoSPI Provisional Estimates released 5 June 2026 — 7.7% real GDP growth, Q4 sectoral breakdown, expenditure components, and 29 leading indicators.",
+    source: "MoSPI NAS",
+    sourceUrl: "https://mospi.gov.in/",
+    dataType: "static-json",
+    updateFrequency: "Annual",
+    tags: ["gdp", "growth", "provisional", "fy26", "quarterly", "gva", "macro"],
+    chartTypes: ["line", "bar", "table"],
+    dashboardPath: "/dashboards/gdp-fy26-provisional",
+    icon: "📊",
+    category: "economy",
+  },
+
+  {
     id: "gdp-growth",
     title: "GDP & National Accounts",
     description:
