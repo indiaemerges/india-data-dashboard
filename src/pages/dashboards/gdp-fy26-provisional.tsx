@@ -556,10 +556,11 @@ export default function GdpFy26ProvisionalDashboard() {
               ]}
               layout={plotLayout({
                 barmode: "group",
-                height: 360,
-                margin: { l: 110, r: 20, t: 20, b: 70 },
-                xaxis: { ...base.xaxis, title: { text: "Growth (%)" } },
+                height: 380,
+                margin: { l: 110, r: 20, t: 20, b: 90 },
+                xaxis: { ...base.xaxis, title: { text: "Growth (%)", standoff: 15 } },
                 yaxis: { ...base.yaxis, autorange: "reversed" },
+                legend: { ...base.legend, orientation: "h", x: 0, y: -0.22, xanchor: "left" },
               })}
               config={defaultConfig}
               useResizeHandler style={{ width: "100%" }}
