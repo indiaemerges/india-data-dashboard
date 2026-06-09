@@ -49,33 +49,52 @@ const SECTOR_LABELS: Record<keyof typeof SC, string> = {
 };
 
 // ── Static press-note data ───────────────────────────────────────────────────
-// Annual real growth (Statement 1 & 3), base year 2022-23
-const ANNUAL = [
-  { fy: "FY22-23",        gdp: 7.2, gva: 7.2 },
-  { fy: "FY23-24",        gdp: 7.2, gva: 7.2 },
-  { fy: "FY24-25 (FRE)",  gdp: 7.1, gva: 7.3 },
-  { fy: "FY25-26 (PE)",   gdp: 7.7, gva: 7.9 },
+// Annual growth — real (Stmt 1) and nominal (Stmt 2), base year 2022-23
+const ANNUAL_REAL = [
+  { fy: "FY22-23",       gdp: 7.2, gva: 7.2 },
+  { fy: "FY23-24",       gdp: 7.2, gva: 7.2 },
+  { fy: "FY24-25 (FRE)", gdp: 7.1, gva: 7.3 },
+  { fy: "FY25-26 (PE)",  gdp: 7.7, gva: 7.9 },
+];
+const ANNUAL_NOM = [
+  { fy: "FY22-23",       gdp: 11.0, gva: 10.7 },
+  { fy: "FY23-24",       gdp: 11.0, gva: 10.7 },
+  { fy: "FY24-25 (FRE)", gdp:  9.7, gva:  9.6 },
+  { fy: "FY25-26 (PE)",  gdp:  8.9, gva:  9.1 },
 ];
 
-// Nominal GDP levels ₹ lakh crore (Statement 2)
-const NOMINAL = [
-  { fy: "FY22-23",        gdp: 261.18 },
-  { fy: "FY23-24",        gdp: 289.84 },
-  { fy: "FY24-25 (FRE)",  gdp: 318.07 },
-  { fy: "FY25-26 (PE)",   gdp: 346.36 },
+// GDP level ₹ lakh crore — real (Stmt 1) and nominal (Stmt 2)
+const LEVEL_REAL = [
+  { fy: "FY22-23",       gdp: 261.18 },
+  { fy: "FY23-24",       gdp: 280.01 },
+  { fy: "FY24-25 (FRE)", gdp: 299.89 },
+  { fy: "FY25-26 (PE)",  gdp: 323.12 },
+];
+const LEVEL_NOM = [
+  { fy: "FY22-23",       gdp: 261.18 },
+  { fy: "FY23-24",       gdp: 289.84 },
+  { fy: "FY24-25 (FRE)", gdp: 318.07 },
+  { fy: "FY25-26 (PE)",  gdp: 346.36 },
 ];
 
-// Expenditure real growth (Statement 1)
-const EXPENDITURE = [
+// Expenditure growth — real (Stmt 1) and nominal (Stmt 2)
+const EXPENDITURE_REAL = [
   { item: "PFCE",    fy25: 5.8, fy26: 7.7 },
   { item: "GFCE",   fy25: 6.5, fy26: 5.5 },
   { item: "GFCF",   fy25: 6.4, fy26: 8.2 },
   { item: "Exports", fy25: 6.6, fy26: 6.3 },
   { item: "Imports", fy25: 5.3, fy26: 5.6 },
 ];
+const EXPENDITURE_NOM = [
+  { item: "PFCE",    fy25: 9.7, fy26: 9.4 },
+  { item: "GFCE",   fy25: 10.5, fy26: 8.7 },
+  { item: "GFCF",   fy25: 8.9,  fy26: 9.9 },
+  { item: "Exports", fy25: 8.3, fy26: 9.3 },
+  { item: "Imports", fy25: 9.2, fy26: 11.3 },
+];
 
-// Annual GVA growth by sector (Statement 3)
-const SECTOR_ANNUAL: Record<keyof typeof SC, { fy25: number; fy26: number }> = {
+// Annual GVA by sector — real (Stmt 3) and nominal (Stmt 4)
+const SECTOR_ANNUAL_REAL: Record<keyof typeof SC, { fy25: number; fy26: number }> = {
   agriculture:          { fy25: 4.2,  fy26: 3.0  },
   mining:               { fy25: 11.7, fy26: 5.2  },
   manufacturing:        { fy25: 9.3,  fy26: 10.7 },
@@ -85,9 +104,19 @@ const SECTOR_ANNUAL: Record<keyof typeof SC, { fy25: number; fy26: number }> = {
   financialRealEstate:  { fy25: 10.0, fy26: 10.4 },
   publicAdmin:          { fy25: 5.0,  fy26: 5.0  },
 };
+const SECTOR_ANNUAL_NOM: Record<keyof typeof SC, { fy25: number; fy26: number }> = {
+  agriculture:          { fy25: 9.8,  fy26: 6.4  },
+  mining:               { fy25: 14.8, fy26: 7.2  },
+  manufacturing:        { fy25: 9.8,  fy26: 11.2 },
+  electricity:          { fy25: 9.3,  fy26: 6.6  },
+  construction:         { fy25: 12.3, fy26: 11.8 },
+  tradeHotelsTransport: { fy25: 9.7,  fy26: 12.2 },
+  financialRealEstate:  { fy25: 12.2, fy26: 11.2 },
+  publicAdmin:          { fy25: 8.1,  fy26: 8.6  },
+};
 
-// Q4 GVA growth by sector (Statement 6)
-const SECTOR_Q4: Record<keyof typeof SC, number> = {
+// Q4 GVA by sector — real (Stmt 6) and nominal (Stmt 8)
+const SECTOR_Q4_REAL: Record<keyof typeof SC, number> = {
   agriculture:          3.6,
   mining:               5.4,
   manufacturing:        7.3,
@@ -97,6 +126,31 @@ const SECTOR_Q4: Record<keyof typeof SC, number> = {
   financialRealEstate:  10.4,
   publicAdmin:          5.8,
 };
+const SECTOR_Q4_NOM: Record<keyof typeof SC, number> = {
+  agriculture:          7.1,
+  mining:               8.3,
+  manufacturing:        8.4,
+  electricity:          8.9,
+  construction:         13.1,
+  tradeHotelsTransport: 14.8,
+  financialRealEstate:  11.6,
+  publicAdmin:          8.2,
+};
+
+// Quarterly heatmap — nominal sector data not available quarterly in JSON;
+// only real is in nas-gva-sectors.json. Heatmap uses real only (no toggle).
+
+// Broad sector — real (Stmt 3) and nominal (Stmt 4)
+const BROAD_REAL = [
+  { sector: "Primary",   fy24: 4.9, fy25: 4.9, fy26: 3.2, color: "#16a34a" },
+  { sector: "Secondary", fy24: 11.6, fy25: 8.0, fy26: 8.8, color: "#2563eb" },
+  { sector: "Tertiary",  fy24: 7.0, fy25: 7.9, fy26: 9.3, color: "#ea580c" },
+];
+const BROAD_NOM = [
+  { sector: "Primary",   fy24: 12.1, fy25: 10.7, fy26: 6.6,  color: "#16a34a" },
+  { sector: "Secondary", fy24: 13.5, fy25: 10.3, fy26: 10.7, color: "#2563eb" },
+  { sector: "Tertiary",  fy24: 10.1, fy25: 10.8, fy26: 10.6, color: "#ea580c" },
+];
 
 // ── Indicators Annexure ──────────────────────────────────────────────────────
 type IndCat = "agri" | "indus" | "trans" | "fiscal" | "trade";
@@ -197,6 +251,18 @@ export default function GdpFy26ProvisionalDashboard() {
   const [activeCat, setActiveCat] = useState<IndCat | "all">("all");
   const [sortCol, setSortCol]     = useState<0 | 1 | 2>(2);
   const [sortAsc, setSortAsc]     = useState(false);
+  const [prices, setPrices]       = useState<"real" | "nominal">("real");
+
+  // Derived data based on price toggle
+  const isNom        = prices === "nominal";
+  const ANNUAL       = isNom ? ANNUAL_NOM       : ANNUAL_REAL;
+  const LEVEL        = isNom ? LEVEL_NOM        : LEVEL_REAL;
+  const EXPENDITURE  = isNom ? EXPENDITURE_NOM  : EXPENDITURE_REAL;
+  const SECTOR_ANNUAL = isNom ? SECTOR_ANNUAL_NOM : SECTOR_ANNUAL_REAL;
+  const SECTOR_Q4    = isNom ? SECTOR_Q4_NOM    : SECTOR_Q4_REAL;
+  const BROAD        = isNom ? BROAD_NOM        : BROAD_REAL;
+  const priceLabel   = isNom ? "Current prices" : "Constant 2022-23 prices";
+  const priceStmt    = isNom ? "Statements 2 & 4 & 8" : "Statements 1 & 3 & 6";
 
   if (nasLoading || gvaLoading) return <LoadingSpinner message="Loading FY26 provisional estimates..." />;
   if (nasError || !nasData) {
@@ -215,30 +281,22 @@ export default function GdpFy26ProvisionalDashboard() {
   const last8nominal = nominalSeries.data.slice(-8);
   const qLabels      = last8real.map((d) => d.date);
 
-  // ── Q4 sector snapshot (horizontal bar, per-sector colors) ───────────────
+  // ── Q4 sector snapshot ───────────────────────────────────────────────────
   const q4Labels  = SECTOR_ORDER.map((k) => SECTOR_LABELS[k]);
   const q4Values  = SECTOR_ORDER.map((k) => SECTOR_Q4[k]);
   const q4Colors  = SECTOR_ORDER.map((k) => SC[k]);
   const latestGvaQ = gvaData ? [...gvaData.quarters].reverse().find((q) => q.totalGVA !== null) : null;
 
   // ── Annual GDP+GVA grouped bar ────────────────────────────────────────────
-  const annFYs  = ANNUAL.map((r) => r.fy);
-  const annGDP  = ANNUAL.map((r) => r.gdp);
-  const annGVA  = ANNUAL.map((r) => r.gva);
-  const annColors = annFYs.map((_, i) => (i === 3 ? "#16a34a" : "rgba(22,163,74,0.35)"));
-  const annGVAColors = annFYs.map((_, i) => (i === 3 ? "#2563eb" : "rgba(37,99,235,0.35)"));
+  const annColors    = ANNUAL.map((_, i) => (i === 3 ? "#16a34a" : "rgba(22,163,74,0.35)"));
+  const annGVAColors = ANNUAL.map((_, i) => (i === 3 ? "#2563eb" : "rgba(37,99,235,0.35)"));
 
-  // ── Expenditure grouped bar ───────────────────────────────────────────────
-  const expColors = ["#2563eb", "#7c3aed", "#ea580c", "#0891b2", "#dc2626"];
-
-  // ── Nominal GDP level bar ────────────────────────────────────────────────
-  const nomColors = NOMINAL.map((_, i) => (i === 3 ? "#ea580c" : "rgba(234,88,12,0.35)"));
-
-  // ── Annual sector grouped bar ─────────────────────────────────────────────
+  // ── Expenditure and sector bars ───────────────────────────────────────────
+  const expColors           = ["#2563eb", "#7c3aed", "#ea580c", "#0891b2", "#dc2626"];
   const sectorLabelsOrdered = SECTOR_ORDER.map((k) => SECTOR_LABELS[k]);
-  const sectorFY25 = SECTOR_ORDER.map((k) => SECTOR_ANNUAL[k].fy25);
-  const sectorFY26 = SECTOR_ORDER.map((k) => SECTOR_ANNUAL[k].fy26);
-  const sectorColors = SECTOR_ORDER.map((k) => SC[k]);
+  const sectorFY25          = SECTOR_ORDER.map((k) => SECTOR_ANNUAL[k].fy25);
+  const sectorFY26          = SECTOR_ORDER.map((k) => SECTOR_ANNUAL[k].fy26);
+  const sectorColors        = SECTOR_ORDER.map((k) => SC[k]);
 
   // ── Layout helpers ────────────────────────────────────────────────────────
   function plotLayout(overrides: Partial<Plotly.Layout> = {}): Partial<Plotly.Layout> {
@@ -309,6 +367,25 @@ export default function GdpFy26ProvisionalDashboard() {
           </p>
         </div>
 
+        {/* Price toggle */}
+        <div className="flex items-center gap-2 mb-6">
+          <span className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Prices:</span>
+          {(["real", "nominal"] as const).map((p) => (
+            <button key={p} onClick={() => setPrices(p)}
+              className={`text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors ${
+                prices === p
+                  ? "bg-orange-600 border-orange-600 text-white"
+                  : "border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-orange-400 hover:text-orange-600 dark:hover:text-orange-400"
+              }`}
+            >
+              {p === "real" ? "Real (Constant 2022-23)" : "Nominal (Current)"}
+            </button>
+          ))}
+          <span className="text-xs text-gray-400 dark:text-gray-500 ml-2">
+            · applies to all growth rate charts · {priceStmt}
+          </span>
+        </div>
+
         {/* KPI row */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
           <KpiCard label="Real GDP Growth"    value="7.7%"           sub="FY26 PE, constant prices"  color="text-green-700 dark:text-green-400" />
@@ -323,11 +400,21 @@ export default function GdpFy26ProvisionalDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
             title="Quarterly GDP Growth Rate (Last 8 Quarters)"
-            subtitle="YoY growth at constant and current prices, Q1 FY25 to Q4 FY26"
+            subtitle={`YoY growth at ${priceLabel}, Q1 FY25 to Q4 FY26`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
-              data={[
+              data={isNom ? [
+                {
+                  type: "scatter", mode: "lines+markers",
+                  name: "Nominal GDP Growth (%)",
+                  x: qLabels, y: last8nominal.map((d) => d.value),
+                  line: { color: "#ea580c", width: 2.5 },
+                  marker: { color: "#ea580c", size: 6 },
+                  fill: "tozeroy", fillcolor: "rgba(234,88,12,0.08)",
+                  hovertemplate: "<b>Nominal GDP</b><br>%{x}: %{y:.1f}%<extra></extra>",
+                },
+              ] : [
                 {
                   type: "scatter", mode: "lines+markers",
                   name: "Real GDP Growth (%)",
@@ -354,7 +441,7 @@ export default function GdpFy26ProvisionalDashboard() {
 
           <ChartCard
             title={`GVA Growth by Sector, ${latestGvaQ?.label ?? "Q4 FY26"}`}
-            subtitle="Real YoY growth (%) at constant 2022-23 prices"
+            subtitle={`Real YoY growth (%) at ${priceLabel}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
@@ -442,7 +529,7 @@ export default function GdpFy26ProvisionalDashboard() {
 
           <ChartCard
             title="Annual GVA Growth by Sector, FY25 vs FY26 PE"
-            subtitle="Real growth (%) at constant 2022-23 prices"
+            subtitle={`Growth (%) at ${priceLabel}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
@@ -477,20 +564,20 @@ export default function GdpFy26ProvisionalDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
             title="Annual GDP and GVA Growth, FY22-23 to FY25-26 PE"
-            subtitle="Real growth (%) at constant 2022-23 prices"
+            subtitle={`Growth (%) at ${priceLabel}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
               data={[
                 {
-                  type: "bar", name: "Real GDP Growth (%)",
-                  x: annFYs, y: annGDP,
+                  type: "bar", name: `${isNom ? "Nominal" : "Real"} GDP Growth (%)`,
+                  x: ANNUAL.map((r) => r.fy), y: ANNUAL.map((r) => r.gdp),
                   marker: { color: annColors },
                   hovertemplate: "<b>GDP</b> %{x}: %{y:.1f}%<extra></extra>",
                 },
                 {
-                  type: "bar", name: "Real GVA Growth (%)",
-                  x: annFYs, y: annGVA,
+                  type: "bar", name: `${isNom ? "Nominal" : "Real"} GVA Growth (%)`,
+                  x: ANNUAL.map((r) => r.fy), y: ANNUAL.map((r) => r.gva),
                   marker: { color: annGVAColors },
                   hovertemplate: "<b>GVA</b> %{x}: %{y:.1f}%<extra></extra>",
                 },
@@ -507,17 +594,17 @@ export default function GdpFy26ProvisionalDashboard() {
           </ChartCard>
 
           <ChartCard
-            title="Nominal GDP Level, FY22-23 to FY25-26 PE"
-            subtitle="&#8377; Lakh Crore at current prices"
+            title={`${isNom ? "Nominal" : "Real"} GDP Level, FY22-23 to FY25-26 PE`}
+            subtitle={`&#8377; Lakh Crore at ${priceLabel}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
               data={[{
                 type: "bar",
-                x: NOMINAL.map((r) => r.fy),
-                y: NOMINAL.map((r) => r.gdp),
-                marker: { color: nomColors },
-                text: NOMINAL.map((r) => `&#8377;${r.gdp.toFixed(1)}L Cr`),
+                x: LEVEL.map((r) => r.fy),
+                y: LEVEL.map((r) => r.gdp),
+                marker: { color: LEVEL.map((_, i) => (i === 3 ? "#ea580c" : "rgba(234,88,12,0.35)")) },
+                text: LEVEL.map((r) => `&#8377;${r.gdp.toFixed(1)}L Cr`),
                 textposition: "outside",
                 hovertemplate: "<b>%{x}</b>: &#8377;%{y:.2f}L Cr<extra></extra>",
                 showlegend: false,
@@ -536,8 +623,8 @@ export default function GdpFy26ProvisionalDashboard() {
         {/* Row 4: Expenditure */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
-            title="Expenditure Components: Real Growth, FY25 vs FY26 PE"
-            subtitle="Year-on-year growth (%) at constant 2022-23 prices · Statement 1"
+            title="Expenditure Components: Growth, FY25 vs FY26 PE"
+            subtitle={`Year-on-year growth (%) at ${priceLabel} · Statement ${isNom ? "2" : "1"}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
@@ -570,33 +657,18 @@ export default function GdpFy26ProvisionalDashboard() {
 
             <ChartCard
             title="Broad Sector GVA Growth (Real)"
-            subtitle="Primary / Secondary / Tertiary, FY23-24 to FY25-26 PE"
+            subtitle={`Primary / Secondary / Tertiary at ${priceLabel}, FY23-24 to FY25-26 PE`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
           >
             <Plot
-              data={[
-                {
-                  type: "bar", name: "Primary",
-                  x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
-                  y: [4.9, 4.9, 3.2],
-                  marker: { color: "#16a34a" },
-                  hovertemplate: "<b>Primary</b> %{x}: %{y:.1f}%<extra></extra>",
-                },
-                {
-                  type: "bar", name: "Secondary",
-                  x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
-                  y: [11.6, 8.0, 8.8],
-                  marker: { color: "#2563eb" },
-                  hovertemplate: "<b>Secondary</b> %{x}: %{y:.1f}%<extra></extra>",
-                },
-                {
-                  type: "bar", name: "Tertiary",
-                  x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
-                  y: [7.0, 7.9, 9.3],
-                  marker: { color: "#ea580c" },
-                  hovertemplate: "<b>Tertiary</b> %{x}: %{y:.1f}%<extra></extra>",
-                },
-              ]}
+              data={BROAD.map((row) => ({
+                type: "bar" as const,
+                name: row.sector,
+                x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
+                y: [row.fy24, row.fy25, row.fy26],
+                marker: { color: row.color },
+                hovertemplate: `<b>${row.sector}</b> %{x}: %{y:.1f}%<extra></extra>`,
+              }))}
               layout={plotLayout({
                 barmode: "group",
                 height: 300,
