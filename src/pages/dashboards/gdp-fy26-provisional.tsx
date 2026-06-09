@@ -207,6 +207,27 @@ function cellClass(v: number | null) {
 const fmt = (v: number | null) =>
   v === null ? "n/a" : (v > 0 ? "+" : "") + v.toFixed(1) + "%";
 
+// ── Per-chart price toggle ────────────────────────────────────────────────────
+type Prices = "real" | "nominal";
+
+function PriceToggle({ value, onChange }: { value: Prices; onChange: (p: Prices) => void }) {
+  return (
+    <div className="flex items-center gap-1 shrink-0">
+      {(["real", "nominal"] as Prices[]).map((p) => (
+        <button key={p} onClick={() => onChange(p)}
+          className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border transition-colors ${
+            value === p
+              ? "bg-orange-600 border-orange-600 text-white"
+              : "border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:border-orange-400 hover:text-orange-600 dark:hover:text-orange-400"
+          }`}
+        >
+          {p === "real" ? "Real" : "Nominal"}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function KpiCard({ label, value, sub, color = "text-gray-900 dark:text-white" }: {
   label: string; value: string; sub: string; color?: string;
 }) {
@@ -219,13 +240,16 @@ function KpiCard({ label, value, sub, color = "text-gray-900 dark:text-white" }:
   );
 }
 
-function ChartCard({ title, subtitle, children, source, sourceUrl }: {
+function ChartCard({ title, subtitle, children, source, sourceUrl, toggle }: {
   title: string; subtitle?: string; children: React.ReactNode;
-  source?: string; sourceUrl?: string;
+  source?: string; sourceUrl?: string; toggle?: React.ReactNode;
 }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
-      <h3 className="text-base font-semibold text-gray-900 dark:text-white">{title}</h3>
+      <div className="flex items-start justify-between gap-3 mb-0.5">
+        <h3 className="text-base font-semibold text-gray-900 dark:text-white">{title}</h3>
+        {toggle}
+      </div>
       {subtitle && <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 mb-3">{subtitle}</p>}
       {children}
       {source && (
@@ -251,18 +275,24 @@ export default function GdpFy26ProvisionalDashboard() {
   const [activeCat, setActiveCat] = useState<IndCat | "all">("all");
   const [sortCol, setSortCol]     = useState<0 | 1 | 2>(2);
   const [sortAsc, setSortAsc]     = useState(false);
-  const [prices, setPrices]       = useState<"real" | "nominal">("real");
 
-  // Derived data based on price toggle
-  const isNom        = prices === "nominal";
-  const ANNUAL       = isNom ? ANNUAL_NOM       : ANNUAL_REAL;
-  const LEVEL        = isNom ? LEVEL_NOM        : LEVEL_REAL;
-  const EXPENDITURE  = isNom ? EXPENDITURE_NOM  : EXPENDITURE_REAL;
-  const SECTOR_ANNUAL = isNom ? SECTOR_ANNUAL_NOM : SECTOR_ANNUAL_REAL;
-  const SECTOR_Q4    = isNom ? SECTOR_Q4_NOM    : SECTOR_Q4_REAL;
-  const BROAD        = isNom ? BROAD_NOM        : BROAD_REAL;
-  const priceLabel   = isNom ? "Current prices" : "Constant 2022-23 prices";
-  const priceStmt    = isNom ? "Statements 2 & 4 & 8" : "Statements 1 & 3 & 6";
+  // Per-chart price toggles (default: real)
+  const [pQtr,     setPQtr]     = useState<Prices>("real");
+  const [pQ4Sec,   setPQ4Sec]   = useState<Prices>("real");
+  const [pSecAnn,  setPSecAnn]  = useState<Prices>("real");
+  const [pAnnGdp,  setPAnnGdp]  = useState<Prices>("real");
+  const [pLevel,   setPLevel]   = useState<Prices>("real");
+  const [pExp,     setPExp]     = useState<Prices>("real");
+  const [pBroad,   setPBroad]   = useState<Prices>("real");
+
+  // Helper: resolve data for a given toggle value
+  const ann    = (p: Prices) => p === "nominal" ? ANNUAL_NOM      : ANNUAL_REAL;
+  const level  = (p: Prices) => p === "nominal" ? LEVEL_NOM       : LEVEL_REAL;
+  const exp    = (p: Prices) => p === "nominal" ? EXPENDITURE_NOM : EXPENDITURE_REAL;
+  const secAnn = (p: Prices) => p === "nominal" ? SECTOR_ANNUAL_NOM : SECTOR_ANNUAL_REAL;
+  const secQ4  = (p: Prices) => p === "nominal" ? SECTOR_Q4_NOM   : SECTOR_Q4_REAL;
+  const broad  = (p: Prices) => p === "nominal" ? BROAD_NOM       : BROAD_REAL;
+  const pLabel = (p: Prices) => p === "nominal" ? "Current prices" : "Constant 2022-23 prices";
 
   if (nasLoading || gvaLoading) return <LoadingSpinner message="Loading FY26 provisional estimates..." />;
   if (nasError || !nasData) {
@@ -283,19 +313,12 @@ export default function GdpFy26ProvisionalDashboard() {
 
   // ── Q4 sector snapshot ───────────────────────────────────────────────────
   const q4Labels  = SECTOR_ORDER.map((k) => SECTOR_LABELS[k]);
-  const q4Values  = SECTOR_ORDER.map((k) => SECTOR_Q4[k]);
   const q4Colors  = SECTOR_ORDER.map((k) => SC[k]);
   const latestGvaQ = gvaData ? [...gvaData.quarters].reverse().find((q) => q.totalGVA !== null) : null;
 
-  // ── Annual GDP+GVA grouped bar ────────────────────────────────────────────
-  const annColors    = ANNUAL.map((_, i) => (i === 3 ? "#16a34a" : "rgba(22,163,74,0.35)"));
-  const annGVAColors = ANNUAL.map((_, i) => (i === 3 ? "#2563eb" : "rgba(37,99,235,0.35)"));
-
-  // ── Expenditure and sector bars ───────────────────────────────────────────
+  // ── Expenditure and sector bar colors ─────────────────────────────────────
   const expColors           = ["#2563eb", "#7c3aed", "#ea580c", "#0891b2", "#dc2626"];
   const sectorLabelsOrdered = SECTOR_ORDER.map((k) => SECTOR_LABELS[k]);
-  const sectorFY25          = SECTOR_ORDER.map((k) => SECTOR_ANNUAL[k].fy25);
-  const sectorFY26          = SECTOR_ORDER.map((k) => SECTOR_ANNUAL[k].fy26);
   const sectorColors        = SECTOR_ORDER.map((k) => SC[k]);
 
   // ── Layout helpers ────────────────────────────────────────────────────────
@@ -367,25 +390,6 @@ export default function GdpFy26ProvisionalDashboard() {
           </p>
         </div>
 
-        {/* Price toggle */}
-        <div className="flex items-center gap-2 mb-6">
-          <span className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wider">Prices:</span>
-          {(["real", "nominal"] as const).map((p) => (
-            <button key={p} onClick={() => setPrices(p)}
-              className={`text-xs font-semibold px-4 py-1.5 rounded-full border transition-colors ${
-                prices === p
-                  ? "bg-orange-600 border-orange-600 text-white"
-                  : "border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:border-orange-400 hover:text-orange-600 dark:hover:text-orange-400"
-              }`}
-            >
-              {p === "real" ? "Real (Constant 2022-23)" : "Nominal (Current)"}
-            </button>
-          ))}
-          <span className="text-xs text-gray-400 dark:text-gray-500 ml-2">
-            · applies to all growth rate charts · {priceStmt}
-          </span>
-        </div>
-
         {/* KPI row */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
           <KpiCard label="Real GDP Growth"    value="7.7%"           sub="FY26 PE, constant prices"  color="text-green-700 dark:text-green-400" />
@@ -400,11 +404,12 @@ export default function GdpFy26ProvisionalDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
             title="Quarterly GDP Growth Rate (Last 8 Quarters)"
-            subtitle={`YoY growth at ${priceLabel}, Q1 FY25 to Q4 FY26`}
+            subtitle={`YoY growth at ${pLabel(pQtr)}, Q1 FY25 to Q4 FY26`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pQtr} onChange={setPQtr} />}
           >
             <Plot
-              data={isNom ? [
+              data={pQtr === "nominal" ? [
                 {
                   type: "scatter", mode: "lines+markers",
                   name: "Nominal GDP Growth (%)",
@@ -441,13 +446,14 @@ export default function GdpFy26ProvisionalDashboard() {
 
           <ChartCard
             title={`GVA Growth by Sector, ${latestGvaQ?.label ?? "Q4 FY26"}`}
-            subtitle={`Real YoY growth (%) at ${priceLabel}`}
+            subtitle={`Growth (%) at ${pLabel(pQ4Sec)}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pQ4Sec} onChange={setPQ4Sec} />}
           >
             <Plot
               data={[{
                 type: "bar", orientation: "h",
-                x: q4Values, y: q4Labels,
+                x: SECTOR_ORDER.map((k) => secQ4(pQ4Sec)[k]), y: q4Labels,
                 marker: { color: q4Colors },
                 hovertemplate: "<b>%{y}</b>: %{x:.1f}%<extra></extra>",
                 showlegend: false,
@@ -529,20 +535,21 @@ export default function GdpFy26ProvisionalDashboard() {
 
           <ChartCard
             title="Annual GVA Growth by Sector, FY25 vs FY26 PE"
-            subtitle={`Growth (%) at ${priceLabel}`}
+            subtitle={`Growth (%) at ${pLabel(pSecAnn)}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pSecAnn} onChange={setPSecAnn} />}
           >
             <Plot
               data={[
                 {
                   type: "bar", orientation: "h", name: "FY24-25 (FRE)",
-                  x: sectorFY25, y: sectorLabelsOrdered,
+                  x: SECTOR_ORDER.map((k) => secAnn(pSecAnn)[k].fy25), y: sectorLabelsOrdered,
                   marker: { color: sectorColors.map((c) => c + "55") },
                   hovertemplate: "<b>%{y}</b> FY25: %{x:.1f}%<extra></extra>",
                 },
                 {
                   type: "bar", orientation: "h", name: "FY25-26 (PE)",
-                  x: sectorFY26, y: sectorLabelsOrdered,
+                  x: SECTOR_ORDER.map((k) => secAnn(pSecAnn)[k].fy26), y: sectorLabelsOrdered,
                   marker: { color: sectorColors },
                   hovertemplate: "<b>%{y}</b> FY26 PE: %{x:.1f}%<extra></extra>",
                 },
@@ -564,21 +571,22 @@ export default function GdpFy26ProvisionalDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
             title="Annual GDP and GVA Growth, FY22-23 to FY25-26 PE"
-            subtitle={`Growth (%) at ${priceLabel}`}
+            subtitle={`Growth (%) at ${pLabel(pAnnGdp)}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pAnnGdp} onChange={setPAnnGdp} />}
           >
             <Plot
               data={[
                 {
-                  type: "bar", name: `${isNom ? "Nominal" : "Real"} GDP Growth (%)`,
-                  x: ANNUAL.map((r) => r.fy), y: ANNUAL.map((r) => r.gdp),
-                  marker: { color: annColors },
+                  type: "bar", name: `${pAnnGdp === "nominal" ? "Nominal" : "Real"} GDP Growth (%)`,
+                  x: ann(pAnnGdp).map((r) => r.fy), y: ann(pAnnGdp).map((r) => r.gdp),
+                  marker: { color: ann(pAnnGdp).map((_, i) => (i === 3 ? "#16a34a" : "rgba(22,163,74,0.35)")) },
                   hovertemplate: "<b>GDP</b> %{x}: %{y:.1f}%<extra></extra>",
                 },
                 {
-                  type: "bar", name: `${isNom ? "Nominal" : "Real"} GVA Growth (%)`,
-                  x: ANNUAL.map((r) => r.fy), y: ANNUAL.map((r) => r.gva),
-                  marker: { color: annGVAColors },
+                  type: "bar", name: `${pAnnGdp === "nominal" ? "Nominal" : "Real"} GVA Growth (%)`,
+                  x: ann(pAnnGdp).map((r) => r.fy), y: ann(pAnnGdp).map((r) => r.gva),
+                  marker: { color: ann(pAnnGdp).map((_, i) => (i === 3 ? "#2563eb" : "rgba(37,99,235,0.35)")) },
                   hovertemplate: "<b>GVA</b> %{x}: %{y:.1f}%<extra></extra>",
                 },
               ]}
@@ -594,17 +602,18 @@ export default function GdpFy26ProvisionalDashboard() {
           </ChartCard>
 
           <ChartCard
-            title={`${isNom ? "Nominal" : "Real"} GDP Level, FY22-23 to FY25-26 PE`}
-            subtitle={`&#8377; Lakh Crore at ${priceLabel}`}
+            title={`${pLevel === "nominal" ? "Nominal" : "Real"} GDP Level, FY22-23 to FY25-26 PE`}
+            subtitle={`&#8377; Lakh Crore at ${pLabel(pLevel)}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pLevel} onChange={setPLevel} />}
           >
             <Plot
               data={[{
                 type: "bar",
-                x: LEVEL.map((r) => r.fy),
-                y: LEVEL.map((r) => r.gdp),
-                marker: { color: LEVEL.map((_, i) => (i === 3 ? "#ea580c" : "rgba(234,88,12,0.35)")) },
-                text: LEVEL.map((r) => `&#8377;${r.gdp.toFixed(1)}L Cr`),
+                x: level(pLevel).map((r) => r.fy),
+                y: level(pLevel).map((r) => r.gdp),
+                marker: { color: level(pLevel).map((_, i) => (i === 3 ? "#ea580c" : "rgba(234,88,12,0.35)")) },
+                text: level(pLevel).map((r) => `&#8377;${r.gdp.toFixed(1)}L Cr`),
                 textposition: "outside",
                 hovertemplate: "<b>%{x}</b>: &#8377;%{y:.2f}L Cr<extra></extra>",
                 showlegend: false,
@@ -624,22 +633,23 @@ export default function GdpFy26ProvisionalDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
             title="Expenditure Components: Growth, FY25 vs FY26 PE"
-            subtitle={`Year-on-year growth (%) at ${priceLabel} · Statement ${isNom ? "2" : "1"}`}
+            subtitle={`Year-on-year growth (%) at ${pLabel(pExp)} · Statement ${pExp === "nominal" ? "2" : "1"}`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pExp} onChange={setPExp} />}
           >
             <Plot
               data={[
                 {
                   type: "bar", name: "FY24-25 (FRE)",
-                  x: EXPENDITURE.map((r) => r.item),
-                  y: EXPENDITURE.map((r) => r.fy25),
+                  x: exp(pExp).map((r) => r.item),
+                  y: exp(pExp).map((r) => r.fy25),
                   marker: { color: expColors.map((c) => c + "55") },
                   hovertemplate: "<b>%{x}</b> FY25: %{y:.1f}%<extra></extra>",
                 },
                 {
                   type: "bar", name: "FY25-26 (PE)",
-                  x: EXPENDITURE.map((r) => r.item),
-                  y: EXPENDITURE.map((r) => r.fy26),
+                  x: exp(pExp).map((r) => r.item),
+                  y: exp(pExp).map((r) => r.fy26),
                   marker: { color: expColors },
                   hovertemplate: "<b>%{x}</b> FY26 PE: %{y:.1f}%<extra></extra>",
                 },
@@ -656,12 +666,13 @@ export default function GdpFy26ProvisionalDashboard() {
           </ChartCard>
 
             <ChartCard
-            title="Broad Sector GVA Growth (Real)"
-            subtitle={`Primary / Secondary / Tertiary at ${priceLabel}, FY23-24 to FY25-26 PE`}
+            title="Broad Sector GVA Growth"
+            subtitle={`Primary / Secondary / Tertiary at ${pLabel(pBroad)}, FY23-24 to FY25-26 PE`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pBroad} onChange={setPBroad} />}
           >
             <Plot
-              data={BROAD.map((row) => ({
+              data={broad(pBroad).map((row) => ({
                 type: "bar" as const,
                 name: row.sector,
                 x: ["FY23-24", "FY24-25 (FRE)", "FY25-26 (PE)"],
@@ -717,8 +728,8 @@ export default function GdpFy26ProvisionalDashboard() {
                   <div className="w-3 h-3 rounded-sm shrink-0" style={{ background: SC[k] }} />
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300 w-32">{SECTOR_LABELS[k]}</span>
                   <div className="flex gap-4 text-xs text-gray-500 dark:text-gray-400">
-                    <span>FY26 annual: <strong className="text-gray-700 dark:text-gray-200">{SECTOR_ANNUAL[k].fy26}%</strong></span>
-                    <span>Q4: <strong className="text-gray-700 dark:text-gray-200">{SECTOR_Q4[k]}%</strong></span>
+                    <span>FY26 ann (R): <strong className="text-gray-700 dark:text-gray-200">{SECTOR_ANNUAL_REAL[k].fy26}%</strong></span>
+                    <span>FY26 ann (N): <strong className="text-gray-700 dark:text-gray-200">{SECTOR_ANNUAL_NOM[k].fy26}%</strong></span>
                   </div>
                 </div>
               ))}
