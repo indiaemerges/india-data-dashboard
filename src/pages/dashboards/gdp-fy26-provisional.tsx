@@ -105,14 +105,15 @@ const SECTOR_ANNUAL_REAL: Record<keyof typeof SC, { fy25: number; fy26: number }
   publicAdmin:          { fy25: 5.0,  fy26: 5.0  },
 };
 const SECTOR_ANNUAL_NOM: Record<keyof typeof SC, { fy25: number; fy26: number }> = {
-  agriculture:          { fy25: 9.8,  fy26: 6.4  },
-  mining:               { fy25: 14.8, fy26: 7.2  },
-  manufacturing:        { fy25: 9.8,  fy26: 11.2 },
-  electricity:          { fy25: 9.3,  fy26: 6.6  },
-  construction:         { fy25: 12.3, fy26: 11.8 },
-  tradeHotelsTransport: { fy25: 9.7,  fy26: 12.2 },
-  financialRealEstate:  { fy25: 12.2, fy26: 11.2 },
-  publicAdmin:          { fy25: 8.1,  fy26: 8.6  },
+  // Statement 4: Provisional Estimates of GVA by Economic Activity at Current Prices
+  agriculture:          { fy25:  9.2, fy26:  1.4 },
+  mining:               { fy25:  6.4, fy26:  4.5 },
+  manufacturing:        { fy25:  8.3, fy26: 11.6 },
+  electricity:          { fy25: 10.0, fy26:  1.9 },
+  construction:         { fy25:  7.5, fy26:  8.4 },
+  tradeHotelsTransport: { fy25:  7.6, fy26: 12.4 },
+  financialRealEstate:  { fy25: 13.1, fy26: 12.8 },
+  publicAdmin:          { fy25:  9.0, fy26: 10.0 },
 };
 
 // Q4 GVA by sector — real (Stmt 6) and nominal (Stmt 8)
@@ -127,29 +128,40 @@ const SECTOR_Q4_REAL: Record<keyof typeof SC, number> = {
   publicAdmin:          5.8,
 };
 const SECTOR_Q4_NOM: Record<keyof typeof SC, number> = {
-  agriculture:          7.1,
-  mining:               8.3,
-  manufacturing:        8.4,
-  electricity:          8.9,
-  construction:         13.1,
-  tradeHotelsTransport: 14.8,
-  financialRealEstate:  11.6,
-  publicAdmin:          8.2,
+  // Statement 8 Q4 FY25-26 nominal growth rates (current prices)
+  agriculture:           2.8,
+  mining:               11.3,
+  manufacturing:         9.9,
+  electricity:           0.9,
+  construction:         10.5,
+  tradeHotelsTransport: 13.9,
+  financialRealEstate:  13.1,
+  publicAdmin:          11.5,
 };
 
-// Quarterly heatmap — nominal sector data not available quarterly in JSON;
-// only real is in nas-gva-sectors.json. Heatmap uses real only (no toggle).
+// Quarterly GVA nominal heatmap — Statement 8 (current prices)
+// 8 sectors × 8 quarters: Q1 FY24-25 through Q4 FY25-26
+const GVA_HEATMAP_NOM: Record<keyof typeof SC, number[]> = {
+  agriculture:          [  8.0,   6.9,  11.4,   9.4,   4.8,  -0.1,  -1.5,   2.8],
+  mining:               [ 11.9,   3.1,   5.4,   5.3,  -3.0,   1.7,   6.9,  11.3],
+  manufacturing:        [  7.5,   3.9,   9.9,  11.5,  10.1,  13.1,  13.3,   9.9],
+  electricity:          [ 17.3,   7.7,   7.2,   8.5,   1.5,   5.1,   0.2,   0.9],
+  construction:         [  8.0,   6.0,   6.8,   9.3,   6.4,   9.5,   7.1,  10.5],
+  tradeHotelsTransport: [  8.3,   7.3,   7.0,   8.0,  11.3,  11.4,  12.7,  13.9],
+  financialRealEstate:  [ 13.3,  13.1,  14.7,  11.5,  12.2,  12.5,  13.2,  13.1],
+  publicAdmin:          [ 11.0,   9.5,   8.5,   7.2,   8.1,   9.6,  10.4,  11.5],
+};
 
 // Broad sector — real (Stmt 3) and nominal (Stmt 4)
 const BROAD_REAL = [
-  { sector: "Primary",   fy24: 4.9, fy25: 4.9, fy26: 3.2, color: "#16a34a" },
+  { sector: "Primary",   fy24: 2.6,  fy25: 4.9, fy26: 3.2, color: "#16a34a" },
   { sector: "Secondary", fy24: 11.6, fy25: 8.0, fy26: 8.8, color: "#2563eb" },
-  { sector: "Tertiary",  fy24: 7.0, fy25: 7.9, fy26: 9.3, color: "#ea580c" },
+  { sector: "Tertiary",  fy24: 7.0,  fy25: 7.9, fy26: 9.3, color: "#ea580c" },
 ];
 const BROAD_NOM = [
-  { sector: "Primary",   fy24: 12.1, fy25: 10.7, fy26: 6.6,  color: "#16a34a" },
-  { sector: "Secondary", fy24: 13.5, fy25: 10.3, fy26: 10.7, color: "#2563eb" },
-  { sector: "Tertiary",  fy24: 10.1, fy25: 10.8, fy26: 10.6, color: "#ea580c" },
+  { sector: "Primary",   fy24: 7.5,  fy25: 9.0,  fy26: 1.6,  color: "#16a34a" },
+  { sector: "Secondary", fy24: 11.1, fy25: 8.2,  fy26: 9.5,  color: "#2563eb" },
+  { sector: "Tertiary",  fy24: 11.9, fy25: 10.6, fy26: 12.0, color: "#ea580c" },
 ];
 
 // ── Indicators Annexure ──────────────────────────────────────────────────────
@@ -278,6 +290,7 @@ export default function GdpFy26ProvisionalDashboard() {
 
   // Per-chart price toggles (default: real)
   const [pQtr,     setPQtr]     = useState<Prices>("real");
+  const [pHeatmap, setPHeatmap] = useState<Prices>("real");
   const [pQ4Sec,   setPQ4Sec]   = useState<Prices>("real");
   const [pSecAnn,  setPSecAnn]  = useState<Prices>("real");
   const [pAnnGdp,  setPAnnGdp]  = useState<Prices>("real");
@@ -475,30 +488,32 @@ export default function GdpFy26ProvisionalDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <ChartCard
             title="GVA Growth by Sector (Last 8 Quarters)"
-            subtitle="Real YoY growth (%) at constant 2022-23 prices — cell color = growth rate"
+            subtitle={`YoY growth (%) at ${pLabel(pHeatmap)} — cell color = growth rate`}
             source="MoSPI NAS" sourceUrl={SOURCE_URL}
+            toggle={<PriceToggle value={pHeatmap} onChange={setPHeatmap} />}
           >
             <Plot
               data={[{
                 type: "heatmap",
-                // Sectors on y-axis (rows), quarters on x-axis (columns)
                 x: gvaData ? gvaData.quarters.slice(-8).map((q) =>
                   q.label.replace(/^(\d{4}-\d{2}) (Q\d)$/, "$2 $1")
                 ) : [],
                 y: [...SECTOR_ORDER].reverse().map((k) => SECTOR_LABELS[k]),
-                z: [...SECTOR_ORDER].reverse().map((k) =>
-                  gvaData ? gvaData.quarters.slice(-8).map((q) => q[k] ?? null) : []
-                ),
+                z: pHeatmap === "nominal"
+                  ? [...SECTOR_ORDER].reverse().map((k) => GVA_HEATMAP_NOM[k])
+                  : [...SECTOR_ORDER].reverse().map((k) =>
+                      gvaData ? gvaData.quarters.slice(-8).map((q) => q[k] ?? null) : []
+                    ),
                 colorscale: [
-                  [0.0,  "#7f1d1d"],   // deep red   — strong negative
-                  [0.15, "#ef4444"],   // red        — negative
-                  [0.30, "#fbbf24"],   // amber      — weak/near-zero
-                  [0.50, "#86efac"],   // light green — moderate
-                  [0.70, "#16a34a"],   // green       — solid
-                  [1.0,  "#14532d"],   // deep green  — strong positive
+                  [0.0,  "#7f1d1d"],
+                  [0.15, "#ef4444"],
+                  [0.30, "#fbbf24"],
+                  [0.50, "#86efac"],
+                  [0.70, "#16a34a"],
+                  [1.0,  "#14532d"],
                 ],
                 zmin: -4,
-                zmax: 14,
+                zmax: 18,
                 colorbar: {
                   title: { text: "%", side: "right" },
                   tickfont: { size: 11, color: isDark ? "#9ca3af" : "#6b7280" },
