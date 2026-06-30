@@ -7,7 +7,7 @@ export interface DataPoint {
 }
 
 export interface DataSeries {
-  source: "worldbank" | "mospi" | "datagov" | "census" | "rbi" | "ppac" | "moafw" | "fci" | "imd";
+  source: "worldbank" | "mospi" | "datagov" | "census" | "rbi" | "ppac" | "moafw" | "fci" | "imd" | "niti";
   indicator: string; // Human-readable indicator name
   indicatorId?: string; // Machine-readable ID (e.g., "NY.GDP.MKTP.KD.ZG")
   unit: string; // e.g., "%" , "USD", "INR Crore", "Index"
@@ -894,4 +894,31 @@ export interface CPIMonthlyData {
   sourceUrl: string;
   notes: string;
   months: CPIMonthDataPoint[];
+}
+
+// ---------------------------------------------------------------------------
+// NITI Aayog MPI — State-level types
+// ---------------------------------------------------------------------------
+
+export interface MPIStateEntry {
+  stateName: string;
+  geoName: string;
+  /** Headcount Ratio H: % of population that is multidimensionally poor, [2015-16, 2019-21] */
+  headcountRatio: { total: [number, number]; rural: [number, number]; urban: [number, number] };
+  /** Intensity A: average deprivation share among the poor, [2015-16, 2019-21] */
+  intensity: { total: [number, number]; rural: [number, number]; urban: [number, number] };
+  /** MPI = H x A, [2015-16, 2019-21] */
+  mpi: { total: [number, number]; rural: [number, number]; urban: [number, number] };
+  /** % of population deprived in each indicator (national), [2015-16, 2019-21] */
+  uncensoredHR?: Record<string, [number, number]>;
+}
+
+export interface MPIStateData {
+  source: string;
+  sourceUrl: string;
+  lastUpdated: string;
+  notes: string;
+  years: string[];
+  indicators: string[];
+  states: MPIStateEntry[];
 }

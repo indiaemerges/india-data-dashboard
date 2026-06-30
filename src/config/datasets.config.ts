@@ -227,6 +227,21 @@ export const datasets: DatasetEntry[] = [
     icon: "🌾",
     category: "agriculture",
   },
+  {
+    id: "poverty-mpi",
+    title: "Multidimensional Poverty (MPI)",
+    description:
+      "State/UT-wise Multidimensional Poverty Index, Headcount Ratio, and Intensity comparing NFHS-4 (2015-16) and NFHS-5 (2019-21), plus national deprivation rates by indicator.",
+    source: "NITI Aayog National MPI",
+    sourceUrl: "https://www.niti.gov.in/",
+    dataType: "static-json",
+    updateFrequency: "Periodic (NFHS rounds)",
+    tags: ["poverty", "mpi", "niti aayog", "deprivation", "nfhs", "social"],
+    chartTypes: ["bar", "map"],
+    dashboardPath: "/dashboards/poverty-mpi",
+    icon: "📉",
+    category: "social",
+  },
 ];
 
 // Group datasets by category

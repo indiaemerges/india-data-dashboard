@@ -8,12 +8,14 @@ import {
   useEnergyStateData,
   useASIStateData,
   useRBIBankingStateData,
+  useMPIStateData,
   plfsStateSlice,
   gsdpStateSlice,
   agriStateSlice,
   energyStateSlice,
   asiStateSlice,
   bankingStateSlice,
+  mpiStateSlice,
 } from "@/lib/hooks/useMospiState";
 
 // ── Colormap catalogue ─────────────────────────────────────────────────────────
@@ -319,6 +321,40 @@ const INDICATORS = [
     dataset: "banking" as const,
     field: "branches" as const,
   },
+  // ── NITI Aayog National MPI (state-level) ───────────────────────────────────
+  {
+    id: "mpi_score",
+    label: "MPI Score",
+    description: "Multidimensional Poverty Index = Headcount Ratio × Intensity · NITI Aayog, NFHS-4 (2015-16) vs NFHS-5 (2019-21)",
+    unit: "",
+    source: "NITI Aayog National MPI",
+    sourceUrl: "https://www.niti.gov.in/",
+    defaultColormap: "YlOrRd" as ColormapId,
+    dataset: "mpi" as const,
+    field: "mpi" as const,
+  },
+  {
+    id: "mpi_headcount",
+    label: "MPI Headcount Ratio",
+    description: "% of population that is multidimensionally poor (deprived in ≥1/3 of weighted indicators) · NITI Aayog",
+    unit: "%",
+    source: "NITI Aayog National MPI",
+    sourceUrl: "https://www.niti.gov.in/",
+    defaultColormap: "YlOrRd" as ColormapId,
+    dataset: "mpi" as const,
+    field: "headcountRatio" as const,
+  },
+  {
+    id: "mpi_intensity",
+    label: "MPI Intensity",
+    description: "Average % of weighted indicators in which the poor are deprived · NITI Aayog",
+    unit: "%",
+    source: "NITI Aayog National MPI",
+    sourceUrl: "https://www.niti.gov.in/",
+    defaultColormap: "Oranges" as ColormapId,
+    dataset: "mpi" as const,
+    field: "intensity" as const,
+  },
 ] as const;
 
 export type IndicatorId = (typeof INDICATORS)[number]["id"];
@@ -376,6 +412,7 @@ export default function StateMapPanel({ indicators }: Props) {
   const { data: energyData }  = useEnergyStateData();
   const { data: asiData }     = useASIStateData();
   const { data: bankingData } = useRBIBankingStateData();
+  const { data: mpiData }     = useMPIStateData();
 
   const needed = new Set(allowed.map((i) => i.dataset));
   const isLoading =
@@ -385,7 +422,8 @@ export default function StateMapPanel({ indicators }: Props) {
     (needed.has("agri")    && !agriData)    ||
     (needed.has("energy")  && !energyData)  ||
     (needed.has("asi")     && !asiData)     ||
-    (needed.has("banking") && !bankingData);
+    (needed.has("banking") && !bankingData) ||
+    (needed.has("mpi")     && !mpiData);
 
   const indicator = allowed.find((ind) => ind.id === indicatorId) ?? allowed[0];
 
@@ -404,6 +442,7 @@ export default function StateMapPanel({ indicators }: Props) {
     indicator.dataset === "energy"  ? (energyData?.years  ?? []) :
     indicator.dataset === "asi"     ? (asiData?.years     ?? []) :
     indicator.dataset === "banking" ? (bankingData?.years ?? []) :
+    indicator.dataset === "mpi"     ? (mpiData?.years     ?? []) :
     (cpiData?.months.map(fmtMonth) ?? []);
 
   const resolvedPeriodIdx =
@@ -466,6 +505,12 @@ export default function StateMapPanel({ indicators }: Props) {
         ? slice.values.map((v) => (v !== null ? Math.round(v) / 100 : null))
         : slice.values;
       periodLabel = bankingData.years[resolvedPeriodIdx];
+    } else if (indicator.dataset === "mpi" && mpiData) {
+      const field = indicator.field as "mpi" | "headcountRatio" | "intensity";
+      const slice = mpiStateSlice(mpiData, resolvedPeriodIdx as 0 | 1, field, "total");
+      mapStates   = slice.names;
+      mapValues   = slice.values;
+      periodLabel = mpiData.years[resolvedPeriodIdx];
     } else if (indicator.dataset === "cpi" && cpiData) {
       mapStates   = cpiData.states.map((s) => s.geoName);
       mapValues   = cpiData.states.map((s) => s.inflation[resolvedPeriodIdx] ?? null);
