@@ -332,6 +332,7 @@ const INDICATORS = [
     defaultColormap: "YlOrRd" as ColormapId,
     dataset: "mpi" as const,
     field: "mpi" as const,
+    decimals: 3,
   },
   {
     id: "mpi_headcount",
@@ -608,6 +609,7 @@ export default function StateMapPanel({ indicators }: Props) {
           zmin={zmin}
           zmax={zmax}
           showAnnotations
+          decimals={"decimals" in indicator ? indicator.decimals : 1}
           source={indicator.source}
           sourceUrl={indicator.sourceUrl}
           height={580}

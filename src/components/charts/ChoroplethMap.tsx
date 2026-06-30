@@ -97,9 +97,10 @@ interface ColorBarProps {
   interpolator: ColorInterpolator;
   reversescale: boolean;
   unit: string;
+  decimals: number;
 }
 
-function ColorBar({ lo, hi, interpolator, reversescale, unit }: ColorBarProps) {
+function ColorBar({ lo, hi, interpolator, reversescale, unit, decimals }: ColorBarProps) {
   // 11 stops → smooth gradient
   const stops = Array.from({ length: 11 }, (_, i) => {
     const t = i / 10;
@@ -113,9 +114,9 @@ function ColorBar({ lo, hi, interpolator, reversescale, unit }: ColorBarProps) {
         style={{ background: `linear-gradient(to right, ${stops})` }}
       />
       <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
-        <span>{lo.toFixed(1)}</span>
+        <span>{lo.toFixed(decimals)}</span>
         <span className="text-gray-400 dark:text-gray-500 text-[10px]">{unit}</span>
-        <span>{hi.toFixed(1)}</span>
+        <span>{hi.toFixed(decimals)}</span>
       </div>
     </div>
   );
@@ -139,6 +140,8 @@ interface ChoroplethMapProps {
   zmax?: number;
   /** Show numeric value labels at each state centroid (default: true) */
   showAnnotations?: boolean;
+  /** Decimal places for annotations, tooltip, colorbar, and mobile table (default: 1) */
+  decimals?: number;
   /** Kept for API compatibility; SVG auto-sizes via aspect ratio */
   height?: number;
   className?: string;
@@ -157,6 +160,7 @@ export default function ChoroplethMap({
   zmin,
   zmax,
   showAnnotations = true,
+  decimals = 1,
   className = "",
 }: ChoroplethMapProps) {
   const { resolvedTheme } = useTheme();
@@ -330,7 +334,7 @@ export default function ChoroplethMap({
                               userSelect: "none",
                             }}
                           >
-                            {val.toFixed(1)}
+                            {val.toFixed(decimals)}
                           </text>
                         </Marker>
                       );
@@ -357,7 +361,7 @@ export default function ChoroplethMap({
               </p>
               <p className="text-gray-600 dark:text-gray-300 leading-tight">
                 {tooltip.value !== null
-                  ? `${tooltip.value.toFixed(1)} ${unit}`
+                  ? `${tooltip.value.toFixed(decimals)} ${unit}`
                   : "No data"}
               </p>
             </div>
@@ -373,6 +377,7 @@ export default function ChoroplethMap({
           interpolator={interpolator}
           reversescale={reversescale}
           unit={unit}
+          decimals={decimals}
         />
       )}
 
@@ -401,7 +406,7 @@ export default function ChoroplethMap({
                       {name}
                     </span>
                     <span className="text-[11px] font-semibold tabular-nums text-gray-900 dark:text-white flex-shrink-0">
-                      {value.toFixed(1)}
+                      {value.toFixed(decimals)}
                     </span>
                   </div>
                 );
