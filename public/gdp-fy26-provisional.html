@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>India GDP FY2025-26: Provisional Estimates | India Data Dashboard</title>
+<meta name="description" content="MoSPI Provisional Estimates of India's GDP for FY2025-26: 7.7% real growth, sectoral breakdown, quarterly trend, and expenditure components."/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --orange: #ea580c;
+    --orange-light: #fed7aa;
+    --bg: #f9fafb;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --text: #111827;
+    --muted: #6b7280;
+    --sidebar: #ffffff;
+  }
+  .dark {
+    --bg: #111827;
+    --card: #1f2937;
+    --border: #374151;
+    --text: #f9fafb;
+    --muted: #9ca3af;
+    --sidebar: #111827;
+  }
+  body { background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, sans-serif; margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem; }
+  .badge-new {
+    background: #dcfce7; color: #166534; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.08em; padding: 1px 6px; border-radius: 999px; text-transform: uppercase;
+  }
+  .dark .badge-new { background: #14532d; color: #86efac; }
+  canvas { display: block; }
+  .ind-filter {
+    font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--card); color: var(--muted);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .ind-filter:hover { border-color: var(--orange); color: var(--orange); }
+  .ind-filter.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+  #indBody tr { border-bottom: 1px solid var(--border); }
+  #indBody tr:hover { background: rgba(234,88,12,0.04); }
+  #indBody td { padding: 7px 10px; vertical-align: middle; }
+  .cat-pill {
+    font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+  }
+  .source-link { color: var(--orange); text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+  .kpi-val { font-size: 1.75rem; font-weight: 800; line-height: 1; }
+  .kpi-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .kpi-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .section-h { font-size: 1.05rem; font-weight: 700; margin: 0 0 4px; }
+  .section-sub { font-size: 0.82rem; color: var(--muted); margin: 0 0 14px; }
+  .chart-wrap { position: relative; }
+  .flash-banner {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+    border: 1px solid #fed7aa; border-radius: 0.5rem; padding: 12px 16px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  }
+  .dark .flash-banner { background: linear-gradient(135deg, #431407 0%, #7c2d12 100%); border-color: #9a3412; }
+</style>
+</head>
+<body>
+
+<!-- HEADER (matches site design) -->
+<header style="background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50">
+  <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:4rem">
+    <a href="/india-data-dashboard/" style="display:flex;align-items:center;gap:8px;text-decoration:none">
+      <span style="font-size:1.5rem">🇮🇳</span>
+      <span style="font-weight:700;color:var(--text);font-size:1rem">India Data Dashboard</span>
+    </a>
+    <nav style="display:flex;gap:1.5rem;align-items:center">
+      <a href="/india-data-dashboard/" style="color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500">Home</a>
+      <a href="/india-data-dashboard/dashboards/" style="color:var(--orange);text-decoration:none;font-size:0.875rem;font-weight:500">Dashboards</a>
+      <a href="/india-data-dashboard/stories/" style="color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500">Data Stories</a>
+      <button onclick="toggleDark()" style="background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.1rem" title="Toggle dark mode">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<div style="max-width:1280px;margin:0 auto;padding:1.5rem 1.5rem 3rem">
+
+  <!-- PAGE TITLE -->
+  <div style="margin-bottom:1.25rem">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px">
+      <h1 style="font-size:1.5rem;font-weight:800;margin:0">GDP & National Accounts: FY2025-26</h1>
+      <span class="badge-new">Provisional Estimates · 5 Jun 2026</span>
+    </div>
+    <p style="color:var(--muted);font-size:0.875rem;margin:0">
+      MoSPI Provisional Estimates of Annual GDP for FY 2025-26 and Q4 (Jan-Mar) 2025-26 quarterly GDP.
+      Released today, 5 June 2026, at 4:00 PM IST.
+      <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jun/doc202665884801.pdf" target="_blank" class="source-link"> Source PDF ↗</a>
+    </p>
+  </div>
+
+  <!-- FLASH BANNER -->
+  <div class="flash-banner">
+    <span style="font-size:1.4rem">📢</span>
+    <div>
+      <strong style="font-size:0.875rem">India's economy grew 7.7% in real terms in FY2025-26</strong>:
+      <span style="font-size:0.875rem;color:var(--muted)"> the fastest pace in three years, up from 7.1% in FY25. Nominal GDP reached ₹346.4 lakh crore (~$4.0T). Q4 real growth: 7.8%.</span>
+    </div>
+  </div>
+
+  <!-- KPI ROW -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:28px">
+
+    <div class="card" style="padding:14px 16px">
+      <div class="kpi-label">Real GDP Growth</div>
+      <div class="kpi-val" style="color:#16a34a">7.7%</div>
+      <div class="kpi-sub">FY2025-26 · Constant prices</div>
+    </div>
+
+    <div class="card" style="padding:14px 16px">
+      <div class="kpi-label">Nominal GDP Growth</div>
+      <div class="kpi-val" style="color:var(--orange)">8.9%</div>
+      <div class="kpi-sub">FY2025-26 · Current prices</div>
+    </div>
+
+    <div class="card" style="padding:14px 16px">
+      <div class="kpi-label">Nominal GDP (₹)</div>
+      <div class="kpi-val" style="color:var(--text)">₹346.4L Cr</div>
+      <div class="kpi-sub">≈ $4.0 trillion USD</div>
+    </div>
+
+    <div class="card" style="padding:14px 16px">
+      <div class="kpi-label">Real GVA Growth</div>
+      <div class="kpi-val" style="color:#2563eb">7.9%</div>
+      <div class="kpi-sub">FY2025-26 · Constant prices</div>
+    </div>
+
+    <div class="card" style="padding:14px 16px">
+      <div class="kpi-label">Q4 Real GDP Growth</div>
+      <div class="kpi-val" style="color:#16a34a">7.8%</div>
+      <div class="kpi-sub">Jan-Mar 2026 · YoY</div>
+    </div>
+
+    <div class="card" style="padding:14px 16px">
+      <div class="kpi-label">Per Capita GDP</div>
+      <div class="kpi-val" style="color:var(--text)">₹2.27L</div>
+      <div class="kpi-sub">+6.8% YoY · FY2025-26</div>
+    </div>
+
+  </div>
+
+  <!-- ROW 1: Annual GDP trend + Q4 Sectoral growth -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+
+    <!-- Annual Real GDP Growth -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Annual Real GDP Growth</p>
+      <p class="section-sub">Year-on-year % change at constant prices (2022-23 base) · MoSPI NAS</p>
+      <div class="chart-wrap" style="height:260px"><canvas id="annualGrowth"></canvas></div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">
+        Source: <a href="https://mospi.gov.in/" target="_blank" class="source-link">MoSPI NAS</a> · Statement 1
+      </p>
+    </div>
+
+    <!-- Quarterly GDP Growth -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Quarterly Real GDP Growth (Last 8 Quarters)</p>
+      <p class="section-sub">YoY growth at constant prices · Q1 FY25 to Q4 FY26</p>
+      <div class="chart-wrap" style="height:260px"><canvas id="qtrGrowth"></canvas></div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">
+        Source: <a href="https://mospi.gov.in/" target="_blank" class="source-link">MoSPI NAS</a> · Statement 6
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ROW 2: Sectoral GVA annual + Expenditure side -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+
+    <!-- Sectoral GVA Growth Annual -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Annual GVA Growth by Sector, FY2025-26</p>
+      <p class="section-sub">Real growth (%) at constant prices · MoSPI, Statement 3</p>
+      <div class="chart-wrap" style="height:280px"><canvas id="sectorAnnual"></canvas></div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">
+        Source: <a href="https://mospi.gov.in/" target="_blank" class="source-link">MoSPI NAS</a> · Statement 3
+      </p>
+    </div>
+
+    <!-- Q4 Sectoral snapshot -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Q4 GVA Growth by Sector (Jan-Mar 2026)</p>
+      <p class="section-sub">Real YoY growth (%) · Statement 6</p>
+      <div class="chart-wrap" style="height:280px"><canvas id="sectorQ4"></canvas></div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">
+        Source: <a href="https://mospi.gov.in/" target="_blank" class="source-link">MoSPI NAS</a> · Statement 6
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ROW 3: Expenditure side + Nominal GDP level -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+
+    <!-- Expenditure components growth -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Expenditure Components: FY2025-26 Real Growth</p>
+      <p class="section-sub">Year-on-year growth at constant prices · Statement 1</p>
+      <div class="chart-wrap" style="height:280px"><canvas id="expenditure"></canvas></div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">
+        PFCE=Private consumption · GFCE=Govt consumption · GFCF=Investment · EXP=Exports · IMP=Imports
+      </p>
+    </div>
+
+    <!-- Nominal GDP level trend -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Nominal GDP Level, FY2022-23 to FY2025-26</p>
+      <p class="section-sub">₹ Lakh Crore at current prices · Statement 2</p>
+      <div class="chart-wrap" style="height:280px"><canvas id="nominalLevel"></canvas></div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">
+        FRE = First Revised Estimate · PE = Provisional Estimate
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ROW 4: GVA composition pie + Broad sector comparison -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+
+    <!-- Nominal GVA composition -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Nominal GVA Composition, FY2025-26</p>
+      <p class="section-sub">Share of sectors in total GVA at current prices · Statement 4</p>
+      <div class="chart-wrap" style="height:280px"><canvas id="gvaComp"></canvas></div>
+    </div>
+
+    <!-- Broad sector: Primary/Secondary/Tertiary annual trend -->
+    <div class="card" style="padding:18px">
+      <p class="section-h">Broad Sector GVA Growth (Real)</p>
+      <p class="section-sub">Primary / Secondary / Tertiary, FY2023-24 to FY2025-26 PE</p>
+      <div class="chart-wrap" style="height:280px"><canvas id="broadSector"></canvas></div>
+      <p style="font-size:0.72rem;color:var(--muted);margin-top:8px">
+        Secondary (Mfg+Electricity+Construction) · Tertiary (Trade/Finance/Govt services)
+      </p>
+    </div>
+
+  </div>
+
+  <!-- INDICATORS ANNEXURE TABLE -->
+  <div class="card" style="padding:18px;margin-bottom:16px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:14px">
+      <div>
+        <p class="section-h" style="margin:0 0 2px">Leading Indicators: Year-on-Year Growth</p>
+        <p class="section-sub" style="margin:0">Annexure from MoSPI press note, 5 June 2026 · Q4 (Jan-Mar 2026) and Annual FY2025-26</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:0.72rem;color:var(--muted)">Filter:</span>
+        <button class="ind-filter active" data-cat="all"    onclick="filterIndicators('all')">All</button>
+        <button class="ind-filter"        data-cat="agri"   onclick="filterIndicators('agri')">Agriculture</button>
+        <button class="ind-filter"        data-cat="indus"  onclick="filterIndicators('indus')">Industry</button>
+        <button class="ind-filter"        data-cat="trans"  onclick="filterIndicators('trans')">Transport</button>
+        <button class="ind-filter"        data-cat="fiscal" onclick="filterIndicators('fiscal')">Fiscal</button>
+        <button class="ind-filter"        data-cat="trade"  onclick="filterIndicators('trade')">Trade &amp; Prices</button>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table id="indTable" style="width:100%;border-collapse:collapse;font-size:0.82rem">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border)">
+            <th onclick="sortTable(0)" style="text-align:left;padding:7px 10px;font-weight:600;color:var(--muted);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;white-space:nowrap">
+              Indicator <span style="opacity:0.4">↕</span>
+            </th>
+            <th onclick="sortTable(1)" style="text-align:center;padding:7px 12px;font-weight:600;color:var(--muted);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;white-space:nowrap">
+              Q4 FY26 (%) <span style="opacity:0.4">↕</span>
+            </th>
+            <th onclick="sortTable(2)" style="text-align:center;padding:7px 12px;font-weight:600;color:var(--muted);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;white-space:nowrap">
+              Annual FY26 (%) <span style="opacity:0.4">↕</span>
+            </th>
+            <th style="text-align:center;padding:7px 12px;font-weight:600;color:var(--muted);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap">
+              Trend
+            </th>
+          </tr>
+        </thead>
+        <tbody id="indBody"></tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.72rem;color:var(--muted);margin-top:10px">
+      Cell shading: <span style="background:#dcfce7;color:#166534;padding:1px 5px;border-radius:3px">strong positive (&gt;10%)</span>
+      <span style="background:#bbf7d0;color:#166534;padding:1px 5px;border-radius:3px;margin-left:4px">moderate (0-10%)</span>
+      <span style="background:#fef9c3;color:#854d0e;padding:1px 5px;border-radius:3px;margin-left:4px">weak (0-3%)</span>
+      <span style="background:#fee2e2;color:#991b1b;padding:1px 5px;border-radius:3px;margin-left:4px">negative</span>
+    </p>
+  </div>
+
+  <!-- NOTES BOX -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+    <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:0.5rem;padding:14px 16px">
+      <p style="font-size:0.8rem;font-weight:700;color:#9a3412;margin:0 0 4px">📋 About this release</p>
+      <p style="font-size:0.78rem;color:#c2410c;margin:0">
+        MoSPI released these Provisional Estimates on 5 June 2026, incorporating full Q4 (Jan-Mar 2026) data.
+        This is the <strong>first comprehensive annual estimate</strong> for FY2025-26.
+        Base year: <strong>2022-23</strong> (new series, introduced Feb 2026).
+        Next revision: First Revised Estimates (FRE) expected January 2027.
+      </p>
+    </div>
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:0.5rem;padding:14px 16px">
+      <p style="font-size:0.8rem;font-weight:700;color:#1e3a8a;margin:0 0 4px">📐 Methodology note</p>
+      <p style="font-size:0.78rem;color:#1d4ed8;margin:0">
+        Estimates follow IMF Quarterly National Accounts Manual 2017.
+        Compiled using benchmark-indicator method: Q3 data from IIP, GST, BSE/NSE results, RBI bank data.
+        Q4 incorporates Advance Crop Estimates, commercial vehicle sales, air/rail traffic and PFMS Central Govt data.
+      </p>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:0.75rem;color:var(--muted)">
+    Data: <a href="https://mospi.gov.in/" target="_blank" class="source-link">MoSPI</a> ·
+    Press Note dated 5 June 2026 ·
+    Dashboard: <a href="https://indiaemerges.github.io/india-data-dashboard/" class="source-link">India Data Dashboard</a> ·
+    <a href="https://substack.com/@indiaemerges" target="_blank" class="source-link">indiaemerges on Substack</a>
+  </p>
+
+</div>
+
+<!-- FOOTER -->
+<footer style="background:var(--card);border-top:1px solid var(--border);padding:1.5rem">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+    <p style="font-size:0.8rem;color:var(--muted);margin:0">
+      Data sourced from <a href="https://www.mospi.gov.in/" target="_blank" class="source-link">MoSPI</a>,
+      <a href="https://data.worldbank.org/" target="_blank" class="source-link">World Bank</a>,
+      <a href="https://dbie.rbi.org.in/" target="_blank" class="source-link">RBI</a>, and other official sources.
+    </p>
+    <a href="https://github.com/indiaemerges" target="_blank" style="font-size:0.8rem;color:var(--muted);text-decoration:none">GitHub</a>
+  </div>
+</footer>
+
+<script>
+// ── Dark mode ──────────────────────────────────────────────────────────
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+if (prefersDark) document.documentElement.classList.add('dark');
+function toggleDark() {
+  document.documentElement.classList.toggle('dark');
+  buildCharts();
+}
+
+function getStyle(prop) {
+  return getComputedStyle(document.documentElement).getPropertyValue(prop).trim();
+}
+
+// ── Shared chart defaults ──────────────────────────────────────────────
+function commonOpts(isDark) {
+  const gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+  const textColor = isDark ? '#9ca3af' : '#6b7280';
+  return {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: textColor, font: { size: 11 }, boxWidth: 12 } },
+      tooltip: { mode: 'index', intersect: false }
+    },
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 } } },
+      y: { grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 } } }
+    }
+  };
+}
+
+// ── Data ───────────────────────────────────────────────────────────────
+// Annual GDP growth (FY2020-21 to FY2025-26 PE, new 2022-23 base)
+const annualYears  = ['FY20','FY21','FY22','FY23','FY24','FY25 FRE','FY26 PE'];
+const annualReal   = [4.0, -5.8, 9.7, 7.2, 7.2, 7.1, 7.7];
+const annualNom    = [7.2, 1.8, 17.7, 14.2, 11.0, 9.7, 8.9];
+
+// Quarterly growth (last 8 quarters)
+const qLabels  = ['Q1 FY25','Q2 FY25','Q3 FY25','Q4 FY25','Q1 FY26','Q2 FY26','Q3 FY26','Q4 FY26'];
+const qReal    = [6.5, 5.6, 6.4, 7.4, 7.8, 8.2, 8.0, 7.8];
+const qNominal = [9.7, 8.3, 10.3, 10.8, 8.8, 8.7, 9.2, 9.1];
+
+// Sectoral GVA annual FY26
+const sectors = ['Agriculture', 'Mining & Quar.', 'Manufacturing', 'Electricity & Util.', 'Construction', 'Trade & Hotels', 'Finance & RE', 'Public Admin'];
+const sectorGrowthFY26 = [3.0, 5.2, 10.7, 1.7, 7.4, 11.0, 10.4, 5.0];
+const sectorGrowthFY25 = [4.2, 11.7, 9.3, 2.9, 7.3, 6.6, 10.0, 5.0];
+
+// Q4 FY26 sector growth (Statement 6)
+const q4Sectors = ['Agriculture', 'Mining', 'Manufacturing', 'Electricity', 'Construction', 'Trade & Hotels', 'Finance & RE', 'Public Admin'];
+const q4Growth  = [3.6, 5.4, 7.3, 4.1, 8.4, 12.5, 10.4, 5.8];
+
+// Expenditure side FY26 real growth (Statement 1)
+const expLabels  = ['PFCE', 'GFCE', 'GFCF', 'Exports', 'Imports'];
+const expGrowth  = [7.7, 5.5, 8.2, 6.3, 5.6];
+const expGrowthFY25 = [5.8, 6.5, 6.4, 6.6, 5.3];
+
+// Nominal GDP levels (₹ lakh crore)
+const gdpLevels = [261.18, 289.84, 318.07, 346.36];
+const gdpYears  = ['FY22-23', 'FY23-24', 'FY24-25\n(FRE)', 'FY25-26\n(PE)'];
+
+// GVA composition (nominal, FY26)
+const gvaLabels = ['Agriculture & Fish', 'Mining & Quar.', 'Manufacturing', 'Electricity & Util.', 'Construction', 'Trade & Hotels', 'Finance & RE', 'Public Admin'];
+const gvaShares = [18, 2, 15, 3, 8, 14, 27, 13];
+
+// Broad sector trend
+const broadYears  = ['FY23-24', 'FY24-25 (FRE)', 'FY25-26 (PE)'];
+const primaryG   = [4.9, 4.9, 3.2];  // Stmt 3 YoY
+const secondaryG = [11.6, 8.0, 8.8]; 
+const tertiaryG  = [7.0, 7.9, 9.3];
+
+// ── Chart instances ────────────────────────────────────────────────────
+let charts = {};
+
+function destroyAll() {
+  Object.values(charts).forEach(c => c.destroy());
+  charts = {};
+}
+
+function buildCharts() {
+  destroyAll();
+  const isDark = document.documentElement.classList.contains('dark');
+  const co = commonOpts(isDark);
+  const orange = '#ea580c';
+  const blue   = '#2563eb';
+  const green  = '#16a34a';
+  const teal   = '#0891b2';
+  const amber  = '#d97706';
+  const grid   = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)';
+  const tx     = isDark ? '#9ca3af' : '#6b7280';
+
+  // Locked semantic color palette — one fixed color per sector, used consistently
+  // across the annual bar chart (chart 3), Q4 bar chart (chart 4), and donut (chart 7).
+  // Order matches: Agriculture, Mining, Manufacturing, Electricity, Construction,
+  //                Trade & Hotels, Finance & RE, Public Admin
+  const SECTOR_COLORS = [
+    '#16a34a',  // Agriculture      — green
+    '#854d0e',  // Mining           — brown
+    '#2563eb',  // Manufacturing    — blue
+    '#f59e0b',  // Electricity      — amber
+    '#64748b',  // Construction     — slate
+    '#0891b2',  // Trade & Hotels   — cyan
+    '#7c3aed',  // Finance & RE     — violet
+    '#dc2626',  // Public Admin     — red
+  ];
+  // Muted versions for FY25 comparison bars
+  const SECTOR_COLORS_MUTED = SECTOR_COLORS.map(c => c + '66');
+
+  // 1. Annual growth — real bars highlight latest year, nominal as line
+  charts.annualGrowth = new Chart(document.getElementById('annualGrowth'), {
+    type: 'bar',
+    data: {
+      labels: annualYears,
+      datasets: [
+        { label: 'Real GDP Growth (%)', data: annualReal,
+          backgroundColor: annualReal.map((_,i) => i===6 ? green : i===5 ? 'rgba(22,163,74,0.5)' : 'rgba(22,163,74,0.25)'),
+          order: 1 },
+        { label: 'Nominal GDP Growth (%)', data: annualNom, type: 'line',
+          borderColor: orange, backgroundColor: 'transparent', tension: 0.3,
+          pointRadius: 4, pointBackgroundColor: orange, borderWidth: 2, order: 0 }
+      ]
+    },
+    options: { ...co, plugins: { ...co.plugins, tooltip: { mode: 'index' } } }
+  });
+
+  // 2. Quarterly growth — consistent green/orange, FY26 quarters slightly bolder
+  charts.qtrGrowth = new Chart(document.getElementById('qtrGrowth'), {
+    type: 'line',
+    data: {
+      labels: qLabels,
+      datasets: [
+        { label: 'Real GDP Growth (%)', data: qReal, borderColor: green,
+          backgroundColor: 'rgba(22,163,74,0.1)', tension: 0.3, fill: true,
+          pointRadius: 5,
+          pointBackgroundColor: qReal.map((_,i) => i>=4 ? green : 'rgba(22,163,74,0.45)'),
+          pointBorderColor: green, borderWidth: 2 },
+        { label: 'Nominal GDP Growth (%)', data: qNominal, borderColor: orange,
+          backgroundColor: 'transparent', tension: 0.3, pointRadius: 4,
+          pointBackgroundColor: orange, borderWidth: 2, borderDash: [4,3] }
+      ]
+    },
+    options: { ...co, plugins: { ...co.plugins, annotation: {}, tooltip: { mode: 'index' } } }
+  });
+
+  // 3. Sector annual — FY25 muted, FY26 uses locked palette per sector
+  charts.sectorAnnual = new Chart(document.getElementById('sectorAnnual'), {
+    type: 'bar',
+    data: {
+      labels: sectors,
+      datasets: [
+        { label: 'FY25 Growth (%)', data: sectorGrowthFY25,
+          backgroundColor: SECTOR_COLORS_MUTED, borderRadius: 3 },
+        { label: 'FY26 PE Growth (%)', data: sectorGrowthFY26,
+          backgroundColor: SECTOR_COLORS, borderRadius: 3 }
+      ]
+    },
+    options: { ...co, indexAxis: 'y',
+      scales: {
+        x: { grid: { color: grid }, ticks: { color: tx, font: { size: 10 } } },
+        y: { grid: { display: false }, ticks: { color: tx, font: { size: 10 } } }
+      },
+      plugins: { ...co.plugins, legend: { labels: { color: tx, font: { size: 11 }, boxWidth: 10 } } }
+    }
+  });
+
+  // 4. Q4 sector — same locked palette (q4Sectors matches SECTOR_COLORS order)
+  charts.sectorQ4 = new Chart(document.getElementById('sectorQ4'), {
+    type: 'bar',
+    data: {
+      labels: q4Sectors,
+      datasets: [
+        { label: 'Q4 FY26 Real GVA Growth (%)', data: q4Growth,
+          backgroundColor: SECTOR_COLORS, borderRadius: 3 }
+      ]
+    },
+    options: { ...co, indexAxis: 'y',
+      scales: {
+        x: { grid: { color: grid }, ticks: { color: tx, font: { size: 10 } } },
+        y: { grid: { display: false }, ticks: { color: tx, font: { size: 10 } } }
+      },
+      plugins: { ...co.plugins, legend: { display: false } }
+    }
+  });
+
+  // 5. Expenditure — fixed colors per component (not value-driven)
+  const EXP_COLORS     = ['#2563eb','#7c3aed','#ea580c','#0891b2','#dc2626'];
+  const EXP_COLORS_MUTED = EXP_COLORS.map(c => c + '66');
+  charts.expenditure = new Chart(document.getElementById('expenditure'), {
+    type: 'bar',
+    data: {
+      labels: expLabels,
+      datasets: [
+        { label: 'FY25 (FRE) %', data: expGrowthFY25,
+          backgroundColor: EXP_COLORS_MUTED, borderRadius: 3 },
+        { label: 'FY26 PE %', data: expGrowth,
+          backgroundColor: EXP_COLORS, borderRadius: 3 }
+      ]
+    },
+    options: { ...co, plugins: { ...co.plugins, tooltip: { mode: 'index' } } }
+  });
+
+  // 6. Nominal level — single-series, highlight PE bar in orange, others muted
+  charts.nominalLevel = new Chart(document.getElementById('nominalLevel'), {
+    type: 'bar',
+    data: {
+      labels: gdpYears,
+      datasets: [
+        { label: 'Nominal GDP (₹ Lakh Crore)', data: gdpLevels,
+          backgroundColor: gdpLevels.map((_,i) => i===3 ? orange : 'rgba(234,88,12,0.35)'),
+          borderRadius: 4 }
+      ]
+    },
+    options: { ...co,
+      plugins: { ...co.plugins, legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `₹${ctx.parsed.y.toFixed(2)} lakh crore` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: tx } },
+        y: { grid: { color: grid }, ticks: { color: tx, callback: v => `₹${v}L Cr` }, min: 200 }
+      }
+    }
+  });
+
+  // 7. GVA composition donut — same SECTOR_COLORS as bar charts
+  charts.gvaComp = new Chart(document.getElementById('gvaComp'), {
+    type: 'doughnut',
+    data: {
+      labels: gvaLabels,
+      datasets: [{ data: gvaShares, backgroundColor: SECTOR_COLORS, borderWidth: 2,
+        borderColor: isDark ? '#1f2937' : '#ffffff' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { color: tx, font: { size: 10 }, boxWidth: 12, padding: 8 } },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed}%` } }
+      },
+      cutout: '55%'
+    }
+  });
+
+  // 8. Broad sector trend
+  charts.broadSector = new Chart(document.getElementById('broadSector'), {
+    type: 'bar',
+    data: {
+      labels: broadYears,
+      datasets: [
+        { label: 'Primary', data: primaryG, backgroundColor: '#16a34a', borderRadius: 3 },
+        { label: 'Secondary', data: secondaryG, backgroundColor: blue, borderRadius: 3 },
+        { label: 'Tertiary', data: tertiaryG, backgroundColor: orange, borderRadius: 3 }
+      ]
+    },
+    options: { ...co, plugins: { ...co.plugins, tooltip: { mode: 'index' } } }
+  });
+}
+
+buildCharts();
+
+// ── Indicators Annexure Table ──────────────────────────────────────────
+// Data from Annexure: Year-on-Year Growth Rate (%) in Indicators
+// cat: agri | indus | trans | fiscal | trade
+const INDICATORS = [
+  { name: 'Total Food Grain Production',                   cat: 'agri',   q4: 9.6,   ann: 5.3  },
+  { name: 'Cereals',                                       cat: 'agri',   q4: 10.5,  ann: 5.2  },
+  { name: 'Rice',                                          cat: 'agri',   q4: 10.7,  ann: 2.6  },
+  { name: 'Wheat',                                         cat: 'agri',   q4: 7.2,   ann: 2.3  },
+  { name: 'Cement Production Index',                       cat: 'indus',  q4: 8.2,   ann: 8.7  },
+  { name: 'Finished Steel Consumption',                    cat: 'indus',  q4: 10.4,  ann: 8.0  },
+  { name: 'Natural Gas Consumption',                       cat: 'indus',  q4: -2.8,  ann: -3.0 },
+  { name: 'Sales of Commercial Vehicles',                  cat: 'trans',  q4: 19.0,  ann: 12.6 },
+  { name: 'Sales of Three Wheelers',                       cat: 'trans',  q4: 26.7,  ann: 12.8 },
+  { name: 'Cargo Handled at Major Ports',                  cat: 'trans',  q4: 4.3,   ann: 7.0  },
+  { name: 'Cargo Handled at Minor Ports',                  cat: 'trans',  q4: -1.0,  ann: 1.4  },
+  { name: 'Air Traffic: Domestic Passengers and Cargo',    cat: 'trans',  q4: 3.7,   ann: 3.7  },
+  { name: 'Air Traffic: International Passengers and Cargo', cat: 'trans', q4: 11.1, ann: 9.7  },
+  { name: 'Railway Net Tonne Km',                          cat: 'trans',  q4: 1.9,   ann: 1.4  },
+  { name: 'Railway Passenger Km',                          cat: 'trans',  q4: 4.5,   ann: 5.3  },
+  { name: 'Central GST (CGST)',                            cat: 'fiscal', q4: 9.0,   ann: 6.4  },
+  { name: 'Custom Duty',                                   cat: 'fiscal', q4: 9.5,   ann: 13.5 },
+  { name: 'Union Excise',                                  cat: 'fiscal', q4: 21.7,  ann: 13.9 },
+  { name: 'Fertilizer Subsidy (Urea + NBF)',               cat: 'fiscal', q4: 44.2,  ann: 21.7 },
+  { name: 'Household Vehicle Registration',                cat: 'trans',  q4: 28.7,  ann: 17.4 },
+  { name: 'Passenger Transport Vehicle Registration',      cat: 'trans',  q4: 19.8,  ann: 14.7 },
+  { name: 'Goods Transport Vehicle Registration',          cat: 'trans',  q4: 27.0,  ann: 18.3 },
+  { name: 'Export of Goods and Services',                  cat: 'trade',  q4: 8.3,   ann: 9.3  },
+  { name: 'Import of Goods and Services',                  cat: 'trade',  q4: 16.2,  ann: 11.1 },
+  { name: 'Import of Transport Goods',                     cat: 'trade',  q4: -1.9,  ann: 6.0  },
+  { name: 'Import of Machinery and Equipment',             cat: 'trade',  q4: 24.9,  ann: 19.3 },
+  { name: 'WPI: Food Grains',                              cat: 'trade',  q4: -3.1,  ann: -2.5 },
+  { name: 'WPI: Crude Petroleum and Natural Gas',          cat: 'trade',  q4: 8.3,   ann: -5.1 },
+  { name: 'WPI: Manufactured Products',                    cat: 'trade',  q4: 3.0,   ann: 2.3  },
+];
+
+const CAT_META = {
+  agri:   { label: 'Agriculture', color: '#16a34a', bg: '#dcfce7' },
+  indus:  { label: 'Industry',    color: '#2563eb', bg: '#dbeafe' },
+  trans:  { label: 'Transport',   color: '#0891b2', bg: '#cffafe' },
+  fiscal: { label: 'Fiscal',      color: '#7c3aed', bg: '#ede9fe' },
+  trade:  { label: 'Trade/Prices',color: '#ea580c', bg: '#ffedd5' },
+};
+
+function cellBg(v) {
+  if (v === null || v === undefined) return '';
+  if (v < 0)   return 'background:#fee2e2;color:#991b1b';
+  if (v < 3)   return 'background:#fef9c3;color:#854d0e';
+  if (v < 10)  return 'background:#bbf7d0;color:#166534';
+  return 'background:#dcfce7;color:#166534';
+}
+
+function sparkBar(q4, ann) {
+  const max = Math.max(Math.abs(q4||0), Math.abs(ann||0), 10);
+  const barW = v => Math.min(Math.abs(v||0) / max * 44, 44).toFixed(1);
+  const barC = v => (v||0) < 0 ? '#ef4444' : '#ea580c';
+  return `<div style="display:flex;flex-direction:column;gap:3px;min-width:52px">
+    <div style="display:flex;align-items:center;gap:3px">
+      <div style="width:${barW(q4)}px;height:5px;border-radius:2px;background:${barC(q4)}"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:3px">
+      <div style="width:${barW(ann)}px;height:5px;border-radius:2px;background:${barC(ann)};opacity:0.45"></div>
+    </div>
+  </div>`;
+}
+
+let currentCat = 'all';
+let sortCol = -1, sortAsc = true;
+
+function renderIndicators(data) {
+  const tbody = document.getElementById('indBody');
+  tbody.innerHTML = data.map(row => {
+    const m = CAT_META[row.cat];
+    const pill = `<span class="cat-pill" style="background:${m.bg};color:${m.color}">${m.label}</span>`;
+    const q4fmt  = row.q4  != null ? (row.q4  > 0 ? '+' : '') + row.q4.toFixed(1)  + '%' : 'n/a';
+    const annfmt = row.ann != null ? (row.ann > 0 ? '+' : '') + row.ann.toFixed(1) + '%' : 'n/a';
+    return `<tr data-cat="${row.cat}">
+      <td style="color:var(--text);font-weight:500">${row.name} <span style="margin-left:6px">${pill}</span></td>
+      <td style="text-align:center;font-weight:700;font-size:0.85rem;${cellBg(row.q4)};border-radius:4px;padding:5px 12px">${q4fmt}</td>
+      <td style="text-align:center;font-weight:700;font-size:0.85rem;${cellBg(row.ann)};border-radius:4px;padding:5px 12px">${annfmt}</td>
+      <td style="text-align:center">${sparkBar(row.q4, row.ann)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function filterIndicators(cat) {
+  currentCat = cat;
+  document.querySelectorAll('.ind-filter').forEach(b => {
+    b.classList.toggle('active', b.dataset.cat === cat);
+  });
+  const filtered = cat === 'all' ? INDICATORS : INDICATORS.filter(r => r.cat === cat);
+  renderIndicators(filtered);
+}
+
+function sortTable(col) {
+  if (sortCol === col) sortAsc = !sortAsc; else { sortCol = col; sortAsc = false; }
+  const filtered = currentCat === 'all' ? [...INDICATORS] : INDICATORS.filter(r => r.cat === currentCat);
+  filtered.sort((a, b) => {
+    let va, vb;
+    if (col === 0) { va = a.name; vb = b.name; return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va); }
+    va = col === 1 ? (a.q4  ?? -999) : (a.ann ?? -999);
+    vb = col === 1 ? (b.q4  ?? -999) : (b.ann ?? -999);
+    return sortAsc ? va - vb : vb - va;
+  });
+  renderIndicators(filtered);
+}
+
+// Initial render — sorted by Annual descending
+sortCol = 2; sortAsc = false;
+const initSorted = [...INDICATORS].sort((a,b) => (b.ann??-999) - (a.ann??-999));
+renderIndicators(initSorted);
+</script>
+</body>
+</html>
