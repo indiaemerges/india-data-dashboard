@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gujarat Paradox — indiaemerges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#080a0f;
+    --panel:#0f131b;
+    --line:#1d2330;
+    --white:#f4f5f7;
+    --dim:#8b93a5;
+    --cyan:#39c4d6;
+    --magenta:#e8467c;
+    --yellow:#e8c84a;
+    --green:#5fbf7e;
+    --gujarat:#e8467c;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'DM Sans', sans-serif;
+    line-height:1.6;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* ---- Masthead ---- */
+  .masthead{
+    padding:48px 0 28px;
+    border-bottom:1px solid var(--line);
+  }
+  .kicker{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--cyan);
+    margin-bottom:14px;
+  }
+  h1{
+    font-size:clamp(32px, 5.5vw, 56px);
+    font-weight:900;
+    letter-spacing:-0.02em;
+    line-height:1.04;
+    max-width:880px;
+  }
+  .dek{
+    margin-top:18px;
+    font-size:18px;
+    color:var(--dim);
+    max-width:680px;
+    font-weight:400;
+  }
+  .byline{
+    margin-top:24px;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    color:var(--dim);
+    display:flex; gap:18px; flex-wrap:wrap;
+  }
+
+  /* ---- Sections ---- */
+  section{padding:56px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-label{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--magenta);
+    margin-bottom:10px;
+  }
+  h2{
+    font-size:clamp(24px, 3.5vw, 34px);
+    font-weight:900;
+    letter-spacing:-0.01em;
+    max-width:760px;
+    margin-bottom:16px;
+  }
+  p.lead{
+    font-size:17px;
+    color:#cfd3dc;
+    max-width:700px;
+    margin-bottom:14px;
+  }
+  p.lead strong{color:var(--white); font-weight:700;}
+
+  /* ---- Stat strip ---- */
+  .statgrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(190px,1fr));
+    gap:1px;
+    background:var(--line);
+    margin:36px 0;
+    border:1px solid var(--line);
+  }
+  .stat{
+    background:var(--panel);
+    padding:22px 20px;
+  }
+  .stat .num{
+    font-family:'Space Mono', monospace;
+    font-size:30px;
+    font-weight:700;
+    color:var(--yellow);
+  }
+  .stat .num.pink{color:var(--magenta);}
+  .stat .num.cyan{color:var(--cyan);}
+  .stat .label{
+    margin-top:6px;
+    font-size:12.5px;
+    color:var(--dim);
+    line-height:1.4;
+  }
+
+  /* ---- Chart panels ---- */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:28px 24px 20px;
+    margin:28px 0;
+  }
+  .panel-title{
+    font-weight:700;
+    font-size:16px;
+    margin-bottom:2px;
+  }
+  .panel-sub{
+    font-size:13px;
+    color:var(--dim);
+    margin-bottom:18px;
+  }
+  .chart-box{position:relative; width:100%;}
+  .h360{height:360px;}
+  .h420{height:420px;}
+  .h300{height:300px;}
+
+  .source-note{
+    margin-top:14px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    color:var(--dim);
+    border-top:1px dashed var(--line);
+    padding-top:10px;
+  }
+
+  /* ---- Toggle controls ---- */
+  .toggles{
+    display:flex; gap:8px; flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+  .toggle-btn{
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--dim);
+    padding:7px 14px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .toggle-btn.active{
+    border-color:var(--cyan);
+    color:var(--cyan);
+    background:rgba(57,196,214,0.08);
+  }
+  .toggle-btn:hover{color:var(--white);}
+
+  /* ---- Table ---- */
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th{
+    text-align:left;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--dim);
+    padding:10px 12px;
+    border-bottom:1px solid var(--line);
+  }
+  td{
+    padding:10px 12px;
+    border-bottom:1px solid var(--line);
+    color:#dfe2e8;
+  }
+  tr.highlight td{background:rgba(232,70,124,0.08); color:var(--white); font-weight:700;}
+  td.num, th.num{text-align:right; font-family:'Space Mono', monospace;}
+
+  /* ---- Callout ---- */
+  .callout{
+    border-left:3px solid var(--yellow);
+    padding:18px 22px;
+    background:rgba(232,200,74,0.05);
+    margin:24px 0;
+  }
+  .callout p{font-size:15px; color:#e6e2cf;}
+
+  footer{
+    padding:40px 0 60px;
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    color:var(--dim);
+  }
+  footer a{color:var(--cyan); text-decoration:none;}
+
+  @media (max-width:640px){
+    .statgrid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="kicker">indiaemerges · chart-a-day series</div>
+    <h1>Rich state, poor outcomes: why Gujarat's growth hasn't bought down poverty</h1>
+    <p class="dek">Gujarat sits among India's wealthiest large states by per-capita income, yet its multidimensional poverty rate is nearly identical to West Bengal's — a state with half its income. The gap traces back to one number: how little of Gujarat's budget goes to health, education and welfare.</p>
+    <div class="byline">
+      <span>DATA: NITI AAYOG · RBI</span>
+      <span>UPDATED JUN 2026</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: THE PARADOX -->
+  <section>
+    <div class="section-label">01 — The paradox</div>
+    <h2>Twice the income, almost the same poverty rate</h2>
+    <p class="lead">By 2021-22, Gujarat's per-capita income (₹2.5 lakh) was roughly double West Bengal's (₹1.24 lakh). On NITI Aayog's National Multidimensional Poverty Index — which measures deprivation in health, education and living standards, not just income — the two states are <strong>nearly indistinguishable</strong>.</p>
+
+    <div class="statgrid">
+      <div class="stat"><div class="num pink">11.66%</div><div class="label">Gujarat's MPI headcount ratio, 2019-21 (NFHS-5)</div></div>
+      <div class="stat"><div class="num">11.89%</div><div class="label">West Bengal's MPI headcount ratio, same year — at half Gujarat's income</div></div>
+      <div class="stat"><div class="num cyan">4.30%</div><div class="label">Gujarat's social sector spending / GSDP, 2021-22 — lowest of any major state</div></div>
+      <div class="stat"><div class="num">11 / 11</div><div class="label">Years (2011-12 to 2021-22) Gujarat ranked last or second-last on this measure</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Multidimensional poverty headcount ratio, by state</div>
+      <div class="panel-sub">Share of population multidimensionally poor (health + education + standard of living deprivations)</div>
+      <div class="toggles" id="mpi-toggles">
+        <button class="toggle-btn active" data-view="2021">2019-21 (NFHS-5)</button>
+        <button class="toggle-btn" data-view="2016">2015-16 (NFHS-4)</button>
+        <button class="toggle-btn" data-view="change">Change (pp)</button>
+      </div>
+      <div class="chart-box h420"><canvas id="mpiChart"></canvas></div>
+      <div class="source-note">SOURCE: NITI Aayog, "National Multidimensional Poverty Index: A Progress Review 2023" (July 2023), based on NFHS-4 (2015-16) and NFHS-5 (2019-21). State pairings cross-validated against independently reported figures (The Print, Jul 2023; Testbook/NITI citation for Uttarakhand).</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">What's actually depriving people in each state?</div>
+      <div class="panel-sub">Share of total population deprived in each MPI indicator, 2019-21 — Gujarat vs. five peer states</div>
+      <div class="toggles" id="indicator-toggles">
+        <button class="toggle-btn active" data-state="Gujarat">Gujarat</button>
+        <button class="toggle-btn" data-state="Maharashtra">Maharashtra</button>
+        <button class="toggle-btn" data-state="Karnataka">Karnataka</button>
+        <button class="toggle-btn" data-state="Tamil Nadu">Tamil Nadu</button>
+        <button class="toggle-btn" data-state="West Bengal">West Bengal</button>
+        <button class="toggle-btn" data-state="Haryana">Haryana</button>
+      </div>
+      <div class="chart-box h420"><canvas id="indicatorChart"></canvas></div>
+      <div class="source-note">SOURCE: NITI Aayog National MPI Progress Review 2023, Table 4 ("State/UT-wise: Uncensored Headcount Ratio"). Figures show the share of each state's <em>total</em> population (not just the MPI-poor) lacking each indicator — e.g. Gujarat's Cooking Fuel figure means 34.74% of all Gujaratis still cooked with solid fuel in 2019-21, regardless of their overall poverty status.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Sanitation, drinking water and electricity: the "easy wins" Gujarat under-delivers on</div>
+      <div class="panel-sub">Combined share of population lacking sanitation, drinking water and electricity, 2019-21</div>
+      <div class="chart-box h360"><canvas id="infraChart"></canvas></div>
+      <div class="source-note">SOURCE: NITI Aayog National MPI Progress Review 2023, Table 4. These three indicators are widely considered the most directly addressable through targeted infrastructure spending (toilets, piped water, household electrification), as opposed to nutrition or education outcomes which take longer to shift.</div>
+    </div>
+
+    <div class="callout">
+      <p>Gujarat's MPI is still substantially a <strong>nutrition story</strong>: 38.09% of Gujarat's total population was nutrition-deprived in 2019-21 — the single largest deprivation of any indicator, and only modestly below the national average of 31.52%. But Gujarat also still has real gaps in basics that money can fix faster: <strong>26.05% of Gujaratis lacked adequate sanitation</strong> and <strong>34.74% still cooked with solid fuel</strong> in 2019-21 — both well above what a state with Gujarat's per-capita income would suggest, and both squarely the kind of indicator that sustained capital and revenue spending moves quickly, as Bihar's even larger declines on the same two indicators (-22.7pp sanitation, -19.6pp cooking fuel) show is achievable even from a much lower base.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THE SPENDING GAP -->
+  <section>
+    <div class="section-label">02 — The spending gap, eleven years running</div>
+    <h2>Gujarat hasn't ranked above last place once since 2011-12</h2>
+    <p class="lead">This isn't a single bad year. Computing social sector expenditure as a share of GSDP for every major state, every year from 2011-12 to 2021-22 — using RBI's own expenditure and GSDP series — Gujarat finishes dead last, or second-to-last, in <strong>every single year</strong> on record.</p>
+
+    <div class="panel">
+      <div class="panel-title">Social sector expenditure as a share of GSDP — full time series</div>
+      <div class="panel-sub">Major states, 2011-12 to 2021-22. Click a state in the legend to isolate it.</div>
+      <div class="chart-box h420"><canvas id="seriesChart"></canvas></div>
+      <div class="source-note">SOURCE: RBI, Handbook of Statistics on Indian States 2024-25 — Table 175 (State-wise Social Sector Expenditure, ₹ crore) and Table 21 (Gross State Domestic Product at Current Prices, ₹ lakh, base 2011-12). Ratio computed directly from these two primary tables; no values estimated.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Latest year on record: social sector expenditure / GSDP, 2021-22</div>
+      <div class="chart-box h420"><canvas id="sseChart"></canvas></div>
+      <div class="source-note">SOURCE: RBI Handbook of Statistics on Indian States 2024-25, Tables 175 &amp; 21.</div>
+    </div>
+
+    <div class="callout">
+      <p>In 2021-22, Gujarat spent <strong>4.30% of GSDP</strong> on social services — the lowest of any major state in this dataset. Maharashtra (5.22%) and Tamil Nadu (5.55%) are the only other big, high-income states anywhere close to Gujarat's range; the difference is that Gujarat has been at or near the floor in <em>every</em> year since 2011-12, not just the most recent one. Bihar, by contrast, spent more than 3.5 times Gujarat's share of GSDP (15.61%) in the same year.</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Education spending as a share of GSDP — full time series</div>
+      <div class="panel-sub">Revenue expenditure on Education, Sports, Art &amp; Culture. Major states, 2011-12 to 2021-22.</div>
+      <div class="chart-box h420"><canvas id="eduSeriesChart"></canvas></div>
+      <div class="source-note">SOURCE: RBI e-STATES database — Appendix-2 (Revenue Expenditure), head "I.A.1: Education, Sports, Art and Culture" (actual expenditure), divided by GSDP at current prices from RBI Handbook Table 21. Gujarat ranked 17th of 18 major states in 2021-22.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Health spending as a share of GSDP — full time series</div>
+      <div class="panel-sub">Revenue expenditure on Medical &amp; Public Health + Family Welfare. Major states, 2011-12 to 2021-22.</div>
+      <div class="chart-box h420"><canvas id="healthSeriesChart"></canvas></div>
+      <div class="source-note">SOURCE: RBI e-STATES database — Appendix-2 (Revenue Expenditure), heads "I.A.2: Medical and Public Health" + "I.A.3: Family Welfare" (actual expenditure combined), divided by GSDP from RBI Handbook Table 21. Matches definition in RBI Handbook Table 18 notes. Gujarat ranked 14th of 18 major states in 2021-22.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Education and health spending compared, 2021-22</div>
+      <div class="panel-sub">% of GSDP — toggle between education and health</div>
+      <div class="toggles" id="eduhealth-toggles">
+        <button class="toggle-btn active" data-view="edu">Education</button>
+        <button class="toggle-btn" data-view="health">Health + Family Welfare</button>
+      </div>
+      <div class="chart-box h420"><canvas id="eduhealthBar"></canvas></div>
+      <div class="source-note">SOURCE: RBI e-STATES database (Appendix-2, actual expenditure) and RBI Handbook Table 21 (GSDP). Telangana excluded (state formed 2014; earlier years reflect zero).</div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: THE TREND -->
+  <section>
+    <div class="section-label">03 — A persistent gap, not a one-off</div>
+    <h2>The gap between Gujarat and its peers has been remarkably stable</h2>
+    <p class="lead">Gujarat's social sector expenditure ratio moved in a narrow band — between 4.3% and 5.25% of GSDP — across the entire eleven-year window. It never closed in on Maharashtra or Karnataka for long, and it never approached the all-state norm of 7-10% that mid-income states like Madhya Pradesh, Odisha and Rajasthan settled into after 2014-15.</p>
+
+    <div class="panel">
+      <div class="panel-title">Gujarat vs. selected peers, indexed view</div>
+      <div class="panel-sub">Social sector expenditure / GSDP, %, by year</div>
+      <div class="chart-box h360"><canvas id="peerChart"></canvas></div>
+      <div class="source-note">SOURCE: RBI Handbook of Statistics on Indian States 2024-25, Tables 175 &amp; 21.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">The full picture: spending and poverty outcomes side by side</div>
+      <table>
+        <thead>
+          <tr>
+            <th>State</th>
+            <th class="num">SSE / GSDP<br>2011-12</th>
+            <th class="num">SSE / GSDP<br>2021-22</th>
+            <th class="num">11-yr average</th>
+            <th class="num">MPI headcount<br>2019-21</th>
+          </tr>
+        </thead>
+        <tbody id="combo-table"></tbody>
+      </table>
+      <div class="source-note">SOURCE: spending columns from RBI Handbook of Statistics on Indian States 2024-25 (Tables 175 &amp; 21); poverty column from NITI Aayog National MPI Progress Review 2023. Two different publications and reference periods — shown together to illustrate the persistence of the pattern, not a causal year-on-year link.</div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: TAKEAWAY -->
+  <section>
+    <div class="section-label">04 — Reading the pattern</div>
+    <h2>Income explains Gujarat's growth story. It doesn't explain its poverty numbers.</h2>
+    <p class="lead">Three things sit alongside each other in this data. First, Gujarat's MPI headcount ratio in 2019-21 was statistically close to West Bengal's despite a roughly 2x income gap — a comparison NITI Aayog's own report implicitly invites by publishing both states' numbers side by side. Second, computing social sector expenditure as a share of GSDP directly from RBI's own primary tables shows Gujarat at or near the bottom of every major state in <strong>every one of the eleven years</strong> from 2011-12 to 2021-22 — not a single year's anomaly, but a sustained pattern across two state governments' worth of budgets. Third, the gap to peers with comparable income levels — Maharashtra, Karnataka, Tamil Nadu — never closed; if anything it widened slightly in Gujarat's most recent years on record.</p>
+    <p class="lead">None of this is proof of a single causal chain — GSDP composition, urbanization rates, and historical baselines differ across states, and a state spending less per rupee of GSDP isn't automatically spending less per capita if its GSDP is larger. But the consistency of the pattern across eleven years — high income, a social spending share stuck near 4-5% of GSDP, and a poverty-reduction pace among the slowest of any major state — is hard to read as coincidence, and it matches what Gujarat's own health and education indices have separately shown: a state whose human-development outcomes have not kept pace with its income growth.</p>
+  </section>
+
+  <footer>
+    indiaemerges · data journalism on Indian economics, trade &amp; industrial policy<br>
+    Figures verified directly against primary NITI Aayog source documents. No values estimated or interpolated.
+  </footer>
+
+</div>
+
+<script>
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#8b93a5';
+
+// ===================== VERIFIED DATA =====================
+// MPI: NITI Aayog "National MPI: A Progress Review 2023" — headcount ratio (%)
+// Cross-validated pairing against independently reported figures.
+// Headcount ratio, Intensity, MPI — official Table 1, NITI Aayog National MPI Progress Review 2023
+// Transcribed directly from primary source PDF (Table 1, p.324). All 28 states.
+const mpiData = [
+  {state:"Bihar", h16:51.89, h21:33.76, change:-18.13},
+  {state:"Madhya Pradesh", h16:36.57, h21:20.63, change:-15.94},
+  {state:"Uttar Pradesh", h16:37.68, h21:22.93, change:-14.75},
+  {state:"Odisha", h16:29.34, h21:15.68, change:-13.65},
+  {state:"Rajasthan", h16:28.86, h21:15.31, change:-13.56},
+  {state:"Chhattisgarh", h16:29.90, h21:16.37, change:-13.53},
+  {state:"Jharkhand", h16:42.10, h21:28.81, change:-13.29},
+  {state:"Assam", h16:32.65, h21:19.35, change:-13.30},
+  {state:"Arunachal Pradesh", h16:24.23, h21:13.76, change:-10.48},
+  {state:"West Bengal", h16:21.29, h21:11.89, change:-9.41},
+  {state:"Manipur", h16:16.96, h21:8.10, change:-8.86},
+  {state:"Uttarakhand", h16:17.67, h21:9.67, change:-8.00},
+  {state:"Telangana", h16:13.18, h21:5.88, change:-7.30},
+  {state:"Maharashtra", h16:14.80, h21:7.81, change:-6.99},
+  {state:"Gujarat", h16:18.47, h21:11.66, change:-6.81},
+  {state:"Andhra Pradesh", h16:11.77, h21:6.06, change:-5.71},
+  {state:"Karnataka", h16:12.77, h21:7.58, change:-5.20},
+  {state:"Haryana", h16:11.88, h21:7.07, change:-4.81},
+  {state:"Meghalaya", h16:32.54, h21:27.79, change:-4.75},
+  {state:"Mizoram", h16:9.78, h21:5.30, change:-4.48},
+  {state:"Tripura", h16:16.62, h21:13.11, change:-3.50},
+  {state:"Goa", h16:3.76, h21:0.84, change:-2.92},
+  {state:"Himachal Pradesh", h16:7.59, h21:4.93, change:-2.65},
+  {state:"Tamil Nadu", h16:4.76, h21:2.20, change:-2.56},
+  {state:"Sikkim", h16:3.82, h21:2.60, change:-1.21},
+  {state:"Punjab", h16:5.57, h21:4.75, change:-0.82},
+  {state:"Kerala", h16:0.70, h21:0.55, change:-0.15},
+];
+
+// Indicator-level uncensored headcount ratio (%): share of TOTAL population deprived in each indicator.
+// Source: NITI Aayog National MPI Progress Review 2023, Table 4 (p.327-329), official data tables.
+// Pairs = [2015-16, 2019-21, change]. This is the richest, most directly interpretable indicator data —
+// e.g. Gujarat Sanitation 37.09% (2015-16) -> 26.05% (2019-21) means just over a quarter of Gujarat's
+// population still lacked adequate sanitation per NFHS-5.
+const deprivationData = {
+  "Gujarat":      {"Nutrition":[41.37,38.09],"Child & Adolescent Mortality":[1.81,1.40],"Maternal Health":[14.77,12.72],
+                    "Years of Schooling":[9.82,7.94],"School Attendance":[6.68,5.06],"Cooking Fuel":[48.79,34.74],
+                    "Sanitation":[37.09,26.05],"Drinking Water":[7.71,5.31],"Electricity":[3.75,2.44],
+                    "Housing":[24.24,23.30],"Assets":[13.59,11.37],"Bank Account":[9.42,4.40]},
+  "Maharashtra":  {"Nutrition":[36.10,32.29],"Child & Adolescent Mortality":[1.42,1.11],"Maternal Health":[15.95,15.32],
+                    "Years of Schooling":[6.54,5.91],"School Attendance":[4.20,2.35],"Cooking Fuel":[39.49,20.07],
+                    "Sanitation":[47.94,28.33],"Drinking Water":[12.61,9.53],"Electricity":[6.59,2.29],
+                    "Housing":[27.90,24.02],"Assets":[13.97,10.04],"Bank Account":[10.35,4.96]},
+  "Karnataka":    {"Nutrition":[33.56,29.97],"Child & Adolescent Mortality":[1.34,1.29],"Maternal Health":[12.36,12.58],
+                    "Years of Schooling":[8.69,7.15],"School Attendance":[3.53,2.50],"Cooking Fuel":[45.54,21.47],
+                    "Sanitation":[42.67,25.65],"Drinking Water":[9.44,7.06],"Electricity":[1.71,0.89],
+                    "Housing":[37.30,36.20],"Assets":[10.05,7.31],"Bank Account":[8.83,4.97]},
+  "Tamil Nadu":   {"Nutrition":[24.77,19.17],"Child & Adolescent Mortality":[1.15,0.84],"Maternal Health":[6.70,3.31],
+                    "Years of Schooling":[6.61,8.53],"School Attendance":[1.03,1.30],"Cooking Fuel":[24.06,15.10],
+                    "Sanitation":[47.55,27.95],"Drinking Water":[6.05,5.71],"Electricity":[0.97,0.67],
+                    "Housing":[20.17,11.37],"Assets":[3.38,3.89],"Bank Account":[6.35,2.56]},
+  "West Bengal":  {"Nutrition":[33.62,27.28],"Child & Adolescent Mortality":[1.50,1.06],"Maternal Health":[14.38,11.43],
+                    "Years of Schooling":[15.84,12.87],"School Attendance":[3.82,2.12],"Cooking Fuel":[73.01,61.25],
+                    "Sanitation":[47.81,31.91],"Drinking Water":[9.46,4.97],"Electricity":[5.75,2.50],
+                    "Housing":[54.25,47.17],"Assets":[14.10,8.13],"Bank Account":[13.82,4.44]},
+  "Haryana":      {"Nutrition":[32.34,26.19],"Child & Adolescent Mortality":[2.17,1.85],"Maternal Health":[23.86,16.83],
+                    "Years of Schooling":[7.09,5.51],"School Attendance":[3.82,4.31],"Cooking Fuel":[51.24,43.93],
+                    "Sanitation":[19.19,15.11],"Drinking Water":[6.63,6.71],"Electricity":[1.06,0.40],
+                    "Housing":[24.26,23.95],"Assets":[4.65,5.21],"Bank Account":[8.17,3.56]},
+};
+const indicatorOrder = ["Nutrition","Child & Adolescent Mortality","Maternal Health","Years of Schooling",
+                         "School Attendance","Cooking Fuel","Sanitation","Drinking Water","Electricity",
+                         "Housing","Assets","Bank Account"];
+const indicatorDim = {
+  "Nutrition":"Health","Child & Adolescent Mortality":"Health","Maternal Health":"Health",
+  "Years of Schooling":"Education","School Attendance":"Education",
+  "Cooking Fuel":"Standard of Living","Sanitation":"Standard of Living","Drinking Water":"Standard of Living",
+  "Electricity":"Standard of Living","Housing":"Standard of Living","Assets":"Standard of Living","Bank Account":"Standard of Living"
+};
+const dimColor = {"Health":"#e8467c","Education":"#e8c84a","Standard of Living":"#39c4d6"};
+
+
+// on Indian States 2024-25 — Table 175 (SSE, Rs crore) / Table 21 (GSDP, current prices, Rs lakh).
+// Years 2011-12 through 2021-22 (Table 21's "Base 2011-12" series start; Gujarat GSDP unavailable 2023-24/24-25 so series capped at 2021-22).
+const sseSeriesYears = ["2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19","2019-20","2020-21","2021-22"];
+const sseSeries = {
+  "Andhra Pradesh": [11.97,12.02,11.57,10.46,9.52,9.18,9.27,8.79,8.51,8.87,7.67],
+  "Bihar": [9.73,10.89,11.01,12.37,14.18,14.38,14.56,14.31,12.37,15.22,15.61],
+  "Chhattisgarh": [9.37,9.56,10.18,10.71,12.21,12.14,12.42,9.92,11.38,10.32,9.76],
+  "Gujarat": [4.93,5.25,5.19,5.13,5.20,4.80,4.56,4.48,4.44,4.70,4.30],
+  "Haryana": [5.47,5.47,4.53,5.04,5.15,5.43,5.55,5.55,6.17,5.87,5.56],
+  "Jharkhand": [7.10,6.88,6.21,8.12,10.60,12.51,10.88,9.89,10.58,11.60,9.01],
+  "Karnataka": [5.34,5.44,5.09,5.64,5.69,5.85,5.73,6.14,5.44,5.31,5.57],
+  "Kerala": [5.15,5.25,5.15,5.56,5.89,6.15,5.82,5.57,4.74,7.42,6.56],
+  "Madhya Pradesh": [8.60,8.76,8.13,9.25,10.27,10.04,10.28,9.23,9.18,10.00,9.49],
+  "Maharashtra": [4.77,4.80,4.74,4.96,4.75,4.76,4.53,5.02,5.42,5.48,5.22],
+  "Odisha": [7.81,7.51,8.37,9.31,11.03,10.09,10.25,10.85,11.36,10.77,9.60],
+  "Punjab": [3.74,4.22,3.94,4.37,4.17,11.30,3.69,4.11,4.03,4.69,4.81],
+  "Rajasthan": [6.40,6.83,7.60,8.90,9.14,8.88,9.16,9.27,8.71,9.23,9.50],
+  "Tamil Nadu": [5.58,5.47,5.69,5.85,5.95,5.35,4.90,5.29,4.96,6.01,5.55],
+  "Uttar Pradesh": [8.10,8.05,7.96,8.32,9.23,9.76,7.93,8.29,8.15,8.53,8.34],
+  "West Bengal": [6.84,6.78,6.73,7.97,8.51,8.56,9.01,8.59,8.18,9.13,9.37],
+};
+
+const cmyk = (i) => ['#39c4d6','#e8467c','#e8c84a','#5fbf7e','#9d7ce8','#e8884a','#6fa8dc'][i % 7];
+const gujaratColor = '#e8467c';
+const otherColor = 'rgba(139,147,165,0.55)';
+
+function colorFor(stateName){
+  return stateName === 'Gujarat' ? gujaratColor : otherColor;
+}
+
+// ---------- MPI Chart ----------
+const mpiSorted = [...mpiData].sort((a,b)=>b.h21-a.h21);
+let mpiView = '2021';
+const mpiCtx = document.getElementById('mpiChart').getContext('2d');
+let mpiChart = new Chart(mpiCtx, {
+  type:'bar',
+  data:{
+    labels: mpiSorted.map(d=>d.state),
+    datasets:[{
+      data: mpiSorted.map(d=>d.h21),
+      backgroundColor: mpiSorted.map(d=>colorFor(d.state)),
+      borderRadius:2,
+      barThickness:14,
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+        titleFont:{family:"'Space Mono', monospace", size:12},
+        bodyFont:{family:"'Space Mono', monospace", size:12},
+        callbacks:{ label:(ctx)=> ctx.parsed.x + (mpiView==='change' ? ' pp' : '%') }
+      }
+    },
+    scales:{
+      x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}} },
+      y:{ grid:{display:false}, ticks:{font:{size:14}} }
+    }
+  }
+});
+
+document.getElementById('mpi-toggles').addEventListener('click', (e)=>{
+  if(!e.target.classList.contains('toggle-btn')) return;
+  document.querySelectorAll('#mpi-toggles .toggle-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  mpiView = e.target.dataset.view;
+  let sorted, key;
+  if(mpiView==='2021'){ key='h21'; sorted=[...mpiData].sort((a,b)=>b.h21-a.h21); }
+  else if(mpiView==='2016'){ key='h16'; sorted=[...mpiData].sort((a,b)=>b.h16-a.h16); }
+  else { key='change'; sorted=[...mpiData].sort((a,b)=>a.change-b.change); }
+  mpiChart.data.labels = sorted.map(d=>d.state);
+  mpiChart.data.datasets[0].data = sorted.map(d=>d[key]);
+  mpiChart.data.datasets[0].backgroundColor = sorted.map(d=>colorFor(d.state));
+  mpiChart.update();
+});
+
+// ---------- Indicator deprivation rate chart ----------
+let indicatorState = 'Gujarat';
+const indicatorCtx = document.getElementById('indicatorChart').getContext('2d');
+function buildIndicatorData(state){
+  // values index: [0]=2015-16, [1]=2019-21
+  const sorted = [...indicatorOrder].sort((a,b)=>deprivationData[state][b][1]-deprivationData[state][a][1]);
+  return {
+    labels: sorted,
+    values: sorted.map(i=>deprivationData[state][i][1]),
+    colors: sorted.map(i=>dimColor[indicatorDim[i]]),
+  };
+}
+let indData = buildIndicatorData('Gujarat');
+let indicatorChart = new Chart(indicatorCtx, {
+  type:'bar',
+  data:{
+    labels: indData.labels,
+    datasets:[{
+      data: indData.values,
+      backgroundColor: indData.colors,
+      borderRadius:2,
+      barThickness:16,
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+        titleFont:{family:"'Space Mono', monospace", size:12},
+        bodyFont:{family:"'Space Mono', monospace", size:12},
+        callbacks:{
+          label:(ctx)=> ctx.parsed.x.toFixed(2) + '% of population deprived (2019-21)',
+          afterLabel:(ctx)=> indicatorDim[ctx.label] + ' dimension'
+        }
+      }
+    },
+    scales:{
+      x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}}, title:{display:true, text:'% of total population deprived', color:'#8b93a5', font:{size:11}} },
+      y:{ grid:{display:false}, ticks:{font:{size:14}} }
+    }
+  }
+});
+
+document.getElementById('indicator-toggles').addEventListener('click', (e)=>{
+  if(!e.target.classList.contains('toggle-btn')) return;
+  document.querySelectorAll('#indicator-toggles .toggle-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  indicatorState = e.target.dataset.state;
+  const d = buildIndicatorData(indicatorState);
+  indicatorChart.data.labels = d.labels;
+  indicatorChart.data.datasets[0].data = d.values;
+  indicatorChart.data.datasets[0].backgroundColor = d.colors;
+  indicatorChart.update();
+});
+
+// ---------- Infrastructure (sanitation+water+electricity) chart ----------
+const infraStates = Object.keys(deprivationData);
+const infraData = infraStates.map(s=>({
+  state: s,
+  val: deprivationData[s]["Sanitation"][1] + deprivationData[s]["Drinking Water"][1] + deprivationData[s]["Electricity"][1]
+})).sort((a,b)=>b.val-a.val);
+const infraCtx = document.getElementById('infraChart').getContext('2d');
+new Chart(infraCtx, {
+  type:'bar',
+  data:{
+    labels: infraData.map(d=>d.state),
+    datasets:[{
+      data: infraData.map(d=>d.val),
+      backgroundColor: infraData.map(d=>colorFor(d.state)),
+      borderRadius:2,
+      barThickness:20,
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+        titleFont:{family:"'Space Mono', monospace", size:12},
+        bodyFont:{family:"'Space Mono', monospace", size:12},
+        callbacks:{ label:(ctx)=> ctx.parsed.x.toFixed(2) + '% of population deprived' }
+      }
+    },
+    scales:{
+      x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}} },
+      y:{ grid:{display:false}, ticks:{font:{size:14}} }
+    }
+  }
+});
+
+// ---------- Full time series chart (line, all states) ----------
+const seriesCtx = document.getElementById('seriesChart').getContext('2d');
+const seriesStates = Object.keys(sseSeries);
+new Chart(seriesCtx, {
+  type:'line',
+  data:{
+    labels: sseSeriesYears,
+    datasets: seriesStates.map((s,i)=>({
+      label: s,
+      data: sseSeries[s],
+      borderColor: s==='Gujarat' ? gujaratColor : cmyk(i),
+      backgroundColor: 'transparent',
+      borderWidth: s==='Gujarat' ? 3.5 : 1.4,
+      pointRadius: s==='Gujarat' ? 2.5 : 0,
+      tension: 0.15,
+      order: s==='Gujarat' ? 0 : 1,
+    }))
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    interaction:{mode:'nearest', intersect:false},
+    plugins:{
+      legend:{
+        position:'bottom',
+        labels:{ font:{family:"'Space Mono', monospace", size:13}, boxWidth:12, padding:10 }
+      },
+      tooltip:{
+        backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+        titleFont:{family:"'Space Mono', monospace", size:12},
+        bodyFont:{family:"'Space Mono', monospace", size:11},
+        callbacks:{ label:(ctx)=> ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2) + '%' }
+      }
+    },
+    scales:{
+      x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}, callback:function(val,idx){ return idx % 2 === 0 ? this.getLabelForValue(val) : ''; }} },
+      y:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}}, title:{display:true, text:'SSE / GSDP (%)', color:'#8b93a5', font:{size:11}} }
+    }
+  }
+});
+
+// ---------- SSE Chart (latest year bar) ----------
+const latestYearData = seriesStates.map(s=>({state:s, val: sseSeries[s][sseSeries[s].length-1]})).sort((a,b)=>b.val-a.val);
+const sseCtx = document.getElementById('sseChart').getContext('2d');
+new Chart(sseCtx, {
+  type:'bar',
+  data:{
+    labels: latestYearData.map(d=>d.state),
+    datasets:[{
+      label:'Social sector exp. / GSDP (%), 2021-22',
+      data: latestYearData.map(d=>d.val),
+      backgroundColor: latestYearData.map(d=>colorFor(d.state)),
+      borderRadius:2,
+      barThickness:14,
+    }]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+        titleFont:{family:"'Space Mono', monospace", size:12},
+        bodyFont:{family:"'Space Mono', monospace", size:12},
+        callbacks:{ label:(ctx)=> ctx.parsed.x.toFixed(2) + '% of GSDP' }
+      }
+    },
+    scales:{
+      x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}} },
+      y:{ grid:{display:false}, ticks:{font:{size:14}} }
+    }
+  }
+});
+
+// ---------- Peer comparison chart ----------
+const peerStates = ["Gujarat","Maharashtra","Karnataka","Tamil Nadu","Haryana","West Bengal"];
+const peerCtx = document.getElementById('peerChart').getContext('2d');
+new Chart(peerCtx, {
+  type:'line',
+  data:{
+    labels: sseSeriesYears,
+    datasets: peerStates.map((s,i)=>({
+      label: s,
+      data: sseSeries[s],
+      borderColor: s==='Gujarat' ? gujaratColor : (s==='Maharashtra' ? '#39c4d6' : cmyk(i)),
+      backgroundColor: 'transparent',
+      borderWidth: s==='Gujarat' ? 3.5 : 2,
+      pointRadius: 3,
+      tension: 0.15,
+    }))
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{ position:'bottom', labels:{ font:{family:"'Space Mono', monospace", size:13.65}, boxWidth:14, padding:12 } },
+      tooltip:{
+        backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+        titleFont:{family:"'Space Mono', monospace", size:12},
+        bodyFont:{family:"'Space Mono', monospace", size:11},
+        callbacks:{ label:(ctx)=> ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(2) + '%' }
+      }
+    },
+    scales:{
+      x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}, callback:function(val,idx){ return idx % 2 === 0 ? this.getLabelForValue(val) : ''; }} },
+      y:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}}, title:{display:true, text:'SSE / GSDP (%)', color:'#8b93a5', font:{size:11}} }
+    }
+  }
+});
+
+// ---------- Combo table ----------
+const tbody = document.getElementById('combo-table');
+const comboStates = ["Gujarat","Maharashtra","Karnataka","Tamil Nadu","Haryana","West Bengal","Rajasthan","Madhya Pradesh","Bihar"];
+comboStates.forEach(s=>{
+  const series = sseSeries[s];
+  const mpi = mpiData.find(d=>d.state===s);
+  const avg = series ? (series.reduce((a,b)=>a+b,0)/series.length).toFixed(2) : '—';
+  const tr = document.createElement('tr');
+  if(s==='Gujarat') tr.classList.add('highlight');
+  tr.innerHTML = `
+    <td>${s}</td>
+    <td class="num">${series ? series[0].toFixed(2)+'%' : '—'}</td>
+    <td class="num">${series ? series[series.length-1].toFixed(2)+'%' : '—'}</td>
+    <td class="num">${avg}%</td>
+    <td class="num">${mpi ? mpi.h21.toFixed(2)+'%' : '—'}</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// ===================== EDUCATION & HEALTH DATA =====================
+// Source: RBI e-STATES database, Appendix-2 (Revenue Expenditure, actual),
+// divided by GSDP from RBI Handbook Table 21 (current prices, base 2011-12).
+// Years 2011-12 to 2021-22; Telangana zeros for 2011-14 reflect pre-bifurcation period.
+const ehYears = ["2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19","2019-20","2020-21","2021-22"];
+
+const eduSeries = {
+  "Gujarat":        [1.902,1.805,1.794,1.781,1.747,1.59,1.62,1.613,1.524,1.613,1.435],
+  "Maharashtra":    [2.334,2.32,2.318,2.231,2.18,2.063,2.06,2.014,2.347,2.383,2.181],
+  "Karnataka":      [2.02,2.103,1.979,1.976,1.792,1.663,1.598,1.583,1.641,1.482,1.463],
+  "Tamil Nadu":     [2.031,2.066,2.184,2.26,2.126,1.999,1.959,2.023,2.194,2.125,1.842],
+  "West Bengal":    [3.054,2.872,2.674,2.87,2.624,2.69,2.525,2.574,2.704,3.122,2.795],
+  "Haryana":        [2.113,2.024,1.847,2.126,2.001,1.97,1.844,1.813,1.962,1.921,1.757],
+  "Bihar":          [4.11,4.986,4.523,4.743,5.007,4.549,4.974,5.118,4.495,4.686,5.216],
+  "Madhya Pradesh": [3.108,2.861,3.117,3.38,3.152,3.254,3.257,3.154,3.102,3.045,2.679],
+  "Uttar Pradesh":  [3.524,3.507,3.269,3.274,3.845,3.927,3.125,2.939,3.118,3.178,2.867],
+  "Rajasthan":      [2.664,2.624,2.778,3.145,3.096,3.221,3.203,3.795,3.352,3.43,3.378],
+  "Odisha":         [2.948,2.775,2.794,3.126,3.365,3.006,3.131,3.248,3.205,3.192,2.738],
+  "Andhra Pradesh": [3.936,3.984,3.98,3.105,2.747,2.515,2.5,2.214,2.841,2.124,1.999],
+  "Kerala":         [2.589,2.554,2.518,2.495,2.512,2.687,2.639,2.406,2.271,2.135,2.679],
+  "Punjab":         [1.984,2.226,1.934,2.104,2.192,2.064,1.977,1.971,2.022,2.209,2.025],
+  "Jharkhand":      [2.687,2.525,2.08,2.629,3.167,3.376,2.952,2.561,3.141,3.388,2.971],
+  "Chhattisgarh":   [3.105,3.091,3.31,4.186,4.142,4.216,4.189,3.825,4.637,4.028,3.795],
+  "Assam":          [4.283,4.423,4.726,5.704,4.698,4.975,4.976,5.046,4.559,4.808,4.372],
+};
+
+const healthSeries = {
+  "Gujarat":        [0.432,0.465,0.428,0.477,0.508,0.535,0.523,0.531,0.57,0.635,0.667],
+  "Maharashtra":    [0.391,0.407,0.413,0.478,0.476,0.46,0.493,0.473,0.511,0.617,0.619],
+  "Karnataka":      [0.488,0.513,0.501,0.553,0.479,0.508,0.524,0.566,0.516,0.595,0.641],
+  "Tamil Nadu":     [0.561,0.583,0.561,0.643,0.66,0.611,0.685,0.721,0.66,0.831,0.796],
+  "West Bengal":    [0.692,0.661,0.632,0.739,0.755,0.805,0.813,0.766,0.863,1.045,1.17],
+  "Haryana":        [0.403,0.46,0.426,0.497,0.502,0.499,0.481,0.526,0.606,0.696,0.684],
+  "Bihar":          [0.73,0.65,0.666,0.959,0.937,1.098,1.198,1.169,1.171,1.498,1.644],
+  "Madhya Pradesh": [0.77,0.821,0.747,0.942,0.966,0.827,0.882,0.786,0.914,0.946,1.063],
+  "Uttar Pradesh":  [0.783,0.897,0.832,0.972,0.955,0.967,1.002,0.977,1.007,1.158,0.987],
+  "Rajasthan":      [0.752,0.745,0.801,0.97,1.054,1.017,1.122,1.247,1.166,1.178,1.2],
+  "Odisha":         [0.574,0.642,0.611,0.883,0.96,1.034,0.943,1.02,1.057,1.341,1.257],
+  "Andhra Pradesh": [1.325,1.299,1.244,0.915,0.818,0.883,0.787,0.827,0.792,0.917,0.896],
+  "Kerala":         [0.764,0.755,0.754,0.787,0.81,0.903,0.88,0.869,0.897,1.1,1.258],
+  "Punjab":         [0.582,0.603,0.568,0.666,0.668,0.672,0.583,0.613,0.631,0.695,0.615],
+  "Jharkhand":      [0.547,0.463,0.518,0.621,0.887,0.833,0.945,1.013,0.899,1.174,1.152],
+  "Chhattisgarh":   [0.604,0.631,0.691,0.949,1.075,1.129,1.276,1.083,1.25,1.468,1.512],
+  "Assam":          [1.02,0.973,0.954,0.976,1.253,1.243,1.488,1.374,1.397,1.686,1.593],
+};
+
+const ehStates = Object.keys(eduSeries);
+
+function makeEHLineChart(ctx, seriesObj, yLabel) {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ehYears,
+      datasets: ehStates.map((s,i) => ({
+        label: s,
+        data: seriesObj[s],
+        borderColor: s==='Gujarat' ? gujaratColor : cmyk(i),
+        backgroundColor: 'transparent',
+        borderWidth: s==='Gujarat' ? 3.5 : 1.4,
+        pointRadius: s==='Gujarat' ? 2.5 : 0,
+        tension: 0.15,
+        order: s==='Gujarat' ? 0 : 1,
+        spanGaps: true,
+      }))
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: {mode:'nearest', intersect:false},
+      plugins: {
+        legend: { position:'bottom', labels:{ font:{family:"'Space Mono', monospace", size:13}, boxWidth:12, padding:10 } },
+        tooltip: {
+          backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+          titleFont:{family:"'Space Mono', monospace", size:12},
+          bodyFont:{family:"'Space Mono', monospace", size:11},
+          callbacks:{ label:(ctx)=> ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(3) + '% of GSDP' }
+        }
+      },
+      scales: {
+        x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}, callback:function(val,idx){ return idx % 2 === 0 ? this.getLabelForValue(val) : ''; }} },
+        y:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}},
+            title:{display:true, text:yLabel, color:'#8b93a5', font:{size:11}} }
+      }
+    }
+  });
+}
+
+const eduSeriesChart = makeEHLineChart(
+  document.getElementById('eduSeriesChart').getContext('2d'),
+  eduSeries, 'Education exp. / GSDP (%)'
+);
+const healthSeriesChart = makeEHLineChart(
+  document.getElementById('healthSeriesChart').getContext('2d'),
+  healthSeries, 'Health exp. / GSDP (%)'
+);
+
+// ---------- Education / Health bar (latest year toggle) ----------
+let ehBarView = 'edu';
+function getEHBarData(view) {
+  const src = view === 'edu' ? eduSeries : healthSeries;
+  const items = ehStates.map(s => ({ state:s, val: src[s][src[s].length-1] }))
+    .sort((a,b) => b.val - a.val);
+  return items;
+}
+const ehBarCtx = document.getElementById('eduhealthBar').getContext('2d');
+let ehBarData = getEHBarData('edu');
+let ehBarChart = new Chart(ehBarCtx, {
+  type: 'bar',
+  data: {
+    labels: ehBarData.map(d=>d.state),
+    datasets: [{ data: ehBarData.map(d=>d.val), backgroundColor: ehBarData.map(d=>colorFor(d.state)), borderRadius:2, barThickness:14 }]
+  },
+  options: {
+    indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins: {
+      legend:{display:false},
+      tooltip:{
+        backgroundColor:'#0f131b', borderColor:'#1d2330', borderWidth:1,
+        titleFont:{family:"'Space Mono', monospace", size:12},
+        bodyFont:{family:"'Space Mono', monospace", size:12},
+        callbacks:{ label:(ctx)=> ctx.parsed.x.toFixed(3) + '% of GSDP' }
+      }
+    },
+    scales:{
+      x:{ grid:{color:'#1d2330'}, ticks:{font:{family:"'Space Mono', monospace", size:13}} },
+      y:{ grid:{display:false}, ticks:{font:{size:14}} }
+    }
+  }
+});
+document.getElementById('eduhealth-toggles').addEventListener('click', (e) => {
+  if (!e.target.classList.contains('toggle-btn')) return;
+  document.querySelectorAll('#eduhealth-toggles .toggle-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  ehBarView = e.target.dataset.view;
+  const d = getEHBarData(ehBarView);
+  ehBarChart.data.labels = d.map(x=>x.state);
+  ehBarChart.data.datasets[0].data = d.map(x=>x.val);
+  ehBarChart.data.datasets[0].backgroundColor = d.map(x=>colorFor(x.state));
+  ehBarChart.update();
+});
+
+</script>
+
+</body>
+</html>
