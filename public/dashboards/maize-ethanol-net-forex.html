@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maize ethanol: the net forex</title>
+<title>Maize: export or ethanol</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -11,16 +11,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   :root{
-    --bg:#080a0f;
-    --panel:#0d1017;
-    --line:rgba(255,255,255,0.10);
-    --line-soft:rgba(255,255,255,0.06);
-    --cyan:#00aeef;
-    --magenta:#ec008c;
-    --yellow:#ffed00;
-    --red:#ff4d4d;
-    --mute:rgba(255,255,255,0.55);
-    --fs:1;
+    --bg:#080a0f;--panel:#0d1017;--line:rgba(255,255,255,0.10);--line-soft:rgba(255,255,255,0.06);
+    --cyan:#00aeef;--magenta:#ec008c;--yellow:#ffed00;--red:#ff4d4d;--mute:rgba(255,255,255,0.55);--fs:1;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:#fff;font-family:'DM Sans',sans-serif;line-height:1.5;padding:28px 22px 40px;-webkit-font-smoothing:antialiased}
@@ -29,11 +21,11 @@
   h1{font-size:calc(27px * var(--fs));font-weight:700;letter-spacing:-0.01em;margin:8px 0 6px}
   .sub{font-size:calc(14px * var(--fs));color:var(--mute);max-width:640px}
   .toolbar{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:24px 0 0;padding-top:18px;border-top:1px solid var(--line)}
-  #dashboard{padding:18px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
-  #dashboard>.grid{margin-top:2px}
   .toolbar label{font-family:'Space Mono',monospace;font-size:calc(11px * var(--fs));color:var(--mute);letter-spacing:0.05em;display:flex;align-items:center;gap:10px}
   button.export{font-family:'Space Mono',monospace;font-size:calc(11px * var(--fs));letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--yellow);border:1px solid var(--yellow);padding:8px 14px;border-radius:2px;cursor:pointer;transition:all .15s}
   button.export:hover{background:var(--yellow);color:#080a0f}
+  #dashboard{padding:18px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+  #dashboard>.grid{margin-top:2px}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 26px;margin:24px 0 6px}
   @media(max-width:640px){.grid{grid-template-columns:1fr}}
   .ctrl label{display:flex;justify-content:space-between;align-items:baseline;font-size:calc(13px * var(--fs));margin-bottom:7px}
@@ -44,28 +36,29 @@
   input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:var(--cyan);cursor:pointer;border:2px solid #080a0f}
   input.small{width:110px}
   .ends{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:calc(10px * var(--fs));color:rgba(255,255,255,0.35);margin-top:4px}
-  .ctrl.key .name{color:var(--yellow)}
-  .ctrl.key input[type=range]::-webkit-slider-thumb{background:var(--yellow)}
-  .ctrl.key input[type=range]::-moz-range-thumb{background:var(--yellow)}
-  .ctrl.key .val{color:var(--yellow)}
-  .verdict{margin:26px 0 18px;padding:20px 22px;border:1px solid var(--line);border-radius:4px;background:var(--panel);display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;justify-content:space-between}
+  .verdict{margin:24px 0 18px;padding:20px 22px;border:1px solid var(--line);border-radius:4px;background:var(--panel);display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;justify-content:space-between}
   .verdict .lead{font-size:calc(15px * var(--fs));font-weight:500}
-  .verdict .lead b{font-family:'Space Mono',monospace}
-  .heroes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:6px 0}
+  .verdict .lead b{font-family:'Space Mono',monospace;color:var(--yellow)}
+  .heroes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0}
   @media(max-width:640px){.heroes{grid-template-columns:1fr}}
   .hero{padding:16px 18px;border-radius:4px;border:1px solid var(--line);background:var(--panel)}
   .hero .tag{font-family:'Space Mono',monospace;font-size:calc(10.5px * var(--fs));letter-spacing:0.05em;text-transform:uppercase}
-  .hero.save .tag{color:var(--cyan)}
-  .hero.cost .tag{color:var(--magenta)}
-  .hero.net .tag{color:var(--yellow)}
-  .hero .big{font-family:'Space Mono',monospace;font-size:calc(28px * var(--fs));font-weight:700;margin:6px 0 2px;letter-spacing:-0.01em}
+  .hero.exp .tag{color:var(--cyan)}
+  .hero.eth .tag{color:var(--magenta)}
+  .hero .big{font-family:'Space Mono',monospace;font-size:calc(30px * var(--fs));font-weight:700;margin:6px 0 2px;letter-spacing:-0.01em}
+  .hero.exp .big{color:var(--cyan)}
+  .hero.eth .big{color:var(--magenta)}
   .hero .cap{font-size:calc(11.5px * var(--fs));color:var(--mute)}
-  .chartbox{margin:22px 0 8px;position:relative;height:200px;width:100%}
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 6px}
-  @media(max-width:640px){.stats{grid-template-columns:1fr}}
+  .chartbox{margin:16px 0 8px;position:relative;height:170px;width:100%}
+  .clegend{display:flex;flex-wrap:wrap;gap:18px;margin:18px 0 2px;font-family:'Space Mono',monospace;font-size:calc(11.5px * var(--fs));color:var(--mute)}
+  .clegend span{display:flex;align-items:center;gap:7px}
+  .clegend i{width:11px;height:11px;border-radius:2px;display:inline-block}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0 6px}
+  @media(max-width:640px){.stats{grid-template-columns:1fr 1fr}}
   .stat{padding:13px 14px;border-radius:4px;background:var(--line-soft)}
   .stat .k{font-family:'Space Mono',monospace;font-size:calc(10.5px * var(--fs));color:var(--mute);letter-spacing:0.04em;text-transform:uppercase;line-height:1.35}
-  .stat .v{font-family:'Space Mono',monospace;font-size:calc(18px * var(--fs));font-weight:700;margin-top:5px}
+  .stat .v{font-family:'Space Mono',monospace;font-size:calc(17px * var(--fs));font-weight:700;margin-top:5px}
+  .stat.hi .v{color:var(--yellow)}
   .notes{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);font-size:calc(11.5px * var(--fs));color:var(--mute);line-height:1.65}
   .notes b{color:rgba(255,255,255,0.8);font-weight:500}
   .notes .src{font-family:'Space Mono',monospace;font-size:calc(10.5px * var(--fs));color:rgba(255,255,255,0.4);margin-top:10px;display:block}
@@ -74,8 +67,8 @@
 <body>
 <div class="wrap" id="panel">
   <div class="eyebrow">indiaemerges / energy policy</div>
-  <h1>Maize ethanol: the net forex the crude-only story leaves out</h1>
-  <p class="sub">The government counts the crude that maize ethanol displaces. It does not net off the maize India now imports to feed the same distilleries. This is the whole ledger: forex saved on crude, minus forex spent on feedstock. Push the import share and watch the saving disappear.</p>
+  <h1>Maize: export the grain or save the crude</h1>
+  <p class="sub">The real opportunity cost of maize ethanol is not the trickle India imports. It is the forex the same maize would earn if it were exported instead. Unlike FCI rice, maize leaves the country freely, so this is a live choice. Both paths are priced at today's market.</p>
 
   <div id="dashboard">
   <div class="grid">
@@ -84,15 +77,10 @@
       <input type="range" id="maize" min="5" max="30" step="0.5" value="12">
       <div class="ends"><span>5</span><span>million tonnes</span><span>30</span></div>
     </div>
-    <div class="ctrl key">
-      <label><span class="name">Share met by imports</span><span class="val" id="vShare">40%</span></label>
-      <input type="range" id="share" min="0" max="100" step="1" value="40">
-      <div class="ends"><span>0</span><span>marginal import share</span><span>100</span></div>
-    </div>
     <div class="ctrl">
-      <label><span class="name">Maize import price, CIF</span><span class="val" id="vImp">$250 / MT</span></label>
-      <input type="range" id="imp" min="180" max="400" step="5" value="250">
-      <div class="ends"><span>180</span><span>US$ per tonne</span><span>400</span></div>
+      <label><span class="name">Export price, FOB</span><span class="val" id="vFob">$230 / MT</span></label>
+      <input type="range" id="fob" min="180" max="320" step="5" value="230">
+      <div class="ends"><span>180</span><span>US$ per tonne</span><span>320</span></div>
     </div>
     <div class="ctrl">
       <label><span class="name">Brent crude</span><span class="val" id="vBrent">$78 / bbl</span></label>
@@ -112,40 +100,40 @@
   </div>
 
   <div class="verdict">
-    <span class="lead" id="verdictText">The feedstock bill eats <b>98%</b> of the crude saving</span>
-    <span class="lead" style="color:var(--mute);font-weight:400;font-size:calc(13px * var(--fs))" id="breakevenText">breakeven near 41% import share</span>
+    <span class="lead" id="verdictText">Exporting earns <b>2.3x</b> the forex ethanol saves</span>
+    <span class="lead" style="color:var(--mute);font-weight:400;font-size:calc(13px * var(--fs))" id="gapText">$1.53 bn of forex left on the table</span>
   </div>
 
   <div class="heroes">
-    <div class="hero save">
-      <div class="tag">Crude forex saved</div>
-      <div class="big" id="hSave" style="color:var(--cyan)">+$1.23 bn</div>
-      <div class="cap" id="capSave">ethanol displaces imported crude</div>
+    <div class="hero exp">
+      <div class="tag">Export the maize</div>
+      <div class="big" id="hExp">$2.76 bn</div>
+      <div class="cap">forex earned, gross FOB</div>
     </div>
-    <div class="hero cost">
-      <div class="tag">Feedstock forex spent</div>
-      <div class="big" id="hCost" style="color:var(--magenta)">&#8722;$1.20 bn</div>
-      <div class="cap" id="capCost">maize bought from world market</div>
-    </div>
-    <div class="hero net">
-      <div class="tag">Net forex</div>
-      <div class="big" id="hNet" style="color:var(--yellow)">+$0.03 bn</div>
-      <div class="cap" id="capNet">what actually reaches the reserves</div>
+    <div class="hero eth">
+      <div class="tag">Use for ethanol</div>
+      <div class="big" id="hEth">$1.23 bn</div>
+      <div class="cap">crude-import forex saved</div>
     </div>
   </div>
 
-  <div class="chartbox"><canvas id="fall" role="img" aria-label="Waterfall of crude forex saved minus maize import cost equals net forex"></canvas></div>
+  <div class="clegend">
+    <span><i style="background:var(--cyan)"></i>Export the maize</span>
+    <span><i style="background:var(--magenta)"></i>Use for ethanol</span>
+  </div>
+  <div class="chartbox"><canvas id="bar" role="img" aria-label="Comparison of forex earned by exporting maize versus forex saved by using it for ethanol"></canvas></div>
 
   <div class="stats">
-    <div class="stat"><div class="k">Ethanol produced</div><div class="v" id="sEth">456 cr L</div></div>
-    <div class="stat"><div class="k">Maize imported</div><div class="v" id="sImp">4.8 MT</div></div>
-    <div class="stat"><div class="k">Net forex per litre</div><div class="v" id="sPerL">&#8377;0.6/L</div></div>
+    <div class="stat"><div class="k">Ethanol output</div><div class="v" id="sEth">456 cr L</div></div>
+    <div class="stat"><div class="k">Export earns / t</div><div class="v" id="sExpT">$230</div></div>
+    <div class="stat"><div class="k">Ethanol saves / t</div><div class="v" id="sEthT">$102</div></div>
+    <div class="stat hi"><div class="k">Forgone forex</div><div class="v" id="sGap">$1.53 bn</div></div>
   </div>
   </div>
 
   <div class="notes">
-    <b>Why this is the honest ledger.</b> Rice ethanol used FCI public stock, which India cannot export under the WTO peace clause, so its export counterfactual was a phantom. Maize is different. It is open-market, freely traded, and ethanol demand already turned India from Asia's top maize exporter into a net importer in 2024. So the feedstock cost here is real forex leaving the country, not a shadow price. Where crude sits low and the import share sits high, the programme's headline crude saving can go fully negative on the maize channel.
-    <span class="src">Maize to ethanol about 7 to 13 MT in 2024-25, rising toward 27 MT by 2030 (NITI Aayog). Yield about 380 L/tonne. India imported 0.9 MT maize in 2024, exports fell to 0.5 MT from 1.9 MT. Import parity roughly $230 to $280/MT CIF, Ukraine and US corn cheapest, US-India deal adds duty-free US corn. Brent about $78/bbl, 8 July 2026. Crude displacement default 290 L/bbl is the energy-equivalent floor. Import share is a marginal assumption, not a measured split. Sources: Ministry of Commerce, DFPD, AIDA, APEDA, USDA, Arcus Policy Research, trade press. Model by indiaemerges.</span>
+    <b>Why export is the right lens.</b> Maize is open-market and freely exported, so every tonne sent to a distillery is a tonne not shipped abroad. India exported about 1 MT of maize in the first five months of MY2025-26, roughly three times the year-earlier pace, on a record 55 MT crop, and USDA cut projected imports to just 50,000 tonnes. So the export alternative is real, not a phantom like FCI rice under the WTO peace clause. Caveat: India cannot dump the full ethanol volume abroad at $230 without softening the price, since its non-GMO maize mainly serves nearby buyers, so read the export bar as marginal opportunity value, not a guaranteed sum at scale.
+    <span class="src">Maize to ethanol about 12 MT of a 41 to 55 MT crop, rising toward 27 MT by 2030 (NITI Aayog, ICRIER). Export FOB $220 to $245/MT, 2026 (Tradologie). Yield about 380 L/tonne. MY2025-26 exports 2.4 MT, imports 50,000 t (USDA via BusinessLine). Production 55 MT record, up 27% (Reuters). Brent about $78/bbl, 8 July 2026. Crude displacement default 290 L/bbl is the energy-equivalent floor; the government aggregate implies a more generous figure near 190. Sources: USDA, DFPD, AIDA, APEDA, ICRIER, trade press. Model by indiaemerges.</span>
   </div>
 
   <div class="toolbar">
@@ -160,89 +148,89 @@
 (function(){
   var $=function(id){return document.getElementById(id)};
   var chart;
+  var INR=86;
 
-  function fmtBn(v){var s=v>=0?'+':'\u2212';return s+'$'+Math.abs(v).toFixed(2)+' bn'}
-  function fmtCr(v){var s=v>=0?'+':'\u2212';return s+'\u20B9'+Math.round(Math.abs(v)).toLocaleString('en-IN')+' cr'}
+  function fmtBn(v){return '$'+v.toFixed(2)+' bn'}
 
   function calc(){
     var maizeMT=+$('maize').value;
-    var share=+$('share').value/100;
-    var impP=+$('imp').value;
+    var fob=+$('fob').value;
     var brent=+$('brent').value;
     var yld=+$('yield').value;
     var disp=+$('disp').value;
-    var inr=86;
 
     var maizeT=maizeMT*1e6;
+    var exportUsd=maizeT*fob;
     var ethanolL=maizeT*yld;
     var bbl=ethanolL/disp;
-    var saveUsd=bbl*brent;
-    var impMaizeT=maizeT*share;
-    var costUsd=impMaizeT*impP;
-    var netUsd=saveUsd-costUsd;
+    var ethUsd=bbl*brent;
 
-    var saveBn=saveUsd/1e9, costBn=costUsd/1e9, netBn=netUsd/1e9;
-    var eaten=saveUsd>0?(costUsd/saveUsd*100):0;
-    var perL=ethanolL>0?(netUsd*inr/ethanolL):0;
-
-    var beShare=(impP>0&&maizeT>0)?(saveUsd/(maizeT*impP)*100):0;
+    var exportBn=exportUsd/1e9, ethBn=ethUsd/1e9;
+    var ratio=ethUsd>0?exportUsd/ethUsd:0;
+    var gapBn=exportBn-ethBn;
+    var gapCr=(exportUsd-ethUsd)*INR/1e7;
+    var ethPerT=(yld/disp)*brent;
 
     $('vMaize').textContent=maizeMT+' MT';
-    $('vShare').textContent=Math.round(share*100)+'%';
-    $('vImp').textContent='$'+impP+' / MT';
+    $('vFob').textContent='$'+fob+' / MT';
     $('vBrent').textContent='$'+brent+' / bbl';
     $('vYield').textContent=yld+' L / t';
     $('vDisp').textContent=disp+' L / bbl';
 
-    $('hSave').textContent=fmtBn(saveBn);
-    $('hCost').textContent=fmtBn(-costBn);
-    $('hNet').textContent=fmtBn(netBn);
-    $('hNet').style.color=netBn>=0?'var(--yellow)':'var(--red)';
+    $('hExp').textContent=fmtBn(exportBn);
+    $('hEth').textContent=fmtBn(ethBn);
 
-    if(eaten>=100){
-      $('verdictText').innerHTML='The feedstock bill <b style="color:var(--red)">wipes out</b> the crude saving';
+    if(ratio>=1){
+      $('verdictText').innerHTML='Exporting earns <b>'+ratio.toFixed(1)+'x</b> the forex ethanol saves';
+      $('gapText').textContent='$'+Math.abs(gapBn).toFixed(2)+' bn of forex left on the table';
     }else{
-      $('verdictText').innerHTML='The feedstock bill eats <b style="color:var(--yellow)">'+Math.round(eaten)+'%</b> of the crude saving';
-    }
-    if(beShare>=0&&beShare<=100){
-      $('breakevenText').textContent='breakeven near '+Math.round(beShare)+'% import share';
-    }else{
-      $('breakevenText').textContent=beShare>100?'stays positive across all import shares':'negative across all import shares';
+      $('verdictText').innerHTML='Ethanol saves <b>'+(1/ratio).toFixed(1)+'x</b> the forex export earns';
+      $('gapText').textContent='$'+Math.abs(gapBn).toFixed(2)+' bn advantage to ethanol';
     }
 
     $('sEth').textContent=(ethanolL/1e7).toFixed(0)+' cr L';
-    $('sImp').textContent=(impMaizeT/1e6).toFixed(1)+' MT';
-    $('sPerL').innerHTML=(perL>=0?'+':'\u2212')+'\u20B9'+Math.abs(perL).toFixed(1)+'/L';
+    $('sExpT').textContent='$'+fob;
+    $('sEthT').textContent='$'+ethPerT.toFixed(0);
+    $('sGap').textContent=(gapBn<0?'\u2212$':'$')+Math.abs(gapBn).toFixed(2)+' bn';
+    $('sGap').style.color=gapBn<0?'var(--red)':'var(--yellow)';
 
-    var S=saveBn, N=netBn;
-    chart.data.datasets[0].data=[[0,S],[N,S],[Math.min(0,N),Math.max(0,N)]];
-    chart.data.datasets[0].backgroundColor=['#00aeef','#ec008c',N>=0?'#ffed00':'#ff4d4d'];
+    chart.data.datasets[0].data=[exportBn,ethBn];
+    chart.options.scales.x.max=Math.ceil(Math.max(exportBn,ethBn)*1.2*2)/2;
     chart.update('none');
   }
 
-  var ctx=$('fall').getContext('2d');
+  var fsScale=1;
+  var valueLabels={
+    id:'valueLabels',
+    afterDatasetsDraw:function(ch){
+      var g=ch.ctx,m=ch.getDatasetMeta(0);
+      g.save();g.font='700 '+Math.round(13*fsScale)+'px "Space Mono", monospace';g.fillStyle='#fff';g.textBaseline='middle';g.textAlign='left';
+      m.data.forEach(function(bar,i){var v=ch.data.datasets[0].data[i];g.fillText('$'+v.toFixed(2)+' bn',bar.x+6,bar.y)});
+      g.restore();
+    }
+  };
+  var ctx=$('bar').getContext('2d');
   chart=new Chart(ctx,{
     type:'bar',
-    data:{
-      labels:['Crude saved','Maize imports','Net forex'],
-      datasets:[{data:[[0,1.23],[0.03,1.23],[0,0.03]],backgroundColor:['#00aeef','#ec008c','#ffed00'],borderRadius:3,maxBarThickness:80}]
-    },
+    data:{labels:['Export the maize','Use for ethanol'],datasets:[{data:[2.76,1.23],backgroundColor:['#00aeef','#ec008c'],borderRadius:3,barThickness:40}]},
     options:{
-      responsive:true,maintainAspectRatio:false,animation:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){var a=c.raw;return '$'+(a[1]-a[0]>=0?(a[1]-a[0]):(a[0]-a[1])).toFixed(2)+' bn'}}}},
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,animation:false,
+      layout:{padding:{right:8}},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return '$'+c.parsed.x.toFixed(2)+' bn'}}}},
       scales:{
-        x:{grid:{display:false},ticks:{color:'#fff',font:{family:'Space Mono',size:12}}},
-        y:{grid:{color:'rgba(255,255,255,0.08)'},ticks:{color:'rgba(255,255,255,0.55)',font:{family:'Space Mono',size:11},callback:function(v){return '$'+v+'bn'}}}
+        x:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.08)'},ticks:{color:'rgba(255,255,255,0.55)',font:{family:'Space Mono',size:11},callback:function(v){return '$'+parseFloat(v.toFixed(2))+'bn'}}},
+        y:{grid:{display:false},ticks:{display:false}}
       }
-    }
+    },
+    plugins:[valueLabels]
   });
 
-  ['maize','share','imp','brent','yield','disp'].forEach(function(id){$(id).addEventListener('input',calc)});
-  $('fs').addEventListener('input',function(){document.documentElement.style.setProperty('--fs',this.value)});
+  ['maize','fob','brent','yield','disp'].forEach(function(id){$(id).addEventListener('input',calc)});
+  $('fs').addEventListener('input',function(){fsScale=+this.value;document.documentElement.style.setProperty('--fs',this.value);chart.options.scales.x.ticks.font.size=Math.round(11*fsScale);chart.update('none')});
   $('png').addEventListener('click',function(){
     var btn=this;var prev=btn.textContent;btn.textContent='Rendering...';
     html2canvas($('dashboard'),{backgroundColor:'#080a0f',scale:3,useCORS:true}).then(function(canvas){
-      var a=document.createElement('a');a.download='maize-ethanol-net-forex.png';a.href=canvas.toDataURL('image/png');a.click();btn.textContent=prev;
+      var a=document.createElement('a');a.download='maize-export-vs-ethanol.png';a.href=canvas.toDataURL('image/png');a.click();btn.textContent=prev;
     }).catch(function(){btn.textContent=prev});
   });
 
