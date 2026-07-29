@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>indiaemerges — electronics imports, post charts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root{--cyan:#5AD8E6;--mag:#F07EC7;--maglt:#F8C0E4;--yel:#F2DA6E;--row:#e6e6e6;--tx:#fff;--mut:#9a9a9a;--dim:#6b6b6b;}
+*{box-sizing:border-box;}
+body{margin:0;background:#0a0a0a;color:var(--tx);font-family:"DM Sans",system-ui,sans-serif;}
+.page{max-width:820px;margin:0 auto;padding:30px 18px 80px;}
+.unit{margin-bottom:40px;}
+.ctrl{display:flex;align-items:center;gap:16px;margin-bottom:10px;flex-wrap:wrap;}
+.ctrl label{font-size:12px;color:var(--mut);display:flex;align-items:center;gap:8px;font-family:"Space Mono",monospace;}
+.ctrl input[type=range]{accent-color:var(--cyan);}
+.btn{background:#161616;border:0.5px solid #333;color:#fff;border-radius:7px;padding:7px 14px;font-size:12px;
+cursor:pointer;font-family:"Space Mono",monospace;}
+.btn:hover{background:#222;}
+.card{background:#000;border-radius:14px;padding:24px 24px 16px;font-size:15px;}
+.ctitle{font-size:1.35em;font-weight:500;line-height:1.25;color:#fff;letter-spacing:-.01em;}
+.ccap{font-size:.82em;color:var(--mut);margin-top:5px;}
+.leg{display:flex;gap:15px;flex-wrap:wrap;font-size:.78em;color:#cfcfcf;align-items:center;margin:14px 0 6px;}
+.leg span{display:flex;align-items:center;gap:6px;}
+.sw{width:11px;height:11px;border-radius:2px;display:inline-block;}
+.chartbox{margin-top:14px;}
+.src{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:11px;border-top:0.5px solid #1e1e1e;
+font-family:"Space Mono",monospace;font-size:.68em;color:var(--dim);}
+.src .brand{color:#cfcfcf;}
+h1.top{font-size:15px;font-weight:500;color:#cfcfcf;font-family:"Space Mono",monospace;margin:0 0 22px;letter-spacing:.02em;}
+</style></head>
+<body><div class="page">
+<h1 class="top">indiaemerges · electronics import charts</h1>
+
+<div class="unit">
+  <div class="ctrl">
+    <label>font <input type="range" min="12" max="19" value="15" data-fs="c1"></label>
+    <button class="btn" data-png="card1">↓ Export PNG</button>
+  </div>
+  <div class="card" id="card1">
+    <div class="ctitle">India's ten biggest electronic imports</div>
+    <div class="ccap" id="cap1"></div>
+    <div class="leg">
+      <span><i class="sw" style="background:var(--cyan)"></i>Ch 84 machinery</span>
+      <span><i class="sw" style="background:var(--mag)"></i>Ch 85 electrical</span>
+      <span><i class="sw" style="background:var(--yel)"></i>Ch 90 instruments</span>
+    </div>
+    <div class="chartbox"><div id="tree1" style="height:340px"></div></div>
+    <div class="src"><span>HS chapters 84 · 85 · 90 · 2025-26</span><span class="brand">@indiaemerges · MoC Trade Analytics Portal</span></div>
+  </div>
+</div>
+
+<div class="unit">
+  <div class="ctrl">
+    <label>font <input type="range" min="12" max="19" value="15" data-fs="c2"></label>
+    <button class="btn" data-png="card2">↓ Export PNG</button>
+  </div>
+  <div class="card" id="card2">
+    <div class="ctitle">The import bill has grown 56% in four years</div>
+    <div class="ccap">Electronic &amp; electrical imports from the world, by HS chapter, US$ billion.</div>
+    <div class="leg">
+      <span><i class="sw" style="background:var(--cyan)"></i>Ch 84 machinery</span>
+      <span><i class="sw" style="background:var(--mag)"></i>Ch 85 electrical</span>
+      <span><i class="sw" style="background:var(--yel)"></i>Ch 90 instruments</span>
+    </div>
+    <div class="chartbox"><div style="height:300px"><canvas id="c2"></canvas></div></div>
+    <div class="src"><span>HS chapters 84 · 85 · 90</span><span class="brand">@indiaemerges · MoC Trade Analytics Portal</span></div>
+  </div>
+</div>
+
+<div class="unit">
+  <div class="ctrl">
+    <label>font <input type="range" min="12" max="19" value="15" data-fs="c3"></label>
+    <button class="btn" data-png="card3">↓ Export PNG</button>
+  </div>
+  <div class="card" id="card3">
+    <div class="ctitle">China's grip eased early, then held</div>
+    <div class="ccap">Share of India's electronics import bill by source. China+HK fell from 52% to 47%, then flattened.</div>
+    <div class="leg">
+      <span><i class="sw" style="background:var(--mag)"></i>China</span>
+      <span><i class="sw" style="background:var(--maglt)"></i>Hong Kong</span>
+      <span><i class="sw" style="background:var(--row)"></i>Rest of world</span>
+    </div>
+    <div class="chartbox"><div style="height:300px"><canvas id="c3"></canvas></div></div>
+    <div class="src"><span>HS chapters 84 · 85 · 90 · China+HK share of world</span><span class="brand">@indiaemerges · MoC Trade Analytics Portal</span></div>
+  </div>
+</div>
+</div>
+
+<script>const P={"c1":{"top":[{"l":"Digital ICs (processors)","c":"85","v":17542.5},{"l":"Telecom / network parts","c":"85","v":15809.6},{"l":"Memory chips","c":"85","v":6793.4},{"l":"Laptops / portable PCs","c":"84","v":6203.3},{"l":"Other integrated circuits","c":"85","v":5366.0},{"l":"Processing units (servers)","c":"84","v":4957.6},{"l":"Lithium-ion batteries","c":"85","v":4697.1},{"l":"Network / transmission gear","c":"85","v":3914.4},{"l":"Turbojets >25kN (aero)","c":"84","v":3453.4},{"l":"Solar PV cells","c":"85","v":3058.9}],"others":122448.7,"total":194244.9,"share":37.0},"c2":{"years":["2021-22","2022-23","2023-24","2024-25","2025-26"],"ch84":[50586.8,54377.0,57393.3,64302.1,74019.5],"ch85":[62489.6,67637.3,79290.6,88596.4,104852.7],"ch90":[11331.2,11671.7,12915.4,13842.1,15375.3]},"c3":{"years":["2021-22","2022-23","2023-24","2024-25","2025-26"],"china":[52631.7,50951.3,56231.0,66513.5,78571.1],"hk":[11536.3,9776.6,11589.2,11189.6,12548.5],"row":[60239.6,72958.2,81779.0,89037.6,103127.9]}};</script>
+<script>
+(function(){
+var CY="#5AD8E6",MG="#F07EC7",MGL="#F8C0E4",YE="#F2DA6E",ROW="#e6e6e6",GRID="rgba(255,255,255,0.08)",TXT="#8a8a8a";
+var CH={"84":CY,"85":MG,"90":YE};
+Chart.defaults.font.family="'DM Sans',system-ui,sans-serif";Chart.defaults.color=TXT;
+function fb(mn){return "$"+(mn/1000).toFixed(1)+"b";}
+
+/* Chart 1 — treemap top 10 */
+document.getElementById("cap1").textContent="Together they are "+P.c1.share+"% of the $"+(P.c1.total/1000).toFixed(0)+" billion electronics import bill.";
+(function(){
+  var host=document.getElementById("tree1"),W=host.clientWidth||760,H=340;
+  var root=d3.hierarchy({children:P.c1.top}).sum(function(d){return d.v||0;}).sort(function(a,b){return b.value-a.value;});
+  d3.treemap().size([W,H]).paddingInner(3)(root);
+  var svg=d3.select(host).append("svg").attr("width","100%").attr("viewBox","0 0 "+W+" "+H);
+  var g=svg.selectAll("g").data(root.leaves()).enter().append("g");
+  g.append("rect").attr("x",function(d){return d.x0;}).attr("y",function(d){return d.y0;})
+    .attr("width",function(d){return d.x1-d.x0;}).attr("height",function(d){return d.y1-d.y0;})
+    .attr("rx",4).attr("fill",function(d){return CH[d.data.c];});
+  g.append("text").attr("x",function(d){return d.x0+11;}).attr("y",function(d){return d.y0+22;})
+    .attr("fill","#0a0a0a").attr("font-family","DM Sans").attr("font-size","13").attr("font-weight","600")
+    .each(function(d){var w=d.x1-d.x0,h=d.y1-d.y0;if(w<64||h<34){d3.select(this).remove();return;}
+      var t=d.data.l;if(t.length>Math.floor(w/7.2))t=t.slice(0,Math.floor(w/7.2)-1)+"…";d3.select(this).text(t);});
+  g.append("text").attr("x",function(d){return d.x0+11;}).attr("y",function(d){return d.y0+40;})
+    .attr("fill","#0a0a0a").attr("font-family","Space Mono").attr("font-size","12").attr("opacity",.85)
+    .each(function(d){var w=d.x1-d.x0,h=d.y1-d.y0;if(w<64||h<52){d3.select(this).remove();return;}d3.select(this).text(fb(d.data.v));});
+})();
+
+/* Chart 2 — stacked columns by chapter */
+var c2=P.c2, bn=function(a){return a.map(function(v){return +(v/1000).toFixed(2);});};
+new Chart(document.getElementById("c2"),{type:"bar",data:{labels:c2.years,datasets:[
+  {label:"Ch 84",data:bn(c2.ch84),backgroundColor:CY,stack:"s",borderRadius:2},
+  {label:"Ch 85",data:bn(c2.ch85),backgroundColor:MG,stack:"s",borderRadius:2},
+  {label:"Ch 90",data:bn(c2.ch90),backgroundColor:YE,stack:"s",borderRadius:2}
+]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return " "+c.dataset.label+": $"+c.parsed.y.toFixed(1)+"b";}}}},
+  scales:{y:{stacked:true,grid:{color:GRID},ticks:{color:TXT,callback:function(v){return "$"+v+"b";}}},
+    x:{stacked:true,grid:{display:false},ticks:{color:"#cfcfcf"}}}}});
+
+/* Chart 3 — 100% stacked source mix */
+var c3=P.c3, pct=function(key){return c3.years.map(function(_,i){var t=c3.china[i]+c3.hk[i]+c3.row[i];return +(c3[key][i]/t*100).toFixed(1);});};
+new Chart(document.getElementById("c3"),{type:"bar",data:{labels:c3.years,datasets:[
+  {label:"China",data:pct("china"),backgroundColor:MG,stack:"s"},
+  {label:"Hong Kong",data:pct("hk"),backgroundColor:MGL,stack:"s"},
+  {label:"Rest of world",data:pct("row"),backgroundColor:ROW,stack:"s"}
+]},options:{responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return " "+c.dataset.label+": "+c.parsed.y+"%";}}}},
+  scales:{y:{stacked:true,min:0,max:100,grid:{color:GRID},ticks:{color:TXT,callback:function(v){return v+"%";}}},
+    x:{stacked:true,grid:{display:false},ticks:{color:"#cfcfcf"}}}}});
+
+/* font sliders */
+document.querySelectorAll('input[data-fs]').forEach(function(sl){
+  var card=document.getElementById({c1:"card1",c2:"card2",c3:"card3"}[sl.dataset.fs]);
+  sl.addEventListener("input",function(){card.style.fontSize=sl.value+"px";});
+});
+/* PNG export */
+document.querySelectorAll('button[data-png]').forEach(function(b){
+  b.addEventListener("click",function(){
+    var card=document.getElementById(b.dataset.png);
+    html2canvas(card,{backgroundColor:"#000",scale:2,useCORS:true}).then(function(cv){
+      var a=document.createElement("a");a.download=b.dataset.png+"_indiaemerges.png";a.href=cv.toDataURL("image/png");a.click();
+    });
+  });
+});
+})();
+</script></body></html>
