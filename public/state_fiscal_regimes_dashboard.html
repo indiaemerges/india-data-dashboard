@@ -110,6 +110,58 @@ select{background:var(--bg);border:1px solid var(--line);color:var(--text);font-
 .buildctrls button:hover{color:#fff}
 .buildctrls button.on{color:#080a0f;background:var(--cyan);border-color:var(--cyan);font-weight:700}
 .buildextra{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px;min-height:34px}
+
+/* responsive chart heights */
+.chart-sm{height:330px}
+.chart-md{height:400px}
+.chart-lg{height:560px}
+
+/* ---- Tablet ---- */
+@media(max-width:760px){
+  .wrap{padding:20px 12px 60px}
+  .card{padding:22px 16px}
+  .hero h1{font-size:1.85em}
+  .step h2, .panel h2{font-size:1.25em}
+  .tabs{gap:2px}
+  .tab{font-size:11px;padding:9px 9px}
+  .buildctrls button{font-size:10px;padding:7px 9px}
+}
+
+/* ---- Phone ---- */
+@media(max-width:560px){
+  .wrap{padding:14px 8px 52px}
+  .card{padding:16px 11px;border-radius:8px}
+  .hero h1{font-size:1.55em;line-height:1.15}
+  .hero .lede{font-size:1.02em}
+  .step h2, .panel h2{font-size:1.15em}
+  .step .lead, .panel .desc, .hero .lede{font-size:0.98em}
+  /* taller charts so bars are legible on a narrow screen */
+  .chart-sm{height:300px}
+  .chart-md{height:440px}
+  .chart-lg{height:620px}
+  /* horizontal-scroll the tab bar instead of wrapping into 3 rows */
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:0;
+        scrollbar-width:none;-ms-overflow-style:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{white-space:nowrap;flex:0 0 auto;padding:10px 11px;font-size:11px}
+  /* build explainer step buttons scroll horizontally too */
+  .buildctrls{flex-wrap:nowrap;overflow-x:auto;gap:5px;scrollbar-width:none}
+  .buildctrls::-webkit-scrollbar{display:none}
+  .buildctrls button{flex:0 0 auto;white-space:nowrap}
+  /* type cards and stories stack to one column */
+  .typegrid{grid-template-columns:1fr}
+  .stories{grid-template-columns:1fr}
+  /* map legend below map, already stacks; ensure comfortable */
+  .mapwrap{gap:14px}
+  /* controls row: keep export + slider from crowding */
+  .controls{gap:10px;justify-content:space-between}
+  .controls input[type=range]{width:96px}
+  /* attribution wraps */
+  .attribution{flex-direction:column;gap:4px}
+  /* compare/traj selector rows wrap comfortably */
+  .row{gap:8px}
+  select{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -198,13 +250,13 @@ select{background:var(--bg);border:1px solid var(--line);color:var(--text);font-
       <div class="tl-axis" style="margin-bottom:22px"><span></span><div class="yrs" id="stateStripYrs"></div></div>
       <div id="runList" class="note" style="margin:0 0 24px"></div>
       <div class="grid2">
-        <div><div class="kicker" style="color:var(--magenta)">Revenue composition</div><div class="chartbox" style="height:330px"><canvas id="revChart"></canvas></div></div>
-        <div><div class="kicker" style="color:var(--cyan)">Spending and balance</div><div class="chartbox" style="height:330px"><canvas id="expChart"></canvas></div></div>
+        <div><div class="kicker" style="color:var(--magenta)">Revenue composition</div><div class="chartbox chart-sm"><canvas id="revChart"></canvas></div></div>
+        <div><div class="kicker" style="color:var(--cyan)">Spending and balance</div><div class="chartbox chart-sm"><canvas id="expChart"></canvas></div></div>
       </div>
       <div style="margin-top:28px">
         <div class="kicker" style="color:var(--green)">Fingerprint vs current regime</div>
         <div class="desc">The state's last five year mean of each feature as a z-score in the year demeaned space, next to its current regime's centroid. Where the bars diverge is where the state is atypical of its own type.</div>
-        <div class="chartbox" style="height:400px"><canvas id="fingerChart"></canvas></div>
+        <div class="chartbox chart-md"><canvas id="fingerChart"></canvas></div>
       </div>
     </div>
 
@@ -218,7 +270,7 @@ select{background:var(--bg);border:1px solid var(--line);color:var(--text);font-
         <select id="trajY"><option>PC2</option><option>PC1</option><option>PC3</option></select>
       </div>
       <div class="row" id="trajChips"></div>
-      <div class="chartbox" style="height:560px"><canvas id="trajChart"></canvas></div>
+      <div class="chartbox chart-lg"><canvas id="trajChart"></canvas></div>
       <div class="note">Axes are the year demeaned components, so movement reflects change relative to contemporaries, not nationwide trends. PC1 runs toward self financed deficit stress on the right and PC2 toward pension and devolution weight at the top.</div>
     </div>
 
@@ -231,14 +283,14 @@ select{background:var(--bg);border:1px solid var(--line);color:var(--text);font-
         <select id="cmpB"></select>
         <label style="font-family:'Space Mono',monospace;font-size:11px;color:var(--dim)"><input type="checkbox" id="cmpRegimes" checked> show current regime means</label>
       </div>
-      <div class="chartbox" style="height:540px"><canvas id="cmpChart"></canvas></div>
+      <div class="chartbox chart-lg"><canvas id="cmpChart"></canvas></div>
       <div class="note" id="cmpNote"></div>
     </div>
 
     <div class="panel" id="p-load">
       <h2>What the components mean</h2>
       <div class="desc" id="loadDesc"></div>
-      <div class="chartbox" style="height:560px"><canvas id="loadChart"></canvas></div>
+      <div class="chartbox chart-lg"><canvas id="loadChart"></canvas></div>
     </div>
 
     <div class="panel method" id="p-method">
@@ -428,6 +480,11 @@ const PC_BOUNDS={};
 function drawTrajPC(){
   const px=trajX.value,py=trajY.value;
   const PAL=['#7fd4e8','#f2a2c8','#f5e08a','#a8e6b8','#f5c08a','#c9aef0'];
+  const PC_MEANING={
+    PC1:'self-reliant  \u2192  debt-strained',
+    PC2:'own-revenue  \u2192  transfer & pension heavy',
+    PC3:'non-tax tilt  \u2192  social-spending tilt'};
+  const axTitle=pc=>[pc, PC_MEANING[pc]||''];
   const ds=trajStates.map((s,si)=>{const v=D.states[s],col=PAL[si%PAL.length];
     return {label:s,y0:v.years[0],col:col,showLine:true,
       data:v.years.map((y,i)=>({x:v[px][i],y:v[py][i],yr:y,r:v.regime[i]})),
@@ -439,8 +496,8 @@ function drawTrajPC(){
    options:{maintainAspectRatio:false,
     plugins:{legend:{display:false},
      tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label} ${ctx.raw.yr}-${String(ctx.raw.yr+1).slice(2)}: ${LNAME(ctx.raw.r)} (${px} ${ctx.raw.x.toFixed(2)}, ${py} ${ctx.raw.y.toFixed(2)})`}}},
-    scales:{x:{min:PC_BOUNDS[px].min,max:PC_BOUNDS[px].max,title:{display:true,text:px,font:{family:"'Space Mono',monospace",size:11}},grid:{color:'#141926'}},
-            y:{min:PC_BOUNDS[py].min,max:PC_BOUNDS[py].max,title:{display:true,text:py,font:{family:"'Space Mono',monospace",size:11}},grid:{color:'#141926'}}}}});
+    scales:{x:{min:PC_BOUNDS[px].min,max:PC_BOUNDS[px].max,title:{display:true,text:axTitle(px),font:{family:"'Space Mono',monospace",size:11}},grid:{color:'#141926'}},
+            y:{min:PC_BOUNDS[py].min,max:PC_BOUNDS[py].max,title:{display:true,text:axTitle(py),font:{family:"'Space Mono',monospace",size:11}},grid:{color:'#141926'}}}}});
 }
 trajAdd.onchange=()=>{const s=trajAdd.value;
   if(s&&!trajStates.includes(s)&&trajStates.length<6){trajStates.push(s);renderChips();drawTrajPC();}
@@ -531,14 +588,21 @@ new Chart(document.getElementById('loadChart'),{type:'bar',
     clear();
     const A='Gujarat',B='Kerala',ma=meanShares(A),mb=meanShares(B);
     const show=[['own_tax_sh','Own taxes'],['central_tax_sh','Central share'],['grants_sh','Grants'],['interest_sh','Interest'],['pension_sh','Pensions'],['social_sh','Social services'],['capex_ratio','Investment']];
-    const x0=170,barW=W-x0-30,rowH=(H-70)/show.length;
+    const narrow=W<520;
+    const x0=narrow?128:170, barW=W-x0-16, topPad=narrow?54:44;
     ctx.textAlign='left';ctx.font="12px 'DM Sans',sans-serif";
-    ctx.fillStyle='#7fd4e8';ctx.fillText('\u25a0 '+A+' (self-reliant)',x0,24);
-    ctx.fillStyle='#f2a2c8';ctx.fillText('\u25a0 '+B+' (debt-strained)',x0+210,24);
+    if(narrow){
+      ctx.fillStyle='#7fd4e8';ctx.fillText('\u25a0 '+A+' (self-reliant)',8,18);
+      ctx.fillStyle='#f2a2c8';ctx.fillText('\u25a0 '+B+' (debt-strained)',8,36);
+    }else{
+      ctx.fillStyle='#7fd4e8';ctx.fillText('\u25a0 '+A+' (self-reliant)',x0,24);
+      ctx.fillStyle='#f2a2c8';ctx.fillText('\u25a0 '+B+' (debt-strained)',x0+210,24);
+    }
+    const rowH=(H-topPad-16)/show.length;
     show.forEach((row,i)=>{
-      const y=54+i*rowH,f=row[0];
-      ctx.fillStyle='#8a93a6';ctx.font="11px 'Space Mono',monospace";ctx.textAlign='right';
-      ctx.fillText(row[1],x0-12,y+4);
+      const y=topPad+10+i*rowH,f=row[0];
+      ctx.fillStyle='#8a93a6';ctx.font=(narrow?"9.5px":"11px")+" 'Space Mono',monospace";ctx.textAlign='right';
+      ctx.fillText(row[1],x0-10,y+4);
       const mx=0.6;
       ctx.fillStyle='#7fd4e8';ctx.fillRect(x0,y-8,barW*Math.min(1,ma[f]/mx),7);
       ctx.fillStyle='#f2a2c8';ctx.fillRect(x0,y+2,barW*Math.min(1,mb[f]/mx),7);
