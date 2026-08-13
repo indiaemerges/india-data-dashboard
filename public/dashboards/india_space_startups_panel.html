@@ -55,6 +55,8 @@ th[aria-sort] .ar{opacity:1}
 td.num,th.num{text-align:right;font-family:var(--mono)}
 .co{font-weight:500;display:flex;align-items:flex-start;gap:9px}
 .seg-bar{width:3px;height:15px;border-radius:2px;flex:none;margin-top:2px}
+.ic{width:16px;height:16px;flex:none;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.tname .ic{width:14px;height:14px;margin:0 6px -2px 0}
 .sub{color:var(--muted);font-size:11.5px;font-family:var(--mono);margin-top:2px}
 .tier{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);white-space:nowrap;margin-top:2px}
 .srcbadge{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:1px 5px;border:1px solid var(--hair);border-radius:2px;color:var(--muted);margin-left:7px;vertical-align:1px}
@@ -123,6 +125,45 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c2.4 2 3.6 5.2 3.6 8.4L12 14l-3.6-2.6C8.4 8.2 9.6 5 12 3z"/>
+    <circle cx="12" cy="9" r="1.4"/>
+    <path d="M8.4 12.2 6 14.6l2.8.2M15.6 12.2 18 14.6l-2.8.2"/>
+    <path d="M10.4 15.4c.6 1.8 2.6 1.8 3.2 0"/>
+  </symbol>
+  <symbol id="ic-satellite" viewBox="0 0 24 24">
+    <rect x="9.6" y="9.6" width="4.8" height="4.8" rx="0.8"/>
+    <rect x="3.8" y="10.2" width="3.6" height="3.6"/>
+    <rect x="16.6" y="10.2" width="3.6" height="3.6"/>
+    <path d="M7.4 12h2.2M14.4 12h2.2"/>
+    <path d="M12 9.6V6.4a2 2 0 0 1 2.4-1"/>
+  </symbol>
+  <symbol id="ic-thruster" viewBox="0 0 24 24">
+    <path d="M9.2 4.5h5.6l.8 7.5H8.4z"/>
+    <path d="M8.4 12l-1.2 4.2h9.6L15.6 12"/>
+    <path d="M10.4 17.2l.8 2.6M12 17.4v2.8M13.6 17.2l-.8 2.6"/>
+  </symbol>
+  <symbol id="ic-orbit" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="2.4"/>
+    <ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(-25 12 12)"/>
+    <circle cx="19.4" cy="8.6" r="1.3"/>
+  </symbol>
+  <symbol id="ic-servicing" viewBox="0 0 24 24">
+    <path d="M15.4 5.6a3.4 3.4 0 0 0-4.3 4.3l-5.5 5.5 1.9 1.9 5.5-5.5a3.4 3.4 0 0 0 4.3-4.3l-2 2-1.8-.4-.4-1.8z"/>
+  </symbol>
+  <symbol id="ic-chip" viewBox="0 0 24 24">
+    <rect x="7" y="7" width="10" height="10" rx="1"/>
+    <rect x="10.2" y="10.2" width="3.6" height="3.6"/>
+    <path d="M9.5 4v2.6M12 4v2.6M14.5 4v2.6M9.5 17.4V20M12 17.4V20M14.5 17.4V20M4 9.5h2.6M4 12h2.6M4 14.5h2.6M17.4 9.5H20M17.4 12H20M17.4 14.5H20"/>
+  </symbol>
+  <symbol id="ic-beam" viewBox="0 0 24 24">
+    <circle cx="6.5" cy="12" r="2"/>
+    <path d="M9 12h2.4M13 12h1.4"/>
+    <path d="M16.4 8.8a5 5 0 0 1 0 6.4"/>
+    <path d="M18.6 6.6a8 8 0 0 1 0 10.8"/>
+  </symbol>
+</svg>
 <div id="scalebar" role="group" aria-label="Display scale">
   <label for="scale">Scale</label>
   <input id="scale" type="range" min="90" max="180" step="5" value="100" aria-label="Display scale percent">
@@ -228,6 +269,22 @@ const fundStr = c => c.funding_total_usd_m==null ? "—" : "$"+c.funding_total_u
 const stageRoman = ["","I","II","III","IV"];
 const STAGE_ORD = {"Prototype":1,"Validation":2,"Early Traction":3,"Scaling":4,"Ideation":0,"Not stated":0};
 
+/* activity icons for the 24 profiled companies */
+const ICONS = {
+  "Skyroot Aerospace":"rocket","Agnikul Cosmos":"rocket","EtherealX":"rocket",
+  "Astrobase Space Technologies":"rocket","Abyom SpaceTech":"rocket","OmSpace Rocket & Exploration":"rocket",
+  "Pixxel":"satellite","GalaxEye":"satellite","SatSure":"satellite","PierSight":"satellite",
+  "SatLeo Labs":"satellite","Sisir Radar":"satellite","Dhruva Space":"satellite",
+  "Bellatrix Aerospace":"thruster","Manastu Space":"thruster",
+  "Digantara":"orbit",
+  "InspeCity":"servicing","Aule Space":"servicing",
+  "TakeMe2Space":"chip",
+  "Astrogate Labs":"beam",
+  "Space Zone India":"rocket","Othisis Systems":"rocket","thrustMIT":"rocket","Team Anant":"satellite"
+};
+const iconFor = c => ICONS[c.name] || ({launch:"rocket",satellites_eo:"satellite",in_space_services:"chip"}[c.super_segment]) || "satellite";
+const iconSvg = id => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-${id}"/></svg>`;
+
 /* header */
 document.getElementById('snapshot').innerHTML = [
   ["24","profiled"],["448","total companies"],["434","DPIIT registrations"],
@@ -327,7 +384,7 @@ function renderTable(){
     const tr=document.createElement('tr');tr.className='datarow';
     const roundStatus = reg ? (c.recognition||'—') : (c.latest_round||'—');
     tr.innerHTML=
-      `<td><div class="co"><i class="seg-bar" style="background:${reg?'var(--grey)':segRaw(c.super_segment)}"></i>
+      `<td><div class="co"><i class="seg-bar" style="background:${reg?'var(--grey)':segRaw(c.super_segment)}"></i>${reg?'':iconSvg(iconFor(c))}
         <div><div>${c.name}${reg?'<span class="srcbadge reg">registry</span>':(c.in_registry?'<span class="srcbadge">DPIIT '+(c.dipp_number||'')+'</span>':'')}</div>
         <div class="sub">${c.segment}</div></div></div></td>
        <td>${c.hq||'—'}</td>
@@ -436,7 +493,7 @@ function drawMap(){
     [...new Set(cos.map(c=>c.segment))].forEach(sub=>{
       inner+=`<div class="subseg">${sub}</div>`;
       cos.filter(c=>c.segment===sub).sort((a,b)=>(b.funding_total_usd_m||0)-(a.funding_total_usd_m||0)).forEach(c=>{
-        inner+=`<div class="tile${EOPPP.has(c.name)?' eoppp':''}"><span class="tname">${c.name}</span><span class="tfund">${fundStr(c)}</span></div>`;
+        inner+=`<div class="tile${EOPPP.has(c.name)?' eoppp':''}"><span class="tname">${iconSvg(iconFor(c))}${c.name}</span><span class="tfund">${fundStr(c)}</span></div>`;
       });
     });
     col.innerHTML=inner;map.appendChild(col);
