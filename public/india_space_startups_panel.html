@@ -104,6 +104,16 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .faxis{fill:var(--faint);font-family:var(--mono);font-size:16px}
 .foot{margin-top:30px;padding-top:16px;border-top:1px solid var(--hair);font-size:11.5px;color:var(--faint);font-family:var(--mono);line-height:1.7}
 .mobilehint{display:none;font-family:var(--mono);font-size:11px;color:var(--faint);margin:0 0 8px}
+/* mobile grouped-bar alternative to the scatter */
+.m-only{display:none}
+.mgroup-h{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 9px;padding-bottom:4px;border-bottom:1px solid var(--hair)}
+.mrow{margin:10px 0}
+.mrow-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.mrow-top .mname{display:flex;align-items:center;gap:7px;font-size:13.5px}
+.mrow-top .mval{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.mbar-track{height:6px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:6px;overflow:hidden}
+.mbar{height:100%;border-radius:2px}
+.mpre{color:var(--grey);font-size:12.5px;line-height:1.7;margin-top:4px}
 #scalebar{position:fixed;top:10px;right:12px;z-index:30;display:flex;align-items:center;gap:9px;
   background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid var(--hair);padding:7px 11px;border-radius:3px;font-family:var(--mono);font-size:11px;color:var(--ink)}
@@ -119,7 +129,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   .tab{padding:10px 10px;font-size:11px}th,td{padding:9px 9px}
   .mobilehint{display:block}
   #scatter{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--hair);border-radius:2px}
-  #scatter svg{min-width:780px}
+  #scatter > svg{min-width:780px}
 }
 @media(max-width:640px){
   /* directory table -> stacked cards so it fits the phone width */
@@ -135,6 +145,11 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   tr.datarow td:not(:first-child)::before{content:attr(data-label) ":  ";font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
   tr.detail{display:block}
   tr.detail td{display:block;border:none;padding:10px 13px}
+  /* scatter -> phone-native grouped bars, no sideways scroll */
+  #scatter{overflow-x:visible;border:none}
+  .mobilehint{display:none}
+  .scatter-note:not(.m-only){display:none}
+  .m-only{display:block}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -234,6 +249,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   <!-- SCATTER -->
   <section class="view" id="view-scatter" role="tabpanel">
     <p class="scatter-note">The 24 <b>profiled</b> companies only — registry entries carry no comparable funding and are excluded here. Vertical is cumulative disclosed funding (log), horizontal is development maturity, bubble size scales with disclosed valuation. <b>The maturity axis is an editorial classification, not a sourced metric.</b></p>
+    <p class="scatter-note m-only">The 24 <b>profiled</b> companies, grouped by development maturity; bar length is cumulative disclosed funding (log scale), coloured by segment. <b>Maturity is an editorial classification, not a sourced metric.</b></p>
     <p class="mobilehint">Scroll the chart sideways · tap a bubble for detail →</p>
     <div id="scatter"></div>
   </section>
@@ -429,8 +445,38 @@ function renderTable(){
 renderTable();
 
 /* ---------- scatter (24 profiled only — unchanged) ---------- */
-let scatterDrawn=false;
+let scatterDrawn=false, scatterMode=null;
+const isNarrow=()=>window.matchMedia('(max-width:640px)').matches;
+function fmtVal(v){return v>=1000?('$'+(v/1000)+'B'):('$'+v+'M');}
+function drawScatterMobile(){
+  const host=document.getElementById('scatter');
+  const pts=DATA.companies.filter(c=>!c.pre_institutional && c.funding_total_usd_m!=null);
+  const pre=DATA.companies.filter(c=>c.pre_institutional);
+  const hi=Math.max(200,...pts.map(p=>p.funding_total_usd_m));
+  const wOf=v=>Math.max(4,(Math.log10(v)-0)/(Math.log10(hi)-0)*100);
+  const stages=[[4,'IV · Operational'],[3,'III · Demo flown'],[2,'II · Ground test'],[1,'I · Concept']];
+  let h='';
+  stages.forEach(([s,lbl])=>{
+    const grp=pts.filter(c=>c.maturity_stage===s).sort((a,b)=>b.funding_total_usd_m-a.funding_total_usd_m);
+    if(!grp.length) return;
+    h+=`<div class="mgroup-h">${lbl}</div>`;
+    grp.forEach(c=>{
+      const col=segRaw(c.super_segment);
+      const val=c.valuation_usd_m?` · val ${fmtVal(c.valuation_usd_m)}`:'';
+      h+=`<div class="mrow">
+        <div class="mrow-top"><span class="mname">${iconSvg(iconFor(c))}<span>${c.name}</span></span>
+        <span class="mval">${fundStr(c)}${val}</span></div>
+        <div class="mbar-track"><div class="mbar" style="width:${wOf(c.funding_total_usd_m)}%;background:${col}"></div></div>
+      </div>`;
+    });
+  });
+  h+=`<div class="mgroup-h" style="color:var(--grey)">Pre-institutional — no comparable capital</div>
+      <div class="mpre">${pre.map(c=>c.name).join(' · ')}</div>`;
+  host.innerHTML=h;
+}
 function drawScatter(){
+  scatterMode = isNarrow()?'m':'d';
+  if(scatterMode==='m'){ drawScatterMobile(); scatterDrawn=true; return; }
   const host=document.getElementById('scatter');
   const W=1320,H=940,ml=130,mr=250,mt=64,mb=250;
   const plotW=W-ml-mr, plotH=H-mt-mb;
@@ -566,6 +612,16 @@ function drawFormation(){
   const apply=()=>{ wrap.style.zoom = sc.value/100; out.textContent = sc.value+'%'; };
   sc.addEventListener('input', apply);
 })();
+
+/* re-render the scatter if the viewport crosses the mobile breakpoint */
+let rzTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(rzTimer);
+  rzTimer=setTimeout(()=>{
+    if(!document.getElementById('view-scatter').classList.contains('active')) return;
+    if((isNarrow()?'m':'d')!==scatterMode) drawScatter();
+  },200);
+});
 </script>
 </body>
 </html>
