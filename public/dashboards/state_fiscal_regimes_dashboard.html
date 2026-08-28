@@ -79,8 +79,11 @@ select{background:var(--bg);border:1px solid var(--line);color:var(--text);font-
 .laycard .plain{font-size:0.96em;color:#c5ccd8;margin-bottom:16px}
 .laycard .bars{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
 .laycard .bar{display:grid;grid-template-columns:96px 1fr 40px;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:10.5px;color:var(--dim)}
-.laycard .track{display:block;width:100%;height:7px;background:#141926;border-radius:4px;overflow:hidden}
-.laycard .fill{display:block;height:100%;border-radius:4px}
+.laycard .track{position:relative;display:block;width:100%;height:7px;background:#141926;border-radius:4px}
+.laycard .zero{position:absolute;top:-2px;bottom:-2px;width:1px;background:#4a5468}
+.laycard .fill{position:absolute;top:0;height:100%;border-radius:4px}
+.scalekey{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:11.5px;color:var(--dim);margin:2px 0 18px}
+.scalekey .sw{display:inline-block;width:14px;height:10px;border-radius:2px;margin-right:4px}
 .laycard .mem{display:flex;flex-wrap:wrap;gap:6px}
 .laycard .mem span{font-size:0.8em;padding:3px 9px;border-radius:12px;border:1px solid var(--line);color:var(--dim);cursor:pointer}
 .laycard .mem span:hover{color:#fff}
@@ -192,7 +195,8 @@ select{background:var(--bg);border:1px solid var(--line);color:var(--text);font-
     <div class="step" id="s-types">
       <div class="steplabel">Step 2 &middot; The types</div>
       <h2>Six kinds of state budget</h2>
-      <div class="lead">Each type is defined by plain facts: how much of its money a state raises itself, how much comes from the centre, how much is swallowed by interest and pensions, and whether it spends more than it earns day to day.</div>
+      <div class="lead">Each type is defined by plain facts: how much of its money a state raises itself, how much comes from the centre, how much is swallowed by interest and pensions, and whether it spends more than it earns day to day. Bars show the actual shares. The day-to-day balance sits on the same axis: a surplus reaches right, a deficit reaches left past zero.</div>
+      <div class="scalekey"><span class="sw" style="background:#7fd4e8"></span>share of budget<span class="sw" style="background:#a8e6b8;margin-left:14px"></span>surplus<span class="sw" style="background:#f2a2c8;margin-left:14px"></span>deficit</div>
       <div class="laycards" id="layCards"></div>
     </div>
 
@@ -361,19 +365,33 @@ const GEO = {"type":"FeatureCollection","features":[{"type":"Feature","propertie
 
 // ---- Layman type cards ----
 (function(){const wrap=document.getElementById('layCards');
-  const FB=[['own','Own taxes','#7fd4e8'],['central','Central transfers','#a8e6b8'],['committed','Interest + pensions','#f5e08a'],['capex','Investment','#c9aef0']];
+  // Real numbers on one axis. Zero sits a little in from the left so a deficit can extend into a negative zone.
+  const ROWS=[['own','Own taxes'],['central','Central transfers'],['committed','Interest + pensions'],['capex','Investment'],['balance','Day-to-day balance']];
+  const NEG=22;   // width of the negative zone, in track %
+  const POS=100-NEG;
+  const MAXPOS=100;// share axis runs 0..100%
+  const MAXNEG=30; // deficits shown up to -30%
   typeOrder.forEach(c=>{const L=D.lay[c];
     const card=document.createElement('div');card.className='laycard';card.style.borderColor=HEX[c]+'55';card.style.borderTopColor=HEX[c];
     const memHtml = L.members.length
       ? L.members.map(s=>`<span onclick="gotoState('${s}')">${s}</span>`).join('')
       : '<span style="border:none;color:#5a6270">no states today, a historical pattern</span>';
-    const bars = FB.map(([k,lab,col])=>{const val=L.stats[k];const w=Math.max(0,Math.min(100,val));
-      return `<div class="bar"><span>${lab}</span><span class="track"><span class="fill" style="width:${w}%;background:${col}"></span></span><span style="color:#fff">${val}%</span></div>`;}).join('');
-    const bal=L.stats.balance;
-    const balLine=`<div class="bar"><span>Day-to-day balance</span><span class="track"><span class="fill" style="width:${Math.min(100,Math.abs(bal))}%;background:${bal<0?'#f2a2c8':'#a8e6b8'}"></span></span><span style="color:#fff">${bal>0?'+':''}${bal}%</span></div>`;
+    const bars = ROWS.map(([k,lab])=>{
+      const val=L.stats[k];
+      let fill;
+      if(val>=0){
+        const w=POS*Math.min(1,val/MAXPOS);
+        fill=`left:${NEG}%;width:${w}%;background:${k==='balance'?'#a8e6b8':'#7fd4e8'}`;
+      }else{
+        const w=NEG*Math.min(1,Math.abs(val)/MAXNEG);
+        fill=`left:${NEG-w}%;width:${w}%;background:#f2a2c8`;
+      }
+      const lbl=(k==='balance'&&val>0)?`+${val}%`:`${val}%`;
+      return `<div class="bar"><span>${lab}</span><span class="track"><span class="zero" style="left:${NEG}%"></span><span class="fill" style="${fill}"></span></span><span style="color:#fff">${lbl}</span></div>`;
+    }).join('');
     card.innerHTML=`<h3 style="color:${HEX[c]}">${L.name}</h3><div class="tag">${L.tag}</div>
       <div class="plain">${L.plain}</div>
-      <div class="bars">${bars}${balLine}</div>
+      <div class="bars">${bars}</div>
       <div class="mem">${memHtml}</div>`;
     wrap.appendChild(card);
   });})();
