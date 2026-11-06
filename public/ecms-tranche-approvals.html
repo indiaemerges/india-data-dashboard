@@ -9,14 +9,14 @@
 *{box-sizing:border-box;}
 body{margin:0;background:#0a0a0a;color:#fff;font-family:"DM Sans",system-ui,sans-serif;}
 .page{max-width:900px;margin:0 auto;padding:30px 18px 80px;}
-h1.top{font-size:15px;font-weight:500;color:#cfcfcf;font-family:"Space Mono",monospace;margin:0 0 24px;}
+h1.top{font-size:18px;font-weight:500;color:#cfcfcf;font-family:"Space Mono",monospace;margin:0 0 24px;}
 .unit{margin-bottom:38px;}
 .ctrl{display:flex;align-items:center;gap:16px;margin-bottom:10px;flex-wrap:wrap;}
 .ctrl label{font-size:12px;color:var(--mut);display:flex;align-items:center;gap:8px;font-family:"Space Mono",monospace;}
 .ctrl input[type=range]{accent-color:var(--cyan);}
 .btn{background:#161616;border:0.5px solid #333;color:#fff;border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer;font-family:"Space Mono",monospace;}
 .btn:hover{background:#222;}
-.card{background:#000;border-radius:14px;padding:26px 26px 18px;font-size:15px;}
+.card{background:#000;border-radius:14px;padding:26px 26px 18px;font-size:18px;}
 .summary{border:0.5px solid #24303a;}
 .khead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
 .ctitle{font-size:1.4em;font-weight:500;line-height:1.2;letter-spacing:-.01em;}
@@ -72,19 +72,23 @@ h1.top{font-size:15px;font-weight:500;color:#cfcfcf;font-family:"Space Mono",mon
 .pill b{color:#fff;font-weight:700;}
 
 .secrow{display:flex;align-items:center;gap:10px;font-size:.75em;margin:4px 0;}
-.secrow .scn{width:172px;flex:none;color:#cfcfcf;display:flex;align-items:center;gap:7px;}
+.secrow .scn{width:236px;flex:none;color:#cfcfcf;display:flex;align-items:center;gap:7px;}
 .secrow .scn span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .secrow .scb{flex:1;height:9px;background:#141414;border-radius:3px;overflow:hidden;}
 .secrow .scb i{display:block;height:100%;border-radius:3px;}
 .secrow .scv{font-family:"Space Mono",monospace;color:#fff;width:22px;text-align:right;flex:none;}
 
-.secrow .dtag{font-family:"Space Mono",monospace;color:#cfcfcf;width:104px;text-align:right;flex:none;font-size:.9em;}
+.secrow .dtag{font-family:"Space Mono",monospace;color:#cfcfcf;width:124px;text-align:right;flex:none;font-size:.9em;}
 
 .tgroup{margin:10px 0;}
 .tlabel{display:flex;justify-content:space-between;align-items:baseline;font-size:.74em;margin-bottom:5px;gap:10px;flex-wrap:wrap;}
 .tlabel .tn{color:#9a9a9a;font-family:"Space Mono",monospace;}
 .tlabel .tamt{color:#fff;font-family:"Space Mono",monospace;}
-.tbar{height:10px;background:#141414;border-radius:3px;overflow:hidden;}
+.brow{display:flex;align-items:center;gap:10px;margin-top:3px;}
+.brow .tbar{flex:1;}
+.brow .ba{font-family:"Space Mono",monospace;font-size:.68em;color:#cfcfcf;width:124px;text-align:right;flex:none;white-space:nowrap;}
+.brow .bp{font-family:"Space Mono",monospace;font-size:.68em;color:#9a9a9a;width:34px;text-align:right;flex:none;}
+.tbar{height:8px;background:#141414;border-radius:3px;overflow:hidden;}
 .tbar i{display:block;height:100%;background:#e6e6e6;border-radius:3px;}
 
 .geogrid{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px;margin-top:14px;}
@@ -94,7 +98,9 @@ h1.top{font-size:15px;font-weight:500;color:#cfcfcf;font-family:"Space Mono",mon
 .coline{font-size:.76em;color:#cfcfcf;margin-top:7px;display:flex;gap:7px;align-items:baseline;line-height:1.4;}
 .coline i{margin-top:4px;}
 .coline .cp{color:#8a8a8a;}
+.coline .tt{color:var(--yel);font-family:"Space Mono",monospace;font-size:.82em;}
 .coline .cl{color:#6b6b6b;font-family:"Space Mono",monospace;font-size:.9em;}
+@media(max-width:700px){.secrow{flex-wrap:wrap;row-gap:3px;margin:7px 0;}.secrow .scn{width:100%;}.secrow .dtag{width:118px;}.brow .ba{width:auto;}}
 </style></head>
 <body><div class="page">
 <h1 class="top">indiaemerges · ECMS approvals</h1>
@@ -102,14 +108,16 @@ h1.top{font-size:15px;font-weight:500;color:#cfcfcf;font-family:"Space Mono",mon
 </div>
 
 <script>
-var SUM={proj:106,products:30,states:15,inv:69548,invT:59350,prod:534101,prodT:456500,jobs:74628,jobsT:91600};
+var SUM={proj:118,products:34,states:16,inv:77051,invT:59350,prod:573146,prodT:456500,jobs:81755,jobsT:91600};
+var NTR=6, ASOF="6 NOV 2026", ASOFM="Nov 2026";
+function pct(a,b){return Math.round(a/b*100)+"%";}
 var SUMX={jobsInd:250000,operational:38,advanced:16};
 var COVER=[["Optical transceiver-SFP",350],["Relays",200],["Anode material","~110"],["Enclosures","~100"]];
-var SECTORS=[{"p": "PCBs (incl. HDI, flexible)", "n": 23, "c": "bare"}, {"p": "Capital goods & parts", "n": 11, "c": "cap"}, {"p": "Connectors", "n": 9, "c": "bare"}, {"p": "Camera modules", "n": 6, "c": "sub"}, {"p": "Optical transceivers (SFP)", "n": 6, "c": "sub"}, {"p": "Relays", "n": 6, "c": "bare"}, {"p": "Capacitors", "n": 5, "c": "bare"}, {"p": "Display modules", "n": 5, "c": "sub"}, {"p": "Enclosures", "n": 5, "c": "bare"}, {"p": "Laminates (copper clad)", "n": 4, "c": "mat"}, {"p": "Resistors & transducers", "n": 4, "c": "bare"}, {"p": "Antennas & heat sinks", "n": 3, "c": "bare"}, {"p": "Metallised film (capacitors)", "n": 3, "c": "mat"}, {"p": "Anode material", "n": 2, "c": "mat"}, {"p": "Li-ion cells", "n": 2, "c": "bare"}, {"p": "Rare earth magnets", "n": 2, "c": "mat"}];
-var SECOTHER={n:10,k:10,list:["Acetylene black", "Aluminium extrusion", "Coils", "Electrolyte additives", "Filters", "Hermetic terminals", "Inductors", "Metal shielding covers", "Oscillators", "Speakers & microphones"]};
-var LAYER=[["Bare components",64,"bare"],["Sub-assemblies",17,"sub"],["Materials & supply chain",14,"mat"],["Capital goods",11,"cap"]];
+var SECTORS=[{"p": "PCBs (incl. HDI, flexible)", "n": 24, "c": "bare"}, {"p": "Capital goods & parts", "n": 14, "c": "cap"}, {"p": "Connectors", "n": 9, "c": "bare"}, {"p": "Relays", "n": 7, "c": "bare"}, {"p": "Camera modules", "n": 6, "c": "sub"}, {"p": "Optical transceivers (SFP)", "n": 6, "c": "sub"}, {"p": "Capacitors", "n": 5, "c": "bare"}, {"p": "Display modules", "n": 5, "c": "sub"}, {"p": "Enclosures", "n": 5, "c": "bare"}, {"p": "Antennas & heat sinks", "n": 4, "c": "bare"}, {"p": "Capacitor films", "n": 4, "c": "mat"}, {"p": "Laminates (copper clad)", "n": 4, "c": "mat"}, {"p": "Resistors & transducers", "n": 4, "c": "bare"}, {"p": "Anode material", "n": 3, "c": "mat"}, {"p": "Li-ion cells", "n": 2, "c": "bare"}, {"p": "Rare earth magnets", "n": 2, "c": "mat"}];
+var SECOTHER={n:14,k:14,list:["Acetylene black", "Aluminium extrusion", "Camera rim", "Cathode active material", "Coils", "Copper foil", "Electrolyte additives", "Filters", "Hermetic terminals", "Inductors", "Metal shielding covers", "Oscillators", "Speakers & microphones", "Specialty ceramics"]};
+var LAYER=[["Bare components",68,"bare"],["Sub-assemblies",17,"sub"],["Materials & supply chain",19,"mat"],["Capital goods",14,"cap"]];
 var DEMAND=[["Optical transceiver (SFP)",100,"sub","meets + exports"],["Relays",100,"bare","meets + exports"],["Enclosures",100,"bare","meets + exports"],["Copper-clad laminate",100,"mat","meets + exports"],["Anode material",100,"mat","~110%"],["Li-ion cells",61,"bare","61%"],["PCBs (MLB / HDI)",50,"bare","~50%"],["Rare earth magnets",25,"mat","~25%"],["Camera modules",15,"sub","15%"]];
-var STATES=["Tamil Nadu","Maharashtra","Karnataka","Gujarat","Haryana","Uttar Pradesh","Andhra Pradesh","Madhya Pradesh","Rajasthan","Telangana","Goa","Himachal Pradesh","Uttarakhand","Jammu & Kashmir"];
+var STATES=["Tamil Nadu","Maharashtra","Karnataka","Gujarat","Haryana","Uttar Pradesh","Andhra Pradesh","Madhya Pradesh","Rajasthan","Telangana","Goa","Himachal Pradesh","Uttarakhand","Jammu & Kashmir","Punjab"];
 var T=[
  {n:1,d:"27 OCT 2025",proj:7,inv:5532,prod:36559,states:"Tamil Nadu · Andhra Pradesh · Madhya Pradesh",prid:"2183028",
   cap:"The opening tranche is narrow and PCB-heavy, with Kaynes Circuits taking four of the seven projects.",g:[
@@ -178,32 +186,85 @@ var T=[
   {p:"Filters",c:"bare",co:"Centum Electronics",first:"India's first domestic manufacturing"},
   {p:"Capacitors",c:"bare",co:"Globe Capacitors"},
   {p:"Metal shielding covers",c:"bare",co:"Wangda Technologies"}],
-  note:"Recipient companies from PIB release 2300625 (17 Aug 2026). Camera and display modules again; still no image-sensor or precision-optics approval."}
+  note:"Recipient companies from PIB release 2300625 (17 Aug 2026). Camera and display modules again; still no image-sensor or precision-optics approval."},
+ {n:6,d:"6 NOV 2026",proj:12,inv:7503,prod:39045,states:"Gujarat · Karnataka · MP · Maharashtra · Punjab · TN · UP",prid:"2333716",
+  cap:"A smaller, upstream-leaning tranche: five of twelve approvals are supply-chain materials, with first-time ECMS approvals for copper foil, cathode active material and specialty ceramics. Punjab enters the ECMS map.",
+  g:[
+  {p:"Multi-layer PCB",c:"bare",co:"NeST ICELR"},
+  {p:"Relays",c:"bare",co:"TDConnex (Chennai)"},
+  {p:"Heat sinks",c:"bare",co:"Modern Automotives"},
+  {p:"Specialty ceramics",c:"bare",co:"Voltix Semicon",first:"first ECMS approval for this product"},
+  {p:"Copper foil (for CCL &amp; Li-ion cells)",c:"mat",co:"Indo Asia Copper",first:"first ECMS approval for this product"},
+  {p:"Anode material",c:"mat",co:"TACC"},
+  {p:"Cathode active material",c:"mat",co:"Vidyuta Materials",first:"first ECMS approval for this product"},
+  {p:"Polypropylene film (capacitor-grade)",c:"mat",co:"Enerfolie"},
+  {p:"Camera rim",c:"mat",co:"Surface Modification Technologies"},
+  {p:"Capital goods &amp; parts",c:"cap",co:"TDConnex (Chennai) · precision moulds &amp; tooling<br>Rockwell Automation India · power &amp; control systems<br>Wipro Pari Robotics · factory automation"}],
+  note:"TDConnex holds two approvals (relays, moulds &amp; tooling), so 11 firms cover 12 applications. Camera rim is classed by MeitY as a supply-chain product. Nearly half of all ECMS units approved so far are MSMEs."}
 ];
 var GEO=[
  {s:"Tamil Nadu",co:[
    {n:"Tata Electronics",p:"Enclosures",loc:"Hosur",c:"bare"},
-   {n:"Kaynes Circuits",p:"PCB",loc:"Chennai",c:"bare"},
+   {n:"Kaynes Circuits",p:"Multi-layer &amp; HDI PCB",loc:"Chennai",c:"bare",k:2},
+   {n:"Kaynes Circuits",p:"Camera module · laminate",c:"sub",rep:1,k:2},
    {n:"Motherson",p:"Enclosures",loc:"Kanchipuram",c:"bare"},
-   {n:"Yuzhan Technology",p:"Enclosures",loc:"Kanchipuram",c:"bare"}]},
+   {n:"Yuzhan Technology",p:"Enclosures",loc:"Kanchipuram",c:"bare"},
+   {n:"Ascent Circuits",p:"Multi-layer PCB",c:"bare",rep:1},
+   {n:"NeST ICELR",p:"Multi-layer PCB",c:"bare",rep:1},
+   {n:"TDConnex",p:"Relays · moulds &amp; tooling",c:"bare",rep:1,k:2},
+   {n:"Rockwell Automation",p:"Power &amp; control systems",c:"cap",rep:1}]},
  {s:"Uttar Pradesh",co:[
-   {n:"Dixon",p:"Display &amp; camera modules",loc:"Noida",c:"sub"},
+   {n:"Dixon",p:"Display &amp; camera modules",loc:"Noida",c:"sub",k:2},
+   {n:"Samsung Display",p:"Display module",c:"sub",rep:1},
    {n:"Lohum Cleantech",p:"Rare earth magnets",loc:"Noida",c:"mat",rep:1},
-   {n:"ILJN Ascent",p:"HDI PCB",c:"bare",rep:1}]},
+   {n:"ILJN Ascent",p:"HDI PCB",c:"bare",rep:1},
+   {n:"Vidyuta Materials",p:"Cathode active material",c:"mat",rep:1}]},
+ {s:"Maharashtra",co:[
+   {n:"Vital Electronics",p:"Multi-layer PCB",c:"bare",rep:1},
+   {n:"Epitome Components",p:"Multi-layer PCB",c:"bare",rep:1},
+   {n:"Shogini Technoarts",p:"Multi-layer PCB",c:"bare",rep:1},
+   {n:"TDK India",p:"Capacitors",c:"bare",rep:1},
+   {n:"Voltix Semicon",p:"Specialty ceramics",c:"bare",rep:1},
+   {n:"Wipro Pari Robotics",p:"Factory automation",c:"cap",rep:1}]},
+ {s:"Gujarat",co:[
+   {n:"Indo Asia Copper",p:"Copper foil",c:"mat",rep:1},
+   {n:"Ratnaveer Precision",p:"Copper-clad laminate",loc:"Vadodara",c:"mat",rep:1},
+   {n:"Acutaas Chemicals",p:"Electrolyte additives",loc:"Jhagadia",c:"mat",rep:1},
+   {n:"Enerfolie",p:"Polypropylene film",c:"mat",rep:1},
+   {n:"Jyoti CNC Automation",p:"Capital goods",loc:"Rajkot",c:"cap",rep:1}]},
  {s:"Karnataka",co:[
    {n:"Wipro Global",p:"Copper-clad laminate",loc:"Bengaluru",c:"mat"},
-   {n:"AT&amp;S India",p:"HDI PCB",c:"bare",rep:1}]},
- {s:"Haryana",co:[
-   {n:"ATLbattery Technology",p:"Li-ion cells",loc:"Rewari &amp; Sohna",c:"bare"}]},
+   {n:"AT&amp;S India",p:"HDI PCB",c:"bare",rep:1},
+   {n:"Amphenol HST India",p:"Connectors",c:"bare",rep:1},
+   {n:"Surface Modification Tech",p:"Camera rim",c:"mat",rep:1}]},
  {s:"Madhya Pradesh",co:[
-   {n:"Secure Circuits",p:"PCB",loc:"Sehore",c:"bare"}]},
- {s:"Maharashtra",co:[
-   {n:"Vital Electronics",p:"Multi-layer PCB",c:"bare",rep:1}]},
+   {n:"Secure Circuits",p:"PCB",loc:"Sehore",c:"bare"},
+   {n:"Dixon Electroconnect",p:"Optical transceivers (SFP)",c:"sub",rep:1},
+   {n:"SRF",p:"Polypropylene film",c:"mat",rep:1},
+   {n:"TACC",p:"Anode material",loc:"Dewas",c:"mat",rep:1}]},
  {s:"Andhra Pradesh",co:[
-   {n:"NPSPL Anode Material",p:"Anode material",loc:"—",c:"mat",rep:1}]}
+   {n:"Syrma Strategic",p:"Multi-layer PCB",loc:"Naidupeta",c:"bare",rep:1},
+   {n:"CIPSA TEC India",p:"Multi-layer PCB",c:"bare",rep:1},
+   {n:"NPSPL Advanced Materials",p:"Anode material",c:"mat",rep:1},
+   {n:"Hindalco",p:"Aluminium extrusion",c:"mat",rep:1}]},
+ {s:"Haryana",co:[
+   {n:"ATLbattery Technology",p:"Li-ion cells",loc:"Rewari &amp; Sohna",c:"bare"},
+   {n:"India Circuits",p:"Multi-layer PCB",c:"bare",rep:1},
+   {n:"Signum Electronics",p:"Multi-layer PCB",c:"bare",rep:1}]},
+ {s:"Rajasthan",co:[
+   {n:"Deki Electronics",p:"Capacitors",c:"bare",rep:1}]},
+ {s:"Punjab",co:[
+   {n:"Modern Automotives",p:"Heat sinks",c:"bare",rep:1}]}
 ];
+var GEOCOV="T1 7/7 · T2 1/17 · T3 21/22 · T4 3/29 · T5 2/31 · T6 12/12";
 var COL={bare:"#A6E3E9",sub:"#F2ABD3",mat:"#F3E3A6",cap:"#CFCFCF"};
-var TOTINV=69548, MAXINV=41863, MAXPV=1451, MAXST=7;
+var TOTINV=SUM.inv, MAXINV=41863, MAXPV=1451, MAXST=7;
+var OUTC="#de7138", INVC="#e6e6e6";
+var TI=T.reduce(function(a,t){return a+t.inv;},0), TP=T.reduce(function(a,t){return a+t.prod;},0);
+function brow(v,tot,col){var w=v/tot*100;return '<div class="brow"><div class="tbar"><i style="width:'+w.toFixed(1)+'%;background:'+col+'"></i></div><span class="bp">'+Math.round(w)+'%</span></div>';}
+function barleg(){return '<div class="impleg" style="margin:0 0 6px"><span><i class="sw" style="background:'+INVC+'"></i>Investment (₹'+TI.toLocaleString("en-IN")+' cr)</span><span><i class="sw" style="background:'+OUTC+'"></i>Projected output (₹'+TP.toLocaleString("en-IN")+' cr)</span></div>';}
+var ABSMAX=Math.max.apply(null,T.map(function(t){return Math.max(t.inv,t.prod);}));
+function arow(v,col){return '<div class="brow"><div class="tbar"><i style="width:'+(v/ABSMAX*100).toFixed(2)+'%;background:'+col+';min-width:2px"></i></div><span class="ba">₹'+v.toLocaleString("en-IN")+' cr</span></div>';}
 function inr(v){return "₹"+v.toLocaleString("en-IN")+" cr";}
 
 function trancheCard(t){
@@ -219,17 +280,19 @@ function trancheCard(t){
        '<div class="gco">'+g.co+'</div>'+(g.first?'<div class="first">'+g.first+'</div>':'')+'</div>';}).join("")+'</div>';
   }
   return '<div class="unit">'+
-   '<div class="ctrl"><label>font <input type="range" min="12" max="23" value="15" data-c="'+id+'"></label>'+
+   '<div class="ctrl"><label>font <input type="range" min="14" max="28" value="18" data-c="'+id+'"></label>'+
    '<button class="btn" data-png="'+id+'" data-n="'+t.n+'">↓ Export PNG</button></div>'+
    '<div class="card" id="'+id+'">'+
      '<div class="khead"><div><div class="ctitle">ECMS tranche '+t.n+'</div>'+
        '<div class="ccap">'+t.cap+'</div></div><div class="date">'+t.d+'</div></div>'+
      '<div class="stats">'+
        '<div class="st"><div class="v">'+inr(t.inv)+'</div><div class="l">INVESTMENT</div></div>'+
-       '<div class="st"><div class="v">'+inr(t.prod)+'</div><div class="l">PROJECTED OUTPUT</div></div>'+
+       '<div class="st"><div class="v" style="color:'+OUTC+'">'+inr(t.prod)+'</div><div class="l">PROJECTED OUTPUT</div></div>'+
        '<div class="st"><div class="v">'+t.proj+'</div><div class="l">PROJECTS</div></div></div>'+
-     '<div class="bar"><i style="width:'+(t.inv/MAXINV*100).toFixed(1)+'%"></i></div>'+
-     '<div class="barcap">'+(t.inv/TOTINV*100).toFixed(0)+'% of the ₹69,548 cr approved across all five tranches</div>'+
+     '<div class="sub2" style="margin:16px 0 6px">Investment vs projected output · same ₹ scale on all six cards</div>'+
+     '<div class="impleg" style="margin:0 0 6px"><span><i class="sw" style="background:'+INVC+'"></i>Investment</span><span><i class="sw" style="background:'+OUTC+'"></i>Projected output</span><span style="color:#6b6b6b">full width = ₹'+ABSMAX.toLocaleString("en-IN")+' cr</span></div>'+
+     arow(t.inv,INVC)+arow(t.prod,OUTC)+
+     '<div class="barcap" style="margin-top:4px">₹'+(t.prod/t.inv).toFixed(1)+' of projected output per ₹1 invested</div>'+
      '<div class="leg"><span><i class="sw" style="background:var(--cyan)"></i>Bare components</span>'+
        '<span><i class="sw" style="background:var(--mag)"></i>Sub-assemblies</span>'+
        '<span><i class="sw" style="background:var(--yel)"></i>Materials &amp; supply chain</span>'+
@@ -241,37 +304,39 @@ function trancheCard(t){
 }
 
 function geographyCard(){
-  var loc=GEO.reduce(function(a,g){return a+g.co.length;},0);
+  var np=function(g){return g.co.reduce(function(a,c){return a+(c.k||1);},0);};
+  var loc=GEO.reduce(function(a,g){return a+np(g);},0);
   var blocks=GEO.map(function(g){
     var lines=g.co.map(function(c){
       return '<div class="coline"><i class="sw" style="background:'+COL[c.c]+'"></i><span><b style="color:#ededed;font-weight:600">'+c.n+(c.rep?'<span style="color:#6b6b6b">\u2009\u2020</span>':'')+'</b> <span class="cp">'+c.p+'</span>'+(c.loc&&c.loc!=="\u2014"?' <span class="cl">'+c.loc+'</span>':'')+'</span></div>';
     }).join("");
-    return '<div class="stateblk"><div class="sh">'+g.s+' <em>'+g.co.length+' located</em></div>'+lines+'</div>';
+    return '<div class="stateblk"><div class="sh">'+g.s+' <em>'+np(g)+' located</em></div>'+lines+'</div>';
   }).join("");
   return '<div class="unit">'+
-   '<div class="ctrl"><label>font <input type="range" min="12" max="23" value="15" data-c="cardG"></label>'+
+   '<div class="ctrl"><label>font <input type="range" min="14" max="28" value="18" data-c="cardG"></label>'+
    '<button class="btn" data-png="cardG" data-n="geography">\u2193 Export PNG</button></div>'+
    '<div class="card summary" id="cardG">'+
      '<div class="khead"><div><div class="ctitle">ECMS projects by state, where disclosed</div>'+
-       '<div class="ccap">MeitY publishes plant locations for only some ECMS projects. These are the '+loc+' with a confirmed site; the other ~'+(SUM.proj-loc)+' of 106 projects have no location disclosed at the project level, so this is a partial map, not the full geography.</div></div>'+
-       '<div class="date">7 STATES SHOWN</div></div>'+
+       '<div class="ccap">MeitY publishes plant locations for only some ECMS projects. These are the '+loc+' of '+SUM.proj+' projects with a confirmed state. Coverage is near-complete for tranches 1, 3 and 6 but thin for 2, 4 and 5, so this is a partial map, not the full geography.</div></div>'+
+       '<div class="date">'+GEO.length+' STATES SHOWN</div></div>'+
      '<div class="leg" style="margin-top:14px"><span><i class="sw" style="background:var(--cyan)"></i>Bare components</span>'+
        '<span><i class="sw" style="background:var(--mag)"></i>Sub-assemblies</span>'+
        '<span><i class="sw" style="background:var(--yel)"></i>Materials &amp; supply chain</span>'+
        '<span><i class="sw" style="background:var(--cap)"></i>Capital goods</span></div>'+
-     '<div class="geogrid">'+blocks+'</div>'+
-     '<div class="sub2" style="margin:14px 0 0;color:#8a8a8a;font-weight:400">City shown where given. \u2020 location from press reporting; the rest are from MeitY\'s operational-facility briefing. Tamil Nadu, Karnataka and Maharashtra also lead on project counts across the tranches.</div>'+
-     '<div class="src"><span>plant locations · MeitY facility briefing + press reports</span><span class="brand">@indiaemerges</span></div>'+
+     '<div class="barcap" style="margin-top:12px">projects located by tranche · '+GEOCOV+'</div>'+'<div class="geogrid">'+blocks+'</div>'+
+     '<div class="sub2" style="margin:14px 0 0;color:#8a8a8a;font-weight:400">City shown where given. \u2020 state from press reporting or company filings; the rest are from MeitY\'s operational-facility briefing. Firms with more than one located approval count once per project (Kaynes 4, Dixon 2, TDConnex 2).</div>'+
+     '<div class="src"><span>plant locations · MeitY facility briefing + press reports + company filings · as of '+ASOF.toLowerCase()+'</span><span class="brand">@indiaemerges</span></div>'+
    '</div></div>';
 }
 function summaryCard(){
   var kpi=function(v,l,t){return '<div class="kpi"><div class="v">'+v+'</div><div class="l">'+l+'</div>'+(t?'<div class="t">'+t+'</div>':'')+'</div>';};
   var MAXT=Math.max.apply(null,T.map(function(t){return t.inv;}));
-  var tbars=T.map(function(t){
+  var tbars=barleg()+
+   T.map(function(t){
     var short=t.d.split(" ").slice(1).join(" ");
-    return '<div class="tgroup"><div class="tlabel"><span class="tn">T'+t.n+' · '+short+'</span>'+
-      '<span class="tamt">₹'+t.inv.toLocaleString("en-IN")+' cr · '+t.proj+' projects</span></div>'+
-      '<div class="tbar"><i style="width:'+(t.inv/TOTINV*100).toFixed(1)+'%"></i></div></div>';}).join("");
+    return '<div class="tgroup"><div class="tlabel"><span class="tn">T'+t.n+' · '+short+' · '+t.proj+' projects</span>'+
+      '<span class="tamt">₹'+t.inv.toLocaleString("en-IN")+' cr <span style="color:'+OUTC+'">/ ₹'+t.prod.toLocaleString("en-IN")+' cr</span></span></div>'+
+      brow(t.inv,TI,INVC)+brow(t.prod,TP,OUTC)+'</div>';}).join("");
   var earlier=SUM.proj-SUMX.operational-SUMX.advanced;
   var impl='<div class="implbar">'+
     '<div style="width:'+(SUMX.operational/SUM.proj*100)+'%;background:#e6e6e6">'+SUMX.operational+'</div>'+
@@ -279,7 +344,7 @@ function summaryCard(){
     '<div style="width:'+(earlier/SUM.proj*100)+'%;background:#333;color:#cfcfcf">'+earlier+'</div></div>'+
     '<div class="impleg"><span><i class="sw" style="background:#e6e6e6"></i>Operational ('+SUMX.operational+')</span>'+
       '<span><i class="sw" style="background:#8a8a8a"></i>Advanced construction ('+SUMX.advanced+')</span>'+
-      '<span><i class="sw" style="background:#333"></i>Earlier stages ('+earlier+', incl. 31 just approved)</span></div>';
+      '<span><i class="sw" style="background:#333"></i>Earlier stages ('+earlier+', incl. 43 approved in tranches 5–6)</span></div>';
   var pills='<div class="pills">'+COVER.map(function(c){
     return '<div class="pill">'+c[0]+' <b>'+c[1]+'%</b></div>';}).join("")+'</div>';
   var layer=(function(){var t=LAYER.reduce(function(a,x){return a+x[1];},0);return '<div class="implbar">'+LAYER.map(function(x){return '<div style="width:'+(x[1]/t*100)+'%;background:'+COL[x[2]]+'">'+x[1]+'</div>';}).join('')+'</div>';})();
@@ -287,29 +352,29 @@ function summaryCard(){
   var states='<div class="pills">'+STATES.map(function(s){
     return '<div class="pill">'+s+'</div>';}).join("")+'<div class="pill" style="color:#7f7f7f">+1 state (tranche 4, not named in release)</div></div>';
   return '<div class="unit">'+
-   '<div class="ctrl"><label>font <input type="range" min="12" max="23" value="15" data-c="cardS"></label>'+
+   '<div class="ctrl"><label>font <input type="range" min="14" max="28" value="18" data-c="cardS"></label>'+
    '<button class="btn" data-png="cardS" data-n="summary">↓ Export PNG</button></div>'+
    '<div class="card summary" id="cardS">'+
-     '<div class="khead"><div><div class="ctitle">ECMS at a glance: five tranches</div>'+
-       '<div class="ccap">Cumulative approvals under the Electronics Component Manufacturing Scheme, Oct 2025 to Aug 2026. Investment and projected output have already overshot the scheme\'s original targets; the jobs target is 82% met.</div></div>'+
-       '<div class="date">AS OF 17 AUG 2026</div></div>'+
+     '<div class="khead"><div><div class="ctitle">ECMS at a glance: six tranches</div>'+
+       '<div class="ccap">Cumulative approvals under the Electronics Component Manufacturing Scheme, Oct 2025 to '+ASOFM+'. Investment and projected output have already overshot the scheme\'s original targets; the jobs target is '+pct(SUM.jobs,SUM.jobsT)+' met.</div></div>'+
+       '<div class="date">AS OF '+ASOF+'</div></div>'+
      '<div class="kpis">'+
        kpi(SUM.proj,"PROJECTS","across "+SUM.products+" products · "+SUM.states+" states")+
-       kpi("₹"+(SUM.inv/1000).toFixed(1)+"k cr","INVESTMENT","117% of ₹"+(SUM.invT/1000).toFixed(1)+"k cr target")+
-       kpi("₹"+(SUM.prod/100000).toFixed(2)+"L cr","PROJECTED OUTPUT","117% of ₹"+(SUM.prodT/100000).toFixed(2)+"L cr target")+
-       kpi(SUM.jobs.toLocaleString("en-IN"),"DIRECT JOBS","+2.5 lakh indirect · 82% of target")+
+       kpi("₹"+(SUM.inv/1000).toFixed(1)+"k cr","INVESTMENT",pct(SUM.inv,SUM.invT)+" of ₹"+(SUM.invT/1000).toFixed(1)+"k cr target")+
+       kpi("₹"+(SUM.prod/100000).toFixed(2)+"L cr","PROJECTED OUTPUT",pct(SUM.prod,SUM.prodT)+" of ₹"+(SUM.prodT/100000).toFixed(2)+"L cr target")+
+       kpi(SUM.jobs.toLocaleString("en-IN"),"DIRECT JOBS","+2.5 lakh indirect · "+pct(SUM.jobs,SUM.jobsT)+" of target")+
      '</div>'+
-     '<div class="sub2">Investment by tranche · bar = share of ₹69,548 cr cumulative</div>'+tbars+
+     '<div class="sub2">Investment and projected output by tranche · bar = tranche share of the six-tranche total</div>'+tbars+
      '<div class="leg" style="margin:16px 0 2px"><span><i class="sw" style="background:var(--cyan)"></i>Bare components</span>'+
        '<span><i class="sw" style="background:var(--mag)"></i>Sub-assemblies</span>'+
        '<span><i class="sw" style="background:var(--yel)"></i>Materials &amp; supply chain</span>'+
        '<span><i class="sw" style="background:var(--cap)"></i>Capital goods</span></div>'+
-     '<div class="sub2">106 projects by value-chain layer</div>'+layer+
-     '<div class="sub2">Projects by sector — all five tranches</div>'+(function(){var MX=Math.max.apply(null,SECTORS.map(function(s){return s.n;}));var rows=SECTORS.map(function(s){return '<div class="secrow"><div class="scn"><i class="sw" style="background:'+COL[s.c]+'"></i><span>'+s.p+'</span></div><div class="scb"><i style="width:'+(s.n/MX*100).toFixed(1)+'%;background:'+COL[s.c]+'"></i></div><div class="scv">'+s.n+'</div></div>';}).join('');rows+='<div class="secrow"><div class="scn"><i class="sw" style="background:#3a3a3a"></i><span>Other single-project segments ('+SECOTHER.k+')</span></div><div class="scb"><i style="width:'+(SECOTHER.n/MX*100).toFixed(1)+'%;background:#3a3a3a"></i></div><div class="scv">'+SECOTHER.n+'</div></div>';return rows;})()+'<div class="sub2" style="margin:14px 0 0;color:#8a8a8a;font-weight:400">106 projects across 15 states (Oct 2025 – Aug 2026). Per-state project counts are not published for every tranche, so no state breakdown is shown.</div>'+
-     '<div class="sub2">Implementation status of the 106 approved projects</div>'+impl+
+     '<div class="sub2">'+SUM.proj+' projects by value-chain layer</div>'+layer+
+     '<div class="sub2">Projects by sector — all six tranches</div>'+(function(){var MX=Math.max.apply(null,SECTORS.map(function(s){return s.n;}));var rows=SECTORS.map(function(s){return '<div class="secrow"><div class="scn"><i class="sw" style="background:'+COL[s.c]+'"></i><span>'+s.p+'</span></div><div class="scb"><i style="width:'+(s.n/MX*100).toFixed(1)+'%;background:'+COL[s.c]+'"></i></div><div class="scv">'+s.n+'</div></div>';}).join('');rows+='<div class="secrow"><div class="scn"><i class="sw" style="background:#3a3a3a"></i><span>Single-project segments ('+SECOTHER.k+')</span></div><div class="scb"><i style="width:'+(SECOTHER.n/MX*100).toFixed(1)+'%;background:#3a3a3a"></i></div><div class="scv">'+SECOTHER.n+'</div></div>';return rows;})()+'<div class="sub2" style="margin:14px 0 0;color:#8a8a8a;font-weight:400">'+SUM.proj+' projects across '+SUM.states+' states (Oct 2025 – '+ASOFM+'). Per-state project counts are not published for every tranche, so no state breakdown is shown.</div>'+
+     '<div class="sub2">Implementation status of the '+SUM.proj+' approved projects · status as of Aug 2026</div>'+impl+
      '<div class="sub2">Share of domestic demand ECMS capacity is designed to meet</div>'+demand+
      '<div class="sub2" style="margin:8px 0 0;color:#8a8a8a;font-weight:400">Coverage figures are stated aims as capacity comes online (2–3 yr horizon), latest per component across tranche releases. "meets + exports" = full domestic demand with surplus.</div>'+
-     '<div class="src"><span>five tranches · Oct 2025 – Aug 2026 · source: PIB releases 2183028 / 2190872 / 2210864 / 2247040 / 2300625</span><span class="brand">@indiaemerges</span></div>'+
+     '<div class="src"><span>six tranches · Oct 2025 – Nov 2026 · source: PIB releases 2183028 / 2190872 / 2210864 / 2247040 / 2300625 / 2333716</span><span class="brand">@indiaemerges</span></div>'+
    '</div></div>';
 }
 
